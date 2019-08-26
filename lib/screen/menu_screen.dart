@@ -15,47 +15,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          PageView(children: pages),
-          SafeArea(
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: new BorderRadius.all(Radius.circular(100)),
-
-              ),
-              child: IconButton(
-              icon: Icon(Icons.translate),
-            ),),
-                          ],
-                        ),
-                      ),
-          )
-          // SafeArea(
-          //   child: Container(
-          //     padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.end,
-          //       children: <Widget>[
-          //         Ink(
-          //           decoration: ShapeDecoration(
-          //             shape: CircleBorder()
-          //           ),
-          //           child: Text("sdfsdf"),
-          //         )
-          //         // Icon(Icons.translate)
-                  
-                  
-          //     ],),
-          //   )
-          // )
-      ]),
+      body: PageView(children: pages),
     );
   }
 }
