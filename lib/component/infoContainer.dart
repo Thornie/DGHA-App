@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dgha_brochure/styles.dart';
 
-
 class InfoContainer extends StatelessWidget {
   // text
   final String title;
