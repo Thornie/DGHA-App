@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dgha_brochure/styles.dart';
 
+
 class InfoContainer extends StatelessWidget {
   // text
   final String title;
@@ -8,7 +9,7 @@ class InfoContainer extends StatelessWidget {
 
   // colours
   final Color titleColour;
-  final Color paragraphTextColour; 
+  final Color paragraphTextColour;
   final Color containerColour;
   final Color paragraphContainerColour;
   final Color paragraphContainerShadowColour;
@@ -17,7 +18,7 @@ class InfoContainer extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.paragraphText,
-    @required this.titleColour, 
+    @required this.titleColour,
     @required this.paragraphTextColour,
     @required this.containerColour,
     @required this.paragraphContainerColour,
