@@ -17,7 +17,6 @@ steps:
 - task: FlutterBuild@0
   inputs:
     projectDirectory: ''
-    apkTargetPlatform: android-arm64
     target: apk
 
 - task: FlutterTest@0
