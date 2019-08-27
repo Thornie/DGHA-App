@@ -18,13 +18,13 @@ steps:
   inputs:
     projectDirectory: ''
     apkTargetPlatform: android-arm64
-#    target: all ???
+    target: all #might look at this later
 
-#- task: Gradle@2
-#  inputs:
-#    workingDirectory: ''
-#    gradleWrapperFile: 'gradlew'
-#    gradleOptions: '-Xmx3072m'
-#    publishJUnitResults: false
-#    testResultsFiles: '**/TEST-*.xml'
-#    tasks: 'assembleDebug'
+- task: FlutterTest@0
+  inputs:
+    projectDirectory: ''
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'build/app/outputs/apk/release/'
+
