@@ -63,7 +63,7 @@ class MenuDrawer extends StatelessWidget {
       onTap: () {
 
         if(root.title == "Donation") {
-          launchURL("https://www.paypal.com/donate/?token=I-MtUmMJP8hllP_t7tXm1SUIvpwYaFJ4n_ZmndVZgeh8HUPRFfsi7OMNX_yLsw9LzpUDl0&country.x=AU&locale.x=AU"); 
+          launchURL("http://dgha.org.au/dgha/membership/"); 
         } else if (root.title == "Sign up") {
           launchURL("http://dgha.org.au/dgha/membership/");
         } else {
