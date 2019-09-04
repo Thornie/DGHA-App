@@ -43,34 +43,40 @@ class _InfoScreenState extends State<InfoScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  IconButton(
-                    icon: Styles.buildAppBarIcon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                  Tooltip(
+                    message: 'Back button',
+                    child: IconButton(
+                      icon: Styles.buildAppBarIcon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
                   Text(
                     widget.appBarTitle,
                     style: Styles.customAppBartextStyle,
                   ),
-                  PopupMenuButton(
-                    onSelected: (choice) {
-                      int newLangIndex = widget.texts
-                          .indexWhere((lang) => lang.languageName == choice);
-                      setLang(newLangIndex);
-                    },
-                    icon: Styles.buildAppBarIcon(Icons.translate),
-                    itemBuilder: (BuildContext ctxt) {
-                      return widget.texts.map((Language lang) {
-                        return PopupMenuItem(
-                          value: lang.languageName,
-                          child: Text(
-                            lang.languageName,
-                            style: Styles.generalTextStyle,
-                          ),
-                        );
-                      }).toList();
-                    },
+                  Tooltip(
+                    message: 'Select language',
+                    child: PopupMenuButton(
+                      onSelected: (choice) {
+                        int newLangIndex = widget.texts
+                            .indexWhere((lang) => lang.languageName == choice);
+                        setLang(newLangIndex);
+                      },
+                      icon: Styles.buildAppBarIcon(Icons.translate),
+                      itemBuilder: (BuildContext ctxt) {
+                        return widget.texts.map((Language lang) {
+                          return PopupMenuItem(
+                            value: lang.languageName,
+                            child: Text(
+                              lang.languageName,
+                              style: Styles.generalTextStyle,
+                            ),
+                          );
+                        }).toList();
+                      },
+                    ),
                   )
                 ],
               ),
