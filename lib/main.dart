@@ -1,5 +1,6 @@
+import 'package:dgha_brochure/misc/route_generator.dart';
+import 'package:dgha_brochure/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
-import 'screen/menu_screen.dart';
 
 void main() => runApp(DGHA());
 
@@ -7,10 +8,8 @@ class DGHA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: MenuScreen.id,
-      routes: {
-        MenuScreen.id: (context) => MenuScreen()
-      },
+      initialRoute: PageViewMenu.id,
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
