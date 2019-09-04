@@ -5,8 +5,6 @@ import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
     Key key,
@@ -14,12 +12,15 @@ class MenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(children: _buildMenuChildren(context)),
+    return Tooltip(
+      message: 'Side Menu Bar',
+      child: Drawer(
+        child: ListView(children: _buildMenuChildren(context)),
+      ),
     );
   }
 
-  void launchURL(String url ) async {
+  void launchURL(String url) async {
     await launch(url);
   }
 
@@ -59,17 +60,15 @@ class MenuDrawer extends StatelessWidget {
         root.title,
         style: Styles.generalTextStyle,
       ),
-      
       onTap: () {
-
-        if(root.title == "Donation") {
-          launchURL("http://dgha.org.au/dgha/membership/"); 
+        if (root.title == "Donation") {
+          launchURL("http://dgha.org.au/dgha/membership/");
         } else if (root.title == "Sign up") {
           launchURL("http://dgha.org.au/dgha/membership/");
         } else {
           Navigator.pop(context);
           Navigator.of(context).pushNamed(root.pageToNavigateTo,
-            arguments: ScreenArguments(title: root.title, texts: root.texts));
+              arguments: ScreenArguments(title: root.title, texts: root.texts));
         }
       },
     );
