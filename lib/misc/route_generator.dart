@@ -10,10 +10,10 @@ class RouteGenerator{
     switch(settings.name) {
       case InfoScreen.id:
         return MaterialPageRoute(builder: (_) => InfoScreen(appBarTitle: arguments.title, texts: arguments.texts,)); 
-      case PageViewMenu.id:
-        return MaterialPageRoute(builder: (_) => PageViewMenu()); 
+      case MenuScreen.id:
+        return MaterialPageRoute(builder: (_) => MenuScreen()); 
       default:
-        return MaterialPageRoute(builder: (_) => PageViewMenu()); 
+        return MaterialPageRoute(builder: (_) => MenuScreen()); 
     }
   }
 }
