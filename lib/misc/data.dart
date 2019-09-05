@@ -2,7 +2,6 @@ import 'package:dgha_brochure/models/languages.dart';
 import 'package:dgha_brochure/models/menu_card_data.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
 import 'package:dgha_brochure/screens/info_screens.dart';
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {
@@ -13,13 +12,13 @@ class Data {
         title: "Guide Dog",
         pageToNavigateTo: InfoScreen.id,
         texts: infoLang,
-        colour: Colors.pink,
+        imagePath: "assets/images/menu_card/info.png",
         pageTitle: "Guide Dog Info"),
     MenuCardData(
         title: "Access",
         pageToNavigateTo: InfoScreen.id,
         texts: accessLang,
-        colour: Colors.amber,
+        imagePath: "assets/images/menu_card/access.png",
         pageTitle: "Guide Dog Access"),
   ];
 
@@ -28,55 +27,55 @@ class Data {
         title: "Federal",
         pageToNavigateTo: InfoScreen.id,
         texts: fedLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "Federal Law"),
     MenuCardData(
         title: "ACT",
         pageToNavigateTo: InfoScreen.id,
         texts: actLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "ACT State Law"),
     MenuCardData(
         title: "NSW",
         pageToNavigateTo: InfoScreen.id,
         texts: nswLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "NSW State Law"),
     MenuCardData(
         title: "NT",
         pageToNavigateTo: InfoScreen.id,
         texts: ntLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "NT State Law"),
     MenuCardData(
         title: "QLD",
         pageToNavigateTo: InfoScreen.id,
         texts: qldLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "QLD State Law"),
     MenuCardData(
         title: "SA",
         pageToNavigateTo: InfoScreen.id,
         texts: saLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "SA State Law"),
     MenuCardData(
         title: "TAS",
         pageToNavigateTo: InfoScreen.id,
         texts: tasLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "TAS State Law"),
     MenuCardData(
         title: "VIC",
         pageToNavigateTo: InfoScreen.id,
         texts: vicLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "VIC State Law"),
     MenuCardData(
         title: "WA",
         pageToNavigateTo: InfoScreen.id,
         texts: waLang,
-        colour: Colors.pink,
+        imagePath: "",
         pageTitle: "WA State Law"),
   ];
 
@@ -103,7 +102,7 @@ class Data {
       link: "http://dgha.org.au/dgha/membership/");
   static final MenuTileData donateTileData = new MenuTileData(
       title: "Donation",
-      icon: FontAwesomeIcons.donate,
+      icon: FontAwesomeIcons.handHoldingUsd,
       link: "http://dgha.org.au/dgha/membership/");
 
   static final List<MenuTileData> stateLawTilesData = <MenuTileData>[
