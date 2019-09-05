@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/components/icon_background.dart';
 import 'package:dgha_brochure/components/menu_tile.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
@@ -21,14 +22,14 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: 10),
-            child: Styles.buildIcon(widget.tile.icon, Styles.yellow),
+            child: IconBackground(child: Styles.buildIcon(widget.tile.icon, Styles.yellow)),
           ),
           SizedBox(width: 5,),
           Expanded(
             child: ExpansionTile(
               title: Text(
                 widget.tile.title,
-                style: Styles.pTextStyle,
+                style: Styles.h2TextStyle,
               ),
               children: _buildChildren(),
             ),
