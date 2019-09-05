@@ -29,7 +29,7 @@ class MenuCard extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 50, top: 10),
+              margin: EdgeInsets.only(bottom: this.width / 2.8, top: this.width/18),
               decoration: card.imagePath == "" ? BoxDecoration() : BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(card.imagePath),
@@ -38,16 +38,18 @@ class MenuCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10),
               width: double.maxFinite,
+              height: this.width/3.3,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),
-              child: Text(
-                card.title,
-                textAlign: TextAlign.center,
-                style: Styles.h2TextStyle,
+              child: Center(
+                child: Text(
+                  card.title,
+                  style: Styles.h2TextStyle,
+                ),
               ),
             )
           ],
