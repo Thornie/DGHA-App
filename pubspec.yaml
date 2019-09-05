@@ -31,6 +31,10 @@ flutter:
     - assets/languages/laws/tas/
     - assets/languages/laws/vic/
     - assets/languages/laws/wa/
+
+    - assets/images/dgha_logo/logo.png
+    - assets/images/menu_card/
+
   fonts:
     - family: Manjari
       fonts:
