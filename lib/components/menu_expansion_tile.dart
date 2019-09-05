@@ -12,8 +12,6 @@ class MenuExpansionTile extends StatefulWidget {
 }
 
 class _MenuExpansionTileState extends State<MenuExpansionTile> {
-  bool showIcon = true; 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,11 +26,6 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
           SizedBox(width: 5,),
           Expanded(
             child: ExpansionTile(
-              onExpansionChanged: (opened) {
-                setState(() {
-                 showIcon = !showIcon; 
-                });
-              },
               title: Text(
                 widget.tile.title,
                 style: Styles.pTextStyle,
