@@ -183,7 +183,7 @@ class Data {
 
 
   static final List<Language> actLang = <Language>[
-    Language(languageName: "English", path: "assets/assets/languages/laws/act/english.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/act/english.txt"),
     Language(languageName: "French", path: "assets/languages/laws/act/french.txt"),
     Language(languageName: "Spanish", path: "assets/languages/laws/act/spanish.txt"),
     Language(languageName: "Swahilli", path: "assets/languages/laws/act/swahilli.txt"),
