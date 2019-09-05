@@ -1,7 +1,9 @@
+import 'package:dgha_brochure/components/icon_background.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InfoScreen extends StatefulWidget {
   static const String id = "Info Screen";
@@ -38,18 +40,24 @@ class _InfoScreenState extends State<InfoScreen> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: Styles.customAppBarPadding,
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               decoration: Styles.customAppBarBoxDecoration,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Tooltip(
                     message: 'Back button',
-                    child: IconButton(
-                      icon: Styles.buildIcon(Icons.arrow_back_ios, Styles.yellow),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: IconBackground(
+                        child: IconButton(
+                          padding: EdgeInsets.only(right: 2),
+                          icon: Icon(FontAwesomeIcons.chevronLeft, color: Styles.yellow, size: 25,),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   Text(
@@ -64,14 +72,20 @@ class _InfoScreenState extends State<InfoScreen> {
                             .indexWhere((lang) => lang.languageName == choice);
                         setLang(newLangIndex);
                       },
-                      icon: Styles.buildIcon(Icons.translate, Styles.yellow),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: IconBackground(
+                          child: Icon(Icons.translate, color: Styles.yellow,),
+                        ),
+                      ),
+                      // icon: Styles.buildIcon(Icons.translate, Styles.yellow),
                       itemBuilder: (BuildContext ctxt) {
                         return widget.texts.map((Language lang) {
                           return PopupMenuItem(
                             value: lang.languageName,
                             child: Text(
                               lang.languageName,
-                              style: Styles.pTextStyle,
+                              style: Styles.h2TextStyle,
                             ),
                           );
                         }).toList();
