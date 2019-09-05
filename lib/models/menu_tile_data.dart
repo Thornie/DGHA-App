@@ -1,10 +1,13 @@
 import 'package:dgha_brochure/models/languages.dart';
+import 'package:flutter/material.dart';
 
-class MenuTile {
+class MenuTileData {
   final String title; 
   final String pageToNavigateTo; 
   final List<Language> texts; 
-  final List<MenuTile> children; 
+  final IconData icon; 
+  final String link; 
+  final List<MenuTileData> children; 
 
-  MenuTile({this.title, this.pageToNavigateTo, this.texts, this.children = const <MenuTile>[]}); 
+  MenuTileData({this.title, this.pageToNavigateTo, this.texts, this.icon, this.link, this.children = const <MenuTileData>[]}); 
 }
