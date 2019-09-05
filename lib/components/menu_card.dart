@@ -38,7 +38,7 @@ class MenuCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10),
               width: double.maxFinite,
-              height: this.width/3.3,
+              height: this.width/3.2,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
