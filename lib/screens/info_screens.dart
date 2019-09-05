@@ -40,7 +40,7 @@ class _InfoScreenState extends State<InfoScreen> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
               decoration: Styles.customAppBarBoxDecoration,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +52,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       child: IconBackground(
                         child: IconButton(
                           padding: EdgeInsets.only(right: 2),
-                          icon: Icon(FontAwesomeIcons.chevronLeft, color: Styles.yellow, size: 25,),
+                          icon: Styles.buildIcon(FontAwesomeIcons.chevronLeft),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -75,7 +75,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       child: Container(
                         margin: EdgeInsets.only(right: 20),
                         child: IconBackground(
-                          child: Icon(Icons.translate, color: Styles.yellow,),
+                          child: Styles.buildIcon(Icons.translate),
                         ),
                       ),
                       // icon: Styles.buildIcon(Icons.translate, Styles.yellow),

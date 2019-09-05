@@ -33,15 +33,7 @@ class MenuTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              child: tile.icon == null
-                  ? Container()
-                  : IconBackground(
-                      child: Icon(
-                        tile.icon,
-                        size: 25,
-                        color: Styles.yellow,
-                      ),
-                    ),
+              child: tile.icon == null ? Container() : IconBackground(child: Styles.buildIcon(tile.icon)),
             ),
             SizedBox(width: 20),
             Container(

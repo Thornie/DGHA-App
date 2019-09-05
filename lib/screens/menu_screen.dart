@@ -38,7 +38,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       margin: EdgeInsets.only(left: 20),
                       child: IconBackground(
                         child: IconButton(
-                          icon: Icon(FontAwesomeIcons.bars, color: Styles.yellow, size: 25,),
+                          icon: Styles.buildIcon(FontAwesomeIcons.bars),
                           onPressed: () {
                             setState(() {
                               _scaffoldKey.currentState.openDrawer();

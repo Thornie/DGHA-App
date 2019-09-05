@@ -22,7 +22,7 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: 10),
-            child: IconBackground(child: Styles.buildIcon(widget.tile.icon, Styles.yellow)),
+            child: IconBackground(child: Styles.buildIcon(widget.tile.icon)),
           ),
           SizedBox(width: 5,),
           Expanded(

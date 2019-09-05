@@ -44,8 +44,8 @@ class Styles {
   ); 
 
   // ----------------- ICON
-  static Icon buildIcon(IconData icon, Color colour) {
-    return Icon(icon, color: colour, size: 25);
+  static Icon buildIcon(IconData icon) {
+    return Icon(icon, color: yellow, size: 25);
   }
 
   // ----------------- MISC
