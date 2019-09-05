@@ -98,7 +98,7 @@ class Data {
       children: stateLawTilesData);
   static final MenuTileData signUpTileData = new MenuTileData(
       title: "Sign Up Membership",
-      icon: FontAwesomeIcons.userPlus,
+      icon: FontAwesomeIcons.solidUser,
       link: "http://dgha.org.au/dgha/membership/");
   static final MenuTileData donateTileData = new MenuTileData(
       title: "Donation",
