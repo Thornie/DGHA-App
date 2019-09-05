@@ -46,7 +46,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   Tooltip(
                     message: 'Back button',
                     child: IconButton(
-                      icon: Styles.buildAppBarIcon(Icons.arrow_back_ios),
+                      icon: Styles.buildIcon(Icons.arrow_back_ios, Styles.yellow),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -64,14 +64,14 @@ class _InfoScreenState extends State<InfoScreen> {
                             .indexWhere((lang) => lang.languageName == choice);
                         setLang(newLangIndex);
                       },
-                      icon: Styles.buildAppBarIcon(Icons.translate),
+                      icon: Styles.buildIcon(Icons.translate, Styles.yellow),
                       itemBuilder: (BuildContext ctxt) {
                         return widget.texts.map((Language lang) {
                           return PopupMenuItem(
                             value: lang.languageName,
                             child: Text(
                               lang.languageName,
-                              style: Styles.generalTextStyle,
+                              style: Styles.pTextStyle,
                             ),
                           );
                         }).toList();
@@ -89,7 +89,7 @@ class _InfoScreenState extends State<InfoScreen> {
                 child: SingleChildScrollView(
                   child: Text(
                     "\n" + infoText + "\n",
-                    style: Styles.generalTextStyle,
+                    style: Styles.pTextStyle,
                   ),
                 ),
               ),

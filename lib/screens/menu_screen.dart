@@ -33,7 +33,7 @@ class _PageViewMenuState extends State<PageViewMenu> {
                   children: <Widget>[
                     IconButton(
                       padding: EdgeInsets.only(left: 30),
-                      icon: Styles.buildAppBarIcon(Icons.menu),
+                      icon: Styles.buildIcon(Icons.menu, Styles.yellow),
                       onPressed: () {
                         setState(() {
                           _scaffoldKey.currentState.openDrawer();
