@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Styles {
   // ----------------- COLOURS
   static final Color yellow = Color(0xfffad00c);
+  static final Color midnightBlue = Color(0xff142e4c);
   static final Color transparent = Color(0x00000000);
 
   // ----------------- APP BAR
