@@ -140,108 +140,114 @@ class Data {
 
   static final List<Language> infoLang = <Language>[
     Language(
-        languageName: "English", path: "languages/guide_dog_info/english.txt"),
+        languageName: "English", path: "assets/languages/guide_dog_info/english.txt"),
     Language(
-        languageName: "French", path: "languages/guide_dog_info/french.txt"),
+        languageName: "French", path: "assets/languages/guide_dog_info/french.txt"),
     Language(
-        languageName: "Spanish", path: "languages/guide_dog_info/spanish.txt"),
+        languageName: "Spanish", path: "assets/languages/guide_dog_info/spanish.txt"),
     Language(
         languageName: "Swahilli",
-        path: "languages/guide_dog_info/swahilli.txt"),
+        path: "assets/languages/guide_dog_info/swahilli.txt"),
     Language(
-        languageName: "Tagalog", path: "languages/guide_dog_info/tagalog.txt"),
+        languageName: "Tagalog", path: "assets/languages/guide_dog_info/tagalog.txt"),
   ];
 
   static final List<Language> accessLang = <Language>[
     Language(
         languageName: "English",
-        path: "languages/guide_dog_access/english.txt"),
+        path: "assets/languages/guide_dog_access/english.txt"),
     Language(
-        languageName: "French", path: "languages/guide_dog_access/french.txt"),
+        languageName: "French", path: "assets/languages/guide_dog_access/french.txt"),
     Language(
         languageName: "Spanish",
-        path: "languages/guide_dog_access/spanish.txt"),
+        path: "assets/languages/guide_dog_access/spanish.txt"),
     Language(
         languageName: "Swahilli",
-        path: "languages/guide_dog_access/swahilli.txt"),
+        path: "assets/languages/guide_dog_access/swahilli.txt"),
     Language(
         languageName: "Tagalog",
-        path: "languages/guide_dog_access/tagalog.txt"),
+        path: "assets/languages/guide_dog_access/tagalog.txt"),
   ];
 
   static final List<Language> fedLang = <Language>[
     Language(
-        languageName: "English", path: "languages/laws/federal/english.txt"),
-    Language(languageName: "French", path: "languages/laws/federal/french.txt"),
+        languageName: "English", path: "assets/languages/laws/federal/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/federal/french.txt"),
     Language(
-        languageName: "Spanish", path: "languages/laws/federal/spanish.txt"),
+        languageName: "Spanish", path: "assets/languages/laws/federal/spanish.txt"),
     Language(
-        languageName: "Swahilli", path: "languages/laws/federal/swahilli.txt"),
+        languageName: "Swahilli", path: "assets/languages/laws/federal/swahilli.txt"),
     Language(
-        languageName: "Tagalog", path: "languages/laws/federal/tagalog.txt"),
+        languageName: "Tagalog", path: "assets/languages/laws/federal/tagalog.txt"),
   ];
 
+
   static final List<Language> actLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/act/english.txt"),
-    Language(languageName: "French", path: "languages/laws/act/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/act/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/act/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/act/tagalog.txt"),
+    Language(languageName: "English", path: "assets/assets/languages/laws/act/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/act/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/act/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/act/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/act/tagalog.txt"),
   ];
 
   static final List<Language> nswLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/nsw/english.txt"),
-    Language(languageName: "French", path: "languages/laws/nsw/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/nsw/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/nsw/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/nsw/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/nsw/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/nsw/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/nsw/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/nsw/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/nsw/tagalog.txt"),
   ];
 
   static final List<Language> ntLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/nt/english.txt"),
-    Language(languageName: "French", path: "languages/laws/nt/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/nt/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/nt/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/nt/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/nt/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/nt/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/nt/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/nt/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/nt/tagalog.txt"),
   ];
 
   static final List<Language> qldLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/qld/english.txt"),
-    Language(languageName: "French", path: "languages/laws/qld/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/qld/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/qld/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/qld/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/qld/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/qld/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/qld/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/qld/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/qld/tagalog.txt"),
   ];
 
   static final List<Language> saLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/sa/english.txt"),
-    Language(languageName: "French", path: "languages/laws/sa/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/sa/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/sa/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/sa/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/sa/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/sa/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/sa/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/sa/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/sa/tagalog.txt"),
   ];
 
   static final List<Language> tasLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/tas/english.txt"),
-    Language(languageName: "French", path: "languages/laws/tas/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/tas/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/tas/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/tas/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/tas/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/tas/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/tas/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/tas/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/tas/tagalog.txt"),
   ];
 
   static final List<Language> vicLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/vic/english.txt"),
-    Language(languageName: "French", path: "languages/laws/vic/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/vic/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/vic/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/vic/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/vic/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/vic/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/vic/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/vic/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/vic/tagalog.txt"),
   ];
 
   static final List<Language> waLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/wa/english.txt"),
-    Language(languageName: "French", path: "languages/laws/wa/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/wa/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/wa/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/wa/tagalog.txt"),
+    Language(languageName: "English", path: "assets/languages/laws/wa/english.txt"),
+    Language(languageName: "French", path: "assets/languages/laws/wa/french.txt"),
+    Language(languageName: "Spanish", path: "assets/languages/laws/wa/spanish.txt"),
+    Language(languageName: "Swahilli", path: "assets/languages/laws/wa/swahilli.txt"),
+    Language(languageName: "Tagalog", path: "assets/languages/laws/wa/tagalog.txt"),
   ];
+
+  // ----------------------------------- NOTE: Images
+  static final String logo = "assets/images/dgha_logo/logo.png"; 
+  static final String infoMenuImg = "assets/images/menu_card/info.png";
+  static final String accessMenuImg = "assets/images/menu_card/access.png";
 }
