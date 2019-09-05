@@ -73,15 +73,7 @@ class _PageViewMenuState extends State<PageViewMenu> {
                               itemCount: Data.generalInfoCardData.length,
                               itemBuilder: (BuildContext context, int index) {
                                 EdgeInsets margin = index == 0 ? EdgeInsets.fromLTRB(0, 0, 0, 5) : EdgeInsets.fromLTRB(20, 0, 0, 5);
-                                return MenuCard(
-                                  title: Data.generalInfoCardData[index].title,
-                                  width: 125,
-                                  margin: margin,
-                                  colour: Data.generalInfoCardData[index].colour,
-                                  pageToNavigateTo: Data.generalInfoCardData[index].pageToNavigateTo,
-                                  texts: Data.generalInfoCardData[index].texts,
-                                  pageTitle: Data.generalInfoCardData[index].pageTitle,
-                                );
+                                return MenuCard(card: Data.generalInfoCardData[index], width: 125, margin: margin);
                               },
                             ),
                           )
@@ -111,15 +103,7 @@ class _PageViewMenuState extends State<PageViewMenu> {
                                 } else {
                                   margin = EdgeInsets.fromLTRB(20, 0, 0, 5);
                                 }
-                                return MenuCard(
-                                  title: Data.lawInfoCardData[index].title,
-                                  width: 125,
-                                  margin: margin,
-                                  colour: Data.lawInfoCardData[index].colour,
-                                  pageToNavigateTo: Data.lawInfoCardData[index].pageToNavigateTo,
-                                  texts: Data.lawInfoCardData[index].texts,
-                                  pageTitle: Data.lawInfoCardData[index].pageTitle,
-                                );
+                                return MenuCard(card: Data.lawInfoCardData[index], width: 125, margin: margin);
                               },
                             ),
                           )
