@@ -1,44 +1,40 @@
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/languages.dart';
+import 'package:dgha_brochure/models/menu_card_data.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
-  final String title;
+  final MenuCardData card; 
   final double width;
   final EdgeInsets margin;
-  final Color colour;
-  final String pageToNavigateTo;
-  final List<Language> texts;
-  final String pageTitle;
 
-  MenuCard(
-      {this.title,
-      this.width,
-      this.margin,
-      this.colour,
-      this.pageToNavigateTo,
-      this.texts,
-      this.pageTitle});
+  MenuCard({this.card, this.width, this.margin});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(this.pageToNavigateTo,
-            arguments: ScreenArguments(title: this.pageTitle, texts: this.texts));
+        Navigator.of(context).pushNamed(card.pageToNavigateTo,
+            arguments:
+                ScreenArguments(title: card.pageTitle, texts: card.texts));
       },
       child: Container(
         width: this.width,
         margin: this.margin,
         decoration: BoxDecoration(
-            color: Color(0xfffad00c),
+            color: Styles.midnightBlue,
             borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: [Styles.customBoxShadow(Offset(1, 2))]),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
-            Container(),
+            Container(
+              margin: EdgeInsets.only(bottom: 50, top: 10),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(card.imagePath),
+                      fit: BoxFit.contain)),
+            ),
             Container(
               padding: EdgeInsets.all(10),
               width: double.maxFinite,
@@ -49,7 +45,7 @@ class MenuCard extends StatelessWidget {
                     bottomRight: Radius.circular(20)),
               ),
               child: Text(
-                this.title,
+                card.title,
                 textAlign: TextAlign.center,
                 style: Styles.h2TextStyle,
               ),
