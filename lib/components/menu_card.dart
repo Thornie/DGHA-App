@@ -4,7 +4,7 @@ import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
-  final MenuCardData card; 
+  final MenuCardData card;
   final double width;
   final EdgeInsets margin;
 
@@ -15,8 +15,7 @@ class MenuCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(card.pageToNavigateTo,
-            arguments:
-                ScreenArguments(title: card.pageTitle, texts: card.texts));
+            arguments: ScreenArguments(title: card.pageTitle, texts: card.texts));
       },
       child: Container(
         width: this.width,
@@ -31,9 +30,11 @@ class MenuCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: 50, top: 10),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(card.imagePath),
-                      fit: BoxFit.contain)),
+                image: DecorationImage(
+                  image: AssetImage(card.imagePath),
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
             Container(
               padding: EdgeInsets.all(10),
