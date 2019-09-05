@@ -8,7 +8,7 @@ class DGHA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: PageViewMenu.id,
+      initialRoute: MenuScreen.id,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

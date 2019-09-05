@@ -5,13 +5,13 @@ import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
 
-class PageViewMenu extends StatefulWidget {
-  static const String id = "Page View Menu";
+class MenuScreen extends StatefulWidget {
+  static const String id = "Menu Screen";
   @override
-  _PageViewMenuState createState() => _PageViewMenuState();
+  _MenuScreenState createState() => _MenuScreenState();
 }
 
-class _PageViewMenuState extends State<PageViewMenu> {
+class _MenuScreenState extends State<MenuScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
