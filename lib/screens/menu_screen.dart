@@ -106,7 +106,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                                     .generalInfoCardData[index],
                                                 width: orientation ==
                                                         Orientation.portrait
-                                                    ? srcWidth / 2.7
+                                                    ? srcWidth / 2.8
                                                     : srcWidth / 4.5,
                                                 margin: margin);
                                           },
@@ -154,7 +154,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                                     Data.lawInfoCardData[index],
                                                 width: orientation ==
                                                         Orientation.portrait
-                                                    ? srcWidth / 2.7
+                                                    ? srcWidth / 2.8
                                                     : srcWidth / 4.5,
                                                 margin: margin);
                                           },
@@ -166,7 +166,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               ),
                             ),
                             SizedBox(
-                              height: srcHeight / 15
+                              height: srcHeight / 13
                             ),
                           ],
                         ),
