@@ -20,6 +20,7 @@ class MenuTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if(tile.link == null) {
+          Navigator.pop(context);
           Navigator.of(context).pushNamed(tile.pageToNavigateTo,
             arguments: ScreenArguments(title: tile.title, texts: tile.texts));
         } else {
