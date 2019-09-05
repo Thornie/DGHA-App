@@ -18,6 +18,9 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double srcWidth = MediaQuery.of(context).size.width;
+    double srcHeight = MediaQuery.of(context).size.height;
+    srcHeight = srcHeight - (srcHeight / 5);
     return Scaffold(
       key: _scaffoldKey,
       drawer: MenuDrawer(),
@@ -28,7 +31,6 @@ class _MenuScreenState extends State<MenuScreen> {
               // NOTE: AppBar
               Container(
                 padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
-                // padding: Styles.customAppBarPadding,
                 margin: EdgeInsets.only(bottom: 2),
                 decoration: Styles.customAppBarBoxDecoration,
                 child: Row(
@@ -60,82 +62,116 @@ class _MenuScreenState extends State<MenuScreen> {
 
               // NOTE: The Scrollable List Tiles Section
               Expanded(
-                child: SingleChildScrollView(
-                    physics: orientation == Orientation.portrait
-                        ? NeverScrollableScrollPhysics()
-                        : BouncingScrollPhysics(),
-                    child: Column(
-                      children: <Widget>[
-                        // NOTE: General Information
-                        Container(
-                          margin: orientation == Orientation.portrait
-                              ? EdgeInsets.only(top: 40)
-                              : EdgeInsets.only(top: 20),
-                          child: Column(
-                            children: <Widget>[
-                              InfoMenuHeading(text: "General Information"),
-                              Container(
-                                height: 160,
-                                padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
-                                child: ListView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: Data.generalInfoCardData.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    EdgeInsets margin = index == 0
-                                        ? EdgeInsets.fromLTRB(0, 0, 0, 5)
-                                        : EdgeInsets.fromLTRB(20, 0, 0, 5);
-                                    return MenuCard(
-                                        card: Data.generalInfoCardData[index],
-                                        width: 125,
-                                        margin: margin);
-                                  },
+                child: Center(
+                  child: SingleChildScrollView(
+                      physics: orientation == Orientation.portrait
+                          ? NeverScrollableScrollPhysics()
+                          : BouncingScrollPhysics(),
+                      child: Container(
+                        height: orientation == Orientation.portrait
+                            ? srcHeight
+                            : srcHeight * 1.5,
+                        child: Column(
+                          children: <Widget>[
+                            // NOTE: General Information
+                            SizedBox(
+                              height: orientation == Orientation.portrait
+                                  ? srcHeight / 15
+                                  : srcHeight / 20,
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  InfoMenuHeading(
+                                    text: "General Information",
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                        margin:
+                                            EdgeInsets.only(left: 30, top: 10),
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          physics: BouncingScrollPhysics(),
+                                          itemCount:
+                                              Data.generalInfoCardData.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            EdgeInsets margin = index == 0
+                                                ? EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 5)
+                                                : EdgeInsets.fromLTRB(
+                                                    20, 0, 0, 5);
+                                            return MenuCard(
+                                                card: Data
+                                                    .generalInfoCardData[index],
+                                                width: orientation ==
+                                                        Orientation.portrait
+                                                    ? srcWidth / 2.7
+                                                    : srcWidth / 4.5,
+                                                margin: margin);
+                                          },
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: orientation == Orientation.portrait
+                                  ? srcHeight / 15
+                                  : srcHeight / 20,
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    InfoMenuHeading(
+                                        text: "Federal and State Laws"),
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          physics: BouncingScrollPhysics(),
+                                          itemCount:
+                                              Data.lawInfoCardData.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            EdgeInsets margin;
+                                            if (index == 0) {
+                                              margin = EdgeInsets.fromLTRB(
+                                                  30, 0, 0, 5);
+                                            } else if (index ==
+                                                Data.lawInfoCardData.length -
+                                                    1) {
+                                              margin = EdgeInsets.fromLTRB(
+                                                  20, 0, 30, 5);
+                                            } else {
+                                              margin = EdgeInsets.fromLTRB(
+                                                  20, 0, 0, 5);
+                                            }
+                                            return MenuCard(
+                                                card:
+                                                    Data.lawInfoCardData[index],
+                                                width: orientation ==
+                                                        Orientation.portrait
+                                                    ? srcWidth / 2.7
+                                                    : srcWidth / 4.5,
+                                                margin: margin);
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: srcHeight / 15
+                            ),
+                          ],
                         ),
-
-                        // NOTE: Laws
-                        Container(
-                          margin: orientation == Orientation.portrait
-                              ? EdgeInsets.only(top: 30, bottom: 40)
-                              : EdgeInsets.only(top: 15, bottom: 25),
-                          child: Column(
-                            children: <Widget>[
-                              InfoMenuHeading(text: "Federal and State Laws"),
-                              Container(
-                                height: 160,
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                child: ListView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: Data.lawInfoCardData.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    EdgeInsets margin;
-                                    if (index == 0) {
-                                      margin = EdgeInsets.fromLTRB(30, 0, 0, 5);
-                                    } else if (index ==
-                                        Data.lawInfoCardData.length - 1) {
-                                      margin =
-                                          EdgeInsets.fromLTRB(20, 0, 30, 5);
-                                    } else {
-                                      margin = EdgeInsets.fromLTRB(20, 0, 0, 5);
-                                    }
-                                    return MenuCard(
-                                        card: Data.lawInfoCardData[index],
-                                        width: 125,
-                                        margin: margin);
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    )),
+                      )),
+                ),
               ),
             ],
           );
