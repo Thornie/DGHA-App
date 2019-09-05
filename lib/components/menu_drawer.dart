@@ -19,6 +19,7 @@ class MenuDrawer extends StatelessWidget {
             elevation: 20,
             child: ListView(
               children: <Widget>[
+                SizedBox(height: 15,),
                 MenuTile(tile: Data.guideDogInfoTileData),
                 MenuTile(tile: Data.guideDogAccessTileData),
                 MenuExpansionTile(tile: Data.fedTileData),
