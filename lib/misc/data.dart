@@ -3,65 +3,183 @@ import 'package:dgha_brochure/models/menu_card_data.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
 import 'package:dgha_brochure/screens/info_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {
-  static final List<MenuCardData> generalInfoCardData = <MenuCardData> [
-    MenuCardData(title: "Guide Dog", pageToNavigateTo: InfoScreen.id, texts: infoLang, colour: Colors.pink, pageTitle: "Guide Dog Info"),
-    MenuCardData(title: "Access", pageToNavigateTo: InfoScreen.id, texts: accessLang, colour: Colors.amber, pageTitle: "Guide Dog Access"),
+
+  // -------------------------------------- NOTE: Card Data
+  static final List<MenuCardData> generalInfoCardData = <MenuCardData>[
+    MenuCardData(
+        title: "Guide Dog",
+        pageToNavigateTo: InfoScreen.id,
+        texts: infoLang,
+        colour: Colors.pink,
+        pageTitle: "Guide Dog Info"),
+    MenuCardData(
+        title: "Access",
+        pageToNavigateTo: InfoScreen.id,
+        texts: accessLang,
+        colour: Colors.amber,
+        pageTitle: "Guide Dog Access"),
   ];
 
-  static final List<MenuCardData> lawInfoCardData = <MenuCardData> [
-    MenuCardData(title: "Federal", pageToNavigateTo: InfoScreen.id, texts: fedLang, colour: Colors.pink, pageTitle: "Federal Law"),
-    MenuCardData(title: "ACT", pageToNavigateTo: InfoScreen.id, texts: actLang, colour: Colors.pink, pageTitle: "ACT State Law"),
-    MenuCardData(title: "NSW", pageToNavigateTo: InfoScreen.id, texts: nswLang, colour: Colors.pink, pageTitle: "NSW State Law"),
-    MenuCardData(title: "NT", pageToNavigateTo: InfoScreen.id, texts: ntLang, colour: Colors.pink, pageTitle: "NT State Law"),
-    MenuCardData(title: "QLD", pageToNavigateTo: InfoScreen.id, texts: qldLang, colour: Colors.pink, pageTitle: "QLD State Law"),
-    MenuCardData(title: "SA", pageToNavigateTo: InfoScreen.id, texts: saLang, colour: Colors.pink, pageTitle: "SA State Law"),
-    MenuCardData(title: "TAS", pageToNavigateTo: InfoScreen.id, texts: tasLang, colour: Colors.pink, pageTitle: "TAS State Law"),
-    MenuCardData(title: "VIC", pageToNavigateTo: InfoScreen.id, texts: vicLang, colour: Colors.pink, pageTitle: "VIC State Law"),
-    MenuCardData(title: "WA", pageToNavigateTo: InfoScreen.id, texts: waLang, colour: Colors.pink, pageTitle: "WA State Law"),
+  static final List<MenuCardData> lawInfoCardData = <MenuCardData>[
+    MenuCardData(
+        title: "Federal",
+        pageToNavigateTo: InfoScreen.id,
+        texts: fedLang,
+        colour: Colors.pink,
+        pageTitle: "Federal Law"),
+    MenuCardData(
+        title: "ACT",
+        pageToNavigateTo: InfoScreen.id,
+        texts: actLang,
+        colour: Colors.pink,
+        pageTitle: "ACT State Law"),
+    MenuCardData(
+        title: "NSW",
+        pageToNavigateTo: InfoScreen.id,
+        texts: nswLang,
+        colour: Colors.pink,
+        pageTitle: "NSW State Law"),
+    MenuCardData(
+        title: "NT",
+        pageToNavigateTo: InfoScreen.id,
+        texts: ntLang,
+        colour: Colors.pink,
+        pageTitle: "NT State Law"),
+    MenuCardData(
+        title: "QLD",
+        pageToNavigateTo: InfoScreen.id,
+        texts: qldLang,
+        colour: Colors.pink,
+        pageTitle: "QLD State Law"),
+    MenuCardData(
+        title: "SA",
+        pageToNavigateTo: InfoScreen.id,
+        texts: saLang,
+        colour: Colors.pink,
+        pageTitle: "SA State Law"),
+    MenuCardData(
+        title: "TAS",
+        pageToNavigateTo: InfoScreen.id,
+        texts: tasLang,
+        colour: Colors.pink,
+        pageTitle: "TAS State Law"),
+    MenuCardData(
+        title: "VIC",
+        pageToNavigateTo: InfoScreen.id,
+        texts: vicLang,
+        colour: Colors.pink,
+        pageTitle: "VIC State Law"),
+    MenuCardData(
+        title: "WA",
+        pageToNavigateTo: InfoScreen.id,
+        texts: waLang,
+        colour: Colors.pink,
+        pageTitle: "WA State Law"),
   ];
 
-  static final List<MenuTile> menuTiles = <MenuTile>[
-    MenuTile(title: "Guide Dog Info", pageToNavigateTo: InfoScreen.id, texts: infoLang, children: []),
-    MenuTile(title: "Guide Dog Access", pageToNavigateTo: InfoScreen.id, texts: accessLang, children: []),
-    MenuTile(title: "Laws", children: <MenuTile>[
-      MenuTile(title: "Federal Law", pageToNavigateTo: InfoScreen.id, texts: fedLang, children: []),
-      MenuTile(title: "ACT State Law", pageToNavigateTo: InfoScreen.id, texts: actLang, children: []),
-      MenuTile(title: "NSW State Law", pageToNavigateTo: InfoScreen.id, texts: nswLang, children: []),
-      MenuTile(title: "NT State Law", pageToNavigateTo: InfoScreen.id, texts: ntLang, children: []),
-      MenuTile(title: "QLD State Law", pageToNavigateTo: InfoScreen.id, texts: qldLang, children: []),
-      MenuTile(title: "SA State Law", pageToNavigateTo: InfoScreen.id, texts: saLang, children: []),
-      MenuTile(title: "TAS State Law", pageToNavigateTo: InfoScreen.id, texts: tasLang, children: []),
-      MenuTile(title: "VIC State Law", pageToNavigateTo: InfoScreen.id, texts: vicLang, children: []),
-      MenuTile(title: "WA State Law", pageToNavigateTo: InfoScreen.id, texts: waLang, children: []),      
-    ]),
-    MenuTile(title: "Sign up"),
-    MenuTile(title: "Donation"),
+  // ------------------------------------ NOTE: Menu List Tiles
+  static final MenuTileData guideDogInfoTileData = new MenuTileData(
+      title: "Guide Dog Info",
+      pageToNavigateTo: InfoScreen.id,
+      texts: infoLang,
+      icon: FontAwesomeIcons.dog);
+  static final MenuTileData guideDogAccessTileData = new MenuTileData(
+      title: "Guide Dog Access",
+      pageToNavigateTo: InfoScreen.id,
+      texts: accessLang,
+      icon: FontAwesomeIcons.unlockAlt);
+  static final MenuTileData fedTileData = new MenuTileData(
+      title: "Laws",
+      pageToNavigateTo: InfoScreen.id,
+      texts: fedLang,
+      icon: FontAwesomeIcons.gavel,
+      children: stateLawTilesData);
+  static final MenuTileData signUpTileData = new MenuTileData(
+      title: "Sign Up Membership",
+      icon: FontAwesomeIcons.userPlus,
+      link: "http://dgha.org.au/dgha/membership/");
+  static final MenuTileData donateTileData = new MenuTileData(
+      title: "Donation",
+      icon: FontAwesomeIcons.donate,
+      link: "http://dgha.org.au/dgha/membership/");
+
+  static final List<MenuTileData> stateLawTilesData = <MenuTileData>[
+    MenuTileData(
+        title: "Federal Law", pageToNavigateTo: InfoScreen.id, texts: fedLang),
+    MenuTileData(
+        title: "ACT State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: actLang),
+    MenuTileData(
+        title: "NSW State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: nswLang),
+    MenuTileData(
+        title: "NT State Law", pageToNavigateTo: InfoScreen.id, texts: ntLang),
+    MenuTileData(
+        title: "QLD State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: qldLang),
+    MenuTileData(
+        title: "SA State Law", pageToNavigateTo: InfoScreen.id, texts: saLang),
+    MenuTileData(
+        title: "TAS State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: tasLang),
+    MenuTileData(
+        title: "VIC State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: vicLang),
+    MenuTileData(
+        title: "WA State Law", pageToNavigateTo: InfoScreen.id, texts: waLang),
   ];
-  
+
+  // ---------------------------- NOTE: Languages
+
   static final List<Language> infoLang = <Language>[
-    Language(languageName: "English", path: "languages/guide_dog_info/english.txt"),
-    Language(languageName: "French", path: "languages/guide_dog_info/french.txt"),
-    Language(languageName: "Spanish", path: "languages/guide_dog_info/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/guide_dog_info/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/guide_dog_info/tagalog.txt"),
+    Language(
+        languageName: "English", path: "languages/guide_dog_info/english.txt"),
+    Language(
+        languageName: "French", path: "languages/guide_dog_info/french.txt"),
+    Language(
+        languageName: "Spanish", path: "languages/guide_dog_info/spanish.txt"),
+    Language(
+        languageName: "Swahilli",
+        path: "languages/guide_dog_info/swahilli.txt"),
+    Language(
+        languageName: "Tagalog", path: "languages/guide_dog_info/tagalog.txt"),
   ];
 
   static final List<Language> accessLang = <Language>[
-    Language(languageName: "English", path: "languages/guide_dog_access/english.txt"),
-    Language(languageName: "French", path: "languages/guide_dog_access/french.txt"),
-    Language(languageName: "Spanish", path: "languages/guide_dog_access/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/guide_dog_access/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/guide_dog_access/tagalog.txt"),
+    Language(
+        languageName: "English",
+        path: "languages/guide_dog_access/english.txt"),
+    Language(
+        languageName: "French", path: "languages/guide_dog_access/french.txt"),
+    Language(
+        languageName: "Spanish",
+        path: "languages/guide_dog_access/spanish.txt"),
+    Language(
+        languageName: "Swahilli",
+        path: "languages/guide_dog_access/swahilli.txt"),
+    Language(
+        languageName: "Tagalog",
+        path: "languages/guide_dog_access/tagalog.txt"),
   ];
 
   static final List<Language> fedLang = <Language>[
-    Language(languageName: "English", path: "languages/laws/federal/english.txt"),
+    Language(
+        languageName: "English", path: "languages/laws/federal/english.txt"),
     Language(languageName: "French", path: "languages/laws/federal/french.txt"),
-    Language(languageName: "Spanish", path: "languages/laws/federal/spanish.txt"),
-    Language(languageName: "Swahilli", path: "languages/laws/federal/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "languages/laws/federal/tagalog.txt"),
+    Language(
+        languageName: "Spanish", path: "languages/laws/federal/spanish.txt"),
+    Language(
+        languageName: "Swahilli", path: "languages/laws/federal/swahilli.txt"),
+    Language(
+        languageName: "Tagalog", path: "languages/laws/federal/tagalog.txt"),
   ];
 
   static final List<Language> actLang = <Language>[
