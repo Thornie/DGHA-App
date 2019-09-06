@@ -7,8 +7,10 @@ import 'package:dgha_brochure/models/menu_tile_data.dart';
 
 class MenuTile extends StatelessWidget {
   final MenuTileData tile;
+  final double iconSize;
+  final double bgSize;
 
-  MenuTile({this.tile});
+  MenuTile({this.tile, this.iconSize, this.bgSize});
 
   _launchUrl(String url) async {
     if (await canLaunch(url)) {
@@ -33,16 +35,31 @@ class MenuTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              child: tile.icon == null ? Container() : IconBackground(child: Styles.buildIcon(tile.icon)),
+              child: tile.icon != null
+                  ? Container(
+                      width: bgSize,
+                      height: bgSize,
+                      decoration: BoxDecoration(
+                          color: Styles.midnightBlue,
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Icon(
+                        tile.icon,
+                        size: iconSize,
+                        color: Styles.yellow,
+                      ))
+                  : Container(),
             ),
             SizedBox(width: 20),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Text(
-                tile.title,
-                style: Styles.h2TextStyle,
-              ),
-            )
+            Expanded(
+              flex: 8,
+              child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Styles.buildH3(tile.title)),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(""),
+            ),
           ],
         ),
       ),

@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 
 class MenuExpansionTile extends StatefulWidget {
   final MenuTileData tile;
-  MenuExpansionTile({this.tile});
+  final double iconSize; 
+  final double bgSize; 
+  
+  MenuExpansionTile({this.tile, this.iconSize, this.bgSize});
 
   @override
   _MenuExpansionTileState createState() => _MenuExpansionTileState();
@@ -21,16 +24,18 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 10),
-            child: IconBackground(child: Styles.buildIcon(widget.tile.icon)),
-          ),
+              width: widget.bgSize,
+              height: widget.bgSize,
+              decoration: BoxDecoration(
+                color: Styles.midnightBlue,
+                borderRadius: BorderRadius.all(Radius.circular(50))
+              ),
+              child: Icon(widget.tile.icon, size: widget.iconSize, color: Styles.yellow,)
+            ),
           SizedBox(width: 5,),
           Expanded(
             child: ExpansionTile(
-              title: Text(
-                widget.tile.title,
-                style: Styles.h2TextStyle,
-              ),
+              title: Styles.buildH3("Laws"),
               children: _buildChildren(),
             ),
           ),

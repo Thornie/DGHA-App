@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
   final MenuCardData card; 
-  final double width;
-  final EdgeInsets margin;
+  final double radius;
+  final double margin;
 
-  MenuCard({this.card, this.width, this.margin});
+  MenuCard({this.card, this.radius, this.margin});
 
   @override
   Widget build(BuildContext context) {
@@ -19,36 +19,45 @@ class MenuCard extends StatelessWidget {
                 ScreenArguments(title: card.pageTitle, texts: card.texts));
       },
       child: Container(
-        width: this.width,
-        margin: this.margin,
         decoration: BoxDecoration(
             color: Styles.midnightBlue,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: [Styles.customBoxShadow(Offset(1, 2))]),
+            borderRadius:
+                BorderRadius.all(Radius.circular(radius)),
+            boxShadow: [
+              Styles.customBoxShadow(Offset(1, 2))
+            ]),
         child: Stack(
-          alignment: Alignment.bottomCenter,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: this.width / 2.8, top: this.width/18),
-              decoration: card.imagePath == "" ? BoxDecoration() : BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(card.imagePath),
-                      fit: BoxFit.contain)),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              width: double.maxFinite,
-              height: this.width/3.2,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
+            Align(
+              alignment: Alignment.topCenter,
+              child: AspectRatio(
+                aspectRatio: 1.18,
+                child: Container(
+                  margin: EdgeInsets.all(margin),
+                  decoration: card.imagePath != "" ? BoxDecoration(
+                    image: DecorationImage(image: AssetImage(card.imagePath))
+                  ) : BoxDecoration(),
+                ),
               ),
-              child: Center(
-                child: Text(
-                  card.title,
-                  style: Styles.h2TextStyle,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: AspectRatio(
+                aspectRatio: 3.7,
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(
+                      10, 5, 10, 0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft:
+                            Radius.circular(radius),
+                        bottomRight:
+                            Radius.circular(radius)),
+                  ),
+                  child: Center(
+                      child: Styles.buildH3(
+                          card.shortTitle)),
                 ),
               ),
             )

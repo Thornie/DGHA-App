@@ -1,4 +1,3 @@
-import 'package:dgha_brochure/components/icon_background.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
@@ -35,82 +34,131 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double srcWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
-              decoration: Styles.customAppBarBoxDecoration,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Tooltip(
-                    message: 'Back button',
-                    child: Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: IconBackground(
-                        child: IconButton(
-                          padding: EdgeInsets.only(right: 2),
-                          icon: Styles.buildIcon(FontAwesomeIcons.chevronLeft),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    widget.appBarTitle,
-                    style: Styles.customAppBartextStyle,
-                  ),
-                  Tooltip(
-                    message: 'Select language',
-                    child: PopupMenuButton(
-                      onSelected: (choice) {
-                        int newLangIndex = widget.texts
-                            .indexWhere((lang) => lang.languageName == choice);
-                        setLang(newLangIndex);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 20),
-                        child: IconBackground(
-                          child: Styles.buildIcon(Icons.translate),
-                        ),
-                      ),
-                      // icon: Styles.buildIcon(Icons.translate, Styles.yellow),
-                      itemBuilder: (BuildContext ctxt) {
-                        return widget.texts.map((Language lang) {
-                          return PopupMenuItem(
-                            value: lang.languageName,
-                            child: Text(
-                              lang.languageName,
-                              style: Styles.h2TextStyle,
+      body: SafeArea(child: OrientationBuilder(
+        builder: (context, orientation) {
+          double iconSize = orientation == Orientation.portrait
+              ? srcWidth / 12
+              : srcWidth / 21;
+          double marginLeft = orientation == Orientation.portrait ? 30 : 70;
+          return Column(
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: orientation == Orientation.portrait
+                    ? Styles.appBarAspectRatioPort
+                    : Styles.appBarAspectRatioLand,
+                child: Tooltip(
+                  message: "Back Button",
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 2),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: orientation == Orientation.portrait
+                                ? Radius.circular(srcWidth / 15)
+                                : Radius.circular(srcWidth / 25),
+                            bottomRight: orientation == Orientation.portrait
+                                ? Radius.circular(srcWidth / 15)
+                                : Radius.circular(srcWidth / 25)),
+                        boxShadow: [Styles.customBoxShadow(Offset(0, 2))]),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: orientation == Orientation.portrait
+                                  ? 30
+                                  : 50),
+                          width: orientation == Orientation.portrait
+                              ? srcWidth / 7
+                              : srcWidth / 13,
+                          height: orientation == Orientation.portrait
+                              ? srcWidth / 7
+                              : srcWidth / 13,
+                          decoration: BoxDecoration(
+                              color: Styles.midnightBlue,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
+                          child: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.chevronLeft,
+                              size: orientation == Orientation.portrait
+                                  ? srcWidth / 12
+                                  : srcWidth / 21,
+                              color: Styles.yellow,
                             ),
-                          );
-                        }).toList();
-                      },
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                            flex: 4,
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              child: Styles.buildH1(widget.appBarTitle),
+                            )),
+                        PopupMenuButton(
+                          onSelected: (choice) {
+                            int newLangIndex = widget.texts.indexWhere(
+                                (lang) => lang.languageName == choice);
+                            setLang(newLangIndex);
+                          },
+                          itemBuilder: (BuildContext ctxt) {
+                            return widget.texts.map((Language lang) {
+                              return PopupMenuItem(
+                                value: lang.languageName,
+                                child: Text(
+                                  lang.languageName,
+                                  style: Styles.h2TextStyle,
+                                ),
+                              );
+                            }).toList();
+                          },
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  right: orientation == Orientation.portrait
+                                      ? 30
+                                      : 50),
+                              width: orientation == Orientation.portrait
+                                  ? srcWidth / 7
+                                  : srcWidth / 13,
+                              height: orientation == Orientation.portrait
+                                  ? srcWidth / 7
+                                  : srcWidth / 13,
+                              decoration: BoxDecoration(
+                                  color: Styles.midnightBlue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50))),
+                              child: Icon(
+                                Icons.translate,
+                                size: iconSize,
+                                color: Styles.yellow,
+                              )),
+                        ),
+                      ],
                     ),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                margin: EdgeInsets.only(left: 30, right: 30),
-                child: SingleChildScrollView(
-                  child: Text(
-                    "\n" + infoText + "\n",
-                    style: Styles.pTextStyle,
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+              Expanded(
+                child: Container(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  margin: EdgeInsets.only(left: marginLeft, right: marginLeft),
+                  child: SingleChildScrollView(
+                    child: Text(
+                      "\n" + infoText + "\n",
+                      style: Styles.pTextStyle,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      )),
     );
   }
 }
