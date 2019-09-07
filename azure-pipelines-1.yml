@@ -22,9 +22,10 @@ steps:
 
 # TODO: Add Android Signing
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    contents: '**/*.app'
-    targetFolder: '$(build.artifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
