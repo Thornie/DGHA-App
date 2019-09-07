@@ -20,7 +20,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: '**/*.ipa'
+    contents: '**/*.app'
     targetFolder: '$(build.artifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
