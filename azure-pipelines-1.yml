@@ -11,9 +11,10 @@ steps:
 
 - task: FlutterBuild@0
   inputs:
-    target: ios
-    projectDirectory: 
+    target: 'ios'
+    projectDirectory: '.'
     debugMode: true
+    iosCodesign: false
 
 - task: ArchiveFiles@2
   inputs:
