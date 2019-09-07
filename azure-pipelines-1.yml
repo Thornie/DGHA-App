@@ -18,9 +18,10 @@ steps:
 
 # TODO: Add Android Signing
 
+
 - task: CopyFiles@2
   inputs:
-    contents: '**/*.app'
+    contents: '/Users/vsts/agent/2.155.1/work/1/s/build/ios/iphoneos/Runner.app'
     targetFolder: '$(build.artifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
