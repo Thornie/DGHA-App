@@ -9,23 +9,22 @@ steps:
   inputs:
     channel: stable
 
+- task: FlutterTest@0
+  inputs:
+    projectDirectory: ''
+
 - task: FlutterBuild@0
   inputs:
-    target: 'ios'
-    projectDirectory: '.'
-    debugMode: true
+    projectDirectory: ''
+    target: ios
     iosCodesign: false
+# Will need to target all when mac build is worked out
 
-- task: ArchiveFiles@2
+# TODO: Add Android Signing
+
+- task: CopyFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    contents: '**/*.app'
+    targetFolder: '$(build.artifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
