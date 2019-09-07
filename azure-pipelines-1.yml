@@ -21,8 +21,10 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: '/Users/vsts/agent/2.155.1/work/1/s/build/ios/iphoneos/Runner.app'
+    contents: '*.app'
     targetFolder: '$(build.artifactStagingDirectory)'
+
+
 
 - task: PublishBuildArtifacts@1
 
