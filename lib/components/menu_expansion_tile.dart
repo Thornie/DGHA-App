@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 
 class MenuExpansionTile extends StatefulWidget {
   final MenuTileData tile;
-  final double iconSize;
 
-  MenuExpansionTile({this.tile, this.iconSize});
+  MenuExpansionTile({this.tile});
 
   @override
   _MenuExpansionTileState createState() => _MenuExpansionTileState();
@@ -17,50 +16,35 @@ class MenuExpansionTile extends StatefulWidget {
 class _MenuExpansionTileState extends State<MenuExpansionTile> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: widget.iconSize / 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            child: IconBg(
-              height: widget.iconSize,
-              chid: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Container(
-                    padding: EdgeInsets.only(bottom: 3),
-                    child: Icon(
-                      widget.tile.icon,
-                      size: constraints.biggest.width - widget.iconSize / 3.5,
-                      color: Styles.yellow,
-                    ),
-                  );
-                },
-              ),
-            ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(Styles.iconPadding),
+          decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
+          child: Icon(
+            widget.tile.icon,
+            size: Styles.iconSize,
+            color: Styles.yellow,
           ),
-          SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            flex: 2,
+        ),
+        Expanded(
+          child: Container(
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: 15),
-                  child: Text(
-                    widget.tile.title,
-                    style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 30),
-                  ),
+                  padding: EdgeInsets.only(top: Styles.iconSize / 1.75, left: 20),
+                  child: Text(widget.tile.title, style: Styles.h3LinkStyle,),
                 ),
                 ExpansionTile(
+                  title: Text(''),
                   children: _buildChildren(),
-                )
+                ),
               ],
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -68,7 +52,7 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
     List<Widget> children = new List<Widget>();
     for (int i = 0; i < widget.tile.children.length; i++) {
       Widget w = MenuTile(
-        tile: widget.tile.children[i], iconSize: widget.iconSize,
+        tile: widget.tile.children[i],
       );
       children.add(w);
     }

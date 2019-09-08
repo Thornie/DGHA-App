@@ -7,9 +7,8 @@ import 'package:dgha_brochure/models/menu_tile_data.dart';
 
 class MenuTile extends StatelessWidget {
   final MenuTileData tile;
-  final double iconSize;
 
-  MenuTile({this.tile, this.iconSize});
+  MenuTile({this.tile});
 
   _launchUrl(String url) async {
     if (await canLaunch(url)) {
@@ -29,27 +28,18 @@ class MenuTile extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: EdgeInsets.only(bottom: this.iconSize / 4),
+        padding: EdgeInsets.only(bottom: Styles.iconSize/2),
         child: Row(
           children: <Widget>[
             Container(
-              child: tile.icon != null
-                  ? IconBg(
-                      height: this.iconSize,
-                      chid: LayoutBuilder(
-                        builder: (context, constraints) {
-                          return Container(
-                            padding: EdgeInsets.only(bottom: 3),
-                            child: Icon(
-                              this.tile.icon,
-                              size: constraints.biggest.width - this.iconSize / 3.5,
-                              color: Styles.yellow,
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                  : Container(),
+              child: tile.icon != null ? Container(
+                padding: EdgeInsets.all(Styles.iconPadding),
+                decoration: BoxDecoration(
+                  color: Styles.midnightBlue,
+                  borderRadius: BorderRadius.all(Radius.circular(1000))
+                ),
+                child: Icon(this.tile.icon, size: Styles.iconSize, color: Styles.yellow,),
+              ) : Container(),
             ),
             SizedBox(width: 20),
             Expanded(
@@ -58,7 +48,7 @@ class MenuTile extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 child: Text(
                     this.tile.title,
-                    style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 30),
+                    style: Styles.h3LinkStyle
                   ),
               ),
             ),

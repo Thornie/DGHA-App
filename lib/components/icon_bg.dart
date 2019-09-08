@@ -10,9 +10,9 @@ class IconBg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: height * 0.73,
-      height: height * 0.7,
-      constraints: BoxConstraints(minHeight: 50, maxHeight: 100),
+      // width: height * 0.73,
+      // height: height * 0.7,
+      // constraints: BoxConstraints(minHeight: 50, maxHeight: 100),
       decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
       child: this.chid
     );

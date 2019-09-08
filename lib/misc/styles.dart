@@ -7,10 +7,14 @@ class Styles {
   static final Color grey = Color(0xff576a80);
   static final Color transparent = Color(0x00000000);
 
+  // ----------------- SIZES
+  static double iconSize = 30; 
+  static final double iconPadding = 8; 
+
   // ----------------- GENERAL TEXT
-  static TextStyle h1Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w900, fontSize: 36);
-  static TextStyle h2Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w700, fontSize: 24);
-  static TextStyle h3Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w600, fontSize: 20);  
-  static TextStyle h4Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w500, fontSize: 18);  
-  static TextStyle pStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 16);  
+  static TextStyle h1Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w900, fontSize: 32);   // DGHA
+  static TextStyle h2Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w700, fontSize: 24);   // Geneneral Info
+  static TextStyle h3Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w600, fontSize: 20);   // Federal
+  static TextStyle h3LinkStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18);   // Links
+  static TextStyle pStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 16);    // Normal Text
 }

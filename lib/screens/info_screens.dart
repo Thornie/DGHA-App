@@ -52,7 +52,6 @@ class _InfoScreenState extends State<InfoScreen> {
     // NOTE: Popmenu
     // this.popMenuTextScale = this.appBarHeight / 90 < 1.2 ? this.appBarHeight / 90 : 1.2;
     // this.textScale = this.appBarHeight / 90 < 1.2 ? this.appBarHeight / 90 : 1.2;
-
   }
 
   void setLang(int index) {
@@ -77,56 +76,43 @@ class _InfoScreenState extends State<InfoScreen> {
                 srcWidth: this.srcWidth,
                 horizontalPadding: this.horizontalPadding,
                 borderRadius: this.appBarRadius,
-                leftChild: IconBg(
-                  height: this.appBarHeight,
-                  chid: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return IconButton(
-                        padding: EdgeInsets.only(bottom: 3, right: 3),
-                        icon: Icon(
-                          FontAwesomeIcons.chevronLeft,
-                          size: constraints.biggest.width - this.appBarHeight / 3.5,
-                          color: Styles.yellow,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      );
-                    },
+                isMenuScr: false,
+                leftChild: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(Styles.iconPadding),
+                    decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: Styles.iconSize,
+                      color: Styles.yellow,
+                    ),
                   ),
                 ),
-                rightChid: IconBg(
-                  height: this.appBarHeight,
-                  chid: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return PopupMenuButton(
-                        onSelected: (choice) {
-                          int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
-                          setLang(newLangIndex);
-                        },
-                        child: Container(
-                          // padding: EdgeInsets.only(bottom: 3),
-                          child: Icon(
-                            Icons.translate,
-                            size: constraints.biggest.width - this.appBarHeight / 3.5,
-                            color: Styles.yellow,
-                          ),
-                        ),
-                        itemBuilder: (BuildContext ctxt) {
-                          return widget.texts.map((Language lang) {
-                            return PopupMenuItem(
-                              value: lang.languageName,
-                              height: this.appBarHeight * 0.8,
-                              child: Text(
-                                lang.languageName,
-                                style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 35),
-                              ),
-                            );
-                          }).toList();
-                        },
-                      );
-                    },
+                rightChid: PopupMenuButton(
+                  onSelected: (choice) {
+                    int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
+                    setLang(newLangIndex);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(Styles.iconPadding),
+                    decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
+                    child: Icon(
+                      Icons.translate,
+                      size: Styles.iconSize,
+                      color: Styles.yellow,
+                    ),
                   ),
+                  itemBuilder: (BuildContext ctxt) {
+                    return widget.texts.map((Language lang) {
+                      return PopupMenuItem(
+                        value: lang.languageName,
+                        child: Text(lang.languageName, style: Styles.h3LinkStyle),
+                      );
+                    }).toList();
+                  },
                 ),
               ),
               Expanded(
@@ -136,10 +122,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   margin: EdgeInsets.symmetric(horizontal: this.horizontalPadding),
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
-                    child: Text(
-                      "\n" + infoText + "\n",
-                      style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 30),
-                    ),
+                    child: Text("\n" + infoText + "\n", style: Styles.pStyle),
                   ),
                 ),
               ),

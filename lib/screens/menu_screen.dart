@@ -49,8 +49,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
     // NOTE: Drawer
     this.drawerWidth = orientation == Orientation.portrait ? srcWidth * 0.8 : srcHeight * 0.8;
-    // this.tileTextScale = drawerWidth / 440 < 1.5 ? drawerWidth / 440 : 1.5; 
-    
+    // this.tileTextScale = drawerWidth / 440 < 1.5 ? drawerWidth / 440 : 1.5;
 
     // NOTE: Card
     if (this.isVertical && orientation == Orientation.portrait) {
@@ -100,52 +99,44 @@ class _MenuScreenState extends State<MenuScreen> {
               children: <Widget>[
                 // NOTE: APPBAR
                 DghaAppBar(
-                  text: "DGHA",
-                  appBarHeight: this.appBarHeight,
-                  srcWidth: this.srcWidth,
-                  horizontalPadding: this.horizontalPadding,
-                  borderRadius: this.appBarRadius,
-                  leftChild: IconBg(
-                    height: this.appBarHeight,
-                    chid: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return IconButton(
-                          padding: EdgeInsets.only(bottom: 3),
-                          icon: Icon(
-                            FontAwesomeIcons.bars,
-                            size: constraints.biggest.width - this.appBarHeight / 3.5,
-                            color: Styles.yellow,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _scaffoldKey.currentState.openDrawer();
-                            });
-                          },
-                        );
+                    text: "DGHA",
+                    appBarHeight: this.appBarHeight,
+                    srcWidth: this.srcWidth,
+                    horizontalPadding: this.horizontalPadding,
+                    borderRadius: this.appBarRadius,
+                    isMenuScr: true,
+                    leftChild: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
                       },
+                      child: Container(
+                        padding: EdgeInsets.all(Styles.iconPadding),
+                        decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
+                        child: Icon(
+                          FontAwesomeIcons.bars,
+                          size: Styles.iconSize,
+                          color: Styles.yellow,
+                        ),
+                      ),
                     ),
-                  ),
-                  rightChid: IconBg(
-                    height: this.appBarHeight,
-                    chid: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return IconButton(
-                          padding: EdgeInsets.only(bottom: 3),
-                          icon: Icon(
-                            this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
-                            size: constraints.biggest.width - this.appBarHeight / 3.5,
-                            color: Styles.yellow,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              this.isVertical = !this.isVertical;
-                            });
-                          },
-                        );
+                    rightChid: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          this.isVertical = !this.isVertical;
+                        });
                       },
-                    ),
-                  ),
-                ),
+                      child: Container(
+                        padding: EdgeInsets.all(Styles.iconPadding),
+                        decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
+                        child: Icon(
+                          this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
+                          size: Styles.iconSize,
+                          color: Styles.yellow,
+                        ),
+                      ),
+                    )),
 
                 // NOTE: TILES AREA
                 Expanded(
@@ -159,10 +150,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                         Container(
                           padding: EdgeInsets.only(left: this.horizontalPadding),
-                          child: Text(
-                            "General Information",
-                            style: Styles.h2Style
-                          ),
+                          child: Text("General Information", style: Styles.h2Style),
                         ),
                         SizedBox(
                           height: 10,
@@ -177,10 +165,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                         Container(
                           padding: EdgeInsets.only(left: this.horizontalPadding),
-                          child: Text(
-                            "Federal and State Laws",
-                            style: Styles.h2Style
-                          ),
+                          child: Text("Federal and State Laws", style: Styles.h2Style),
                         ),
                         SizedBox(
                           height: 10,

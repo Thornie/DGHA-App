@@ -9,12 +9,12 @@ class DghaAppBar extends StatelessWidget {
   final Widget rightChid;
   final String text;
   final double borderRadius; 
+  final bool isMenuScr; 
 
-  DghaAppBar({this.srcWidth, this.appBarHeight, this.horizontalPadding, this.leftChild, this.text, this.rightChid, this.borderRadius});
+  DghaAppBar({this.srcWidth, this.appBarHeight, this.horizontalPadding, this.leftChild, this.text, this.rightChid, this.borderRadius, this.isMenuScr});
 
   @override
   Widget build(BuildContext context) {
-    
         return Container(
           width: this.srcWidth,
           height: this.appBarHeight,
@@ -35,7 +35,7 @@ class DghaAppBar extends StatelessWidget {
                   padding: EdgeInsets.all(this.appBarHeight / 8),
                   child: Text(
                     this.text,
-                    style: Styles.h1Style,
+                    style: isMenuScr ? Styles.h1Style : Styles.h2Style,
                 textAlign: TextAlign.center,
               ),
             ),
