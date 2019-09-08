@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/components/icon_background.dart';
+import 'package:dgha_brochure/components/icon_bg.dart';
 import 'package:dgha_brochure/components/menu_tile.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 
 class MenuExpansionTile extends StatefulWidget {
   final MenuTileData tile;
-  final double iconSize; 
-  final double bgSize; 
-  
-  MenuExpansionTile({this.tile, this.iconSize, this.bgSize});
+  final double iconSize;
+
+  MenuExpansionTile({this.tile, this.iconSize});
 
   @override
   _MenuExpansionTileState createState() => _MenuExpansionTileState();
@@ -19,24 +18,45 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(bottom: widget.iconSize / 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              width: widget.bgSize,
-              height: widget.bgSize,
-              decoration: BoxDecoration(
-                color: Styles.midnightBlue,
-                borderRadius: BorderRadius.all(Radius.circular(50))
+            child: IconBg(
+              height: widget.iconSize,
+              chid: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Container(
+                    padding: EdgeInsets.only(bottom: 3),
+                    child: Icon(
+                      widget.tile.icon,
+                      size: constraints.biggest.width - widget.iconSize / 3.5,
+                      color: Styles.yellow,
+                    ),
+                  );
+                },
               ),
-              child: Icon(widget.tile.icon, size: widget.iconSize, color: Styles.yellow,)
             ),
-          SizedBox(width: 5,),
+          ),
+          SizedBox(
+            width: 20,
+          ),
           Expanded(
-            child: ExpansionTile(
-              title: Styles.buildH3("Laws"),
-              children: _buildChildren(),
+            flex: 2,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 15),
+                  child: Text(
+                    widget.tile.title,
+                    style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 30),
+                  ),
+                ),
+                ExpansionTile(
+                  children: _buildChildren(),
+                )
+              ],
             ),
           ),
         ],
@@ -46,10 +66,12 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> {
 
   List<Widget> _buildChildren() {
     List<Widget> children = new List<Widget>();
-    for(int i = 0; i < widget.tile.children.length; i++) {
-      Widget w = MenuTile(tile: widget.tile.children[i],); 
+    for (int i = 0; i < widget.tile.children.length; i++) {
+      Widget w = MenuTile(
+        tile: widget.tile.children[i], iconSize: widget.iconSize,
+      );
       children.add(w);
     }
-    return children; 
+    return children;
   }
 }

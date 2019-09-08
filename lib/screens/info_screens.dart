@@ -1,3 +1,5 @@
+import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/icon_bg.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
@@ -18,10 +20,39 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
 
+  // NOTE: App Properties
+  double srcWidth;
+  double srcHeight;
+  double horizontalPadding = 30;
+
+  // NOTE: App Bar Properties
+  double appBarHeight;
+  double appBarRadius;
+
+  // Pop Menu
+
+  // NOTE: Text
+
   @override
   void initState() {
     super.initState();
     setLang(0);
+  }
+
+  void calcDimensions(Orientation orientation) {
+    // NOTE: App
+    this.srcWidth = MediaQuery.of(context).size.width;
+    this.srcHeight = MediaQuery.of(context).size.height;
+
+    // NOTE: App Bar
+    this.appBarHeight = orientation == Orientation.portrait ? srcHeight / 12 : srcWidth / 12;
+    // this.appBarTextScale = this.appBarHeight / 70;
+    this.appBarRadius = this.appBarHeight / 3.5;
+
+    // NOTE: Popmenu
+    // this.popMenuTextScale = this.appBarHeight / 90 < 1.2 ? this.appBarHeight / 90 : 1.2;
+    // this.textScale = this.appBarHeight / 90 < 1.2 ? this.appBarHeight / 90 : 1.2;
+
   }
 
   void setLang(int index) {
@@ -34,111 +65,67 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double srcWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: SafeArea(child: OrientationBuilder(
         builder: (context, orientation) {
-          double iconSize = orientation == Orientation.portrait
-              ? srcWidth / 12
-              : srcWidth / 21;
-          double marginLeft = orientation == Orientation.portrait ? 30 : 70;
+          this.calcDimensions(orientation);
           return Column(
             children: <Widget>[
-              AspectRatio(
-                aspectRatio: orientation == Orientation.portrait
-                    ? Styles.appBarAspectRatioPort
-                    : Styles.appBarAspectRatioLand,
-                child: Tooltip(
-                  message: "Back Button",
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 2),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: orientation == Orientation.portrait
-                                ? Radius.circular(srcWidth / 15)
-                                : Radius.circular(srcWidth / 25),
-                            bottomRight: orientation == Orientation.portrait
-                                ? Radius.circular(srcWidth / 15)
-                                : Radius.circular(srcWidth / 25)),
-                        boxShadow: [Styles.customBoxShadow(Offset(0, 2))]),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: orientation == Orientation.portrait
-                                  ? 30
-                                  : 50),
-                          width: orientation == Orientation.portrait
-                              ? srcWidth / 7
-                              : srcWidth / 13,
-                          height: orientation == Orientation.portrait
-                              ? srcWidth / 7
-                              : srcWidth / 13,
-                          decoration: BoxDecoration(
-                              color: Styles.midnightBlue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50))),
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.chevronLeft,
-                              size: orientation == Orientation.portrait
-                                  ? srcWidth / 12
-                                  : srcWidth / 21,
-                              color: Styles.yellow,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+              DghaAppBar(
+                text: widget.appBarTitle,
+                appBarHeight: this.appBarHeight,
+                srcWidth: this.srcWidth,
+                horizontalPadding: this.horizontalPadding,
+                borderRadius: this.appBarRadius,
+                leftChild: IconBg(
+                  height: this.appBarHeight,
+                  chid: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return IconButton(
+                        padding: EdgeInsets.only(bottom: 3, right: 3),
+                        icon: Icon(
+                          FontAwesomeIcons.chevronLeft,
+                          size: constraints.biggest.width - this.appBarHeight / 3.5,
+                          color: Styles.yellow,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    },
+                  ),
+                ),
+                rightChid: IconBg(
+                  height: this.appBarHeight,
+                  chid: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return PopupMenuButton(
+                        onSelected: (choice) {
+                          int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
+                          setLang(newLangIndex);
+                        },
+                        child: Container(
+                          // padding: EdgeInsets.only(bottom: 3),
+                          child: Icon(
+                            Icons.translate,
+                            size: constraints.biggest.width - this.appBarHeight / 3.5,
+                            color: Styles.yellow,
                           ),
                         ),
-                        Expanded(
-                            flex: 4,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: Styles.buildH1(widget.appBarTitle),
-                            )),
-                        PopupMenuButton(
-                          onSelected: (choice) {
-                            int newLangIndex = widget.texts.indexWhere(
-                                (lang) => lang.languageName == choice);
-                            setLang(newLangIndex);
-                          },
-                          itemBuilder: (BuildContext ctxt) {
-                            return widget.texts.map((Language lang) {
-                              return PopupMenuItem(
-                                value: lang.languageName,
-                                child: Text(
-                                  lang.languageName,
-                                  style: Styles.h2TextStyle,
-                                ),
-                              );
-                            }).toList();
-                          },
-                          child: Container(
-                              margin: EdgeInsets.only(
-                                  right: orientation == Orientation.portrait
-                                      ? 30
-                                      : 50),
-                              width: orientation == Orientation.portrait
-                                  ? srcWidth / 7
-                                  : srcWidth / 13,
-                              height: orientation == Orientation.portrait
-                                  ? srcWidth / 7
-                                  : srcWidth / 13,
-                              decoration: BoxDecoration(
-                                  color: Styles.midnightBlue,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50))),
-                              child: Icon(
-                                Icons.translate,
-                                size: iconSize,
-                                color: Styles.yellow,
-                              )),
-                        ),
-                      ],
-                    ),
+                        itemBuilder: (BuildContext ctxt) {
+                          return widget.texts.map((Language lang) {
+                            return PopupMenuItem(
+                              value: lang.languageName,
+                              height: this.appBarHeight * 0.8,
+                              child: Text(
+                                lang.languageName,
+                                style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 35),
+                              ),
+                            );
+                          }).toList();
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
@@ -146,11 +133,12 @@ class _InfoScreenState extends State<InfoScreen> {
                 child: Container(
                   width: double.maxFinite,
                   height: double.maxFinite,
-                  margin: EdgeInsets.only(left: marginLeft, right: marginLeft),
+                  margin: EdgeInsets.symmetric(horizontal: this.horizontalPadding),
                   child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Text(
                       "\n" + infoText + "\n",
-                      style: Styles.pTextStyle,
+                      style: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 30),
                     ),
                   ),
                 ),
