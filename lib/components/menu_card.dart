@@ -20,7 +20,7 @@ class MenuCard extends StatelessWidget {
       },
       child: Container(
         width: this.width,
-        margin: EdgeInsets.only(bottom: 5),
+        margin: EdgeInsets.only(bottom: 7),
         decoration: BoxDecoration(
           color: Styles.midnightBlue,
           borderRadius: BorderRadius.all(Radius.circular(radius)),

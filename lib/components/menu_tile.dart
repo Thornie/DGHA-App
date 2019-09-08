@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/components/icon_bg.dart';
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -27,36 +27,34 @@ class MenuTile extends StatelessWidget {
           _launchUrl(tile.link);
         }
       },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: Styles.iconSize/2),
-        child: Row(
-          children: <Widget>[
-            Container(
-              child: tile.icon != null ? Container(
-                padding: EdgeInsets.all(Styles.iconPadding),
-                decoration: BoxDecoration(
-                  color: Styles.midnightBlue,
-                  borderRadius: BorderRadius.all(Radius.circular(1000))
-                ),
-                child: Icon(this.tile.icon, size: Styles.iconSize, color: Styles.yellow,),
-              ) : Container(),
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              flex: 8,
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Text(
-                    this.tile.title,
-                    style: Styles.h3LinkStyle
-                  ),
+      child: Semantics(
+        label: this.tile.semanticLabel,
+        hint: this.tile.semanticHint,
+        child: Container(
+          constraints: BoxConstraints(minHeight: 50),
+          child: Row(
+            children: <Widget>[
+              Container(
+                child: tile.icon != null
+                    ? DghaIcon(
+                        icon: tile.icon,
+                      )
+                    : Container(),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(""),
-            ),
-          ],
+              SizedBox(width: 20),
+              Expanded(
+                flex: 8,
+                child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Text(this.tile.title, style: Styles.h3LinkStyle),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(""),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,8 @@ class MenuCardData {
   final List<Language> texts; 
   final String pageTitle; 
   final String imagePath;   
+  final String semanticLabel;
+  final String semanticHint; 
 
-  MenuCardData({this.shortTitle, this.pageToNavigateTo, this.texts, this.imagePath, this.pageTitle});
+  MenuCardData({this.shortTitle, this.pageToNavigateTo, this.texts, this.imagePath, this.pageTitle, this.semanticLabel, this.semanticHint});
 }

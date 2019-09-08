@@ -31,115 +31,195 @@ class Data {
   static final List<MenuCardData> lawInfoCardDataPortRow5 = [waCardLaw];
 
   static final MenuCardData infoCardData = new MenuCardData(
-    shortTitle: "Guide Dog",
-    pageToNavigateTo: InfoScreen.id,
-    texts: infoLang,
-    imagePath: "assets/images/menu_card/info.png",
-    pageTitle: "Guide Dog Info",
-  );
+      shortTitle: "Guide Dog",
+      pageToNavigateTo: InfoScreen.id,
+      texts: infoLang,
+      imagePath: "assets/images/menu_card/info.png",
+      pageTitle: "Guide Dog Info",
+      semanticLabel: "Guide Dog Information Card",
+      semanticHint: "Double tap to read more about Guide Dogs");
 
   static final MenuCardData accessCardData = new MenuCardData(
-    shortTitle: "Access",
-    pageToNavigateTo: InfoScreen.id,
-    texts: accessLang,
-    imagePath: "assets/images/menu_card/access.png",
-    pageTitle: "Access",
-  );
+      shortTitle: "Access",
+      pageToNavigateTo: InfoScreen.id,
+      texts: accessLang,
+      imagePath: "assets/images/menu_card/access.png",
+      pageTitle: "Access",
+      semanticLabel: "Guide Dog Access Card",
+      semanticHint: "Double Tap to read more about about Guide Dog Access");
 
   static final MenuCardData fedCardData = new MenuCardData(
-    shortTitle: "Federal",
-    pageToNavigateTo: InfoScreen.id,
-    texts: fedLang,
-    imagePath: "",
-    pageTitle: "Federal Law",
-  );
+      shortTitle: "Federal",
+      pageToNavigateTo: InfoScreen.id,
+      texts: fedLang,
+      imagePath: "",
+      pageTitle: "Federal Law",
+      semanticLabel: "Federal Law Card",
+      semanticHint: "Double Tap to read more about Federal Law regarding Guide Dogs");
 
   static final MenuCardData actCardData = new MenuCardData(
-    shortTitle: "ACT",
-    pageToNavigateTo: InfoScreen.id,
-    texts: actLang,
-    imagePath: "",
-    pageTitle: "ACT State Law",
-  );
+      shortTitle: "ACT",
+      pageToNavigateTo: InfoScreen.id,
+      texts: actLang,
+      imagePath: "",
+      pageTitle: "ACT State Law",
+      semanticLabel: "Australian Capital Territory State Law Card",
+      semanticHint: "Double Tap to read more about A C T State Law regarding Guide Dogs");
 
   static final MenuCardData nswCardData = new MenuCardData(
-    shortTitle: "NSW",
-    pageToNavigateTo: InfoScreen.id,
-    texts: nswLang,
-    imagePath: "",
-    pageTitle: "NSW State Law",
-  );
+      shortTitle: "NSW",
+      pageToNavigateTo: InfoScreen.id,
+      texts: nswLang,
+      imagePath: "",
+      pageTitle: "NSW State Law",
+      semanticLabel: "New South Wales Card",
+      semanticHint: "Double Tap to read more about New South Wales State Law regarding Guide Dogs");
 
   static final MenuCardData ntCardData = new MenuCardData(
-    shortTitle: "NT",
-    pageToNavigateTo: InfoScreen.id,
-    texts: ntLang,
-    imagePath: "",
-    pageTitle: "NT State Law",
-  );
+      shortTitle: "NT",
+      pageToNavigateTo: InfoScreen.id,
+      texts: ntLang,
+      imagePath: "",
+      pageTitle: "NT State Law",
+      semanticLabel: "Northern Territory Law Card",
+      semanticHint: "Double Tap to read more about Northern Territory Law regarding Guide Dogs");
 
   static final MenuCardData qldCardData = new MenuCardData(
-    shortTitle: "QLD",
-    pageToNavigateTo: InfoScreen.id,
-    texts: qldLang,
-    imagePath: "",
-    pageTitle: "QLD State Law",
-  );
+      shortTitle: "QLD",
+      pageToNavigateTo: InfoScreen.id,
+      texts: qldLang,
+      imagePath: "",
+      pageTitle: "QLD State Law",
+      semanticLabel: "Queensland State Law Card",
+      semanticHint: "Double Tap to read more about Queensland Law regarding Guide Dogs");
 
   static final MenuCardData saCardData = new MenuCardData(
-    shortTitle: "SA",
-    pageToNavigateTo: InfoScreen.id,
-    texts: saLang,
-    imagePath: "",
-    pageTitle: "SA State Law",
-  );
+      shortTitle: "SA",
+      pageToNavigateTo: InfoScreen.id,
+      texts: saLang,
+      imagePath: "",
+      pageTitle: "SA State Law",
+      semanticLabel: "South Australia State Law Card",
+      semanticHint: "Double Tap to read more about South Australia State Law regarding Guide Dogs");
 
   static final MenuCardData tasCardData = new MenuCardData(
-    shortTitle: "TAS",
-    pageToNavigateTo: InfoScreen.id,
-    texts: tasLang,
-    imagePath: "",
-    pageTitle: "TAS State Law",
-  );
+      shortTitle: "TAS",
+      pageToNavigateTo: InfoScreen.id,
+      texts: tasLang,
+      imagePath: "",
+      pageTitle: "TAS State Law",
+      semanticLabel: "Tasmania State Card",
+      semanticHint: "Double Tap to read more about Tasmania State Law regarding Guide Dogs");
 
   static final MenuCardData vicCardData = new MenuCardData(
-    shortTitle: "VIC",
-    pageToNavigateTo: InfoScreen.id,
-    texts: vicLang,
-    imagePath: "",
-    pageTitle: "VIC State Law",
-  );
+      shortTitle: "VIC",
+      pageToNavigateTo: InfoScreen.id,
+      texts: vicLang,
+      imagePath: "",
+      pageTitle: "VIC State Law",
+      semanticLabel: "Victoria State Card",
+      semanticHint: "Double Tap to read more about Victoria State Law regarding Guide Dogs");
 
   static final MenuCardData waCardLaw = new MenuCardData(
-    shortTitle: "WA",
-    pageToNavigateTo: InfoScreen.id,
-    texts: waLang,
-    imagePath: "",
-    pageTitle: "WA State Law",
-  );
+      shortTitle: "WA",
+      pageToNavigateTo: InfoScreen.id,
+      texts: waLang,
+      imagePath: "",
+      pageTitle: "WA State Law",
+      semanticLabel: "Western Australia State Law Card",
+      semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs");
 
   // ------------------------------------ NOTE: Menu List Tiles
-  static final MenuTileData guideDogInfoTileData =
-      new MenuTileData(title: "Guide Dog", pageToNavigateTo: InfoScreen.id, texts: infoLang, icon: FontAwesomeIcons.dog);
-  static final MenuTileData guideDogAccessTileData =
-      new MenuTileData(title: "Access", pageToNavigateTo: InfoScreen.id, texts: accessLang, icon: FontAwesomeIcons.unlockAlt);
-  static final MenuTileData fedTileData =
-      new MenuTileData(title: "Laws", pageToNavigateTo: InfoScreen.id, texts: fedLang, icon: FontAwesomeIcons.gavel, children: stateLawTilesData);
-  static final MenuTileData signUpTileData =
-      new MenuTileData(title: "Sign Up", icon: FontAwesomeIcons.solidUser, link: "http://dgha.org.au/dgha/membership/");
-  static final MenuTileData donateTileData =
-      new MenuTileData(title: "Donation", icon: FontAwesomeIcons.handHoldingUsd, link: "http://dgha.org.au/dgha/membership/");
+  static final MenuTileData guideDogInfoTileData = new MenuTileData(
+      title: "Guide Dog",
+      pageToNavigateTo: InfoScreen.id,
+      texts: infoLang,
+      icon: FontAwesomeIcons.dog,
+      semanticLabel: "Guide Dog Information Button",
+      semanticHint: "Double tap to read more about Guide Dogs");
+  static final MenuTileData guideDogAccessTileData = new MenuTileData(
+      title: "Access",
+      pageToNavigateTo: InfoScreen.id,
+      texts: accessLang,
+      icon: FontAwesomeIcons.unlockAlt,
+      semanticLabel: "Guide Dog Access Button",
+      semanticHint: "Double tap to read more about Guide Dogs Access");
+  static final MenuTileData lawsTilesListData = new MenuTileData(
+      title: "Laws",
+      pageToNavigateTo: InfoScreen.id,
+      texts: fedLang,
+      icon: FontAwesomeIcons.gavel,
+      children: stateLawTilesData,
+      semanticLabel: "Laws List Button",
+      semanticHint: "Double tap to show Federal and State Laws Buttons");
+  static final MenuTileData signUpTileData = new MenuTileData(
+      title: "Sign Up",
+      icon: FontAwesomeIcons.solidUser,
+      link: "http://dgha.org.au/dgha/membership/",
+      semanticLabel: "Sign Up Button",
+      semanticHint: "Double tap to go to the Guide Dog Handlder Australia Sign Up page.");
+  static final MenuTileData donateTileData = new MenuTileData(
+      title: "Donation",
+      icon: FontAwesomeIcons.handHoldingUsd,
+      link: "http://dgha.org.au/dgha/membership/",
+      semanticLabel: "Donation Button",
+      semanticHint: "Double tap to go to the Guide Dog Handler Australia Donation page.");
 
   static final List<MenuTileData> stateLawTilesData = <MenuTileData>[
-    MenuTileData(title: "Federal Law", pageToNavigateTo: InfoScreen.id, texts: fedLang),
-    MenuTileData(title: "ACT State Law", pageToNavigateTo: InfoScreen.id, texts: actLang),
-    MenuTileData(title: "NSW State Law", pageToNavigateTo: InfoScreen.id, texts: nswLang),
-    MenuTileData(title: "NT State Law", pageToNavigateTo: InfoScreen.id, texts: ntLang),
-    MenuTileData(title: "QLD State Law", pageToNavigateTo: InfoScreen.id, texts: qldLang),
-    MenuTileData(title: "SA State Law", pageToNavigateTo: InfoScreen.id, texts: saLang),
-    MenuTileData(title: "TAS State Law", pageToNavigateTo: InfoScreen.id, texts: tasLang),
-    MenuTileData(title: "VIC State Law", pageToNavigateTo: InfoScreen.id, texts: vicLang),
-    MenuTileData(title: "WA State Law", pageToNavigateTo: InfoScreen.id, texts: waLang),
+    MenuTileData(
+        title: "Federal Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: fedLang,
+        semanticLabel: "Federal Law Button",
+        semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "ACT State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: actLang,
+        semanticLabel: "Australian Capital Territory Law Button",
+        semanticHint: "Double Tap to read more about A C T State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "NSW State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: nswLang,
+        semanticLabel: "New South Wales State Law Button",
+        semanticHint: "Double Tap to read more about New South Wales State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "NT State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: ntLang,
+        semanticLabel: "Northern Territory State Button",
+        semanticHint: "Double Tap to read more about Northern Territory State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "QLD State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: qldLang,
+        semanticLabel: "Queensland State Law Button",
+        semanticHint: "Double Tap to read more about Queensland State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "SA State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: saLang,
+        semanticLabel: "South Australia State Law Button",
+        semanticHint: "Double Tap to read more about South Australia State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "TAS State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: tasLang,
+        semanticLabel: "Tasmania State Law Button",
+        semanticHint: "Double Tap to read more about Tasmania State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "VIC State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: vicLang,
+        semanticLabel: "Victoria State Law Button",
+        semanticHint: "Double Tap to read more about Victoria State State Law regarding Guide Dogs"),
+    MenuTileData(
+        title: "WA State Law",
+        pageToNavigateTo: InfoScreen.id,
+        texts: waLang,
+        semanticLabel: "Western Australia Button",
+        semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs"),
   ];
 
   // ---------------------------- NOTE: Languages

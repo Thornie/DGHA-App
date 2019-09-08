@@ -1,5 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
-import 'package:dgha_brochure/components/icon_bg.dart';
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/components/menu_card.dart';
 import 'package:dgha_brochure/misc/data.dart';
@@ -105,39 +105,34 @@ class _MenuScreenState extends State<MenuScreen> {
                     horizontalPadding: this.horizontalPadding,
                     borderRadius: this.appBarRadius,
                     isMenuScr: true,
-                    leftChild: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _scaffoldKey.currentState.openDrawer();
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(Styles.iconPadding),
-                        decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
-                        child: Icon(
-                          FontAwesomeIcons.bars,
-                          size: Styles.iconSize,
-                          color: Styles.yellow,
-                        ),
-                      ),
+                    leftChild: Semantics(
+                      label: "Menu button",
+                      hint: "Double tap to open up side bar navigation",
+                      excludeSemantics: true,
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _scaffoldKey.currentState.openDrawer();
+                            });
+                          },
+                          child: DghaIcon(
+                            icon: FontAwesomeIcons.bars,
+                          )),
                     ),
-                    rightChid: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          this.isVertical = !this.isVertical;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(Styles.iconPadding),
-                        decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
-                        child: Icon(
-                          this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
-                          size: Styles.iconSize,
-                          color: Styles.yellow,
-                        ),
-                      ),
+                    rightChid: Semantics(
+                      label: "Card Direction Button",
+                      hint: this.isVertical ? "Double tap to list cards horizontally" : "Double tap to list cards vertically",
+                      excludeSemantics: true,
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              this.isVertical = !this.isVertical;
+                            });
+                          },
+                          child: DghaIcon(
+                            icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
+                          )),
                     )),
-
                 // NOTE: TILES AREA
                 Expanded(
                   child: SingleChildScrollView(
@@ -145,30 +140,30 @@ class _MenuScreenState extends State<MenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: this.horizontalPadding),
-                          child: Text("General Information", style: Styles.h2Style),
-                        ),
-                        SizedBox(
-                          height: 10,
+                        Semantics(
+                          label: "Sub Heading. ",
+                          hint: "There are two cards in this category. Double tap on the card to read more about the topic",
+                          child: Container(
+                            width: double.maxFinite,
+                            padding: EdgeInsets.only(left: this.horizontalPadding, top: 30, bottom: 10),
+                            child: Text("General Information", style: Styles.h2Style),
+                          ),
                         ),
                         Container(
                           height: cardHeight,
                           constraints: BoxConstraints(maxHeight: cardMaxHeight),
                           child: _buildCardList(Data.generalInfoCardData),
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: this.horizontalPadding),
-                          child: Text("Federal and State Laws", style: Styles.h2Style),
-                        ),
-                        SizedBox(
-                          height: 10,
+                        Semantics(
+                          label: "Sub Heading. ",
+                          hint: "There are 9 cards in this category. " +
+                              (this.isVertical ? "Slide up and down the list below to see more cards. " : "Slide left to right the list below to see more cards. ") +
+                              "Double tap on the card to read more about the topic",
+                          child: Container(
+                            width: double.maxFinite,
+                            padding: EdgeInsets.only(left: this.horizontalPadding, top: 30, bottom: 10),
+                            child: Text("Federal and State Laws", style: Styles.h2Style),
+                          ),
                         ),
                         _buildLawCards(orientation),
                         SizedBox(height: this.cardSpacing),
@@ -195,14 +190,20 @@ class _MenuScreenState extends State<MenuScreen> {
       padding: EdgeInsets.fromLTRB(this.horizontalPadding, 0, this.horizontalPadding, 0),
       itemCount: cardList.length,
       itemBuilder: (BuildContext context, int index) {
+        String upAndDown = "${cardList[index].semanticHint}. Or slide up and down to see more cards"; 
+        String leftAndRight = "${cardList[index].semanticHint}. Or slide left and right to see more cards";
         return Container(
           margin: getMargin(cardList.length, index),
-          child: MenuCard(
-            card: cardList[index],
-            width: this.cardWidth,
-            height: this.cardHeight,
-            maxHeight: this.cardMaxHeight,
-            radius: this.cardBorderRadius,
+          child: Semantics(
+            label: cardList[index].semanticLabel,
+            hint: this.isVertical ? upAndDown : leftAndRight,
+            child: MenuCard(
+              card: cardList[index],
+              width: this.cardWidth,
+              height: this.cardHeight,
+              maxHeight: this.cardMaxHeight,
+              radius: this.cardBorderRadius,
+            ),
           ),
         );
       },
@@ -248,6 +249,9 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   Widget _horizontalWidgets() {
-    return Container(height: cardHeight, constraints: BoxConstraints(maxHeight: cardMaxHeight), child: _buildCardList(Data.lawInfoCardData));
+    return Container(
+        height: cardHeight,
+        constraints: BoxConstraints(maxHeight: cardMaxHeight),
+        child: Semantics(container: true, child: _buildCardList(Data.lawInfoCardData)));
   }
 }

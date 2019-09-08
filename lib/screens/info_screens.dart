@@ -1,5 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
-import 'package:dgha_brochure/components/icon_bg.dart';
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
@@ -77,42 +77,36 @@ class _InfoScreenState extends State<InfoScreen> {
                 horizontalPadding: this.horizontalPadding,
                 borderRadius: this.appBarRadius,
                 isMenuScr: false,
-                leftChild: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(Styles.iconPadding),
-                    decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: Styles.iconSize,
-                      color: Styles.yellow,
-                    ),
-                  ),
+                leftChild: Semantics(
+                  label: "Back Button",
+                  hint: "Double tap to go back to home screen",
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: DghaIcon(icon: Icons.arrow_back_ios)),
                 ),
-                rightChid: PopupMenuButton(
-                  onSelected: (choice) {
-                    int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
-                    setLang(newLangIndex);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(Styles.iconPadding),
-                    decoration: BoxDecoration(color: Styles.midnightBlue, borderRadius: BorderRadius.all(Radius.circular(1000))),
-                    child: Icon(
-                      Icons.translate,
-                      size: Styles.iconSize,
-                      color: Styles.yellow,
-                    ),
+                rightChid: Semantics(
+                  label: "Translation Button",
+                  hint: "Double to tap to open up translation menu",
+                  child: PopupMenuButton(
+                    onSelected: (choice) {
+                      int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
+                      setLang(newLangIndex);
+                    },
+                    child: DghaIcon(icon: Icons.translate),
+                    itemBuilder: (BuildContext ctxt) {
+                      return widget.texts.map((Language lang) {
+                        return PopupMenuItem(
+                          value: lang.languageName,
+                          child: Semantics(
+                            hint: "Double tap to selected ${lang.languageName} translation.",
+                            child: Text(lang.languageName, style: Styles.h3LinkStyle),
+                          ),
+                        );
+                      }).toList();
+                    },
                   ),
-                  itemBuilder: (BuildContext ctxt) {
-                    return widget.texts.map((Language lang) {
-                      return PopupMenuItem(
-                        value: lang.languageName,
-                        child: Text(lang.languageName, style: Styles.h3LinkStyle),
-                      );
-                    }).toList();
-                  },
                 ),
               ),
               Expanded(
