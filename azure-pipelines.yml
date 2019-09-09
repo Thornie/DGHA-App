@@ -6,14 +6,17 @@ pool:
 
 steps:
 - task: FlutterInstall@0
+  timeoutInMinutes: 10
   inputs:
     channel: stable
 
 - task: FlutterTest@0
+  timeoutInMinutes: 10
   inputs:
     projectDirectory: ''
 
 - task: FlutterBuild@0
+  timeoutInMinutes: 10
   inputs:
     projectDirectory: ''
     target: apk
