@@ -120,6 +120,10 @@ class _InfoScreenState extends State<InfoScreen> {
                     child: Html(
                       data: infoText,
                       defaultTextStyle: Styles.pStyle,
+                      padding: EdgeInsets.all(10),
+                      onLinkTap: (url) {
+                        print("Opening $url");
+                      },
                     ),
                   ),
                 ),
