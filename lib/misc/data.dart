@@ -226,18 +226,28 @@ class Data {
 
   static final List<Language> infoLang = <Language>[
     Language(languageName: "English", path: "assets/languages/guide_dog_info/english.txt"),
-    Language(languageName: "French", path: "assets/languages/guide_dog_info/french.txt"),
-    Language(languageName: "Spanish", path: "assets/languages/guide_dog_info/spanish.txt"),
-    Language(languageName: "Swahilli", path: "assets/languages/guide_dog_info/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "assets/languages/guide_dog_info/tagalog.txt"),
+    Language(languageName: "Arabic", path: "assets/languages/guide_dog_info/arabic.txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/guide_dog_info/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/guide_dog_info/chinese(traditional).txt"),
+    Language(languageName: "Greek", path: "assets/languages/guide_dog_info/greek.txt"),
+    Language(languageName: "Italian", path: "assets/languages/guide_dog_info/italian.txt"),
+    Language(languageName: "Japanese", path: "assets/languages/guide_dog_info/japanese.txt"),
+    Language(languageName: "Korean", path: "assets/languages/guide_dog_info/korean.txt"),
+    Language(languageName: "Thai", path: "assets/languages/guide_dog_info/thai.txt"),
+    Language(languageName: "Vietnamese", path: "assets/languages/guide_dog_info/vietnamese.txt"),
   ];
 
   static final List<Language> accessLang = <Language>[
     Language(languageName: "English", path: "assets/languages/guide_dog_access/english.txt"),
-    Language(languageName: "French", path: "assets/languages/guide_dog_access/french.txt"),
-    Language(languageName: "Spanish", path: "assets/languages/guide_dog_access/spanish.txt"),
-    Language(languageName: "Swahilli", path: "assets/languages/guide_dog_access/swahilli.txt"),
-    Language(languageName: "Tagalog", path: "assets/languages/guide_dog_access/tagalog.txt"),
+    Language(languageName: "Arabic", path: "assets/languages/guide_dog_access/arabic.txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/guide_dog_access/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/guide_dog_access/chinese(traditional).txt"),
+    Language(languageName: "Greek", path: "assets/languages/guide_dog_access/greek.txt"),
+    Language(languageName: "Italian", path: "assets/languages/guide_dog_access/italian.txt"),
+    Language(languageName: "Japanese", path: "assets/languages/guide_dog_access/japanese.txt"),
+    Language(languageName: "Korean", path: "assets/languages/guide_dog_access/korean.txt"),
+    Language(languageName: "Thai", path: "assets/languages/guide_dog_access/thai.txt"),
+    Language(languageName: "Vietnamese", path: "assets/languages/guide_dog_access/vietnamese.txt"),
   ];
 
   static final List<Language> fedLang = <Language>[
