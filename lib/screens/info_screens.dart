@@ -5,6 +5,7 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class InfoScreen extends StatefulWidget {
   static const String id = "Info Screen";
@@ -116,7 +117,10 @@ class _InfoScreenState extends State<InfoScreen> {
                   margin: EdgeInsets.symmetric(horizontal: this.horizontalPadding),
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
-                    child: Text("\n" + infoText + "\n", style: Styles.pStyle),
+                    child: Html(
+                      data: infoText,
+                      defaultTextStyle: Styles.pStyle,
+                    ),
                   ),
                 ),
               ),
