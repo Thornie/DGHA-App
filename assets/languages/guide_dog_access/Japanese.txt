@@ -1,0 +1,12 @@
+<p>盲導犬ハンドラーと盲導犬は、次のような公共の場所に立ち入ることが法的に許可されています。</p>
+<ul>
+    <li>ショップとスーパーマーケット</li>
+    <li>カフェやレストラン</li>
+    <li>パブとクラブ</li>
+    <li>映画館および劇場</li>
+    <li>ホテル、モーテル、その他の宿泊施設</li>
+    <li>医療/歯科診療および病院（手術室を除く）</li>
+    <li>タクシー、バス、電車、路面電車、飛行機など、あらゆる形態の公共交通機関</li>
+</ul>
+<p>Guide Dogのアクセス権は、1992年障害差別法（セクション9）、National Disability Services Standards（2014）、Privacy Act 1986（Commonwealth）、およびDog Act 1976に準拠しています。</p>
+<p>詳細については、<a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
