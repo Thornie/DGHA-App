@@ -31,7 +31,7 @@ class _MenuScreenState extends State<MenuScreen> {
   double cardWidth;
   double cardHeight;
   double cardMinHeight;
-  double cardMinWidth = 160;
+  double cardMinWidth = 153;
 
   // NOTE: Card Text
   final double textMinWidth = 102;
