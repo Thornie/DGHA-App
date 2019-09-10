@@ -64,10 +64,6 @@ class _InfoScreenState extends State<InfoScreen> {
                       height: 70,
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: Styles.spacing),
-                      child: Text("When a Guide Dog is in harness", style: Styles.pStyle),
-                    ),
-                    Container(
                       margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                       child: SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
