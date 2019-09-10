@@ -4,26 +4,24 @@ import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
-  final double width;
-  final double height;
-  final double maxHeight;
-  final double radius;
+  final double cardWidth;
+  final double cardHeight;
   final MenuCardData card;
 
-  MenuCard({this.width, this.radius, this.height, this.maxHeight, this.card});
+  MenuCard({this.cardWidth, this.cardHeight, this.card});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    var gestureDetector = GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(card.pageToNavigateTo, arguments: ScreenArguments(title: card.pageTitle, texts: card.texts));
       },
       child: Container(
-        width: this.width,
-        margin: EdgeInsets.only(bottom: 7),
+        width: this.cardWidth,
+        height: this.cardHeight,
         decoration: BoxDecoration(
           color: Styles.midnightBlue,
-          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
           boxShadow: [
             BoxShadow(
               color: Styles.grey,
@@ -32,46 +30,31 @@ class MenuCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Stack(
+        child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: width,
-                    height: height * 0.023,
-                    constraints: BoxConstraints(maxHeight: maxHeight * 0.4),
-                  ),
-                  Container(
-                    width: width,
-                    height: height * 0.65,
-                    constraints: BoxConstraints(maxHeight: maxHeight * 0.62),
-                    decoration: card.imagePath != "" ? BoxDecoration(image: DecorationImage(image: AssetImage(card.imagePath))) : BoxDecoration(),
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: Styles.imageMargin),
+                decoration: BoxDecoration(image: DecorationImage(image: AssetImage(card.imagePath))),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: width,
-                height: height * 0.3,
-                constraints: BoxConstraints(maxHeight: maxHeight * 0.3),
-                padding: EdgeInsets.all(width * 0.025),
-                decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius))),
-                child: Center(
-                  child: Text(
-                    card.shortTitle,
-                    style: Styles.h3Style
-                  ),
-                ),
+            Container(
+              padding: EdgeInsets.all(Styles.textPadding),
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
               ),
-            )
+              child: Text(
+                card.cardTitle,
+                style: Styles.h3Style,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
       ),
     );
+    return gestureDetector;
   }
 }
