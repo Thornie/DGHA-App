@@ -60,7 +60,7 @@ class _MenuScreenState extends State<MenuScreen> {
       }
     }
 
-    this.drawerWidth = this.scrWidth * 0.75;
+    this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
     this.cardHeight = this.cardWidth * 1.15;
   }
