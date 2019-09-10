@@ -35,18 +35,14 @@ class MenuTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                child: tile.icon != null
-                    ? DghaIcon(
-                        icon: tile.icon,
-                      )
-                    : Container(),
+                child: tile.icon != null ? DghaIcon(icon: tile.icon) : Container(),
               ),
               SizedBox(width: 20),
               Expanded(
                 flex: 8,
                 child: Container(
                   margin: EdgeInsets.only(top: 10),
-                  child: Text(this.tile.title, style: Styles.h3LinkStyle),
+                  child: Text(this.tile.title, style: Styles.h3LinkStyle,),
                 ),
               ),
               Expanded(
