@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class MenuCard extends StatelessWidget {
   final double cardWidth;
   final double cardHeight;
-  final double cardMaxSize; 
+  final double cardMaxWidth; 
   final MenuCardData card;
 
-  MenuCard({this.cardWidth, this.cardHeight, this.card, this.cardMaxSize});
+  MenuCard({this.cardWidth, this.cardHeight, this.card, this.cardMaxWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class MenuCard extends StatelessWidget {
         width: this.cardWidth,
         height: this.cardHeight,
         constraints: BoxConstraints(
-          maxHeight: this.cardMaxSize,
-          maxWidth: this.cardMaxSize
+          maxWidth: this.cardMaxWidth
         ),
         decoration: BoxDecoration(
           color: Styles.midnightBlue,

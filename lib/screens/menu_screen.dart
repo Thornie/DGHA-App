@@ -32,7 +32,8 @@ class _MenuScreenState extends State<MenuScreen> {
   double cardHeight;
   double cardMinHeight;
   double cardMinWidth = 143;
-  double cardMaxSize;
+  double cardMaxWidth;
+  double cardMaxHeight = 300; 
 
   // NOTE: Card Text
   final double textMinWidth = 102;
@@ -49,7 +50,7 @@ class _MenuScreenState extends State<MenuScreen> {
     double cardNewWidth = 0;
 
     if (isVertical) {
-      this.cardMaxSize = (this.scrWidth - (Styles.spacing * 2)); 
+      this.cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)); 
       int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
       while (cardNewWidth < cardNewMinWidth) {
@@ -58,7 +59,7 @@ class _MenuScreenState extends State<MenuScreen> {
         numOfCards--;
       }
     } else {
-      this.cardMaxSize = (this.scrWidth - (Styles.spacing * 2)) * 0.8; 
+      this.cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85; 
       cardNewWidth = cardNewMinWidth + Styles.spacing;
       if (cardNewWidth < this.cardMinWidth) {
         cardNewWidth = this.cardMinWidth;
@@ -67,7 +68,13 @@ class _MenuScreenState extends State<MenuScreen> {
 
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
-    this.cardHeight = this.cardWidth * 1.15;
+    if((this.cardWidth * 1.15) < this.cardMaxHeight) {
+      this.cardHeight = this.cardWidth * 1.15;
+    } else {
+      this.cardHeight = this.cardMaxHeight; 
+    }    
+
+    print("max size: " + this.cardMaxWidth.toString());
   }
 
   @override
@@ -159,7 +166,7 @@ class _MenuScreenState extends State<MenuScreen> {
     List<Widget> cards = new List<Widget>();
 
     for (int i = 0; i < cardsData.length; i++) {
-      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight, cardMaxSize: this.cardMaxSize,);
+      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight, cardMaxWidth: this.cardMaxWidth,);
       cards.add(w);
 
       if ((isSeparated) && (i < cardsData.length - 1)) {
