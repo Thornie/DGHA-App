@@ -43,6 +43,7 @@ class _MenuScreenState extends State<MenuScreen> {
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
     double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
+    double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)); 
     double cardNewWidth = 0;
 
     if (isVertical) {
@@ -58,6 +59,10 @@ class _MenuScreenState extends State<MenuScreen> {
       if (cardNewWidth < this.cardMinWidth) {
         cardNewWidth = this.cardMinWidth;
       }
+    }
+
+    if(cardNewWidth > cardMaxWidth) {
+      cardNewMinWidth = cardMaxWidth; 
     }
 
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
