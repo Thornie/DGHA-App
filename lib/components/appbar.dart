@@ -30,7 +30,7 @@ class DghaAppBar extends StatelessWidget {
                 this.text,
                 style: this.isMenu ? Styles.h1Style : Styles.pStyle,
                 textAlign: TextAlign.center,
-                // textScaleFactor: 1,
+                textScaleFactor: 1,
               ),
             ),
           ),
