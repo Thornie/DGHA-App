@@ -27,13 +27,12 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // NOTE: Card Properties
   bool isVertical = false;
-
+  
+  double cardMinWidth = 143;
+  double cardMaxHeight = 300; 
   double cardWidth;
   double cardHeight;
-  double cardMinHeight;
-  double cardMinWidth = 143;
   double cardMaxWidth;
-  double cardMaxHeight = 300; 
 
   // NOTE: Card Text
   final double textMinWidth = 102;
@@ -44,13 +43,11 @@ class _MenuScreenState extends State<MenuScreen> {
     this.scrHeight = MediaQuery.of(context).size.height;
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
-    
-
     double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
     double cardNewWidth = 0;
 
     if (isVertical) {
-      this.cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)); 
+      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)); 
       int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
       while (cardNewWidth < cardNewMinWidth) {
@@ -58,23 +55,31 @@ class _MenuScreenState extends State<MenuScreen> {
         cardNewWidth = scrWidthIncludingPadding / (numOfCards);
         numOfCards--;
       }
+      
+      // set max width
+      if(cardNewWidth > cardMaxWidth) {
+        cardNewWidth = cardMaxWidth; 
+      }
+      
     } else {
-      this.cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85; 
+      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85; 
       cardNewWidth = cardNewMinWidth + Styles.spacing;
+
+      // set min width
       if (cardNewWidth < this.cardMinWidth) {
         cardNewWidth = this.cardMinWidth;
       }
+
+      // set max width
+      if(cardNewWidth > cardMaxWidth) {
+        cardNewWidth = cardMaxWidth; 
+      }
     }
+
 
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
-    if((this.cardWidth * 1.15) < this.cardMaxHeight) {
-      this.cardHeight = this.cardWidth * 1.15;
-    } else {
-      this.cardHeight = this.cardMaxHeight; 
-    }    
-
-    print("max size: " + this.cardMaxWidth.toString());
+    this.cardHeight = this.cardWidth * 1.15;
   }
 
   @override
@@ -166,7 +171,7 @@ class _MenuScreenState extends State<MenuScreen> {
     List<Widget> cards = new List<Widget>();
 
     for (int i = 0; i < cardsData.length; i++) {
-      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight, cardMaxWidth: this.cardMaxWidth,);
+      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight);
       cards.add(w);
 
       if ((isSeparated) && (i < cardsData.length - 1)) {
