@@ -1,1 +1,27 @@
-ACT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<h1>Primary Act:</h1>
+
+<h2>Domestic Animals Act 2000</h2>
+<h2>Sections Applicable:</h2>
+<h2>Section 104, Rights of Persons Accompanied by Assistance Animals</h2>
+<h2>Section 105, Exclusion of Assistance Animal from Public Place</h2>
+<h2>Section 106, Imposition of Excess Charges for Assistance Animal</h2>
+<h2>Excerpt from Section 104:</h2>
+
+<p>“    (1) Despite any other territory law (other than the Discrimination Act 1991 ), a person with a disability accompanied by an assistance animal has the same right of access to, and the same right to the use of, a public place as a person who is not accompanied by an assistance animal.
+        (2) Without limiting subsection (1), a person with a disability does not commit an offence merely by taking an assistance animal onto or into, or allowing the animal to enter, a public place. “
+</p>
+
+<h2>Maximum Fine for Breach of Act:</h2>
+<h2>10 penalty units</h2>
+<h2>Value of One Penalty Unit as of 2012:</h2>
+<p>$110.00</p>
+<h2>Exceptions to Access under Act:</h2>
+<p>• It is not unlawful to impose a charge to a person with a dog guide if expense is reasonably occurred by the third person because of the presence of the dog guide.</p>
+
+<h2>Other Relevant Legislation:</h2>
+<p>Discrimination Act (NT)</p>
+
+</p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
+</p>For more information visit <a href="https://www.minddog.org.au/resources/federal-laws/">dog-guide-access-legislation</a></p>
+
+
