@@ -1,1 +1,24 @@
-FED Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<h1>Primary Act:</h1>
+
+<h2>Dog and Cat Management Act 1995</h2>
+<h2>Section/s Applicable:</h2>
+<h2>Section 21, Accreditation of Disability Dogs, Guide Dogs etc</h2>
+<h2>Section 81, Disability Dogs, Guide Dogs etc</h2>
+<h2>Excerpt from Section 81:</h2>
+
+<p> <ul>“(1) Despite this Act or any other Act—
+        <li>(a) a person who is wholly or partially blind or deaf, or otherwise disabled, is entitled to be accompanied by an accredited disability dog, guide dog or hearing dog in a public place or public passenger vehicle; and</li>
+        <li>(b) the occupier or person in charge of a public place or public passenger vehicle must not refuse access to the place or vehicle to a person who is wholly or partially blind or deaf, or otherwise disabled, on the ground that the person is accompanied by a disability dog, guide dog or hearing dog.”</li>
+    </ul>
+
+</p>
+
+<h2>Maximum Fine for Breach of Act:</h2>
+<p> $250</p>
+<h2>Exceptions to Access Under Act:</h2>
+<p>• It is not unlawful for a person with an assistance animal to be asked to produce evidence that their dog is an assistance animal.</p>
+
+</p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
+</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164/">dog-guide-access-legislation</a></p>
+
+

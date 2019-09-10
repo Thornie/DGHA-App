@@ -1,1 +1,14 @@
-FED Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<h1>Primary Act:</h1>
+
+<h2>Anti Discrimination Act 1992</h2>
+<h2>Section/s Applicable:</h2>
+<h2>Section 21, Discrimination by Refusal to Allow Guide Dog. </h2>
+<h2>Excerpt from Section 21:</h2>
+<p>“ (1) For the purposes of this Act, a person discriminates on the ground of impairment against a person with a visual, hearing or mobility impairment if the person treats the person with the impairment less favourably because the person has a guide dog. “</p>
+
+
+<h2>Maximum Fine for Breach of Act:</h2>
+<p>Fixed penalty of $500</p>
+
+</p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
+

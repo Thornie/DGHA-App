@@ -1,0 +1,43 @@
+<h1> Atto primario: </h1>
+
+<h2> Companion Animals Act 1998 </h2>
+<h2> Sezione / i applicabile: </h2>
+<h2> 14, Cani vietati in alcuni luoghi pubblici </h2>
+<h2> 59, Persona con disabilità che può essere accompagnata da un animale di assistenza </h2>
+<h2> 60, Animale di assistenza da non negare all'ingresso </h2>
+<h2> 61, illegale imporre una tassa per l'ingresso dell'animale di assistenza </h2>
+<h2> Estratto dalla sezione 59: </h2>
+<P>
+    <Ul>
+        <li> “(1) Una persona con disabilità ha il diritto di essere accompagnata da un animale di assistenza che viene utilizzato in buona fede dalla persona per assistere la persona, in o su qualsiasi edificio o luogo aperto o utilizzato dal pubblico o su qualsiasi trasporto pubblico. </li>
+        <li> (2) La persona non è colpevole di un reato semplicemente perché la persona porta l'animale dentro o sopra o consente all'animale di entrare o trovarsi in o su tale edificio o luogo o qualsiasi trasporto pubblico mentre la persona sta usando il animale in buona fede per aiutare la persona. </li>
+        <li> (3) Questa sezione si applica nonostante le disposizioni di qualsiasi altra legge o strumento adottata ai sensi di una legge. “</ Li>
+    </ Ul>
+</ P>
+
+<h2> Multa massima per Breach of Act: </h2>
+<p> 8 unità di penalità </p>
+<h2> Valore di un'unità di penalità dal 2012: </h2>
+<P> $ 110.00 </ p>
+<h2> Multe emesse da: </h2>
+<P>
+    <Ul>
+        <li> Polizia del NSW </li>
+        <li> Consigli locali </li>
+    </ Ul>
+</ P>
+<h2> Eccezioni all'accesso ai sensi della legge: </h2>
+<p> Non è illegale imporre un addebito a una persona con una guida per cani se la terza persona ha ragionevolmente sostenuto spese a causa della presenza della guida per cani. </p>
+
+<h2> Altra legislazione pertinente: </h2>
+<P>
+    <Ul>
+            <li> Anti-Discrimination Act 1977 (Nuovo Galles del Sud) </li>
+            <li> Passenger Transport Act 1990 (Nuovo Galles del Sud) </li>
+            <li> Rail Safety Act 1993 (Nuovo Galles del Sud) </li>
+    </ Ul>
+</ P>
+
+
+</p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
+</p>For more information visit <a href="http://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/nsw/consol_act/caa1998174/s60.html/">dog-guide-access-legislation</a></p>
