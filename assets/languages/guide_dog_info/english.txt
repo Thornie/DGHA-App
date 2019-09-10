@@ -7,4 +7,4 @@
     <li>If you see a loose Guide Dog, please contact the local council</li>
     <li>According to government legislation, you must allow a Guide Dog to go anywhere that the person working with it can go</li>
 </ul>
-<p>For more information visit <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

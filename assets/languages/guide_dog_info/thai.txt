@@ -7,4 +7,4 @@
     <li>หากคุณเห็นสุนัขนำทางหลวมกรุณาติดต่อสภาท้องถิ่น</li>
     <li>ตามกฎหมายของรัฐบาลคุณต้องอนุญาตให้สุนัขนำทางเดินไปทุกที่ที่คนทำงานด้วยสามารถไปได้</li>
 </ul>
-<p>สำหรับการเยี่ยมชมข้อมูลเพิ่มเติม <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

@@ -7,4 +7,4 @@
     <li>안내견이 느슨하면 지역 의회에 연락하십시오</li>
     <li>정부 법률에 따르면, 안내견과 함께 일하는 사람이 갈 수있는 곳으로 안내견을 보내야합니다.</li>
 </ul>
-<p>자세한 내용은 방문 <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

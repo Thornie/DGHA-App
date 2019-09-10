@@ -9,4 +9,4 @@
     <li>Tutte le forme di trasporto pubblico, inclusi taxi, autobus, treni, tram e aeroplani</li>
 </ul>
 <p>I diritti di accesso ai cani guida sono regolati da Disability Discrimination Act 1992 (Sezione 9), National Disability Services Standards (2014), Privacy Act 1986 (Commonwealth) e Dog Act 1976.</p>
-<p>Per maggiori informazioni visita <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

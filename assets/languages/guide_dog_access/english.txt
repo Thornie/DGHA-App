@@ -9,4 +9,4 @@
     <li>All forms of public transport, including taxis, buses, trains, trams and airplanes</li>
 </ul>
 <p>Guide Dog access rights are governed by the Disability Discrimination Act 1992 (Section 9), National Disability Services Standards (2014), Privacy Act 1986 (Commonwealth), and Dog Act 1976.</p>
-<p>For more information visit <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

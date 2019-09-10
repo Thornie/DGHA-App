@@ -7,4 +7,4 @@
     <li>ゆるい盲導犬を見つけた場合は、地元の議会に連絡してください</li>
     <li>政府の法律によると、盲導犬は、それを扱う人が行ける場所ならどこでも行けるようにする必要があります</li>
 </ul>
-<p>詳細については、<a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

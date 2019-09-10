@@ -9,4 +9,4 @@
     <li>택시, 버스, 기차, 트램 및 비행기를 포함한 모든 형태의 대중 교통</li>
 </ul>
 <p>안내견 접근 권한은 1992 년 장애 차별 법 (섹션 9), 국가 장애 서비스 표준 (2014), 개인 정보 보호법 1986 (연방) 및 개법 1976에 의해 규율됩니다.</p>
-<p>자세한 내용은 방문 <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

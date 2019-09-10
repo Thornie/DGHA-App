@@ -9,4 +9,4 @@
     <li>タクシー、バス、電車、路面電車、飛行機など、あらゆる形態の公共交通機関</li>
 </ul>
 <p>Guide Dogのアクセス権は、1992年障害差別法（セクション9）、National Disability Services Standards（2014）、Privacy Act 1986（Commonwealth）、およびDog Act 1976に準拠しています。</p>
-<p>詳細については、<a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

@@ -9,4 +9,4 @@
     <li>各种形式的公共交通工具，包括出租车，公共汽车，火车，有轨电车和飞机</li>
 </ul>
 <p>导盲犬的使用权受1992年残疾歧视法案（第9节），国家残疾服务标准（2014年），1986年隐私法（联邦）和1976年狗法案的管辖。</p>
-<p>欲了解更多信息，请访问 <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

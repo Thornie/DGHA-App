@@ -7,4 +7,4 @@
     <li>Αν δείτε ένα χαλαρό σκυλί οδηγού, παρακαλώ επικοινωνήστε με το τοπικό συμβούλιο</li>
     <li>Σύμφωνα με την κυβερνητική νομοθεσία, πρέπει να επιτρέψετε σε ένα σκυλί-οδηγό να πάει οπουδήποτε μπορεί να πάει το άτομο που εργάζεται μαζί του</li>
 </ul>
-<p>Για περισσότερες πληροφορίες επισκεφθείτε <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

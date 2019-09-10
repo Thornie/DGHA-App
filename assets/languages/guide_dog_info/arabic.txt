@@ -7,4 +7,4 @@
     <li>إذا رأيت كلب مرشد مرخّص ، يرجى الاتصال بالمجلس المحلي</li>
     <li>وفقًا للتشريعات الحكومية ، يجب أن تسمح لـ Guide Dog بالانتقال إلى أي مكان يمكن للشخص الذي يعمل معه الانتقال إليه</li>
 </ul>
-<p>للمزيد من المعلومات قم بزيارة <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

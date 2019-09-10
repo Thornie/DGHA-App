@@ -7,4 +7,4 @@
     <li>如果您看到松散的导盲犬，请联系当地议会</li>
     <li>根据政府法规，您必须允许导盲犬去任何与其一起工作的人去的地方</li>
 </ul>
-<p>欲了解更多信息，请访问 <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>

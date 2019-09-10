@@ -7,4 +7,4 @@
     <li>Nếu bạn thấy Chó dẫn đường lỏng lẻo, vui lòng liên hệ với hội đồng địa phương</li>
     <li>Theo luật pháp của chính phủ, bạn phải cho phép Chó dẫn đường đi bất cứ nơi nào mà người làm việc với nó có thể đi</li>
 </ul>
-<p>Để biết thêm thông tin, hãy truy cập <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
+<p>For more information visit <a href="http://guidedogsaustralia.com/">Guide Dogs Australia</a></p>
