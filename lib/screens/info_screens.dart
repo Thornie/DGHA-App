@@ -21,6 +21,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
   double scrHeight;
+  double textScale;
 
   @override
   void initState() {
@@ -28,8 +29,8 @@ class _InfoScreenState extends State<InfoScreen> {
     setLang(0);
   }
 
-  void calcDimensions(Orientation orientation) {
-    this.scrHeight = MediaQuery.of(context).size.height;
+  void calcDimensions() {
+    this.textScale = MediaQuery.of(context).textScaleFactor;
   }
 
   void setLang(int index) {
@@ -40,7 +41,7 @@ class _InfoScreenState extends State<InfoScreen> {
     });
   }
 
-    _launchUrl(String url) async {
+  _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -51,6 +52,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return Scaffold(
       body: SafeArea(child: OrientationBuilder(
         builder: (context, orientation) {
+          calcDimensions();
           return Stack(
             children: <Widget>[
               Container(
@@ -64,16 +66,15 @@ class _InfoScreenState extends State<InfoScreen> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                       child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Html(
-                          data: infoText,
-                          defaultTextStyle: Styles.pStyle,
-                          padding: EdgeInsets.all(10),
-                          onLinkTap: (url) {
-                            _launchUrl(url);
-                          },
-                        )
-                      ),
+                          physics: BouncingScrollPhysics(),
+                          child: Html(
+                            data: infoText,
+                            defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
+                            padding: EdgeInsets.all(10),
+                            onLinkTap: (url) {
+                              _launchUrl(url);
+                            },
+                          )),
                     ),
                   ],
                 ),
