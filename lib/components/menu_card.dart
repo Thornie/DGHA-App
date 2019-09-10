@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 class MenuCard extends StatelessWidget {
   final double cardWidth;
   final double cardHeight;
-  final double cardMaxWidth; 
   final MenuCardData card;
 
-  MenuCard({this.cardWidth, this.cardHeight, this.card, this.cardMaxWidth});
+  MenuCard({this.cardWidth, this.cardHeight, this.card});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +19,6 @@ class MenuCard extends StatelessWidget {
       child: Container(
         width: this.cardWidth,
         height: this.cardHeight,
-        constraints: BoxConstraints(
-          maxWidth: this.cardMaxWidth
-        ),
         decoration: BoxDecoration(
           color: Styles.midnightBlue,
           borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
