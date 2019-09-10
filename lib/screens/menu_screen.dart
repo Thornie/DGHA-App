@@ -43,12 +43,13 @@ class _MenuScreenState extends State<MenuScreen> {
     this.scrHeight = MediaQuery.of(context).size.height;
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
-    this.cardMaxSize = (this.scrWidth - (Styles.spacing * 2)); 
+    
 
     double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
     double cardNewWidth = 0;
 
     if (isVertical) {
+      this.cardMaxSize = (this.scrWidth - (Styles.spacing * 2)); 
       int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
       while (cardNewWidth < cardNewMinWidth) {
@@ -57,6 +58,7 @@ class _MenuScreenState extends State<MenuScreen> {
         numOfCards--;
       }
     } else {
+      this.cardMaxSize = (this.scrWidth - (Styles.spacing * 2)) * 0.8; 
       cardNewWidth = cardNewMinWidth + Styles.spacing;
       if (cardNewWidth < this.cardMinWidth) {
         cardNewWidth = this.cardMinWidth;
