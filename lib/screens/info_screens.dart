@@ -64,13 +64,16 @@ class _InfoScreenState extends State<InfoScreen> {
                       height: 70,
                     ),
                     Container(
+                      padding: EdgeInsets.only(left: Styles.spacing),
+                      child: Text("When a Guide Dog is in harness", style: Styles.pStyle),
+                    ),
+                    Container(
                       margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                       child: SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
                           child: Html(
                             data: infoText,
                             defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
-                            padding: EdgeInsets.all(10),
                             onLinkTap: (url) {
                               _launchUrl(url);
                             },
