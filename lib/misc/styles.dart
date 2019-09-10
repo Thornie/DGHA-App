@@ -10,6 +10,11 @@ class Styles {
   // ----------------- SIZES
   // ---------- APP
   static final double appBarHorizontalPadding = 10; 
+  static final double normalRadius = 20;  
+  static final double imageMargin = 8; 
+  static final double spacing = 20;
+  // ---------- TEXT
+  static final double textPadding = 10; 
 
   // ---------- ICON
   static double iconSize = 24; 
