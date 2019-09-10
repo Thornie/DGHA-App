@@ -1,1 +1,12 @@
-ACCESS Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p>Guide Dog Handlers and their Guide Dogs are legally allowed to enter public places including:</p>
+<ul>
+    <li>Shops and supermarkets</li>
+    <li>Cafes and restaurants</li>
+    <li>Pubs and clubs</li>
+    <li>Cinemas and theatres</li>
+    <li>Hotels, motels and other accommodation</li>
+    <li>Medical/dental practices and hospitals (except in an operating theatre)</li>
+    <li>All forms of public transport, including taxis, buses, trains, trams and airplanes</li>
+</ul>
+<p>Guide Dog access rights are governed by the Disability Discrimination Act 1992 (Section 9), National Disability Services Standards (2014), Privacy Act 1986 (Commonwealth), and Dog Act 1976.</p>
+<p>For more information visit <a href="https://www.guidedogsvictoria.com.au">Guide Dogs Australia</a></p>
