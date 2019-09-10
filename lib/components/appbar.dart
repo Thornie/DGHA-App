@@ -28,7 +28,7 @@ class DghaAppBar extends StatelessWidget {
             child: Container(
               child: Text(
                 this.text,
-                style: this.isMenu ? Styles.h1Style : Styles.pStyle,
+                style: this.isMenu ? Styles.h1Style : Styles.h2Style,
                 textAlign: TextAlign.center,
                 textScaleFactor: 1,
               ),
