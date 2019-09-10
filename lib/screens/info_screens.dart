@@ -6,6 +6,7 @@ import 'package:dgha_brochure/models/languages.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoScreen extends StatefulWidget {
   static const String id = "Info Screen";
@@ -61,6 +62,12 @@ class _InfoScreenState extends State<InfoScreen> {
         infoText = data;
       });
     });
+  }
+
+    _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 
   @override
@@ -122,7 +129,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       defaultTextStyle: Styles.pStyle,
                       padding: EdgeInsets.all(10),
                       onLinkTap: (url) {
-                        print("Opening $url");
+                        _launchUrl(url);
                       },
                     ),
                   ),
