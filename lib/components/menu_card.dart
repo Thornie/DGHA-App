@@ -54,6 +54,8 @@ class MenuCard extends StatelessWidget {
                 card.cardTitle,
                 style: Styles.h3Style,
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
