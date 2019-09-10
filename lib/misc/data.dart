@@ -20,18 +20,8 @@ class Data {
     waCardLaw
   ];
 
-  static final List<MenuCardData> lawInfoCardDataLandRow1 = [fedCardData, actCardData, nswCardData, ntCardData];
-  static final List<MenuCardData> lawInfoCardDataLandRow2 = [qldCardData, saCardData, tasCardData, vicCardData];
-  static final List<MenuCardData> lawInfoCardDataLandRow3 = [waCardLaw];
-
-  static final List<MenuCardData> lawInfoCardDataPortRow1 = [fedCardData, actCardData];
-  static final List<MenuCardData> lawInfoCardDataPortRow2 = [nswCardData, ntCardData];
-  static final List<MenuCardData> lawInfoCardDataPortRow3 = [qldCardData, saCardData];
-  static final List<MenuCardData> lawInfoCardDataPortRow4 = [tasCardData, vicCardData];
-  static final List<MenuCardData> lawInfoCardDataPortRow5 = [waCardLaw];
-
   static final MenuCardData infoCardData = new MenuCardData(
-      shortTitle: "Guide Dog",
+      cardTitle: "Guide Dog",
       pageToNavigateTo: InfoScreen.id,
       texts: infoLang,
       imagePath: "assets/images/menu_card/info.png",
@@ -40,7 +30,7 @@ class Data {
       semanticHint: "Double tap to read more about Guide Dogs");
 
   static final MenuCardData accessCardData = new MenuCardData(
-      shortTitle: "Access",
+      cardTitle: "Access",
       pageToNavigateTo: InfoScreen.id,
       texts: accessLang,
       imagePath: "assets/images/menu_card/access.png",
@@ -49,7 +39,7 @@ class Data {
       semanticHint: "Double Tap to read more about about Guide Dog Access");
 
   static final MenuCardData fedCardData = new MenuCardData(
-      shortTitle: "Federal",
+      cardTitle: "Federal",
       pageToNavigateTo: InfoScreen.id,
       texts: fedLang,
       imagePath: "assets/images/menu_card/federal.png",
@@ -58,7 +48,7 @@ class Data {
       semanticHint: "Double Tap to read more about Federal Law regarding Guide Dogs");
 
   static final MenuCardData actCardData = new MenuCardData(
-      shortTitle: "ACT",
+      cardTitle: "ACT",
       pageToNavigateTo: InfoScreen.id,
       texts: actLang,
       imagePath: "assets/images/menu_card/act.png",
@@ -67,7 +57,7 @@ class Data {
       semanticHint: "Double Tap to read more about A C T State Law regarding Guide Dogs");
 
   static final MenuCardData nswCardData = new MenuCardData(
-      shortTitle: "NSW",
+      cardTitle: "NSW",
       pageToNavigateTo: InfoScreen.id,
       texts: nswLang,
       imagePath: "assets/images/menu_card/nsw.png",
@@ -76,7 +66,7 @@ class Data {
       semanticHint: "Double Tap to read more about New South Wales State Law regarding Guide Dogs");
 
   static final MenuCardData ntCardData = new MenuCardData(
-      shortTitle: "NT",
+      cardTitle: "NT",
       pageToNavigateTo: InfoScreen.id,
       texts: ntLang,
       imagePath: "assets/images/menu_card/nt.png",
@@ -85,7 +75,7 @@ class Data {
       semanticHint: "Double Tap to read more about Northern Territory Law regarding Guide Dogs");
 
   static final MenuCardData qldCardData = new MenuCardData(
-      shortTitle: "QLD",
+      cardTitle: "QLD",
       pageToNavigateTo: InfoScreen.id,
       texts: qldLang,
       imagePath: "assets/images/menu_card/qld.png",
@@ -94,7 +84,7 @@ class Data {
       semanticHint: "Double Tap to read more about Queensland Law regarding Guide Dogs");
 
   static final MenuCardData saCardData = new MenuCardData(
-      shortTitle: "SA",
+      cardTitle: "SA",
       pageToNavigateTo: InfoScreen.id,
       texts: saLang,
       imagePath: "assets/images/menu_card/sa.png",
@@ -103,7 +93,7 @@ class Data {
       semanticHint: "Double Tap to read more about South Australia State Law regarding Guide Dogs");
 
   static final MenuCardData tasCardData = new MenuCardData(
-      shortTitle: "TAS",
+      cardTitle: "TAS",
       pageToNavigateTo: InfoScreen.id,
       texts: tasLang,
       imagePath: "assets/images/menu_card/tas.png",
@@ -112,7 +102,7 @@ class Data {
       semanticHint: "Double Tap to read more about Tasmania State Law regarding Guide Dogs");
 
   static final MenuCardData vicCardData = new MenuCardData(
-      shortTitle: "VIC",
+      cardTitle: "VIC",
       pageToNavigateTo: InfoScreen.id,
       texts: vicLang,
       imagePath: "assets/images/menu_card/vic.png",
@@ -121,7 +111,7 @@ class Data {
       semanticHint: "Double Tap to read more about Victoria State Law regarding Guide Dogs");
 
   static final MenuCardData waCardLaw = new MenuCardData(
-      shortTitle: "WA",
+      cardTitle: "WA",
       pageToNavigateTo: InfoScreen.id,
       texts: waLang,
       imagePath: "assets/images/menu_card/wa.png",
@@ -314,6 +304,4 @@ class Data {
 
   // ----------------------------------- NOTE: Images
   static final String logo = "assets/images/dgha_logo/logo.png";
-  static final String infoMenuImg = "assets/images/menu_card/info.png";
-  static final String accessMenuImg = "assets/images/menu_card/access.png";
 }
