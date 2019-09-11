@@ -109,77 +109,82 @@ class _MenuScreenState extends State<MenuScreen> {
             this.calcDimensions(orientation);
 
             return Stack(
-                  children: <Widget>[
-                    Container(
-                      height: this.scrHeight,
-                      child: ListView(
-              physics: BouncingScrollPhysics(),
               children: <Widget>[
-                // the SizedBox height are found by trial and error, nothing special
-                SizedBox(height: 105),
-                Semantics(
-                  label: "General Information Section",
-                  explicitChildNodes: true,
-                  excludeSemantics: true,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                  height: this.scrHeight,
+                  child: ListView(
+                    physics: BouncingScrollPhysics(),
                     children: <Widget>[
-                      _buildH2("General Information"),
-                      _buildCardsList(Data.generalInfoCardData),
+                      // the SizedBox height are found by trial and error, nothing special
+                      SizedBox(height: 105),
+                      Semantics(
+                        label: "General Information Section",
+                        hint: "There are ${Data.generalInfoCardData.length} cards in this section",
+                        explicitChildNodes: true,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            _buildH2("General Information"),
+                            _buildCardsList(Data.generalInfoCardData),
+                          ],
+                        ),
+                      ),
+
+                      Semantics(
+                        label: "Federal and State Laws Section",
+                        hint: "There are ${Data.lawInfoCardData.length} cards in this section",
+                        explicitChildNodes: true,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: this.isVertical ? 40 : 10),
+                            _buildH2("Laws"),
+                            _buildCardsList(Data.lawInfoCardData),
+                            SizedBox(height: 40),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
 
-                Column(
-                  children: <Widget>[
-                    SizedBox(height: this.isVertical ? 40 : 10),
-                    _buildH2("Laws"),
-                    _buildCardsList(Data.lawInfoCardData),
-                    SizedBox(height: 40),
-                  ],
-                ),
-              ],
-            ),
+                // APP BAR
+                // it's at the bottom so it's above all of the other widgets
+                DghaAppBar(
+                  text: "DGHA",
+                  isMenu: true,
+                  semanticLabel: "D G H A - Guide Dog Handler Australia",
+                  childOne: Semantics(
+                    button: true,
+                    label: "Menu",
+                    hint: "Open side bar menu",
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
+                      },
+                      child: DghaIcon(icon: FontAwesomeIcons.bars),
                     ),
-
-                    // APP BAR
-                    // it's at the bottom so it's above all of the other widgets
-                    DghaAppBar(
-                      text: "DGHA",
-                      isMenu: true,
-                      semanticLabel: "D G H A - Guide Dog Handler Australia",
-                      childOne: Semantics(
-                        button: true,
-                        label: "Menu",
-                        hint: "Open side bar menu",
-                        child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _scaffoldKey.currentState.openDrawer();
-              });
-            },
-            child: DghaIcon(icon: FontAwesomeIcons.bars),
-                        ),
+                  ),
+                  childTwo: Semantics(
+                    button: true,
+                    label: "Card Direction.",
+                    hint: this.isVertical ? "Display cards horizontally." : "Display cards vertically.",
+                    explicitChildNodes: false,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          this.isVertical = !this.isVertical;
+                        });
+                      },
+                      child: DghaIcon(
+                        icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
                       ),
-                      childTwo: Semantics(
-                        button: true,
-                        label: "Card Direction.",
-                        hint: this.isVertical ? "Display cards horizontally." : "Display cards vertically.",
-                        explicitChildNodes: false,
-                        child: GestureDetector(
-            onTap: () {
-              setState(() {
-                this.isVertical = !this.isVertical;
-              });
-            },
-            child: DghaIcon(
-              icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
-            ),
-                        ),
-                      ),
-                    )
-                  ],
-                );
+                    ),
+                  ),
+                )
+              ],
+            );
           },
         ),
       ),
@@ -187,17 +192,14 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   Widget _buildH2(String text) {
-    return Semantics(
-      label: text,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-        width: double.maxFinite,
-        child: Text(
-          text,
-          style: Styles.h2Style,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+      width: double.maxFinite,
+      child: Text(
+        text,
+        style: Styles.h2Style,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -229,15 +231,15 @@ class _MenuScreenState extends State<MenuScreen> {
       );
     } else {
       return Container(
-          // the 2.5 accounts for the extra padding on the top and bottom
-          height: this.cardHeight + Styles.spacing * 1.5,
-          child: ListView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(Styles.spacing, Styles.spacing / 2, Styles.spacing, Styles.spacing),
-              scrollDirection: Axis.horizontal,
-              children: this._buildCards(cardsData, true),
-            ),
-        );
+        // the 2.5 accounts for the extra padding on the top and bottom
+        height: this.cardHeight + Styles.spacing * 1.5,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.fromLTRB(Styles.spacing, Styles.spacing / 2, Styles.spacing, Styles.spacing),
+          scrollDirection: Axis.horizontal,
+          children: this._buildCards(cardsData, true),
+        ),
+      );
     }
   }
 }
