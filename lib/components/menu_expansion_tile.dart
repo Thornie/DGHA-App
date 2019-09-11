@@ -32,18 +32,16 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    double textScale = MediaQuery.of(context).textScaleFactor;
-    return Semantics(
-      label: widget.tile.semanticLabel,
-      hint: widget.tile.semanticHint,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              child: Stack(
-                children: <Widget>[
-                  Row(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            child: Stack(
+              children: <Widget>[
+                Semantics(
+                  excludeSemantics: true,
+                  child: Row(
                     children: <Widget>[
                       DghaIcon(icon: widget.tile.icon),
                       SizedBox(width: 20),
@@ -63,25 +61,28 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                       )
                     ],
                   ),
-                  ExpansionTile(
-                    title: Text(
+                ),
+                ExpansionTile(
+                  title: Semantics(
+                    hint: this.isCollapsed ? widget.tile.semanticHint : "Double tap to close menu",
+                    child: Text(
                       'Laws',
                       style: TextStyle(color: Styles.transparent),
                     ),
-                    onExpansionChanged: (bool) {
-                      setState(() {
-                        this.isCollapsed = !this.isCollapsed;
-                      });
-                    },
-                    trailing: Text(""),
-                    children: _buildChildren(),
                   ),
-                ],
-              ),
+                  onExpansionChanged: (bool) {
+                    setState(() {
+                      this.isCollapsed = !this.isCollapsed;
+                    });
+                  },
+                  trailing: Text(""),
+                  children: _buildChildren(),
+                ),
+              ],
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 
@@ -89,7 +90,8 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
     List<Widget> children = new List<Widget>();
     for (int i = 0; i < widget.tile.children.length; i++) {
       Widget w = MenuTile(
-        tile: widget.tile.children[i], paddingLeft: 95,
+        tile: widget.tile.children[i],
+        paddingLeft: 95,
       );
       children.add(w);
     }
