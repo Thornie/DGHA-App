@@ -82,6 +82,9 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
               ),
               DghaAppBar(
+                text: widget.appBarTitle,
+                isMenu: false,
+                semanticLabel: widget.appBarTitle,
                 childOne: Container(
                   child: GestureDetector(
                     onTap: () {
@@ -118,8 +121,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                   ),
                 ),
-                text: widget.appBarTitle,
-                isMenu: false,
+                
               )
             ],
           );
