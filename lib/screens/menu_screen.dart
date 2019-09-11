@@ -132,7 +132,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
                       Semantics(
                         label: "Federal and State Laws Section",
-                        hint: "There are ${Data.lawInfoCardData.length} cards in this section",
+                        hint: "There are ${Data.lawInfoCardData.length} cards in this section, " + (this.isVertical ? "Slide up and down to see more cards" : "Slide left and right to see more cards"),
                         explicitChildNodes: true,
                         child: Column(
                           children: <Widget>[
@@ -156,7 +156,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   childOne: Semantics(
                     button: true,
                     label: "Menu",
-                    hint: "Double tap to open side bar menu",
+                    hint: "Double tap to pen side bar menu",
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
