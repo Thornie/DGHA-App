@@ -24,7 +24,7 @@ class _InfoScreenState extends State<InfoScreen> {
   double textScale;
   double popUpHeight;
   final double popUpTextHeight = 50;
-  final double popUpMaxHeight = 100;
+  final double popUpMaxHeight = 90;
 
   @override
   void initState() {
@@ -34,8 +34,14 @@ class _InfoScreenState extends State<InfoScreen> {
 
   void calcDimensions() {
     this.textScale = MediaQuery.of(context).textScaleFactor;
-
-    this.popUpHeight = this.popUpTextHeight * this.textScale;
+    
+    if(this.textScale < 1.5 || this.textScale == 1.5) {
+      this.popUpHeight = this.popUpTextHeight;
+    } else if (this.textScale > 1.5 && this.textScale < 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8; 
+    } else if( this.textScale > 2 || this.textScale == 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7; 
+    }
 
     this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
   }
