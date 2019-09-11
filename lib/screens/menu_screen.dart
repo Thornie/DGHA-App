@@ -116,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       // the SizedBox height are found by trial and error, nothing special
-                      SizedBox(height: 105),
+                      SizedBox(height: 65),
                       Semantics(
                         label: "General Information Section",
                         hint: "There are ${Data.generalInfoCardData.length} cards in this section",
@@ -124,6 +124,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(height: 45),
                             _buildH2("General Information"),
                             _buildCardsList(Data.generalInfoCardData),
                           ],
