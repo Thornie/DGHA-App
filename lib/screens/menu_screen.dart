@@ -5,6 +5,7 @@ import 'package:dgha_brochure/components/menu_card.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/menu_card_data.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -15,26 +16,31 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  // used for closing or opening drawer
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  // NOTE: App Properties
+  // app properties
   double scrWidth;
   double scrHeight;
   double textScale;
 
-  // NOTE: Drawer
+  // drawer properties
   double drawerWidth;
 
-  // NOTE: Card Properties
+  // card properties
   bool isVertical = false;
 
-  double cardMinWidth = 143;
-  double cardMaxHeight = 300;
+  // the cardMinWidth is small enough that the user can see a bit of the next card
+  final double cardMinWidth = 143;
+
+  // the cardMaxHeight isn't too big, so the user doesn't need to scroll for too long
+  final double cardMaxHeight = 300;
+
   double cardWidth;
   double cardHeight;
   double cardMaxWidth;
 
-  // NOTE: Card Text
+  // card text properties
   final double textMinWidth = 102;
   final double textMinHeight = 34;
 
@@ -44,32 +50,42 @@ class _MenuScreenState extends State<MenuScreen> {
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
     double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
+
+    // reset card's width
     double cardNewWidth = 0;
 
-    if (isVertical) {
+    if (this.isVertical) {
+      // cardMaxWidth = the whole screen - the padding
       double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2));
+
+      // get the number of cards that can fit on a screen
       int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
+      // make sure that all cards are big enough to fit all the text
       while (cardNewWidth < cardNewMinWidth) {
         double scrWidthIncludingPadding = scrWidth - (Styles.spacing * 2) - (Styles.spacing * (numOfCards - 1));
         cardNewWidth = scrWidthIncludingPadding / (numOfCards);
+
+        // better that the cards are bigger than it need to be, rather than too small
         numOfCards--;
       }
 
-      // set max width
+      // if the card is bigger than the whole screen, set it to cardMaxWidth
       if (cardNewWidth > cardMaxWidth) {
         cardNewWidth = cardMaxWidth;
       }
     } else {
+      // the cardMaxWidth is small enough that the user can still see a bit of the next card
       double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85;
+
       cardNewWidth = cardNewMinWidth + Styles.spacing;
 
-      // set min width
+      // if the card is smaller than 140, it's too small
       if (cardNewWidth < this.cardMinWidth) {
         cardNewWidth = this.cardMinWidth;
       }
 
-      // set max width
+      // if the card is bigger than the 85% of the screen, it's too big
       if (cardNewWidth > cardMaxWidth) {
         cardNewWidth = cardMaxWidth;
       }
@@ -91,79 +107,106 @@ class _MenuScreenState extends State<MenuScreen> {
         child: OrientationBuilder(
           builder: (context, orientation) {
             this.calcDimensions(orientation);
+
             return Stack(
+                  children: <Widget>[
+                    Container(
+                      height: this.scrHeight,
+                      child: ListView(
+              physics: BouncingScrollPhysics(),
               children: <Widget>[
-                Container(
-                  height: this.scrHeight,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
+                // the SizedBox height are found by trial and error, nothing special
+                SizedBox(height: 105),
+                Semantics(
+                  label: "General Information Section",
+                  explicitChildNodes: true,
+                  excludeSemantics: true,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: 105),
                       _buildH2("General Information"),
                       _buildCardsList(Data.generalInfoCardData),
-                      SizedBox(height: isVertical ? 40 : 0),
-                      _buildH2("Law"),
-                      _buildCardsList(Data.lawInfoCardData),
-                      SizedBox(height: 40),
                     ],
                   ),
                 ),
 
-                // APP BAR
-                DghaAppBar(
-                  childOne: Container(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _scaffoldKey.currentState.openDrawer();
-                        });
-                      },
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.bars,
-                      ),
-                    ),
-                  ),
-                  childTwo: Container(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          this.isVertical = !this.isVertical;
-                        });
-                      },
-                      child: DghaIcon(
-                        icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
-                      ),
-                    ),
-                  ),
-                  text: "DGHA",
-                  isMenu: true,
-                )
+                Column(
+                  children: <Widget>[
+                    SizedBox(height: this.isVertical ? 40 : 10),
+                    _buildH2("Laws"),
+                    _buildCardsList(Data.lawInfoCardData),
+                    SizedBox(height: 40),
+                  ],
+                ),
               ],
-            );
+            ),
+                    ),
+
+                    // APP BAR
+                    // it's at the bottom so it's above all of the other widgets
+                    DghaAppBar(
+                      text: "DGHA",
+                      isMenu: true,
+                      semanticLabel: "D G H A - Guide Dog Handler Australia",
+                      childOne: Semantics(
+                        button: true,
+                        label: "Menu",
+                        hint: "Open side bar menu",
+                        child: GestureDetector(
+            onTap: () {
+              setState(() {
+                _scaffoldKey.currentState.openDrawer();
+              });
+            },
+            child: DghaIcon(icon: FontAwesomeIcons.bars),
+                        ),
+                      ),
+                      childTwo: Semantics(
+                        button: true,
+                        label: "Card Direction.",
+                        hint: this.isVertical ? "Display cards horizontally." : "Display cards vertically.",
+                        explicitChildNodes: false,
+                        child: GestureDetector(
+            onTap: () {
+              setState(() {
+                this.isVertical = !this.isVertical;
+              });
+            },
+            child: DghaIcon(
+              icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
+            ),
+                        ),
+                      ),
+                    )
+                  ],
+                );
           },
         ),
       ),
     );
   }
 
-  Container _buildH2(String text) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-      child: Text(
-        text,
-        style: Styles.h2Style,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
+  Widget _buildH2(String text) {
+    return Semantics(
+      label: text,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+        width: double.maxFinite,
+        child: Text(
+          text,
+          style: Styles.h2Style,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }
 
-  // VERTICAL
   List<Widget> _buildCards(List<MenuCardData> cardsData, bool isSeparated) {
     List<Widget> cards = new List<Widget>();
 
     for (int i = 0; i < cardsData.length; i++) {
-      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight);
+      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight, cardIndex: i + 1, listLength: cardsData.length,);
       cards.add(w);
 
       if ((isSeparated) && (i < cardsData.length - 1)) {
@@ -186,14 +229,15 @@ class _MenuScreenState extends State<MenuScreen> {
       );
     } else {
       return Container(
-        height: this.cardHeight + Styles.spacing * 2.5,
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(Styles.spacing, Styles.spacing / 2, Styles.spacing, Styles.spacing * 2),
-          scrollDirection: Axis.horizontal,
-          children: this._buildCards(cardsData, true),
-        ),
-      );
+          // the 2.5 accounts for the extra padding on the top and bottom
+          height: this.cardHeight + Styles.spacing * 1.5,
+          child: ListView(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.fromLTRB(Styles.spacing, Styles.spacing / 2, Styles.spacing, Styles.spacing),
+              scrollDirection: Axis.horizontal,
+              children: this._buildCards(cardsData, true),
+            ),
+        );
     }
   }
 }
