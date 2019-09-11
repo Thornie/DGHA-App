@@ -27,9 +27,9 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // NOTE: Card Properties
   bool isVertical = false;
-  
+
   double cardMinWidth = 143;
-  double cardMaxHeight = 300; 
+  double cardMaxHeight = 300;
   double cardWidth;
   double cardHeight;
   double cardMaxWidth;
@@ -47,7 +47,7 @@ class _MenuScreenState extends State<MenuScreen> {
     double cardNewWidth = 0;
 
     if (isVertical) {
-      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)); 
+      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2));
       int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
       while (cardNewWidth < cardNewMinWidth) {
@@ -55,14 +55,13 @@ class _MenuScreenState extends State<MenuScreen> {
         cardNewWidth = scrWidthIncludingPadding / (numOfCards);
         numOfCards--;
       }
-      
+
       // set max width
-      if(cardNewWidth > cardMaxWidth) {
-        cardNewWidth = cardMaxWidth; 
+      if (cardNewWidth > cardMaxWidth) {
+        cardNewWidth = cardMaxWidth;
       }
-      
     } else {
-      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85; 
+      double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2)) * 0.85;
       cardNewWidth = cardNewMinWidth + Styles.spacing;
 
       // set min width
@@ -71,11 +70,10 @@ class _MenuScreenState extends State<MenuScreen> {
       }
 
       // set max width
-      if(cardNewWidth > cardMaxWidth) {
-        cardNewWidth = cardMaxWidth; 
+      if (cardNewWidth > cardMaxWidth) {
+        cardNewWidth = cardMaxWidth;
       }
     }
-
 
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
@@ -100,31 +98,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
-                      SizedBox(
-                        height: 105,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                        child: Text(
-                          "General Information",
-                          style: Styles.h2Style,
-                        ),
-                      ),
+                      SizedBox(height: 105),
+                      _buildH2("General Information"),
                       _buildCardsList(Data.generalInfoCardData),
-                      SizedBox(
-                        height: isVertical ? 40 : 0,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                        child: Text(
-                          "Laws",
-                          style: Styles.h2Style,
-                        ),
-                      ),
+                      SizedBox(height: isVertical ? 40 : 0),
+                      _buildH2("Law"),
                       _buildCardsList(Data.lawInfoCardData),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      SizedBox(height: 40),
                     ],
                   ),
                 ),
@@ -162,6 +142,18 @@ class _MenuScreenState extends State<MenuScreen> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Container _buildH2(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+      child: Text(
+        text,
+        style: Styles.h2Style,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

@@ -42,7 +42,7 @@ class MenuTile extends StatelessWidget {
                 flex: 8,
                 child: Container(
                   margin: EdgeInsets.only(top: 10),
-                  child: Text(this.tile.title, style: Styles.h3LinkStyle,),
+                  child: Text(this.tile.title, style: Styles.h3LinkStyle, maxLines: 1, overflow: TextOverflow.ellipsis,),
                 ),
               ),
               Expanded(

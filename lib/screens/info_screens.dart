@@ -69,7 +69,10 @@ class _InfoScreenState extends State<InfoScreen> {
                           physics: BouncingScrollPhysics(),
                           child: Html(
                             data: infoText,
-                            defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
+                            defaultTextStyle: TextStyle(
+                                fontFamily: "Manjari",
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18 * textScale),
                             onLinkTap: (url) {
                               _launchUrl(url);
                             },
@@ -92,17 +95,23 @@ class _InfoScreenState extends State<InfoScreen> {
                 childTwo: Container(
                   child: PopupMenuButton(
                     onSelected: (choice) {
-                      int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
+                      int newLangIndex = widget.texts
+                          .indexWhere((lang) => lang.languageName == choice);
                       setLang(newLangIndex);
                     },
                     child: DghaIcon(icon: Icons.translate),
                     itemBuilder: (BuildContext ctxt) {
                       return widget.texts.map((Language lang) {
                         return PopupMenuItem(
+                          height: 34 * (textScale),
                           value: lang.languageName,
                           child: Semantics(
-                            hint: "Double tap to selected ${lang.languageName} translation.",
-                            child: Text(lang.languageName, style: Styles.h3LinkStyle),
+                            hint:
+                                "Double tap to selected ${lang.languageName} translation.",
+                            child: Container(
+                              child: Text(lang.languageName,
+                                  style: Styles.h3LinkStyle, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                            ),
                           ),
                         );
                       }).toList();
