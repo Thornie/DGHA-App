@@ -22,9 +22,9 @@ class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
   double scrHeight;
   double textScale;
-  double popUpHeight; 
-  final double popUpTextHeight = 50; 
-  final double popUpMaxHeight = 100; 
+  double popUpHeight;
+  final double popUpTextHeight = 50;
+  final double popUpMaxHeight = 100;
 
   @override
   void initState() {
@@ -35,13 +35,13 @@ class _InfoScreenState extends State<InfoScreen> {
   void calcDimensions() {
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
-    this.popUpHeight = this.popUpTextHeight * this.textScale; 
+    this.popUpHeight = this.popUpTextHeight * this.textScale;
 
-    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight; 
+    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
   }
 
   void setLang(int index) {
-    Helper().loadAsset(context, widget.texts[index].path).then((data) {
+    Helper().loadTxtFiles(context, widget.texts[index].path).then((data) {
       setState(() {
         infoText = data;
       });
@@ -70,23 +70,26 @@ class _InfoScreenState extends State<InfoScreen> {
                     SizedBox(
                       height: 70,
                     ),
+
+                    // ------------ TEXT
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                       child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          child: Html(
-                            data: infoText,
-                            defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
-                            onLinkTap: (url) {
-                              _launchUrl(url);
-                            },
-                          )),
+                        physics: BouncingScrollPhysics(),
+                        child: Html(
+                          data: infoText,
+                          defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
+                          onLinkTap: (url) {
+                            _launchUrl(url);
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              // SECTION: APP BAR
+              // --------------- APP BAR
               DghaAppBar(
                 text: widget.appBarTitle,
                 isMenu: false,
@@ -138,7 +141,6 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                 ),
               )
-              // !SECTION
             ],
           );
         },

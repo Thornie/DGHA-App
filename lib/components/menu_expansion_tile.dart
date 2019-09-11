@@ -66,6 +66,8 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                   title: Semantics(
                     button: true,
                     hint: this.isCollapsed ? "Double tap to close menu" : widget.tile.semanticHint,
+
+                    // hide the text because its ugly lol. 
                     child: Text(
                       'Laws',
                       style: TextStyle(color: Styles.transparent),
@@ -76,6 +78,8 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                       this.isCollapsed = !this.isCollapsed;
                     });
                   },
+
+                  // hide the icon because its also ugly
                   trailing: Text(""),
                   children: _buildChildren(),
                 ),

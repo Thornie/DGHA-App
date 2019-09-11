@@ -106,6 +106,7 @@ class _MenuScreenState extends State<MenuScreen> {
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
+            
             this.calcDimensions(orientation);
 
             return Stack(
@@ -115,8 +116,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
-                      // the SizedBox height are found by trial and error, nothing special
                       SizedBox(height: 65),
+
+                      // -------------- GENERAL INFORMATION
                       Semantics(
                         label: "General Information Section",
                         hint: "There are ${Data.generalInfoCardData.length} cards in this section",
@@ -131,6 +133,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                       ),
 
+                      // -------------- LAWS INFORMATION
                       Semantics(
                         label: "Federal and State Laws Section",
                         hint: "There are ${Data.lawInfoCardData.length} cards in this section, " + (this.isVertical ? "Slide up and down to see more cards" : "Slide left and right to see more cards"),
@@ -148,7 +151,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
 
-                // APP BAR
+                // -------------- APP BAR
                 // it's at the bottom so it's above all of the other widgets
                 DghaAppBar(
                   text: "DGHA",
