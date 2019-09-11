@@ -157,7 +157,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   childOne: Semantics(
                     button: true,
                     label: "Menu",
-                    hint: "Double tap to pen side bar menu",
+                    hint: "Double tap to open side bar menu",
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
