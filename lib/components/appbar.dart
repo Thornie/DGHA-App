@@ -27,8 +27,8 @@ class DghaAppBar extends StatelessWidget {
           this.childOne,
           Expanded(
             child: Semantics(
-              header: true,
               label: this.semanticLabel,
+              excludeSemantics: true,
               child: Container(
                 child: Text(
                   this.text,
