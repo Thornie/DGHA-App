@@ -156,7 +156,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   childOne: Semantics(
                     button: true,
                     label: "Menu",
-                    hint: "Open side bar menu",
+                    hint: "Double tap to open side bar menu",
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -169,7 +169,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   childTwo: Semantics(
                     button: true,
                     label: "Card Direction.",
-                    hint: this.isVertical ? "Display cards horizontally." : "Display cards vertically.",
+                    hint: this.isVertical ? "Double tap to display cards horizontally." : "Double tap to display cards vertically.",
                     explicitChildNodes: false,
                     child: GestureDetector(
                       onTap: () {
