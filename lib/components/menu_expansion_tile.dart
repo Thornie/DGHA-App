@@ -46,15 +46,21 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                   Row(
                     children: <Widget>[
                       DghaIcon(icon: widget.tile.icon),
+                      SizedBox(width: 20),
                       Expanded(
-                                              child: Container(
-                          // padding: EdgeInsets.only(top: 25 / textScale, left: 85),
+                        child: Container(
+                          padding: EdgeInsets.only(top: 10),
                           child: Text(
                             widget.tile.title,
                             style: Styles.h3LinkStyle,
                           ),
                         ),
                       ),
+                      Icon(
+                        this.isCollapsed ? FontAwesomeIcons.solidCaretSquareUp : FontAwesomeIcons.caretSquareDown,
+                        color: Styles.midnightBlue,
+                        size: 30,
+                      )
                     ],
                   ),
                   ExpansionTile(
@@ -67,15 +73,7 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                         this.isCollapsed = !this.isCollapsed;
                       });
                     },
-                    trailing: Container(
-                      margin: EdgeInsets.only(top: 5, left: 10),
-                      // padding: EdgeInsets.only(left: 1),
-                      child: Icon(
-                        this.isCollapsed ? FontAwesomeIcons.solidCaretSquareUp : FontAwesomeIcons.caretSquareDown,
-                        color: Styles.midnightBlue,
-                        size: 35,
-                      ),
-                    ),
+                    trailing: Text(""),
                     children: _buildChildren(),
                   ),
                 ],
@@ -90,11 +88,9 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
   List<Widget> _buildChildren() {
     List<Widget> children = new List<Widget>();
     for (int i = 0; i < widget.tile.children.length; i++) {
-      Widget w = Padding(
-          padding: EdgeInsets.only(left: 75),
-          child: MenuTile(
-            tile: widget.tile.children[i],
-          ));
+      Widget w = MenuTile(
+        tile: widget.tile.children[i], paddingLeft: 95,
+      );
       children.add(w);
     }
     return children;
