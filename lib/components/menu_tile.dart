@@ -29,8 +29,10 @@ class MenuTile extends StatelessWidget {
         }
       },
       child: Semantics(
+        button: true,
         label: this.tile.semanticLabel,
         hint: this.tile.semanticHint,
+        excludeSemantics: true,
         child: Container(
           constraints: BoxConstraints(minHeight: 50),
           child: Row(
