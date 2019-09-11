@@ -41,15 +41,6 @@ flutter:
         - asset: assets/fonts/Manjari/Manjari-Regular.ttf
         - asset: assets/fonts/Manjari/Manjari-Bold.ttf
           weight: 700
-    - family: RedHatText
-      fonts:
-        - asset: assets/fonts/Red_Hat_Text/RedHatText-Regular.ttf
-        - asset: assets/fonts/Red_Hat_Text/RedHatText-RegularItalic.ttf
-          style: italic
-        - asset: assets/fonts/Red_Hat_Text/RedHatText-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Red_Hat_Text/RedHatText-Medium.ttf
-          weight: 500
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins/Poppins-Regular.ttf
