@@ -22,6 +22,9 @@ class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
   double scrHeight;
   double textScale;
+  double popUpHeight; 
+  final double popUpTextHeight = 50; 
+  final double popUpMaxHeight = 100; 
 
   @override
   void initState() {
@@ -31,6 +34,10 @@ class _InfoScreenState extends State<InfoScreen> {
 
   void calcDimensions() {
     this.textScale = MediaQuery.of(context).textScaleFactor;
+
+    this.popUpHeight = this.popUpTextHeight * this.textScale; 
+
+    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight; 
   }
 
   void setLang(int index) {
@@ -69,10 +76,7 @@ class _InfoScreenState extends State<InfoScreen> {
                           physics: BouncingScrollPhysics(),
                           child: Html(
                             data: infoText,
-                            defaultTextStyle: TextStyle(
-                                fontFamily: "Manjari",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18 * textScale),
+                            defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
                             onLinkTap: (url) {
                               _launchUrl(url);
                             },
@@ -81,11 +85,16 @@ class _InfoScreenState extends State<InfoScreen> {
                   ],
                 ),
               ),
+
+              // SECTION: APP BAR
               DghaAppBar(
                 text: widget.appBarTitle,
                 isMenu: false,
                 semanticLabel: widget.appBarTitle,
-                childOne: Container(
+                childOne: Semantics(
+                  button: true,
+                  label: "Back",
+                  hint: "Double tap to go back to home screen",
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
@@ -98,22 +107,29 @@ class _InfoScreenState extends State<InfoScreen> {
                 childTwo: Container(
                   child: PopupMenuButton(
                     onSelected: (choice) {
-                      int newLangIndex = widget.texts
-                          .indexWhere((lang) => lang.languageName == choice);
+                      int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
                       setLang(newLangIndex);
                     },
-                    child: DghaIcon(icon: Icons.translate),
+                    child: Semantics(
+                      button: true,
+                      label: "Translate",
+                      hint: "Double tap to open translate drop down menu",
+                      child: DghaIcon(icon: Icons.translate),
+                    ),
                     itemBuilder: (BuildContext ctxt) {
                       return widget.texts.map((Language lang) {
                         return PopupMenuItem(
-                          height: 34 * (textScale),
+                          height: this.popUpHeight,
                           value: lang.languageName,
                           child: Semantics(
-                            hint:
-                                "Double tap to selected ${lang.languageName} translation.",
+                            hint: "Double tap to select ${lang.languageName} translation.",
                             child: Container(
-                              child: Text(lang.languageName,
-                                  style: Styles.h3LinkStyle, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                              child: Text(
+                                lang.languageName,
+                                style: Styles.h3LinkStyle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         );
@@ -121,8 +137,8 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                   ),
                 ),
-                
               )
+              // !SECTION
             ],
           );
         },
