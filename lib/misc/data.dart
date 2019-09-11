@@ -52,7 +52,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: actLang,
       imagePath: "assets/images/menu_card/act.png",
-      pageTitle: "ACT State Law",
+      pageTitle: "ACT Law",
       semanticLabel: "Australian Capital Territory State Law Card",
       semanticHint: "Double Tap to read more about A C T State Law regarding Guide Dogs");
 
@@ -61,7 +61,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: nswLang,
       imagePath: "assets/images/menu_card/nsw.png",
-      pageTitle: "NSW State Law",
+      pageTitle: "NSW Law",
       semanticLabel: "New South Wales Card",
       semanticHint: "Double Tap to read more about New South Wales State Law regarding Guide Dogs");
 
@@ -70,7 +70,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: ntLang,
       imagePath: "assets/images/menu_card/nt.png",
-      pageTitle: "NT State Law",
+      pageTitle: "NT Law",
       semanticLabel: "Northern Territory Law Card",
       semanticHint: "Double Tap to read more about Northern Territory Law regarding Guide Dogs");
 
@@ -79,7 +79,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: qldLang,
       imagePath: "assets/images/menu_card/qld.png",
-      pageTitle: "QLD State Law",
+      pageTitle: "QLD Law",
       semanticLabel: "Queensland State Law Card",
       semanticHint: "Double Tap to read more about Queensland Law regarding Guide Dogs");
 
@@ -88,7 +88,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: saLang,
       imagePath: "assets/images/menu_card/sa.png",
-      pageTitle: "SA State Law",
+      pageTitle: "SA Law",
       semanticLabel: "South Australia State Law Card",
       semanticHint: "Double Tap to read more about South Australia State Law regarding Guide Dogs");
 
@@ -97,7 +97,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: tasLang,
       imagePath: "assets/images/menu_card/tas.png",
-      pageTitle: "TAS State Law",
+      pageTitle: "TAS Law",
       semanticLabel: "Tasmania State Card",
       semanticHint: "Double Tap to read more about Tasmania State Law regarding Guide Dogs");
 
@@ -106,7 +106,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: vicLang,
       imagePath: "assets/images/menu_card/vic.png",
-      pageTitle: "VIC State Law",
+      pageTitle: "VIC Law",
       semanticLabel: "Victoria State Card",
       semanticHint: "Double Tap to read more about Victoria State Law regarding Guide Dogs");
 
@@ -115,7 +115,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: waLang,
       imagePath: "assets/images/menu_card/wa.png",
-      pageTitle: "WA State Law",
+      pageTitle: "WA Law",
       semanticLabel: "Western Australia State Law Card",
       semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs");
 
@@ -163,49 +163,49 @@ class Data {
         semanticLabel: "Federal Law Button",
         semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "NSW State Law",
+        title: "NSW Law",
         pageToNavigateTo: InfoScreen.id,
         texts: nswLang,
         semanticLabel: "New South Wales State Law Button",
         semanticHint: "Double Tap to read more about New South Wales State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "VIC State Law",
+        title: "VIC Law",
         pageToNavigateTo: InfoScreen.id,
         texts: vicLang,
         semanticLabel: "Victoria State Law Button",
         semanticHint: "Double Tap to read more about Victoria State State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "QLD State Law",
+        title: "QLD Law",
         pageToNavigateTo: InfoScreen.id,
         texts: qldLang,
         semanticLabel: "Queensland State Law Button",
         semanticHint: "Double Tap to read more about Queensland State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "WA State Law",
+        title: "WA Law",
         pageToNavigateTo: InfoScreen.id,
         texts: waLang,
         semanticLabel: "Western Australia Button",
         semanticHint: "Double Tap to read more about Western Australia State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "SA State Law",
+        title: "SA Law",
         pageToNavigateTo: InfoScreen.id,
         texts: saLang,
         semanticLabel: "South Australia State Law Button",
         semanticHint: "Double Tap to read more about South Australia State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "TAS State Law",
+        title: "TAS Law",
         pageToNavigateTo: InfoScreen.id,
         texts: tasLang,
         semanticLabel: "Tasmania State Law Button",
         semanticHint: "Double Tap to read more about Tasmania State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "ACT State Law",
+        title: "ACT Law",
         pageToNavigateTo: InfoScreen.id,
         texts: actLang,
         semanticLabel: "Australian Capital Territory Law Button",
         semanticHint: "Double Tap to read more about A C T State Law regarding Guide Dogs"),
     MenuTileData(
-        title: "NT State Law",
+        title: "NT Law",
         pageToNavigateTo: InfoScreen.id,
         texts: ntLang,
         semanticLabel: "Northern Territory State Button",
