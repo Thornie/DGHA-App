@@ -1,3 +1,4 @@
+<h1>Accesso al cane guida</h1>
 <p>I gestori di cani guida e i loro cani guida sono legalmente autorizzati ad accedere a luoghi pubblici, tra cui:</p>
 <ul>
     <li>Negozi e supermercati</li>
