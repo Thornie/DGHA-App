@@ -1,3 +1,5 @@
+<h4><b>Translated into Korean</b></h4>
+
 <h1> 기본법 : </ h1>
 
 <h2> 국내 동물 법 2000 </ h2>
@@ -22,4 +24,3 @@
 <p> 차별 법 (NT) </ p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="https://www.minddog.org.au/resources/federal-laws/">dog-guide-access-legislation</a></p>

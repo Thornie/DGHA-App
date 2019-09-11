@@ -1,3 +1,5 @@
+<h4><b>Translated into Italian</b></h4>
+
 <h1> Atto primario: </h1>
 
 <h2> Domestic Animals Act 2000 </h2>
@@ -22,4 +24,3 @@
 <p> Discrimination Act (NT) </p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="https://www.minddog.org.au/resources/federal-laws/">dog-guide-access-legislation</a></p>

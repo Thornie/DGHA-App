@@ -1,3 +1,5 @@
+<h4><b>Translated into Chinese (Traditional)</b></h4>
+
 <h1>主要法案：</ h1>
 
 <h2> 2009年指南，聽力和援助犬法</ h2>
@@ -15,18 +17,20 @@
 <h2>根據法案進行訪問的例外情況：</ h2>
 <P>
 <UL>
-    <li>•住院病房</ li>
-    <li>•勞動病房</ li>
-    <li>•手術室</ li>
-    <li>•恢復區</ li>
-    <li>•衛生標准保持在相當高水平的區域
+    <li>住院病房</ li>
+    <li>勞動病房</ li>
+    <li>手術室</ li>
+    <li>恢復區</ li>
+    <li>衛生標准保持在相當高水平的區域
         預防感染或疾病傳播的目的</ li>
-    <li>•救護車</ li>
-    <li>•通常準備食物的公共場所或公共乘用車的一部分</ li>
-    <li>•帶狗導遊的人被要求提供證據證明他們的狗是輔助動物並非違法。
+    <li>救護車</ li>
+    <li>通常準備食物的公共場所或公共乘用車的一部分</ li>
+    <li>帶狗導遊的人被要求提供證據證明他們的狗是輔助動物並非違法。
             其他立法：</ li>
-    <li>•1991年反歧視法案</ li>
-    <li>•建立單位和集團名稱法案1980. </ li> </ li>
+    <li>1991年反歧視法案</ li>
+    <li>建立單位和集團名稱法案1980. </ li> </ li>
            
 </ UL>
 </ p>
+
+</p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>

@@ -1,3 +1,5 @@
+<h4><b>Translated into Italian</b></h4>
+
 <h1> Atto primario: </h1>
 
 <h2> Guide, Hearing and Assistance Dogs Act 2009 </h2>
@@ -15,21 +17,20 @@
 <h2> Eccezioni all'accesso ai sensi della legge: </h2>
 <P>
 <Ul>
-    <li> • un reparto di degenza </li>
-    <li> • un reparto del lavoro </li>
-    <li> • una sala procedure </li>
-    <li> • un'area di ripristino </li>
-    <li> • un'area in cui lo standard di igiene è mantenuto ad un livello significativamente elevato per il
+    <li>un reparto di degenza </li>
+    <li>un reparto del lavoro </li>
+    <li>una sala procedure </li>
+    <li>un'area di ripristino </li>
+    <li>un'area in cui lo standard di igiene è mantenuto ad un livello significativamente elevato per il
         scopo di prevenire l'infezione o la diffusione della malattia </li>
-    <li> • un'ambulanza </li>
-    <li> • una parte di un luogo pubblico o di un veicolo passeggeri pubblico in cui il cibo è normalmente preparato </li>
-    <li> • Non è illegale che una persona con una guida per cani sia tenuta a presentare prove per certificare che il proprio cane è un animale di assistenza.
+    <li>un'ambulanza </li>
+    <li>una parte di un luogo pubblico o di un veicolo passeggeri pubblico in cui il cibo è normalmente preparato </li>
+    <li>Non è illegale che una persona con una guida per cani sia tenuta a presentare prove per certificare che il proprio cane è un animale di assistenza.
             Altra legislazione: </li>
-    <li> • Legge antidiscriminazione del 1991 </li>
-    <li> • Building Units and Group Titles Act 1980. </li> </li>
+    <li>Legge antidiscriminazione del 1991 </li>
+    <li>Building Units and Group Titles Act 1980. </li> </li>
            
 </ Ul>
 </ P>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="https://www.legislation.qld.gov.au/browse/aspassed/">dog-guide-access-legislation</a></p>

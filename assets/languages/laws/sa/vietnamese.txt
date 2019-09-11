@@ -1,3 +1,5 @@
+<h4><b>Translated into Vietnamese</b></h4>
+
 <h1> Đạo luật chính: </ h1>
 
 <h2> Đạo luật quản lý chó và mèo 1995 </ h2>
@@ -19,4 +21,3 @@
 <p> • Không có gì là bất hợp pháp khi một người có động vật hỗ trợ được yêu cầu đưa ra bằng chứng rằng con chó của họ là động vật hỗ trợ. </ p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164//">dog-guide-access-legislation</a></p>
