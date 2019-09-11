@@ -145,7 +145,7 @@ class Data {
       icon: FontAwesomeIcons.gavel,
       children: lawsTileData,
       semanticLabel: "Laws Drop Down",
-      semanticHint: "Double tap to show Federal and State Laws Buttons");
+      semanticHint: "Double tap to open Laws Menu");
 
   static final List<MenuTileData> lawsTileData = <MenuTileData>[
     fedTileData,
@@ -185,7 +185,7 @@ class Data {
       title: "NT Law",
       pageToNavigateTo: InfoScreen.id,
       texts: ntLang,
-      semanticLabel: "Northern Territory",
+      semanticLabel: "Northern Territory Law",
       semanticHint: "Double Tap to read more about Northern Territory Law regarding Guide Dogs");
 
   static final MenuTileData qldTileData = new MenuTileData(
@@ -220,7 +220,7 @@ class Data {
       title: "WA Law",
       pageToNavigateTo: InfoScreen.id,
       texts: waLang,
-      semanticLabel: "Western Australia",
+      semanticLabel: "Western Australia Law",
       semanticHint: "Double Tap to read more about Western Australian Law regarding Guide Dogs");
 
   static final MenuTileData signUpTileData = new MenuTileData(
