@@ -64,7 +64,8 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                 ),
                 ExpansionTile(
                   title: Semantics(
-                    hint: this.isCollapsed ? widget.tile.semanticHint : "Double tap to close menu",
+                    button: true,
+                    hint: this.isCollapsed ? "Double tap to close menu" : widget.tile.semanticHint,
                     child: Text(
                       'Laws',
                       style: TextStyle(color: Styles.transparent),
