@@ -7,8 +7,9 @@ import 'package:dgha_brochure/models/menu_tile_data.dart';
 
 class MenuTile extends StatelessWidget {
   final MenuTileData tile;
+  final double paddingLeft; 
 
-  MenuTile({this.tile});
+  MenuTile({this.tile, this.paddingLeft});
 
   _launchUrl(String url) async {
     if (await canLaunch(url)) {
@@ -37,11 +38,11 @@ class MenuTile extends StatelessWidget {
               Container(
                 child: tile.icon != null ? DghaIcon(icon: tile.icon) : Container(),
               ),
-              SizedBox(width: 20),
+              SizedBox(width: this.paddingLeft != null ? this.paddingLeft : 20),
               Expanded(
                 flex: 8,
                 child: Container(
-                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 10),
                   child: Text(this.tile.title, style: Styles.h3LinkStyle, maxLines: 1, overflow: TextOverflow.ellipsis,),
                 ),
               ),
