@@ -227,14 +227,14 @@ class Data {
       title: "Sign Up",
       icon: FontAwesomeIcons.solidUser,
       link: "http://dgha.org.au/dgha/membership/",
-      semanticLabel: "Sign Up Button",
+      semanticLabel: "Sign Up",
       semanticHint: "Double tap to go to the Guide Dog Handlder Australia Sign Up page");
 
   static final MenuTileData donateTileData = new MenuTileData(
       title: "Donation",
       icon: FontAwesomeIcons.handHoldingUsd,
       link: "http://dgha.org.au/dgha/membership/",
-      semanticLabel: "Donation Button",
+      semanticLabel: "Donation",
       semanticHint: "Double tap to go to the Guide Dog Handler Australia Donation page");
   // !SECTION
 
