@@ -5,21 +5,10 @@ import 'package:dgha_brochure/screens/info_screens.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {
-  // -------------------------------------- SECTION : Card Data
+  // -------------------------------------- SECTION: Card Data
+
+  // ------------- SECTION: General Information Card
   static final List<MenuCardData> generalInfoCardData = [guideDogCardData, accessCardData];
-
-  static final List<MenuCardData> lawInfoCardData = [
-    fedCardData,
-    actCardData,
-    nswCardData,
-    ntCardData,
-    qldCardData,
-    saCardData,
-    tasCardData,
-    vicCardData,
-    waCardLaw
-  ];
-
   static final MenuCardData guideDogCardData = new MenuCardData(
       cardTitle: "Guide Dogs",
       pageToNavigateTo: InfoScreen.id,
@@ -37,6 +26,20 @@ class Data {
       pageTitle: "Access",
       semanticLabel: "Access",
       semanticHint: "Double Tap to read more about Guide Dogs Access");
+  // ---------- !SECTION 
+
+  // ---------- SECTION: Law Cards
+  static final List<MenuCardData> lawInfoCardData = [
+    fedCardData,
+    actCardData,
+    nswCardData,
+    ntCardData,
+    qldCardData,
+    saCardData,
+    tasCardData,
+    vicCardData,
+    waCardLaw
+  ];
 
   static final MenuCardData fedCardData = new MenuCardData(
       cardTitle: "Federal",
@@ -118,10 +121,11 @@ class Data {
       pageTitle: "WA Law",
       semanticLabel: "Western Australia",
       semanticHint: "Double Tap to read more about Western Australian Law regarding Guide Dogs");
-
+  // ---------- !SECTION
   // !SECTION
 
   // ------------------------------------ SECTION: Menu List Tiles
+  // ---------------- SECTION: General Info Tiles
   static final MenuTileData guideDogInfoTileData = new MenuTileData(
       title: "Guide Dogs",
       pageToNavigateTo: InfoScreen.id,
@@ -137,7 +141,9 @@ class Data {
       icon: FontAwesomeIcons.unlockAlt,
       semanticLabel: "Access",
       semanticHint: "Double tap to read more about Guide Dogs Access");
+  // !SECTION 
 
+  // ---------------- SECTION: Law Tiles
   static final MenuTileData lawsTilesListData = new MenuTileData(
       title: "Laws",
       pageToNavigateTo: InfoScreen.id,
@@ -215,7 +221,7 @@ class Data {
       texts: vicLang,
       semanticLabel: "Victorian Law",
       semanticHint: "Double Tap to read more about Victorian Law regarding Guide Dogs");
-      
+
   static final MenuTileData waTileData = new MenuTileData(
       title: "WA Law",
       pageToNavigateTo: InfoScreen.id,
@@ -237,9 +243,10 @@ class Data {
       semanticLabel: "Donation",
       semanticHint: "Double tap to go to the Guide Dog Handler Australia Donation page");
   // !SECTION
+  // !SECTION
 
-  // ---------------------------- NOTE: Languages
-
+  // ------------------------------------ SECTION: Languages
+  // ---------------------- SECTION: General Info Languages
   static final List<Language> infoLang = <Language>[
     Language(languageName: "English", path: "assets/languages/guide_dog_info/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/guide_dog_info/arabic.txt"),
@@ -265,7 +272,9 @@ class Data {
     Language(languageName: "Thai", path: "assets/languages/guide_dog_access/thai.txt"),
     Language(languageName: "Vietnamese", path: "assets/languages/guide_dog_access/vietnamese.txt"),
   ];
+  // !SECTION 
 
+  // ----------------------------- SECTION: Laws Languages
   static final List<Language> fedLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/federal/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/federal/arabic.txt"),
@@ -382,7 +391,6 @@ class Data {
     Language(languageName: "Thai", path: "assets/languages/laws/wa/thai.txt"),
     Language(languageName: "Vietnamese", path: "assets/languages/laws/wa/vietnamese.txt"),
   ];
-
-  // ----------------------------------- NOTE: Images
-  static final String logo = "assets/images/dgha_logo/logo.png";
+  // !SECTION
+  // !SECTION
 }
