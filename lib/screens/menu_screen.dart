@@ -44,6 +44,13 @@ class _MenuScreenState extends State<MenuScreen> {
   final double textMinWidth = 102;
   final double textMinHeight = 34;
 
+  // sort
+  bool isOrderedByAbc = false;
+  List<String> sort = ['Alphabetical', 'Population'];
+  double popUpHeight;
+  final double popUpTextHeight = 50;
+  final double popUpMaxHeight = 90;
+
   void calcDimensions(Orientation orientation) {
     this.scrWidth = MediaQuery.of(context).size.width;
     this.scrHeight = MediaQuery.of(context).size.height;
@@ -91,6 +98,16 @@ class _MenuScreenState extends State<MenuScreen> {
       }
     }
 
+    if (this.textScale < 1.5 || this.textScale == 1.5) {
+      this.popUpHeight = this.popUpTextHeight;
+    } else if (this.textScale > 1.5 && this.textScale < 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8;
+    } else if (this.textScale > 2 || this.textScale == 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7;
+    }
+
+    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
+
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
     this.cardHeight = this.cardWidth * 1.15;
@@ -106,7 +123,6 @@ class _MenuScreenState extends State<MenuScreen> {
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
-            
             this.calcDimensions(orientation);
 
             return Stack(
@@ -116,7 +132,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
-                      SizedBox(height: 65),
+                      SizedBox(height: 35),
 
                       // -------------- GENERAL INFORMATION
                       Semantics(
@@ -136,13 +152,23 @@ class _MenuScreenState extends State<MenuScreen> {
                       // -------------- LAWS INFORMATION
                       Semantics(
                         label: "Federal and State Laws Section",
-                        hint: "There are ${Data.lawInfoCardData.length} cards in this section, " + (this.isVertical ? "Slide up and down to see more cards" : "Slide left and right to see more cards"),
+                        hint: "There are ${Data.lawInfoCardDataABC.length} cards in this section, " +
+                            (this.isVertical ? "Slide up and down to see more cards" : "Slide left and right to see more cards"),
                         explicitChildNodes: true,
                         child: Column(
                           children: <Widget>[
-                            SizedBox(height: this.isVertical ? 40 : 10),
-                            _buildH2("Laws"),
-                            _buildCardsList(Data.lawInfoCardData),
+                            SizedBox(height: this.isVertical ? 15 : 3.3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Expanded(child: _buildH2("Laws")),
+                                buildPopUp(),
+                                SizedBox(
+                                  width: Styles.appBarHorizontalPadding,
+                                )
+                              ],
+                            ),
+                            _buildCardsList(this.isOrderedByAbc ? Data.lawInfoCardDataABC : Data.lawInfoCardDataPop),
                             SizedBox(height: 40),
                           ],
                         ),
@@ -195,10 +221,72 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
+  PopupMenuButton<String> buildPopUp() {
+    return PopupMenuButton(
+      onSelected: (choice) {
+        if (choice == "Alphabetical") {
+          setState(() {
+            this.isOrderedByAbc = true;
+          });
+        } else {
+          setState(() {
+            this.isOrderedByAbc = false;
+          });
+        }
+      },
+      child: Semantics(
+        button: true,
+        label: "Sort",
+        hint: this.isOrderedByAbc ? "Sort by: alphabetical. Double tap to change the sorting." : "Sort by: population size. Double tap to change the sorting.",
+        child: Container(
+          padding: EdgeInsets.all(Styles.iconPaddingPadding),
+          child: Container(
+              padding: EdgeInsets.all(Styles.iconPadding),
+              decoration: BoxDecoration(
+                color: Styles.midnightBlue,
+                borderRadius: BorderRadius.all(Radius.circular(1000)),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.filter,
+                    size: Styles.iconSize,
+                    color: Styles.yellow,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    this.isOrderedByAbc ? FontAwesomeIcons.sortAlphaDown : FontAwesomeIcons.sortAmountDown,
+                    size: Styles.iconSize,
+                    color: Colors.white,
+                  ),
+                ],
+              )),
+        ),
+      ),
+      itemBuilder: (BuildContext ctxt) {
+        return this.sort.map((String order) {
+          return PopupMenuItem(
+            height: this.popUpHeight,
+            value: order,
+            child: Container(
+              child: Text(
+                order,
+                style: Styles.h3LinkStyle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          );
+        }).toList();
+      },
+    );
+  }
+
   Widget _buildH2(String text) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-      width: double.maxFinite,
       child: Text(
         text,
         style: Styles.h2Style,
@@ -212,7 +300,13 @@ class _MenuScreenState extends State<MenuScreen> {
     List<Widget> cards = new List<Widget>();
 
     for (int i = 0; i < cardsData.length; i++) {
-      Widget w = MenuCard(card: cardsData[i], cardWidth: this.cardWidth, cardHeight: this.cardHeight, cardIndex: i + 1, listLength: cardsData.length,);
+      Widget w = MenuCard(
+        card: cardsData[i],
+        cardWidth: this.cardWidth,
+        cardHeight: this.cardHeight,
+        cardIndex: i + 1,
+        listLength: cardsData.length,
+      );
       cards.add(w);
 
       if ((isSeparated) && (i < cardsData.length - 1)) {

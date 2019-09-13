@@ -27,9 +27,9 @@ class Data {
       semanticHint: "Double Tap to read more about Guide Dogs Access");
 
   // -------------- LAWS INFO CARDS
-  static final List<MenuCardData> lawInfoCardData = [
-    fedCardData,
+  static final List<MenuCardData> lawInfoCardDataABC = [
     actCardData,
+    fedCardData,
     nswCardData,
     ntCardData,
     qldCardData,
@@ -39,12 +39,24 @@ class Data {
     waCardLaw
   ];
 
+  static final List<MenuCardData> lawInfoCardDataPop = [
+    fedCardData,
+    nswCardData,
+    vicCardData,
+    qldCardData,
+    waCardLaw,
+    saCardData,
+    tasCardData,
+    actCardData,
+    ntCardData,
+  ];
+
   static final MenuCardData fedCardData = new MenuCardData(
       cardTitle: "Federal",
       pageToNavigateTo: InfoScreen.id,
       texts: fedLang,
       imagePath: "assets/images/menu_card/federal.png",
-      pageTitle: "Federal Law",
+      pageTitle: "Federal",
       semanticLabel: "Federal",
       semanticHint: "Double Tap to read more about Federal Law regarding Guide Dogs");
 
@@ -53,7 +65,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: actLang,
       imagePath: "assets/images/menu_card/act.png",
-      pageTitle: "ACT Law",
+      pageTitle: "ACT",
       semanticLabel: "Australian Capital Territory",
       semanticHint: "Double Tap to read more about Australian Capital Territory Law regarding Guide Dogs");
 
