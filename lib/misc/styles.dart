@@ -21,9 +21,11 @@ class Styles {
   static final double iconPaddingPadding = 10; 
   
   // ----------------- GENERAL TEXT
-  static TextStyle h1Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w900, fontSize: 32);       // DGHA
-  static TextStyle h2Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w700, fontSize: 24);       // Geneneral Info
-  static TextStyle h3Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w600, fontSize: 20);       // Cards Text
-  static TextStyle h3LinkStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 20);   // Drawer Tiles
-  static TextStyle pStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18);        // Normal Text
+  static TextStyle h1Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w900, fontSize: 32, color: midnightBlue);       // DGHA
+  static TextStyle h2Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w700, fontSize: 24, color: midnightBlue);       // Geneneral Info
+  static TextStyle h3Style = TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w600, fontSize: 20, color: midnightBlue);       // Cards Text
+  static TextStyle h4Style = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue);
+  static TextStyle h3LinkStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 20, color: midnightBlue);   // Drawer Tiles
+  static TextStyle pStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, color: midnightBlue);        // Normal Text
+  static TextStyle linkStyle = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue, decoration: TextDecoration.underline, decorationColor: midnightBlue);     // Links
 }

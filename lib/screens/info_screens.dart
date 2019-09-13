@@ -1,5 +1,6 @@
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/selectable_contrainer.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
@@ -26,10 +27,13 @@ class _InfoScreenState extends State<InfoScreen> {
   final double popUpTextHeight = 50;
   final double popUpMaxHeight = 90;
 
+  List<String> spans; 
+
   @override
   void initState() {
     super.initState();
-    setLang(0);
+    loadText(0); 
+    // setLang(0);
   }
 
   void calcDimensions() {
@@ -54,10 +58,12 @@ class _InfoScreenState extends State<InfoScreen> {
     });
   }
 
-  _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    }
+  void loadText(int index) {
+    Helper().loadMd(context, widget.texts[index].path).then((data) {
+      setState(() {
+        this.spans = data; 
+      });
+    }); 
   }
 
   @override
@@ -74,23 +80,11 @@ class _InfoScreenState extends State<InfoScreen> {
                   physics: BouncingScrollPhysics(),
                   children: <Widget>[
                     SizedBox(
-                      height: 70,
+                      height: 60,
                     ),
 
                     // ------------ TEXT
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Html(
-                          data: infoText,
-                          defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
-                          onLinkTap: (url) {
-                            _launchUrl(url);
-                          },
-                        ),
-                      ),
-                    ),
+                    SelectableContainer(text: spans,)
                   ],
                 ),
               ),
@@ -117,7 +111,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   child: PopupMenuButton(
                     onSelected: (choice) {
                       int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
-                      setLang(newLangIndex);
+                      loadText(newLangIndex);
                     },
                     child: Semantics(
                       button: true,
