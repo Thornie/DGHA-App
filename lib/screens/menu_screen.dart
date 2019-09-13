@@ -248,6 +248,7 @@ class _MenuScreenState extends State<MenuScreen> {
               ),
               child: Row(
                 children: <Widget>[
+                  SizedBox(width: 5,),
                   Icon(
                     FontAwesomeIcons.filter,
                     size: Styles.iconSize,
@@ -261,6 +262,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     size: Styles.iconSize,
                     color: Colors.white,
                   ),
+                  SizedBox(width: 5,)
                 ],
               )),
         ),
