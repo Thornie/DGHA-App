@@ -8,7 +8,7 @@ Guide Dog Handlers and their Guide Dogs are legally allowed to enter public plac
 *   Cinemas and theatres
 *   Hotels and motels
 *   Medical/dental practices
-*   All forms of public transport
+*   All forms of public transport, including bus, trains
 
 Guide Dog access rights are governed by the Disability Discrimination Act 1992 (Section 9), National Disability Services Standards (2014), Privacy Act 1986 (Commonwealth), and Dog Act 1976.
 

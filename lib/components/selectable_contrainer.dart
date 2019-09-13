@@ -15,10 +15,10 @@ class SelectableContainer extends StatelessWidget {
     }
   }
 
-  List<TextSpan> lines() {
-    List<TextSpan> spans = new List<TextSpan>();
+  List<Widget> lines() {
+    List<Widget> widgets = new List<Widget>();
 
-    for (int i = 0; i < this.text.length - 1; i++) {
+    for (int i = 0; i < this.text.length; i++) {
       List<String> words = this.text[i].split(" ");
       String newLine = this.text[i];
       TextStyle textStyle = Styles.pStyle;
@@ -41,73 +41,90 @@ class SelectableContainer extends StatelessWidget {
         isBulletPoint = true;
       }
 
-      if (isBulletPoint) {
-        String stringPadding = " \u2022 ";
-        TextSpan bullet = TextSpan(text: stringPadding, style: textStyle);
-        spans.add(bullet);
-      }
+      if (newLine.contains("https://www.")) {
+        String frontString = "";
+        String endString = "";
+        String linkText = "";
+        String url = "";
 
-      TextSpan ts = TextSpan(
-        text: newLine + "\n",
-        style: textStyle,
-      );
-      spans.add(ts);
+        int indexOfOpenSquareBracket;
+        int indexOfClosedSquareBracket;
+        int indexOfOpenBracket;
+        int indexOfClosedBracket;
+
+        indexOfOpenSquareBracket = newLine.indexOf("[");
+        indexOfClosedSquareBracket = newLine.indexOf("]");
+        indexOfOpenBracket = newLine.indexOf("(");
+        indexOfClosedBracket = newLine.indexOf(")");
+
+        frontString = newLine.substring(0, indexOfOpenSquareBracket);
+
+        if (indexOfClosedBracket < newLine.length - 1) {
+          endString = newLine.substring(indexOfClosedBracket + 1, newLine.length - 1);
+        }
+
+        linkText = newLine.substring(indexOfOpenSquareBracket + 1, indexOfClosedSquareBracket);
+        url = newLine.substring(indexOfOpenBracket + 1, indexOfClosedBracket);
+
+        Widget link = Wrap(
+          children: <Widget>[
+            SelectableText(
+              frontString + ": ",
+              style: Styles.pStyle,
+            ),
+            GestureDetector(
+              onTap: () {
+                _launchURL(url); 
+              },
+              child: Text(
+                linkText,
+                style: Styles.linkStyle,
+              ),
+            ),
+            // SelectableText(endString, style: Styles.pStyle,)
+          ],
+        );
+
+        widgets.add(link);
+      } else if (isBulletPoint) {
+        Container bullet = Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SelectableText(
+                "\u2022  ",
+                style: textStyle,
+              ),
+              Expanded(
+                child: SelectableText(
+                  newLine,
+                  style: textStyle,
+                ),
+              )
+            ],
+          ),
+        );
+        widgets.add(bullet);
+      } else {
+        SelectableText ts = SelectableText(
+          newLine,
+          style: textStyle,
+        );
+        widgets.add(ts);
+      }
     }
-    return spans;
+    return widgets;
   }
 
   @override
   Widget build(BuildContext context) {
-    // LINK
-    bool isLink = false;
-    String line = this.text[this.text.length - 1];
-    String frontString = "";
-    String endString = "";
-    String linkText = "";
-    String url = "";
-
-    if (line.contains("https://www.")) {
-      int indexOfOpenSquareBracket;
-      int indexOfClosedSquareBracket;
-      int indexOfOpenBracket;
-      int indexOfClosedBracket;
-
-      indexOfOpenSquareBracket = line.indexOf("[");
-      indexOfClosedSquareBracket = line.indexOf("]");
-      indexOfOpenBracket = line.indexOf("(");
-      indexOfClosedBracket = line.indexOf(")");
-
-      frontString = line.substring(0, indexOfOpenSquareBracket);
-
-      if (indexOfClosedBracket < line.length - 1) {
-        endString = line.substring(indexOfClosedBracket + 1, line.length - 1);
-      }
-
-      linkText = line.substring(indexOfOpenSquareBracket + 1, indexOfClosedSquareBracket);
-      url = line.substring(indexOfOpenBracket + 1, indexOfClosedBracket);
-
-      isLink = true;
-    }
-
     return Container(
       padding: EdgeInsets.fromLTRB(Styles.spacing, 20, Styles.spacing, Styles.spacing * 3),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        SelectableText.rich(TextSpan(children: lines())),
-        GestureDetector(
-          onTap: () {
-            isLink ? _launchURL(url) : null;
-          },
-          child: isLink
-              ? Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    "$frontString: $url",
-                    style: Styles.linkStyle,
-                  ),
-                )
-              : Container(),
-        ),
-      ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: lines(),
+      ),
     );
   }
 }

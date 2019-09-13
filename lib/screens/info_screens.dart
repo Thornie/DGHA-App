@@ -27,7 +27,7 @@ class _InfoScreenState extends State<InfoScreen> {
   final double popUpTextHeight = 50;
   final double popUpMaxHeight = 90;
 
-  List<String> spans; 
+  List<String> spans = new List<String>(); 
 
   @override
   void initState() {
