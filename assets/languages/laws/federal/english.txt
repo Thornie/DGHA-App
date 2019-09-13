@@ -1,4 +1,4 @@
-<h1>DISABILITY DISCRIMINATION ACT: HUMAN RIGHTS COMMISSION </h1>
+<h3>DISABILITY DISCRIMINATION ACT: HUMAN RIGHTS COMMISSION </h3>
 <p>Under the Federal Disability Discrimination Act 1992 amended 2009 (hereafter DDA) all assistance dogs are guaranteed access to all public places in Australia. </p>
 <p>According to the DDA, if your assistance dog is appropriately trained and certified to assist you, and meets acceptable standards of hygiene and behaviour, than access to public spaces and services is guaranteed. There are circumstances under which access may be refused and these are detailed under Section 54A of the Act. If your dog has an infectious disease or threatens public health or the health of other animals you may legally be refused access. You are also obliged to produce evidence that your dog is a legitimate assistance animal when asked.
     Following successful completion of the Public Access Test, mindDog will give your dog an identity card. This will carry his picture and provide evidence that he is certified; however, this does not mean you will have a trouble-free experience.
@@ -51,26 +51,13 @@
     provides assistance to alleviate the effect of the disability.
 </p>
 
-<h4>Having a carer, assistant, assistance animal or disability aid, the following table has effect:</h4>
-<p>For the purposes of this act, a person with a disability has…
-    if the person…
-    a carer or assistant
-    is presently accompanies by the carer or assistant; or
-    
-    was previously accompanied by the carer or assistant; or
-    may be accompanied by the carer or assistant in the future; or
-    is imputed to be accompanied by the carer or assistant.
-    an assistance animal or disability aid
-    is presently accompanies by the carer or assistant; or
-    
-    was previously accompanied by the carer or assistant; or
-    may be accompanied by the carer or assistant in the future; or
-    is imputed to be accompanied by the carer or assistant.
-</p>
-
-<h4>Human Rights Commission</h4>
-<p>If you do have a problem and you and your dog are refused access to an area or service, the Human Rights Commission has a very straightforward method for making a complaint. You can do this on their web site and the whole process can be done by email if that suits you. Alternatively, you can contact us and we can advise you or assist you to make a complaint.
-    Two of the best ways to avoid trouble is to make sure that your dog is always wearing his mindDog 
+<h3><b>Human Rights Commission</b></h3>
+<p> If you do have a problem and you and your dog are refused access to an area or service, the Human Rights Commission has a very straightforward method for making a complaint. You can do this on their web site and the whole process can be done by email if that suits you. Alternatively, you can contact us and we can advise you or assist you to make a complaint.
+    Two of the best ways to avoid trouble is to make sure that your dog is always wearing his mindDog vest 
+    when you go out together. If you are going somewhere that you haven’t been before, it may help to call ahead and 
+    let them know you are coming. This can make all the difference in the world. Most people don’t like surprises and 
+    if you are met with a bad reaction to your dog, it can be embarrassing and humiliating. 
+    Always remember that you and your dog do have rights.
 </p>
 
 </p>For more information visit <a href="https://www.minddog.org.au/resources/federal-laws/">dog-guide-access-legislation</a></p>

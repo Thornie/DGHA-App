@@ -1,4 +1,6 @@
 
+    <h4><b>Translated into Chinese (Simplified)</b></h4>
+    
     <h1>主要法案：</h1>
     <h2>1976年的狗法
             适用的部分：
@@ -24,7 +26,7 @@
             
     </p>
         </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-        </p>For more information visit <a href="http://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/da197644/s8.html/">dog-guide-access-legislation</a></p>
+       
 
 
 

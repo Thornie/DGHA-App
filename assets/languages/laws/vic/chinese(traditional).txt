@@ -1,3 +1,5 @@
+<h4><b>Translated into Chinese (Traditional)</b></h4>
+
 <h1>主要法案：</h1>
 <h2>1994年國內動物法案
     部分適用：
@@ -15,4 +17,4 @@
 </p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="http://www8.austlii.edu.au/cgi-bin/viewdb/au/legis/vic/consol_act/daa1994163/">dog-guide-access-legislation</a></p>
+
