@@ -1,3 +1,5 @@
+<h4><b>Translated into Thai</b></h4>
+
 <h1> พระราชบัญญัติหลัก: </h1>
 
 <h2> พระราชบัญญัติสัตว์เลี้ยงร่วม 1998 </h2>
@@ -40,4 +42,3 @@
 
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="http://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/nsw/consol_act/caa1998174/s60.html/">dog-guide-access-legislation</a></p>

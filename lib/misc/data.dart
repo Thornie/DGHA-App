@@ -56,7 +56,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: fedLang,
       imagePath: "assets/images/menu_card/federal.png",
-      pageTitle: "Federal Law",
+      pageTitle: "Federal",
       semanticLabel: "Federal",
       semanticHint: "Double Tap to read more about Federal Law regarding Guide Dogs");
 
@@ -65,7 +65,7 @@ class Data {
       pageToNavigateTo: InfoScreen.id,
       texts: actLang,
       imagePath: "assets/images/menu_card/act.png",
-      pageTitle: "ACT Law",
+      pageTitle: "ACT",
       semanticLabel: "Australian Capital Territory",
       semanticHint: "Double Tap to read more about Australian Capital Territory Law regarding Guide Dogs");
 
@@ -282,8 +282,8 @@ class Data {
   static final List<Language> fedLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/federal/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/federal/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/federal/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/federal/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/federal/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/federal/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/federal/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/federal/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/federal/japanese.txt"),
@@ -295,8 +295,8 @@ class Data {
   static final List<Language> actLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/act/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/act/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/act/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/act/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/act/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/act/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/act/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/act/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/act/japanese.txt"),
@@ -308,8 +308,8 @@ class Data {
   static final List<Language> nswLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/nsw/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/nsw/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/nsw/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/nsw/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/nsw/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/nsw/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/nsw/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/nsw/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/nsw/japanese.txt"),
@@ -321,8 +321,8 @@ class Data {
   static final List<Language> ntLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/nt/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/nt/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/nt/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/nt/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/nt/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/nt/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/nt/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/nt/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/nt/japanese.txt"),
@@ -334,8 +334,8 @@ class Data {
   static final List<Language> qldLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/qld/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/qld/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/qld/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/qld/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/qld/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/qld/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/qld/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/qld/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/qld/japanese.txt"),
@@ -347,8 +347,8 @@ class Data {
   static final List<Language> saLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/sa/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/sa/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/sa/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/sa/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/sa/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/sa/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/sa/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/sa/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/sa/japanese.txt"),
@@ -360,8 +360,8 @@ class Data {
   static final List<Language> tasLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/tas/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/tas/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/tas/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/tas/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/tas/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/tas/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/tas/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/tas/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/tas/japanese.txt"),
@@ -373,8 +373,8 @@ class Data {
   static final List<Language> vicLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/vic/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/vic/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/vic/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/vic/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/vic/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/vic/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/vic/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/vic/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/vic/japanese.txt"),
@@ -386,8 +386,8 @@ class Data {
   static final List<Language> waLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/wa/english.txt"),
     Language(languageName: "Arabic", path: "assets/languages/laws/wa/arabic.txt"),
-    Language(languageName: "Chinese(simplified)", path: "assets/languages/laws/wa/chinese(simplified).txt"),
-    Language(languageName: "Chinese(traditional", path: "assets/languages/laws/wa/chinese(traditional).txt"),
+    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/wa/chinese(simplified).txt"),
+    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/wa/chinese(traditional).txt"),
     Language(languageName: "Greek", path: "assets/languages/laws/wa/greek.txt"),
     Language(languageName: "Italian", path: "assets/languages/laws/wa/italian.txt"),
     Language(languageName: "Japanese", path: "assets/languages/laws/wa/japanese.txt"),

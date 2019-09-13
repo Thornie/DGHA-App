@@ -1,3 +1,5 @@
+<h4><b>Translated into Greek</b></h4>
+
 <h1> Πρωτοβάθμια πράξη: </ h1>
 
 <h2> Νόμος περί διαχείρισης σκύλων και γάτων του 1995 </ h2>
@@ -20,5 +22,3 @@
 
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164/">dog-guide-access-legislation</a></p>
-

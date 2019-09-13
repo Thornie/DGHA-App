@@ -1,3 +1,5 @@
+<h4><b>Translated into Japanese</b></h4>
+
 <h1>基本法：</ h1>
 
 <h2> 1995年の犬と猫の管理法</ h2>
@@ -19,4 +21,3 @@
 <p>•介助動物を飼っている人が、自分の犬が介助動物であるという証拠を提出するよう求められることは違法ではありません。</ p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164/">dog-guide-access-legislation</a></p>

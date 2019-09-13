@@ -1,3 +1,5 @@
+<h4><b>Translated into Korean</b></h4>
+
 <h1> 기본법 : </ h1>
 
 <h2> 개와 고양이 관리법 1995 </ h2>
@@ -19,4 +21,3 @@
 <p> • 보조 동물을 가진 사람이 자신의 개가 보조 동물이라는 증거를 요구하는 것은 불법이 아닙니다. </ p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164/">dog-guide-access-legislation</a></p>

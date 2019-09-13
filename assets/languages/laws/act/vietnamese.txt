@@ -1,3 +1,5 @@
+<h4><b>Translated into Vietnamese</b></h4>
+
 <h1> Đạo luật chính: </ h1>
 
 <h2> Đạo luật về động vật nuôi 2000 </ h2>
@@ -22,4 +24,3 @@
 <p> Đạo luật phân biệt đối xử (NT) </ p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="https://www.minddog.org.au/resources/federal-laws/">dog-guide-access-legislation</a></p>
