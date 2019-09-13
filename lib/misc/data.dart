@@ -27,9 +27,9 @@ class Data {
       semanticHint: "Double Tap to read more about Guide Dogs Access");
 
   // -------------- LAWS INFO CARDS
-  static final List<MenuCardData> lawInfoCardData = [
-    fedCardData,
+  static final List<MenuCardData> lawInfoCardDataABC = [
     actCardData,
+    fedCardData,
     nswCardData,
     ntCardData,
     qldCardData,
@@ -37,6 +37,18 @@ class Data {
     tasCardData,
     vicCardData,
     waCardLaw
+  ];
+
+  static final List<MenuCardData> lawInfoCardDataPop = [
+    fedCardData,
+    nswCardData,
+    vicCardData,
+    qldCardData,
+    waCardLaw,
+    saCardData,
+    tasCardData,
+    actCardData,
+    ntCardData,
   ];
 
   static final MenuCardData fedCardData = new MenuCardData(
