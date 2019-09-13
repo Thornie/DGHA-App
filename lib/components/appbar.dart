@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class DghaAppBar extends StatelessWidget {
   final Widget childOne;
   final Widget childTwo;
-  final String text; 
-  final bool isMenu; 
+  final String text;
+  final bool isMenu;
+  final String semanticLabel;
 
-  DghaAppBar({this.childOne, this.childTwo, this.text, this.isMenu}); 
+  DghaAppBar({this.childOne, this.childTwo, this.text, this.isMenu, this.semanticLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +26,16 @@ class DghaAppBar extends StatelessWidget {
         children: <Widget>[
           this.childOne,
           Expanded(
-            child: Container(
-              child: Text(
-                this.text,
-                style: this.isMenu ? Styles.h1Style : Styles.h2Style,
-                textAlign: TextAlign.center,
-                textScaleFactor: 1,
+            child: Semantics(
+              label: this.semanticLabel,
+              excludeSemantics: true,
+              child: Container(
+                child: Text(
+                  this.text,
+                  style: this.isMenu ? Styles.h1Style : Styles.h2Style,
+                  textAlign: TextAlign.center,
+                  textScaleFactor: 1,
+                ),
               ),
             ),
           ),

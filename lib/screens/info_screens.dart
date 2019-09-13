@@ -21,6 +21,10 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
   double scrHeight;
+  double textScale;
+  double popUpHeight;
+  final double popUpTextHeight = 50;
+  final double popUpMaxHeight = 90;
 
   @override
   void initState() {
@@ -28,19 +32,29 @@ class _InfoScreenState extends State<InfoScreen> {
     setLang(0);
   }
 
-  void calcDimensions(Orientation orientation) {
-    this.scrHeight = MediaQuery.of(context).size.height;
+  void calcDimensions() {
+    this.textScale = MediaQuery.of(context).textScaleFactor;
+    
+    if(this.textScale < 1.5 || this.textScale == 1.5) {
+      this.popUpHeight = this.popUpTextHeight;
+    } else if (this.textScale > 1.5 && this.textScale < 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8; 
+    } else if( this.textScale > 2 || this.textScale == 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7; 
+    }
+
+    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
   }
 
   void setLang(int index) {
-    Helper().loadAsset(context, widget.texts[index].path).then((data) {
+    Helper().loadTxtFiles(context, widget.texts[index].path).then((data) {
       setState(() {
         infoText = data;
       });
     });
   }
 
-    _launchUrl(String url) async {
+  _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -51,6 +65,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return Scaffold(
       body: SafeArea(child: OrientationBuilder(
         builder: (context, orientation) {
+          calcDimensions();
           return Stack(
             children: <Widget>[
               Container(
@@ -61,25 +76,34 @@ class _InfoScreenState extends State<InfoScreen> {
                     SizedBox(
                       height: 70,
                     ),
+
+                    // ------------ TEXT
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Html(
                           data: infoText,
-                          defaultTextStyle: Styles.pStyle,
-                          padding: EdgeInsets.all(10),
+                          defaultTextStyle: TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18 * textScale),
                           onLinkTap: (url) {
                             _launchUrl(url);
                           },
-                        )
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+
+              // --------------- APP BAR
               DghaAppBar(
-                childOne: Container(
+                text: widget.appBarTitle,
+                isMenu: false,
+                semanticLabel: widget.appBarTitle,
+                childOne: Semantics(
+                  button: true,
+                  label: "Back",
+                  hint: "Double tap to go back to home screen",
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
@@ -95,22 +119,33 @@ class _InfoScreenState extends State<InfoScreen> {
                       int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
                       setLang(newLangIndex);
                     },
-                    child: DghaIcon(icon: Icons.translate),
+                    child: Semantics(
+                      button: true,
+                      label: "Translate",
+                      hint: "Double tap to open translate drop down menu",
+                      child: DghaIcon(icon: Icons.translate),
+                    ),
                     itemBuilder: (BuildContext ctxt) {
                       return widget.texts.map((Language lang) {
                         return PopupMenuItem(
+                          height: this.popUpHeight,
                           value: lang.languageName,
                           child: Semantics(
-                            hint: "Double tap to selected ${lang.languageName} translation.",
-                            child: Text(lang.languageName, style: Styles.h3LinkStyle),
+                            hint: "Double tap to select ${lang.languageName} translation.",
+                            child: Container(
+                              child: Text(
+                                lang.languageName,
+                                style: Styles.h3LinkStyle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ),
                         );
                       }).toList();
                     },
                   ),
                 ),
-                text: widget.appBarTitle,
-                isMenu: false,
               )
             ],
           );
