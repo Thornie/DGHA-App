@@ -15,24 +15,20 @@
 <h2>Exceptions to Access Under Act:</h2>
 <p>
 <ul>
-    <li>• an in-patient ward</li>
-    <li>• a labour ward</li>
-    <li>• a procedure room</li>
-    <li> • a recovery area</li>
-    <li>• an area in which the standard of hygiene is maintained at a significantly high level for the
+    <li>an in-patient ward</li>
+    <li>a labour ward</li>
+    <li>a procedure room</li>
+    <li>a recovery area</li>
+    <li>an area in which the standard of hygiene is maintained at a significantly high level for the
         purpose of preventing infection or the spread of disease</li>
-    <li> • an ambulance</li>
-    <li>• a part of a public place or public passenger vehicle where food is ordinarily prepared</li>
-    <li>• It is not unlawful for a person with an dog guide to be asked to produce evidence to certify that their dog is an assistance animal.
+    <li>an ambulance</li>
+    <li>a part of a public place or public passenger vehicle where food is ordinarily prepared</li>
+    <li>It is not unlawful for a person with an dog guide to be asked to produce evidence to certify that their dog is an assistance animal.
             Other Legislation:</li>
-    <li>• Anti-Discrimination Act 1991</li>
-    <li>• Building Units and Group Titles Act 1980.</li></li>    
+    <li>Anti-Discrimination Act 1991</li>
+    <li>Building Units and Group Titles Act 1980.</li></li>    
            
 </ul>
 </p>
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="https://www.legislation.qld.gov.au/browse/aspassed/">dog-guide-access-legislation</a></p>
-
-
-

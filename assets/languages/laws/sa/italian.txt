@@ -1,3 +1,5 @@
+<h4><b>Translated into Italian</b></h4>
+
 <h1> Atto primario: </h1>
 
 <h2> Legge sulla gestione di cani e gatti 1995 </h2>
@@ -20,4 +22,3 @@
 
 
 </p>For more information visit <a href="https://www.bca.org.au/dog-guide-access-legislation/">dog-guide-access-legislation</a></p>
-</p>For more information visit <a href="www8.austlii.edu.au/cgi-bin/viewdb/au/legis/sa/consol_act/dacma1995164/">dog-guide-access-legislation</a></p>
