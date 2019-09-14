@@ -1,17 +1,10 @@
-#### Translated into Korean
+#### **Translated into Korean**
 
-## 안내견 접근
+### 차별 금지법 1992
 
-안내견 처리기 및 안내견은 법적으로 다음과 같은 공공 장소에 출입 할 수 있습니다.
+섹션 21에서 발췌 :
+"(1)이 법의 목적 상, 안내견이있어 장애가있는 사람을 덜 호의적 인 것으로 취급하는 경우, 시각, 청각 또는 이동 장애가있는 사람과 장애를 이유로 차별을 받는다."
 
-*   상점과 슈퍼마켓
-*   카페와 레스토랑
-*   펍과 클럽
-*   영화관 및 극장
-*   호텔, 모텔 및 기타 숙박 시설
-*   의료 / 치과 실습 및 병원 (운영 극장 제외)
-*   택시, 버스, 기차, 트램 및 비행기를 포함한 모든 형태의 대중 교통
+#### 위반 행위에 대한 최대 벌금 : $ 500의 고정 된 벌금
 
-안내견 접근 권한은 1992 년 장애 차별 법 (섹션 9), 국가 장애 서비스 표준 (2014), 개인 정보 보호법 1986 (연방) 및 개법 1976에 의해 규율됩니다.
-
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

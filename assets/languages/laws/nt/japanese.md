@@ -1,17 +1,10 @@
-#### Translated into Japanese
+#### **Translated into Japanese**
 
-## 盲導犬のアクセス
+###差別防止法1992
 
-盲導犬ハンドラーと盲導犬は、次のような公共の場所に立ち入ることが法的に許可されています。
+セクション21からの抜粋：
+「（1）本法の目的上、盲導犬を使用しているために視覚障害、聴覚障害、運動障害のある人を不利に扱った場合、その人は障害を理由に差別します。
 
-*   ショップとスーパーマーケット
-*   カフェやレストラン
-*   パブとクラブ
-*   映画館および劇場
-*   ホテル、モーテル、その他の宿泊施設
-*   医療/歯科診療および病院（手術室を除く）
-*   タクシー、バス、電車、路面電車、飛行機など、あらゆる形態の公共交通機関
+####違反行為に対する最大罰金：500ドルの固定ペナルティ
 
-Guide Dogのアクセス権は、1992年障害差別法（セクション9）、National Disability Services Standards（2014）、Privacy Act 1986（Commonwealth）、およびDog Act 1976に準拠しています。
-
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

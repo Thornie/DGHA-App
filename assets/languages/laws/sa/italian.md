@@ -1,17 +1,15 @@
-#### Translated into Italian
+#### **Translated into Italian**
 
-## Accesso al cane guida
+### Dog and Cat Management Act 1995
 
-I gestori di cani guida e i loro cani guida sono legalmente autorizzati ad accedere a luoghi pubblici, tra cui:
+Estratto dalla sezione 81:
+"(1) una persona che è totalmente o parzialmente cieca o sorda, o diversamente disabilitata, ha il diritto di essere accompagnata da un cane disabile accreditato, cane guida o cane uditore in un luogo pubblico o veicolo pubblico passeggeri; e
 
-*   Negozi e supermercati
-*   Caffè e ristoranti
-*   Pub e locali
-*   Cinema e teatri
-*   Alberghi, motel e altri alloggi
-*   Studi medici / dentistici e ospedali (tranne in una sala operatoria)
-*   Tutte le forme di trasporto pubblico, inclusi taxi, autobus, treni, tram e aeroplani
+(2) l'occupante o la persona responsabile di un luogo pubblico o di un veicolo passeggeri pubblico non deve rifiutare l'accesso al luogo o al veicolo a una persona che sia totalmente o parzialmente cieca o sorda, o diversamente disabilitata, per il motivo che la persona è accompagnata da un cane disabile, un cane guida o un cane uditore. "
 
-I diritti di accesso ai cani guida sono regolati da Disability Discrimination Act 1992 (Sezione 9), National Disability Services Standards (2014), Privacy Act 1986 (Commonwealth) e Dog Act 1976.
+#### Multa massima per violazione dell'atto: $ 250
 
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+### Eccezioni:
+Non è illegale che una persona con un animale di assistenza sia invitata a fornire prove del fatto che il suo cane è un animale di assistenza.
+
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

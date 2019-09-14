@@ -1,4 +1,4 @@
-#### Translated into Japanese
+#### **Translated into Japanese**
 
 ### 盲導犬のアクセス
 

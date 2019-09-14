@@ -1,4 +1,4 @@
-### DISABILITY DISCRIMINATION ACT
+### Disability Discrimination Act
 
 Under the Federal Disability Discrimination Act 1992 amended 2009 (hereafter DDA) all assistance dogs are guaranteed access to all public places in Australia.
 

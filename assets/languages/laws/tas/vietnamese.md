@@ -1,17 +1,22 @@
-#### Translated into Vietnamese
+#### **Translated into Vietnamese**
 
-## Hướng dẫn tiếp cận chó
+### Hướng dẫn Đạo luật về Chó và Thính giác 1967
 
-Hướng dẫn Người xử lý chó và Hướng dẫn Chó của họ được phép vào nơi công cộng bao gồm:
+Trích từ Phần 3:
+"(1) Một người mù hoặc khiếm thị, khiếm thính hoặc khiếm thính hoặc huấn luyện viên -
+ (a) có quyền đi cùng với chó dẫn đường vào bất kỳ nơi công cộng nào hoặc trên bất kỳ phương tiện chở khách công cộng nào; và
+ (b) không phạm tội bằng cách đưa chó dẫn đường vào hoặc lên, hoặc cho phép chó dẫn đường ở lại hoặc ở, nơi công cộng hoặc phương tiện chở khách công cộng.
 
-*   Cửa hàng và siêu thị
-*   Quán cà phê và nhà hàng
-*   Quán rượu và câu lạc bộ
-*   Rạp chiếu phim và rạp chiếu phim
-*   Khách sạn, nhà nghỉ và chỗ ở khác
-*   Thực hành y tế / nha khoa và bệnh viện (trừ trong một phòng mổ)
-*   Tất cả các hình thức giao thông công cộng, bao gồm taxi, xe buýt, xe lửa, xe điện và máy bay
+(2) Một người phụ trách một nơi công cộng hoặc phương tiện chở khách công cộng, hoặc người phục vụ hoặc đại lý của một người phụ trách một nơi công cộng hoặc phương tiện chở khách công cộng, không được -
+ (a) từ chối cho phép một người đi cùng với chó dẫn đường vào nơi đó hoặc lên phương tiện đó; hoặc là
+ (b) chỉ đạo một người đi cùng với một con chó dẫn đường rời khỏi nơi đó hoặc phương tiện; hoặc là
+ (c) từ chối chỗ ở hoặc dịch vụ cho một người đi cùng với một con chó dẫn đường. "
 
-Hướng dẫn Quyền truy cập của chó được điều chỉnh bởi Đạo luật phân biệt đối xử người khuyết tật 1992 (Phần 9), Tiêu chuẩn dịch vụ người khuyết tật quốc gia (2014), Đạo luật bảo mật 1986 (Liên bang) và Đạo luật Dog 1976.
+#### Mức phạt tối đa cho Vi phạm Đạo luật: 20 đơn vị hình phạt
 
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+#### Giá trị của một đơn vị phạt vào năm 2012: $ 130,00
+
+### Ngoại lệ:
+Không phải là bất hợp pháp khi một người có động vật hỗ trợ được yêu cầu đưa ra bằng chứng rằng con chó của họ là động vật hỗ trợ.
+
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

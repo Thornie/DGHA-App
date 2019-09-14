@@ -10,11 +10,11 @@ Excerpt from Section 8:
 #### Value of One Penalty Unit as of 2012: $100.00
 
 ### Exceptions:
-*   an in-patient ward
-*   a labour ward
-*   a procedure room
-*   a recovery area
-*   an ambulance
+- an in-patient ward
+- a labour ward
+- a procedure room
+- a recovery area
+- an ambulance
 
 It is not unlawful for a person with an dog guide to be asked to produce evidence to certify that their dog is an assistance animal.
 

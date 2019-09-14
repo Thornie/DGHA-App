@@ -1,4 +1,4 @@
-### DOMESTIC ANIMALS ACT 1994
+### Domestic Animals Act 1994
 
 Exemptions for Guide Dogs Excerpt from Section 7:
 "(1) A visually impaired person or hearing impaired person who keeps and uses a dog as a guide dog is not liable for an offence under this Act in respect of that dog, where, in acting in the manner which would constitute the offence, the dog was performing its functions as a guide dog."

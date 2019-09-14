@@ -1,17 +1,14 @@
-#### Translated into Chinese (Traditioinal)
+#### **Translated into Chinese (Traditioinal)**
 
-## 導盲犬入口
+### 1994年“家畜法”
 
-導盲犬及其導盲犬在法律上允許進入公共場所，包括：
+導盲犬的豁免摘錄自第7節：
+“（1）視障人士或使用狗隻作為導盲犬的聆訊受損人士，如對該狗隻構成該罪行的行為，則不對該法令所訂的罪行負上法律責任， 這隻狗正在扮演導盲犬的角色。“
 
-*   商店和超市
-*   咖啡館和餐館
-*   酒吧和俱樂部
-*   電影院和劇院
-*   酒店，汽車旅館和其他住宿
-*   醫療/牙科診所和醫院（手術室除外）
-*   各種形式的公共交通工具，包括出租車，公共汽車，火車，有軌電車和飛機
+“（4）除了任何其他法令或附屬文書中的任何內容外，視障人士，聆訊受損人士或引導犬的人均可在任何時間及地點陪同，並由其飼養或使用或由他訓練的狗隻 或她作為導盲犬。“
 
-導盲犬的使用權受1992年“殘疾歧視法”（第9節），“國家殘疾服務標準”（2014年），“1986年隱私法”（聯邦）和“1976年狗法”的管轄。
+#### 違反法案的最高罰款：10
 
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+#### 截至2012年，一個懲罰單位的價值：125.19美元
+
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

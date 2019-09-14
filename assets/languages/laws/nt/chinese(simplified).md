@@ -1,17 +1,10 @@
-#### Translated into Chinese (Simplified)
+#### **Translated into Chinese (Simplified)**
 
-## 导盲犬入口
+### 1992年“反歧视法”
 
-导盲犬及其导盲犬在法律上允许进入公共场所，包括：
+摘自第21节：
+“（1）就本法而言，如果某人因患有导盲犬而对受损人士的待遇较差，则该人就视觉，听觉或行动障碍人士的损害理由而歧视他人。”
 
-*   商店和超市
-*   咖啡馆和餐馆
-*   酒吧和俱乐部
-*   电影院和剧院
-*   酒店，汽车旅馆和其他住宿
-*   医疗/牙科诊所和医院（手术室除外）
-*   各种形式的公共交通工具，包括出租车，公共汽车，火车，有轨电车和飞机
+#### 违反法案的最高罚款：定额罚款500美元
 
-导盲犬的使用权受1992年残疾歧视法案（第9节），国家残疾服务标准（2014年），1986年隐私法（联邦）和1976年狗法案的管辖。
-
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

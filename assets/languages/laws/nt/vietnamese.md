@@ -1,17 +1,10 @@
-#### Translated into Vietnamese
+#### **Translated into Vietnamese**
 
-## Hướng dẫn tiếp cận chó
+### Đạo luật chống phân biệt đối xử năm 1992
 
-Hướng dẫn Người xử lý chó và Hướng dẫn Chó của họ được phép vào nơi công cộng bao gồm:
+Trích từ Phần 21:
+"(1) Vì mục đích của Đạo luật này, một người phân biệt đối xử với người bị suy giảm khả năng thị giác, thính giác hoặc khả năng vận động nếu người đó đối xử với người bị suy giảm ít thuận lợi hơn vì người đó có chó dẫn đường."
 
-*   Cửa hàng và siêu thị
-*   Quán cà phê và nhà hàng
-*   Quán rượu và câu lạc bộ
-*   Rạp chiếu phim và rạp chiếu phim
-*   Khách sạn, nhà nghỉ và chỗ ở khác
-*   Thực hành y tế / nha khoa và bệnh viện (trừ trong một phòng mổ)
-*   Tất cả các hình thức giao thông công cộng, bao gồm taxi, xe buýt, xe lửa, xe điện và máy bay
+#### Mức phạt tối đa khi vi phạm Đạo luật: Đã sửa lỗi $ 500
 
-Hướng dẫn Quyền truy cập của chó được điều chỉnh bởi Đạo luật phân biệt đối xử người khuyết tật 1992 (Phần 9), Tiêu chuẩn dịch vụ người khuyết tật quốc gia (2014), Đạo luật bảo mật 1986 (Liên bang) và Đạo luật Dog 1976.
-
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)

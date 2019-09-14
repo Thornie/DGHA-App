@@ -1,17 +1,15 @@
-#### Translated into Vietnamese
+#### **Translated into Vietnamese**
 
-## Hướng dẫn tiếp cận chó
+### Đạo luật quản lý chó và mèo 1995
 
-Hướng dẫn Người xử lý chó và Hướng dẫn Chó của họ được phép vào nơi công cộng bao gồm:
+Trích từ Mục 81:
+"(1) một người bị mù hoàn toàn hoặc một phần hoặc điếc, hoặc bị khuyết tật, được quyền đi cùng với một con chó khuyết tật được công nhận, chó dẫn đường hoặc chó nghe ở nơi công cộng hoặc xe chở khách công cộng; và
 
-*   Cửa hàng và siêu thị
-*   Quán cà phê và nhà hàng
-*   Quán rượu và câu lạc bộ
-*   Rạp chiếu phim và rạp chiếu phim
-*   Khách sạn, nhà nghỉ và chỗ ở khác
-*   Thực hành y tế / nha khoa và bệnh viện (trừ trong một phòng mổ)
-*   Tất cả các hình thức giao thông công cộng, bao gồm taxi, xe buýt, xe lửa, xe điện và máy bay
+(2) người chiếm giữ hoặc người phụ trách nơi công cộng hoặc phương tiện chở khách công cộng không được từ chối tiếp cận địa điểm hoặc phương tiện với người bị mù hoàn toàn hoặc một phần hoặc điếc, hoặc bị khuyết tật, trên mặt đất mà người đó đi cùng bởi một con chó khuyết tật, chó dẫn đường hoặc chó nghe.
 
-Hướng dẫn Quyền truy cập của chó được điều chỉnh bởi Đạo luật phân biệt đối xử người khuyết tật 1992 (Phần 9), Tiêu chuẩn dịch vụ người khuyết tật quốc gia (2014), Đạo luật bảo mật 1986 (Liên bang) và Đạo luật Dog 1976.
+#### Mức phạt tối đa cho Vi phạm Đạo luật: $ 250
 
-For more information visit [Guide Dogs Australia](http://guidedogsaustralia.com/)
+### Ngoại lệ:
+Không phải là bất hợp pháp khi một người có động vật hỗ trợ được yêu cầu đưa ra bằng chứng rằng con chó của họ là động vật hỗ trợ.
+
+For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
