@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/selectable_contrainer.dart';
 import 'package:dgha_brochure/misc/helper.dart';
@@ -84,7 +85,8 @@ class _InfoScreenState extends State<InfoScreen> {
                     ),
 
                     // ------------ TEXT
-                    SelectableContainer(text: spans,)
+                    SelectableContainer(text: spans,),
+                    SizedBox(height: 50,),
                   ],
                 ),
               ),
@@ -146,7 +148,11 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                   ),
                 ),
-              )
+              ),
+              DGHABotNav(
+                activeTabColor: Styles.yellow,
+                activeTab: 1,
+              ),
             ],
           );
         },
