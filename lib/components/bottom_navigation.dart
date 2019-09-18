@@ -1,13 +1,17 @@
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha_brochure/screens/menu_screen.dart';
+import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DGHABotNav extends StatelessWidget {
-  final String infoSemanticLabel;
-  final String ratingSemanticLabel;
+  final Color activeTabColor;
+  // 0 for ratings tab
+  // 1 for dog info tab 
+  final int activeTab;
 
-  DGHABotNav({this.infoSemanticLabel, this.ratingSemanticLabel});
+  DGHABotNav({this.activeTabColor, this.activeTab});
 
   @override
   Widget build(BuildContext context) {
@@ -27,45 +31,68 @@ class DGHABotNav extends StatelessWidget {
         ),
         child: Stack(
           children: <Widget>[
-           DghaIcon(
-             icon: FontAwesomeIcons.bars,
-             backgroundColor: Colors.transparent,
-             iconColor: Colors.transparent,
-           ),
+            DghaIcon(
+              icon: FontAwesomeIcons.bars,
+              backgroundColor: Colors.transparent,
+              iconColor: Colors.transparent,
+            ),
             Row(
+              // -------------------- Rating Button
               children: <Widget>[
                 Expanded(
-                  child: Semantics(
-                    label: this.ratingSemanticLabel,
-                    excludeSemantics: true,
-                    child: MaterialButton(
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.solidStar,
-                        iconColor: Styles.midnightBlue,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: this.activeTab == 0
+                          ? this.activeTabColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(Styles.normalRadius),
                       ),
-                      onPressed: () {
-                        print("Rating Pressed");
-                      },
+                    ),
+                    child: Semantics(
+                      label: "Rating Page Tab",
+                      excludeSemantics: true,
+                      child: MaterialButton(
+                        child: DghaIcon(
+                          icon: FontAwesomeIcons.solidStar,
+                          iconColor: Styles.midnightBlue,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(RatingMenuScreen.id);
+                        },
+                      ),
                     ),
                   ),
                 ),
+                // -------------------- Middle Line
                 Container(
                   width: 2.0,
                   color: Styles.midnightBlue,
                   height: 35,
                 ),
+                // -------------------- Dog Info Button
                 Expanded(
-                  child: Semantics(
-                    label: this.infoSemanticLabel,
-                    excludeSemantics: true,
-                    child: MaterialButton(
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.dog,
-                        iconColor: Styles.midnightBlue,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: this.activeTab == 1
+                          ? this.activeTabColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Styles.normalRadius),
                       ),
-                      onPressed: () {
-                        print("Info Pressed");
-                      },
+                    ),
+                    child: Semantics(
+                      label: "Info Page Tab",
+                      excludeSemantics: true,
+                      child: MaterialButton(
+                        child: DghaIcon(
+                          icon: FontAwesomeIcons.dog,
+                          iconColor: Styles.midnightBlue,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(MenuScreen.id);
+                        },
+                      ),
                     ),
                   ),
                 ),
