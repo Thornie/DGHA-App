@@ -39,19 +39,30 @@ class DGHABotNav extends StatelessWidget {
                     label: this.ratingSemanticLabel,
                     excludeSemantics: true,
                     child: MaterialButton(
-                      child: Text("Ratings"),
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.star,
+                        iconColor: Styles.midnightBlue,
+                      ),
                       onPressed: () {
                         print("Rating Pressed");
                       },
                     ),
                   ),
                 ),
+                Container(
+                  width: 2.0,
+                  color: Styles.midnightBlue,
+                  height: 35,
+                ),
                 Expanded(
                   child: Semantics(
                     label: this.infoSemanticLabel,
                     excludeSemantics: true,
                     child: MaterialButton(
-                      child: Text("Info"),
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.dog,
+                        iconColor: Styles.midnightBlue,
+                      ),
                       onPressed: () {
                         print("Info Pressed");
                       },
