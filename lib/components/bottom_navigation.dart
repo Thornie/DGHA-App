@@ -40,7 +40,7 @@ class DGHABotNav extends StatelessWidget {
                     excludeSemantics: true,
                     child: MaterialButton(
                       child: DghaIcon(
-                        icon: FontAwesomeIcons.star,
+                        icon: FontAwesomeIcons.solidStar,
                         iconColor: Styles.midnightBlue,
                       ),
                       onPressed: () {
