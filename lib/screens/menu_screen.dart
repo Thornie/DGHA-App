@@ -195,7 +195,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           _scaffoldKey.currentState.openDrawer();
                         });
                       },
-                      child: DghaIcon(icon: FontAwesomeIcons.bars),
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.bars, 
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                        ),
                     ),
                   ),
                   childTwo: Semantics(
@@ -211,6 +215,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       },
                       child: DghaIcon(
                         icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
                       ),
                     ),
                   ),

@@ -38,7 +38,7 @@ class MenuTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                child: tile.icon != null ? DghaIcon(icon: tile.icon) : Container(),
+                child: tile.icon != null ? DghaIcon(icon: tile.icon, backgroundColor: Styles.midnightBlue, iconColor: Styles.yellow,) : Container(),
               ),
               SizedBox(width: this.paddingLeft != null ? this.paddingLeft : 20),
               Expanded(
