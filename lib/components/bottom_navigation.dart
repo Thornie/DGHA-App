@@ -1,5 +1,7 @@
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DGHABotNav extends StatelessWidget {
   final String infoSemanticLabel;
@@ -13,7 +15,6 @@ class DGHABotNav extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: double.maxFinite,
-        height: 70.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -21,34 +22,43 @@ class DGHABotNav extends StatelessWidget {
             topRight: Radius.circular(Styles.normalRadius),
           ),
           boxShadow: [
-            BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, 3))
+            BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, -3))
           ],
         ),
-        child: Row(
+        child: Stack(
           children: <Widget>[
-            Expanded(
-              child: Semantics(
-                label: this.ratingSemanticLabel,
-                excludeSemantics: true,
-                child: MaterialButton(
-                  child: Text("Ratings"),
-                  onPressed: () {
-                    print("Rating Pressed");
-                  },
+           DghaIcon(
+             icon: FontAwesomeIcons.bars,
+             backgroundColor: Colors.transparent,
+             iconColor: Colors.transparent,
+           ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Semantics(
+                    label: this.ratingSemanticLabel,
+                    excludeSemantics: true,
+                    child: MaterialButton(
+                      child: Text("Ratings"),
+                      onPressed: () {
+                        print("Rating Pressed");
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: Semantics(
-                label: this.infoSemanticLabel,
-                excludeSemantics: true,
-                child: MaterialButton(
-                  child: Text("Info"),
-                  onPressed: () {
-                    print("Info Pressed");
-                  },
+                Expanded(
+                  child: Semantics(
+                    label: this.infoSemanticLabel,
+                    excludeSemantics: true,
+                    child: MaterialButton(
+                      child: Text("Info"),
+                      onPressed: () {
+                        print("Info Pressed");
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
