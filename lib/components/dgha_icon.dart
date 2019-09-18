@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class DghaIcon extends StatelessWidget {
   final IconData icon;
+  final Color iconColor;
+  final Color backgroundColor;
 
-  DghaIcon({this.icon});
+  DghaIcon({this.icon, this.iconColor, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,13 @@ class DghaIcon extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(Styles.iconPadding),
         decoration: BoxDecoration(
-          color: Styles.midnightBlue,
+          color: this.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(1000)),
         ),
         child: Icon(
           this.icon,
           size: Styles.iconSize,
-          color: Styles.yellow,
+          color: this.iconColor,
         ),
       ),
     );
