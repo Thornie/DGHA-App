@@ -222,8 +222,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
                 DGHABotNav(
-                  infoSemanticLabel: "Info Page",
-                  ratingSemanticLabel: "Ratings Page",
+                  activeTabColor: Styles.yellow,
+                  activeTab: 1,
                 ),
               ],
             );
