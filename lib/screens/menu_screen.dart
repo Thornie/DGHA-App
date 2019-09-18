@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/components/menu_card.dart';
@@ -173,6 +174,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 70.0,)
                     ],
                   ),
                 ),
@@ -212,7 +214,11 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
+                DGHABotNav(
+                  infoSemanticLabel: "Info Page",
+                  ratingSemanticLabel: "Ratings Page",
+                ),
               ],
             );
           },
