@@ -14,4 +14,4 @@ Excerpt from Section 59:
 ### Exceptions:
 It is not unlawful to impose a charge to a person with a dog guide if expense is reasonably occurred by the third person because of the presence of the dog guide.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

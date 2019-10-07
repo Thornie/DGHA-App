@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 기본법 : 가축 법 2000
 
 섹션 104에서 발췌 :
@@ -12,4 +10,4 @@
 ### 예외 :
 개 가이드의 존재로 인해 제 3자가 비용을 합리적으로 발생 시키면 개 가이드를 가진 사람에게 요금을 부과하는 것은 불법이 아닙니다.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

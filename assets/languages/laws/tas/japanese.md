@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ### 盲導犬および聴導犬法1967
 
 セクション3からの抜粋：
@@ -19,4 +17,4 @@
 ### 例外：
 介助動物を飼っている人が、自分の犬が介助動物であるという証拠を提出するよう求められることは違法ではありません。
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

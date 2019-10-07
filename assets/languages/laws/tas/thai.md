@@ -1,5 +1,3 @@
-#### **Translated into Thai**
-
 พระราชบัญญัติสุนัขนำทางและสุนัขได้ยิน 1967
 
 ตัดตอนมาจากส่วนที่ 3:
@@ -19,4 +17,4 @@
 ### ข้อยกเว้น:
 ไม่ผิดกฎหมายที่บุคคลที่มีสัตว์ให้ความช่วยเหลือจะถูกขอให้แสดงหลักฐานว่าสุนัขของพวกเขาเป็นสัตว์ที่ให้ความช่วยเหลือ
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

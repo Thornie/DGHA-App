@@ -22,49 +22,43 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
   String infoText = "";
+  String languageName = "";
   double scrHeight;
   double textScale;
   double popUpHeight;
   final double popUpTextHeight = 50;
   final double popUpMaxHeight = 90;
 
-  List<String> spans = new List<String>(); 
+  List<String> spans = new List<String>();
 
   @override
   void initState() {
     super.initState();
-    loadText(0); 
+    loadText(0);
     // setLang(0);
   }
 
   void calcDimensions() {
     this.textScale = MediaQuery.of(context).textScaleFactor;
-    
-    if(this.textScale < 1.5 || this.textScale == 1.5) {
+
+    if (this.textScale < 1.5 || this.textScale == 1.5) {
       this.popUpHeight = this.popUpTextHeight;
     } else if (this.textScale > 1.5 && this.textScale < 2) {
-      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8; 
-    } else if( this.textScale > 2 || this.textScale == 2) {
-      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7; 
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8;
+    } else if (this.textScale > 2 || this.textScale == 2) {
+      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7;
     }
 
     this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
   }
 
-  void setLang(int index) {
-    Helper().loadTxtFiles(context, widget.texts[index].path).then((data) {
-      setState(() {
-        infoText = data;
-      });
-    });
-  }
-
   void loadText(int index) {
     Helper().loadMd(context, widget.texts[index].path).then((data) {
       setState(() {
-        this.spans = data; 
+        this.spans = data;
+        languageName = widget.texts[index].languageName;
       });
-    }); 
+    });
   }
 
   @override
@@ -85,8 +79,25 @@ class _InfoScreenState extends State<InfoScreen> {
                     ),
 
                     // ------------ TEXT
-                    SelectableContainer(text: spans,),
-                    SizedBox(height: 50,),
+                    // -------- LANGUAGE INDICATOR
+                    Container(
+                      child: languageName == "English"
+                          ? Container()
+                          : Container(
+                              padding: EdgeInsets.only(top: Styles.spacing, left: 20),
+                              child: SelectableText(
+                                "$languageName",
+                                style: Styles.highlightText,
+                              ),
+                            ),
+                    ),
+                    // ------- ACTUAL TEXT
+                    SelectableContainer(
+                      text: spans,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),
@@ -125,7 +136,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         icon: Icons.translate,
                         backgroundColor: Styles.midnightBlue,
                         iconColor: Styles.yellow,
-                        ),
+                      ),
                     ),
                     itemBuilder: (BuildContext ctxt) {
                       return widget.texts.map((Language lang) {

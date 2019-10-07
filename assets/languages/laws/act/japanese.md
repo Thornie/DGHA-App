@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ### 基本法：2000年家畜法
 
 セクション104からの抜粋：
@@ -12,4 +10,4 @@
 ### 例外：
 犬のガイドがいるために第三者が費用を合理的に負担している場合、犬のガイドを持つ人に料金を課すことは違法ではありません。
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

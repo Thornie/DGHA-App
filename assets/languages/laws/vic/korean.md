@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 국내 동물 법 1994
 
 섹션 7에서 발췌 한 안내견 면제
@@ -11,4 +9,4 @@
 
 #### 2012 년 현재 한 페널티 유닛의 가치 : $ 125.19
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

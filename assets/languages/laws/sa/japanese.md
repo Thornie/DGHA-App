@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ### 1995年の犬と猫の管理法
 
 セクション81からの抜粋：
@@ -12,4 +10,4 @@
 ### 例外：
 介助動物を飼っている人が、自分の犬が介助動物であるという証拠を提出するよう求められることは違法ではありません。
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

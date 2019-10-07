@@ -18,4 +18,4 @@ Excerpt from Section 8:
 
 It is not unlawful for a person with an dog guide to be asked to produce evidence to certify that their dog is an assistance animal.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

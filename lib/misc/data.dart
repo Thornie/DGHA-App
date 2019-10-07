@@ -254,145 +254,79 @@ class Data {
   // ---------------------- GENERAL INFO LANGUAGES
   static final List<Language> infoLang = <Language>[
     Language(languageName: "English", path: "assets/languages/guide_dog_info/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/guide_dog_info/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/guide_dog_info/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/guide_dog_info/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/guide_dog_info/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/guide_dog_info/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/guide_dog_info/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/guide_dog_info/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/guide_dog_info/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/guide_dog_info/vietnamese.md"),
   ];
 
   static final List<Language> accessLang = <Language>[
     Language(languageName: "English", path: "assets/languages/guide_dog_access/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/guide_dog_access/arabic.txt"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/guide_dog_access/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/guide_dog_access/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/guide_dog_access/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/guide_dog_access/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/guide_dog_access/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/guide_dog_access/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/guide_dog_access/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/guide_dog_access/vietnamese.md"),
   ];
 
   // ----------------------- LAWS INFO LANGUAGES
   static final List<Language> fedLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/federal/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/federal/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/federal/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/federal/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/federal/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/federal/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/federal/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/federal/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/federal/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/federal/vietnamese.txt"),
   ];
 
   static final List<Language> actLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/act/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/act/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/act/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/act/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/act/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/act/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/act/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/act/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/act/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/act/vietnamese.md"),
   ];
 
   static final List<Language> nswLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/nsw/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/nsw/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/nsw/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/nsw/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/nsw/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/nsw/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/nsw/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/nsw/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/nsw/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/nsw/vietnamese.md"),
   ];
 
   static final List<Language> ntLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/nt/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/nt/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/nt/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/nt/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/nt/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/nt/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/nt/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/nt/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/nt/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/nt/vietnamese.md"),
   ];
 
   static final List<Language> qldLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/qld/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/qld/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/qld/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/qld/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/qld/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/qld/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/qld/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/qld/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/qld/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/qld/vietnamese.md"),
   ];
 
   static final List<Language> saLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/sa/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/sa/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/sa/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/sa/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/sa/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/sa/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/sa/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/sa/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/sa/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/sa/vietnamese.md"),
   ];
 
   static final List<Language> tasLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/tas/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/tas/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/tas/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/tas/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/tas/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/tas/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/tas/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/tas/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/tas/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/tas/vietnamese.md"),
   ];
 
   static final List<Language> vicLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/vic/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/vic/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/vic/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/vic/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/vic/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/vic/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/vic/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/vic/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/vic/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/vic/vietnamese.md"),
   ];
 
   static final List<Language> waLang = <Language>[
     Language(languageName: "English", path: "assets/languages/laws/wa/english.md"),
-    // Language(languageName: "Arabic", path: "assets/languages/laws/wa/arabic.md"),
-    Language(languageName: "Chinese (simplified)", path: "assets/languages/laws/wa/chinese(simplified).md"),
-    Language(languageName: "Chinese (traditional)", path: "assets/languages/laws/wa/chinese(traditional).md"),
-    Language(languageName: "Greek", path: "assets/languages/laws/wa/greek.md"),
-    Language(languageName: "Italian", path: "assets/languages/laws/wa/italian.md"),
     Language(languageName: "Japanese", path: "assets/languages/laws/wa/japanese.md"),
     Language(languageName: "Korean", path: "assets/languages/laws/wa/korean.md"),
     Language(languageName: "Thai", path: "assets/languages/laws/wa/thai.md"),
-    Language(languageName: "Vietnamese", path: "assets/languages/laws/wa/vietnamese.md"),
   ];
 }

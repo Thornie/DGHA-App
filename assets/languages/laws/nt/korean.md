@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 차별 금지법 1992
 
 섹션 21에서 발췌 :
@@ -7,4 +5,4 @@
 
 #### 위반 행위에 대한 최대 벌금 : $ 500의 고정 된 벌금
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)
