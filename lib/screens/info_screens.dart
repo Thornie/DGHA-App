@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/selectable_contrainer.dart';
 import 'package:dgha_brochure/misc/helper.dart';
@@ -84,7 +85,8 @@ class _InfoScreenState extends State<InfoScreen> {
                     ),
 
                     // ------------ TEXT
-                    SelectableContainer(text: spans,)
+                    SelectableContainer(text: spans,),
+                    SizedBox(height: 50,),
                   ],
                 ),
               ),
@@ -104,6 +106,8 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                     child: DghaIcon(
                       icon: Icons.arrow_back_ios,
+                      backgroundColor: Styles.midnightBlue,
+                      iconColor: Styles.yellow,
                     ),
                   ),
                 ),
@@ -117,7 +121,11 @@ class _InfoScreenState extends State<InfoScreen> {
                       button: true,
                       label: "Translate",
                       hint: "Double tap to open translate drop down menu",
-                      child: DghaIcon(icon: Icons.translate),
+                      child: DghaIcon(
+                        icon: Icons.translate,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                        ),
                     ),
                     itemBuilder: (BuildContext ctxt) {
                       return widget.texts.map((Language lang) {
@@ -140,7 +148,11 @@ class _InfoScreenState extends State<InfoScreen> {
                     },
                   ),
                 ),
-              )
+              ),
+              DGHABotNav(
+                activeTabColor: Styles.yellow,
+                activeTab: 1,
+              ),
             ],
           );
         },

@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/components/menu_card.dart';
@@ -173,6 +174,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 35.0,)
                     ],
                   ),
                 ),
@@ -193,7 +195,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           _scaffoldKey.currentState.openDrawer();
                         });
                       },
-                      child: DghaIcon(icon: FontAwesomeIcons.bars),
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.bars, 
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                        ),
                     ),
                   ),
                   childTwo: Semantics(
@@ -209,10 +215,16 @@ class _MenuScreenState extends State<MenuScreen> {
                       },
                       child: DghaIcon(
                         icon: this.isVertical ? FontAwesomeIcons.arrowsAltH : FontAwesomeIcons.arrowsAltV,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
                       ),
                     ),
                   ),
-                )
+                ),
+                DGHABotNav(
+                  activeTabColor: Styles.yellow,
+                  activeTab: 1,
+                ),
               ],
             );
           },

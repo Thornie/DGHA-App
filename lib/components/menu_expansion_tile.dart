@@ -43,7 +43,11 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                   excludeSemantics: true,
                   child: Row(
                     children: <Widget>[
-                      DghaIcon(icon: widget.tile.icon),
+                      DghaIcon(
+                        icon: widget.tile.icon,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                        ),
                       SizedBox(width: 20),
                       Expanded(
                         child: Container(

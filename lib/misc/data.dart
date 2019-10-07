@@ -138,7 +138,7 @@ class Data {
       title: "Guide Dogs",
       pageToNavigateTo: InfoScreen.id,
       texts: infoLang,
-      icon: FontAwesomeIcons.dog,
+      icon: FontAwesomeIcons.paw,
       semanticLabel: "Guide Dogs",
       semanticHint: "Double tap to read more about Guide Dogs");
 
