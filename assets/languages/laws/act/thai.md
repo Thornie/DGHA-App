@@ -1,5 +1,3 @@
-#### **Translated into Thai**
-
 ### พระราชบัญญัติหลัก: พระราชบัญญัติสัตว์เลี้ยงในประเทศปี 2000
 
 ตัดตอนมาจากมาตรา 104:
@@ -12,4 +10,4 @@
 ### ข้อยกเว้น:
 มันไม่ผิดกฎหมายที่จะเรียกเก็บค่าใช้จ่ายกับคนที่มีสุนัขนำทางหากมีค่าใช้จ่ายที่เกิดขึ้นจริงจากบุคคลที่สามเนื่องจากการปรากฏตัวของสุนัขนำทาง
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

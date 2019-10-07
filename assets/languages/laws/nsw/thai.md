@@ -1,5 +1,3 @@
-#### **Translated into Thai**
-
 ### พระราชบัญญัติสัตว์เลี้ยง 1998
 
 ตัดตอนมาจากมาตรา 59:
@@ -16,4 +14,4 @@
 ### ข้อยกเว้น:
 มันไม่ผิดกฎหมายที่จะคิดค่าใช้จ่ายให้กับบุคคลที่มีสุนัขนำทางหากค่าใช้จ่ายเกิดขึ้นอย่างสมเหตุสมผลโดยบุคคลที่สามเนื่องจากการมีสุนัขนำทาง
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

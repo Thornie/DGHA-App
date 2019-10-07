@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 안내, 청각 및 보조견 법 2009
 
 섹션 8에서 발췌 :
@@ -20,4 +18,4 @@
 
 개 가이드를 가진 사람이 개가 보조 동물임을 증명하는 증거를 요구하는 것은 불법이 아닙니다.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

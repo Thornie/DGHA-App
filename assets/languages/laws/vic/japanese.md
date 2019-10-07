@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ### 1994年家畜法
 
 セクション7からの盲導犬の抜粋：
@@ -11,4 +9,4 @@
 
 #### 2012年の1ペナルティユニットの値：125.19ドル
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

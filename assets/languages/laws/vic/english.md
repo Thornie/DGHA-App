@@ -9,4 +9,4 @@ Exemptions for Guide Dogs Excerpt from Section 7:
 
 #### Value of One Penalty Unit as of 2012: $125.19
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

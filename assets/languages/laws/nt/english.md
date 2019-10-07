@@ -5,4 +5,4 @@ Excerpt from Section 21:
 
 #### Maximum Fine for Breach of Act: Fixed penalty of $500
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

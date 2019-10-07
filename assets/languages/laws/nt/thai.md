@@ -1,5 +1,3 @@
-#### **Translated into Thai**
-
 ### พระราชบัญญัติการต่อต้านการเลือกปฏิบัติ พ.ศ. 2535
 
 ตัดตอนมาจากมาตรา 21:
@@ -7,4 +5,4 @@
 
 #### ค่าปรับสูงสุดสำหรับการละเมิด: แก้ไขค่าปรับ $ 500
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 동반자 동물 법 1998
 
 섹션 59에서 발췌 :
@@ -16,4 +14,4 @@
 ### 예외 :
 개 가이드의 존재로 인해 제 3자가 비용을 합리적으로 발생시킨 경우 개 가이드를 가진 사람에게 요금을 부과하는 것은 불법이 아닙니다.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

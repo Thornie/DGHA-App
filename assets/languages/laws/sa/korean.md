@@ -1,5 +1,3 @@
-#### **Translated into Korean**
-
 ### 개와 고양이 관리법 1995
 
 섹션 81에서 발췌 :
@@ -12,4 +10,4 @@
 ### 예외 :
 보조 동물을 가진 사람이 개가 보조 동물이라는 증거를 제시하도록 요구하는 것은 불법이 아닙니다.
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

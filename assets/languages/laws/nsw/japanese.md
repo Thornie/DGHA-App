@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ###コンパニオンアニマルズ法1998
 
 セクション59からの抜粋：
@@ -16,4 +14,4 @@
 ### 例外：
 犬のガイドが存在するために費用が第三者によって合理的に発生した場合、犬のガイドを持つ人に料金を課すことは違法ではありません。
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

@@ -1,5 +1,3 @@
-#### **Translated into Japanese**
-
 ### ガイド、聴覚および介助犬法2009
 
 セクション8からの抜粋：
@@ -20,4 +18,4 @@
 
 犬のガイドがいる人が、自分の犬が介助動物であることを証明する証拠を提出するよう求められることは違法ではありません。
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)

@@ -1,5 +1,3 @@
-#### **Translated into Thai**
-
 ### พระราชบัญญัติสุนัขนำทางการได้ยินและให้ความช่วยเหลือ
 
 ตัดตอนมาจากส่วนที่ 8:
@@ -20,4 +18,4 @@
 
 ไม่ใช่เรื่องผิดกฎหมายที่บุคคลที่มีสุนัขนำทางจะถูกขอให้สร้างหลักฐานเพื่อรับรองว่าสุนัขของพวกเขาเป็นสัตว์ช่วยเหลือ
 
-For more information visit [dog-guide-access-legislation](https://www.bca.org.au/dog-guide-access-legislation/)
+For more information visit [mindDog Australia](https://www.bca.org.au/mindDog Australia/)
