@@ -167,7 +167,6 @@ class Data {
     ntTileData,
     qldTileData,
     saTileData,
-    saTileData,
     tasTileData,
     vicTileData,
     waTileData
