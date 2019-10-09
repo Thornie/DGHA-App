@@ -39,18 +39,6 @@ class Data {
     waCardLaw
   ];
 
-  static final List<MenuCardData> lawInfoCardDataPop = [
-    fedCardData,
-    nswCardData,
-    vicCardData,
-    qldCardData,
-    waCardLaw,
-    saCardData,
-    tasCardData,
-    actCardData,
-    ntCardData,
-  ];
-
   static final MenuCardData fedCardData = new MenuCardData(
       cardTitle: "Federal",
       pageToNavigateTo: InfoScreen.id,
@@ -166,7 +154,6 @@ class Data {
     nswTileData,
     ntTileData,
     qldTileData,
-    saTileData,
     saTileData,
     tasTileData,
     vicTileData,

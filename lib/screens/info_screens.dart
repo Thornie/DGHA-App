@@ -1,12 +1,15 @@
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/components/selectable_contrainer.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
+import 'package:dgha_brochure/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InfoScreen extends StatefulWidget {
@@ -21,13 +24,20 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
+  // used for closing or opening drawer
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   String infoText = "";
   String languageName = "";
   double scrHeight;
+  double scrWidth;
   double textScale;
   double popUpHeight;
   final double popUpTextHeight = 50;
   final double popUpMaxHeight = 90;
+
+  // drawer properties
+  double drawerWidth;
 
   List<String> spans = new List<String>();
 
@@ -38,7 +48,9 @@ class _InfoScreenState extends State<InfoScreen> {
     // setLang(0);
   }
 
-  void calcDimensions() {
+  void calcDimensions(Orientation orientation) {
+    this.scrWidth = MediaQuery.of(context).size.width;
+    this.scrHeight = MediaQuery.of(context).size.height;
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
     if (this.textScale < 1.5 || this.textScale == 1.5) {
@@ -50,6 +62,7 @@ class _InfoScreenState extends State<InfoScreen> {
     }
 
     this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
+    this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
   }
 
   void loadText(int index) {
@@ -64,9 +77,13 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+        drawer: MenuDrawer(
+        width: this.drawerWidth,
+      ),
       body: SafeArea(child: OrientationBuilder(
         builder: (context, orientation) {
-          calcDimensions();
+          calcDimensions(orientation);
           return Stack(
             children: <Widget>[
               Container(
@@ -113,7 +130,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   hint: "Double tap to go back to home screen",
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(MenuScreen.id);
                     },
                     child: DghaIcon(
                       icon: Icons.arrow_back_ios,
@@ -122,7 +139,24 @@ class _InfoScreenState extends State<InfoScreen> {
                     ),
                   ),
                 ),
-                childTwo: Container(
+                childTwo: Semantics(
+                    button: true,
+                    label: "Menu",
+                    hint: "Double tap to open side bar menu",
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
+                      },
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.bars, 
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                        ),
+                    ),
+                  ),
+                childThree: Container(
                   child: PopupMenuButton(
                     onSelected: (choice) {
                       int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
