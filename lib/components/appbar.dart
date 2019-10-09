@@ -41,12 +41,12 @@ class DghaAppBar extends StatelessWidget {
               ),
             ),
           ),
-          //Used as padding so the title is centered properly
-          DghaIcon(
+          //DGHAIcon used as padding so the title is centered properly
+          this.childTwo != null ? this.childTwo : DghaIcon(
             icon: FontAwesomeIcons.bars, 
             backgroundColor: Colors.transparent,
             iconColor: Colors.transparent
-          )
+          ),
         ],
       ),
     );
