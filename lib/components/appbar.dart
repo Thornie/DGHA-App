@@ -1,5 +1,7 @@
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DghaAppBar extends StatelessWidget {
   final Widget childOne;
@@ -39,7 +41,12 @@ class DghaAppBar extends StatelessWidget {
               ),
             ),
           ),
-          this.childTwo
+          //Used as padding so the title is centered properly
+          DghaIcon(
+            icon: FontAwesomeIcons.bars, 
+            backgroundColor: Colors.transparent,
+            iconColor: Colors.transparent
+          )
         ],
       ),
     );
