@@ -45,13 +45,6 @@ class _MenuScreenState extends State<MenuScreen> {
   final double textMinWidth = 102;
   final double textMinHeight = 34;
 
-  // sort
-  bool isOrderedByAbc = false;
-  List<String> sort = ['Alphabetical', 'Population'];
-  double popUpHeight;
-  final double popUpTextHeight = 50;
-  final double popUpMaxHeight = 90;
-
   void calcDimensions(Orientation orientation) {
     this.scrWidth = MediaQuery.of(context).size.width;
     this.scrHeight = MediaQuery.of(context).size.height;
@@ -99,15 +92,6 @@ class _MenuScreenState extends State<MenuScreen> {
       }
     }
 
-    if (this.textScale < 1.5 || this.textScale == 1.5) {
-      this.popUpHeight = this.popUpTextHeight;
-    } else if (this.textScale > 1.5 && this.textScale < 2) {
-      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.8;
-    } else if (this.textScale > 2 || this.textScale == 2) {
-      this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7;
-    }
-
-    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
 
     this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
@@ -157,19 +141,11 @@ class _MenuScreenState extends State<MenuScreen> {
                             (this.isVertical ? "Slide up and down to see more cards" : "Slide left and right to see more cards"),
                         explicitChildNodes: true,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(height: this.isVertical ? 15 : 3.3),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Expanded(child: _buildH2("Laws")),
-                                buildPopUp(),
-                                SizedBox(
-                                  width: Styles.appBarHorizontalPadding,
-                                )
-                              ],
-                            ),
-                            _buildCardsList(this.isOrderedByAbc ? Data.lawInfoCardDataABC : Data.lawInfoCardDataPop),
+                            _buildH2("Laws"),
+                            _buildCardsList(Data.lawInfoCardDataABC),
                             SizedBox(height: 40),
                           ],
                         ),
@@ -230,71 +206,6 @@ class _MenuScreenState extends State<MenuScreen> {
           },
         ),
       ),
-    );
-  }
-
-  PopupMenuButton<String> buildPopUp() {
-    return PopupMenuButton(
-      onSelected: (choice) {
-        if (choice == "Alphabetical") {
-          setState(() {
-            this.isOrderedByAbc = true;
-          });
-        } else {
-          setState(() {
-            this.isOrderedByAbc = false;
-          });
-        }
-      },
-      child: Semantics(
-        button: true,
-        label: "Sort",
-        hint: this.isOrderedByAbc ? "Sort by: alphabetical. Double tap to change the sorting." : "Sort by: population size. Double tap to change the sorting.",
-        child: Container(
-          padding: EdgeInsets.all(Styles.iconPaddingPadding),
-          child: Container(
-              padding: EdgeInsets.all(Styles.iconPadding),
-              decoration: BoxDecoration(
-                color: Styles.midnightBlue,
-                borderRadius: BorderRadius.all(Radius.circular(1000)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  SizedBox(width: 5,),
-                  Icon(
-                    FontAwesomeIcons.filter,
-                    size: Styles.iconSize,
-                    color: Styles.yellow,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    this.isOrderedByAbc ? FontAwesomeIcons.sortAlphaDown : FontAwesomeIcons.sortAmountDown,
-                    size: Styles.iconSize,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 5,)
-                ],
-              )),
-        ),
-      ),
-      itemBuilder: (BuildContext ctxt) {
-        return this.sort.map((String order) {
-          return PopupMenuItem(
-            height: this.popUpHeight,
-            value: order,
-            child: Container(
-              child: Text(
-                order,
-                style: Styles.h3LinkStyle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          );
-        }).toList();
-      },
     );
   }
 
