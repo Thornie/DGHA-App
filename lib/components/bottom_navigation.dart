@@ -50,7 +50,8 @@ class DGHABotNav extends StatelessWidget {
                       ),
                     ),
                     child: Semantics(
-                      label: "Rating Page Tab",
+                      label: "Rating Page",
+                      hint: "Double tap to go to the rating page",
                       excludeSemantics: true,
                       child: MaterialButton(
                         child: DghaIcon(
@@ -82,7 +83,8 @@ class DGHABotNav extends StatelessWidget {
                       ),
                     ),
                     child: Semantics(
-                      label: "Info Page Tab",
+                      label: "Information Page",
+                      hint: "Double tap to go to the information page",
                       excludeSemantics: true,
                       child: MaterialButton(
                         child: DghaIcon(

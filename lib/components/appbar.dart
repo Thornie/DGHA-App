@@ -6,12 +6,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class DghaAppBar extends StatelessWidget {
   final Widget childOne;
   final Widget childTwo;
-  final Widget childThree;
   final String text;
   final bool isMenu;
   final String semanticLabel;
 
-  DghaAppBar({this.childOne, this.childTwo, this.childThree, this.text, this.isMenu, this.semanticLabel});
+  DghaAppBar({this.childOne, this.childTwo, this.text, this.isMenu, this.semanticLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +41,8 @@ class DghaAppBar extends StatelessWidget {
               ),
             ),
           ),
-          this.childTwo != null ? this.childTwo : Container(width: 0, height: 0,),
           //DGHAIcon used as padding so the title is centered properly
-          this.childThree != null ? this.childThree : DghaIcon(
+          this.childTwo != null ? this.childTwo : DghaIcon(
             icon: FontAwesomeIcons.bars, 
             backgroundColor: Colors.transparent,
             iconColor: Colors.transparent

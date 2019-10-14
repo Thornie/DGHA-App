@@ -126,37 +126,22 @@ class _InfoScreenState extends State<InfoScreen> {
                 semanticLabel: widget.appBarTitle,
                 childOne: Semantics(
                   button: true,
-                  label: "Back",
-                  hint: "Double tap to go back to home screen",
+                  label: "Menu",
+                  hint: "Double tap to open side bar menu",
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(MenuScreen.id);
+                      setState(() {
+                        _scaffoldKey.currentState.openDrawer();
+                      });
                     },
                     child: DghaIcon(
-                      icon: Icons.arrow_back_ios,
+                      icon: FontAwesomeIcons.bars, 
                       backgroundColor: Styles.midnightBlue,
                       iconColor: Styles.yellow,
-                    ),
+                      ),
                   ),
                 ),
-                childTwo: Semantics(
-                    button: true,
-                    label: "Menu",
-                    hint: "Double tap to open side bar menu",
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _scaffoldKey.currentState.openDrawer();
-                        });
-                      },
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.bars, 
-                        backgroundColor: Styles.midnightBlue,
-                        iconColor: Styles.yellow,
-                        ),
-                    ),
-                  ),
-                childThree: Container(
+                childTwo: Container(
                   child: PopupMenuButton(
                     onSelected: (choice) {
                       int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
