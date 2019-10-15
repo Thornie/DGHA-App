@@ -40,6 +40,8 @@ class _RatingScreenState extends State<RatingScreen> {
     overallRatingScreen = new RatingScreenSection(
       title: "Overall",
       buttonTitle: "Next",
+      hintText:
+          "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
@@ -56,6 +58,8 @@ class _RatingScreenState extends State<RatingScreen> {
     customerServiceRatingScreen = new RatingScreenSection(
       title: "Customer Service",
       buttonTitle: "Next",
+      hintText:
+          "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
       rating: customerServiceRatingScreen != null
           ? customerServiceRatingScreen.rating
@@ -74,6 +78,7 @@ class _RatingScreenState extends State<RatingScreen> {
     amenitiesRatingScreen = new RatingScreenSection(
       title: "Amenities",
       buttonTitle: "Next",
+      hintText: "Give a score out of 5 on the amenities here at this location.",
       //If the page already has a rating, grab that from the object
       rating: amenitiesRatingScreen != null ? amenitiesRatingScreen.rating : 0,
 
@@ -91,6 +96,8 @@ class _RatingScreenState extends State<RatingScreen> {
     locationRatingScreen = new RatingScreenSection(
       title: "Location",
       buttonTitle: "Next",
+      hintText:
+          "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
@@ -107,6 +114,8 @@ class _RatingScreenState extends State<RatingScreen> {
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
       controller: commentController,
+      hintText:
+          "Add a comment to your review to give more detail on your experience. This is optional.",
       onPressed: () {
         comment = commentController.text;
         //TODO: Save to database here

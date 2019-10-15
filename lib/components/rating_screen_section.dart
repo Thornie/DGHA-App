@@ -1,5 +1,6 @@
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 //The component for each rating page (overall, customer service, etc)
@@ -7,16 +8,47 @@ class RatingScreenSection extends StatefulWidget {
   final String title;
   final String buttonTitle;
   final Function onPressed;
+  final String hintText;
   double rating;
 
   RatingScreenSection(
-      {this.title, this.buttonTitle = "Next", this.onPressed, this.rating = 0});
+      {this.title,
+      this.buttonTitle = "Next",
+      this.onPressed,
+      this.rating = 0,
+      this.hintText = ""});
 
   @override
   _RatingScreenSectionState createState() => _RatingScreenSectionState();
 }
 
 class _RatingScreenSectionState extends State<RatingScreenSection> {
+  //Popup dialog box
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text(
+            widget.hintText,
+            style: Styles.h3Style,
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              child: Text(
+                "Close",
+                style: Styles.h2Style,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double localRating = widget.rating;
@@ -28,10 +60,34 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              //----------Title
-              Text(
-                widget.title,
-                style: Styles.h2Style,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //----------Title
+                  Text(
+                    widget.title,
+                    style: Styles.h2Style,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  //----------More Info
+                  Container(
+                    height: 35,
+                    child: FloatingActionButton(
+                      heroTag: null,
+                      backgroundColor: Styles.midnightBlue,
+                      child: Icon(
+                        FontAwesomeIcons.question,
+                        color: Styles.yellow,
+                        size: 25,
+                      ),
+                      onPressed: () {
+                        createAlertDialog(context);
+                      },
+                    ),
+                  ),
+                ],
               ),
               Stack(
                 children: <Widget>[
@@ -90,40 +146,95 @@ class CommentSection extends StatefulWidget {
   final String title;
   final Function onPressed;
   final TextEditingController controller;
+  final String hintText;
 
-  CommentSection({this.title, this.onPressed, this.controller});
+  CommentSection(
+      {this.title, this.onPressed, this.controller, this.hintText = ""});
 
   @override
   _CommentSectionState createState() => _CommentSectionState();
 }
 
 class _CommentSectionState extends State<CommentSection> {
+  //Popup dialog box
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text(
+            widget.hintText,
+            style: Styles.h3Style,
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              child: Text(
+                "Close",
+                style: Styles.h2Style,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30),
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                //----------Title
-                Text(
-                  widget.title,
-                  style: Styles.h2Style,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    //----------Title
+                    Text(
+                      widget.title,
+                      style: Styles.h2Style,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    //----------More Info
+                    Container(
+                      height: 35,
+                      child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Styles.midnightBlue,
+                        child: Icon(
+                          FontAwesomeIcons.question,
+                          color: Styles.yellow,
+                          size: 25,
+                        ),
+                        onPressed: () {
+                          createAlertDialog(context);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 //----------Comment Box
-                TextField(
-                  controller: widget.controller,
-                  keyboardType: TextInputType.multiline,
-                  minLines: 1,
-                  maxLines: 7,
-                  style: Styles.h3Style,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: TextField(
+                    controller: widget.controller,
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,
+                    maxLines: 7,
+                    style: Styles.h3Style,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
