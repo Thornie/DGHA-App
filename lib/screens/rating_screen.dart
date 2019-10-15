@@ -11,7 +11,7 @@ class RatingScreen extends StatefulWidget {
 class _RatingScreenState extends State<RatingScreen> {
   int navPosition = 0;
   Widget currentPage;
-  final controller = PageController(
+  final pageController = PageController(
     initialPage: 0,
     keepPage: false,
   );
@@ -44,7 +44,7 @@ class _RatingScreenState extends State<RatingScreen> {
           navPosition = 1;
         });
         overallRating = overallRatingScreen.rating;
-        controller.jumpToPage(1);
+        pageController.jumpToPage(1);
       },
     );
     customerServiceRatingScreen = new RatingScreenSection(
@@ -55,7 +55,7 @@ class _RatingScreenState extends State<RatingScreen> {
           navPosition = 2;
         });
         customerServiceRating = customerServiceRatingScreen.rating;
-        controller.jumpToPage(2);
+        pageController.jumpToPage(2);
       },
     );
     amenitiesRatingScreen = new RatingScreenSection(
@@ -66,7 +66,7 @@ class _RatingScreenState extends State<RatingScreen> {
           navPosition = 3;
         });
         amenitiesRating = amenitiesRatingScreen.rating;
-        controller.jumpToPage(3);
+        pageController.jumpToPage(3);
       },
     );
     locationRatingScreen = new RatingScreenSection(
@@ -77,7 +77,7 @@ class _RatingScreenState extends State<RatingScreen> {
           navPosition = 4;
         });
         locationRating = locationRatingScreen.rating;
-        controller.jumpToPage(4);
+        pageController.jumpToPage(4);
       },
     );
     commentSectionScreen = new CommentSection(
@@ -122,12 +122,13 @@ class _RatingScreenState extends State<RatingScreen> {
               iconColor: Styles.midnightBlue,
               backgroundColor: Colors.grey,
               highlightedColor: Styles.yellow,
+              controller: pageController,
             ),
           ),
           //----------Rating Section
           Expanded(
             child: PageView(
-              controller: controller,
+              controller: pageController,
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 overallRatingScreen,

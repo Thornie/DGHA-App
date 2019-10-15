@@ -7,12 +7,14 @@ class RatingBreadcrumbs extends StatefulWidget {
   final Color iconColor;
   final Color backgroundColor;
   final Color highlightedColor;
+  final PageController controller;
 
   RatingBreadcrumbs(
       {this.navPosition,
       this.backgroundColor,
       this.iconColor,
-      this.highlightedColor});
+      this.highlightedColor,
+      this.controller});
   @override
   _RatingBreadcrumbsState createState() => _RatingBreadcrumbsState();
 }
@@ -43,89 +45,89 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 //----------Overall Rating
-                GestureDetector(
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.iconColor,
-                      size: 35,
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: widget.navPosition >= 0
-                          ? widget.highlightedColor
-                          : widget.backgroundColor,
-                    ),
+                FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: widget.navPosition >= 0
+                      ? widget.highlightedColor
+                      : widget.backgroundColor,
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: widget.iconColor,
+                    size: 35,
                   ),
-                  onTap: () {
-                    print("TE");
-                  },
+                  onPressed: widget.navPosition >= 0
+                      ? () {
+                          widget.controller.jumpToPage(0);
+                        }
+                      : null,
                 ),
                 //----------Customer Service
-                Container(
-                  height: 40,
-                  width: 40,
+                FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: widget.navPosition >= 1
+                      ? widget.highlightedColor
+                      : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
                     color: widget.iconColor,
                     size: 35,
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.navPosition >= 1
-                        ? widget.highlightedColor
-                        : widget.backgroundColor,
-                  ),
+                  onPressed: widget.navPosition >= 1
+                      ? () {
+                          widget.controller.jumpToPage(1);
+                        }
+                      : null,
                 ),
                 //----------Amenities
-                Container(
-                  height: 40,
-                  width: 40,
+                FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: widget.navPosition >= 2
+                      ? widget.highlightedColor
+                      : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
                     color: widget.iconColor,
                     size: 35,
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.navPosition >= 2
-                        ? widget.highlightedColor
-                        : widget.backgroundColor,
-                  ),
+                  onPressed: widget.navPosition >= 2
+                      ? () {
+                          widget.controller.jumpToPage(2);
+                        }
+                      : null,
                 ),
                 //----------Location
-                Container(
-                  height: 40,
-                  width: 40,
+                FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: widget.navPosition >= 3
+                      ? widget.highlightedColor
+                      : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
                     color: widget.iconColor,
                     size: 35,
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.navPosition >= 3
-                        ? widget.highlightedColor
-                        : widget.backgroundColor,
-                  ),
+                  onPressed: widget.navPosition >= 3
+                      ? () {
+                          widget.controller.jumpToPage(3);
+                        }
+                      : null,
                 ),
                 //----------Comment
-                Container(
-                  height: 40,
-                  width: 40,
+                FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: widget.navPosition >= 4
+                      ? widget.highlightedColor
+                      : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
                     color: widget.iconColor,
                     size: 35,
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.navPosition >= 4
-                        ? widget.highlightedColor
-                        : widget.backgroundColor,
-                  ),
+                  onPressed: widget.navPosition >= 4
+                      ? () {
+                          widget.controller.jumpToPage(4);
+                        }
+                      : null,
                 ),
               ],
             ),
