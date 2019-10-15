@@ -15,7 +15,9 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SearchRatingScreen(),
+        child: RatingScreen(),
+        //USE THIS WHEN DONE TESTING
+        //SearchRatingScreen(),
       ),
       //-------------------- Bottom navigation --------------------//
       bottomNavigationBar: DGHABotNav(
