@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
 
 class RatingBreadcrumbs extends StatefulWidget {
@@ -27,8 +28,8 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          right: BorderSide(width: 2, color: Colors.black),
-          left: BorderSide(width: 2, color: Colors.black),
+          right: BorderSide(width: 2, color: Styles.midnightBlue),
+          left: BorderSide(width: 2, color: Styles.midnightBlue),
         ),
       ),
       height: 40,
@@ -37,8 +38,8 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
           //----------Line
           Center(
             child: Container(
-              height: 2,
-              color: Colors.black,
+              height: 3,
+              color: Styles.midnightBlue,
             ),
           ),
           //----------Dots
