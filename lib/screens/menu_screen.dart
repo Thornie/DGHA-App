@@ -47,7 +47,8 @@ class _MenuScreenState extends State<MenuScreen> {
     this.scrHeight = MediaQuery.of(context).size.height;
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
-    double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
+    double cardNewMinWidth =
+        (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
 
     // reset card's width
     double cardNewWidth = 0;
@@ -56,11 +57,13 @@ class _MenuScreenState extends State<MenuScreen> {
     double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2));
 
     // get the number of cards that can fit on a screen
-    int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
+    int numOfCards =
+        ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
     // make sure that all cards are big enough to fit all the text
     while (cardNewWidth < cardNewMinWidth) {
-      double scrWidthIncludingPadding = scrWidth - (Styles.spacing * 2) - (Styles.spacing * (numOfCards - 1));
+      double scrWidthIncludingPadding =
+          scrWidth - (Styles.spacing * 2) - (Styles.spacing * (numOfCards - 1));
       cardNewWidth = scrWidthIncludingPadding / (numOfCards);
 
       // better that the cards are bigger than it need to be, rather than too small
@@ -72,7 +75,9 @@ class _MenuScreenState extends State<MenuScreen> {
       cardNewWidth = cardMaxWidth;
     }
 
-    this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
+    this.drawerWidth = orientation == Orientation.portrait
+        ? this.scrWidth * 0.75
+        : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
     this.cardHeight = this.cardWidth * 1.15;
   }
@@ -101,7 +106,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       // -------------- GENERAL INFORMATION
                       Semantics(
                         label: "General Information Section",
-                        hint: "There are ${Data.generalInfoCardData.length} cards in this section",
+                        hint:
+                            "There are ${Data.generalInfoCardData.length} cards in this section",
                         explicitChildNodes: true,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +122,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       // -------------- LAWS INFORMATION
                       Semantics(
                         label: "Federal and State Laws Section",
-                        hint: "There are ${Data.lawInfoCardDataABC.length} cards in this section, Slide up and down to see more cards",
+                        hint:
+                            "There are ${Data.lawInfoCardDataABC.length} cards in this section, Slide up and down to see more cards",
                         explicitChildNodes: true,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +135,9 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 35.0,)
+                      SizedBox(
+                        height: 35.0,
+                      )
                     ],
                   ),
                 ),
@@ -150,21 +159,22 @@ class _MenuScreenState extends State<MenuScreen> {
                         });
                       },
                       child: DghaIcon(
-                        icon: FontAwesomeIcons.bars, 
+                        icon: FontAwesomeIcons.bars,
                         backgroundColor: Styles.midnightBlue,
                         iconColor: Styles.yellow,
-                        ),
+                      ),
                     ),
                   ),
-                ),
-                DGHABotNav(
-                  activeTabColor: Styles.yellow,
-                  activeTab: 1,
                 ),
               ],
             );
           },
         ),
+      ),
+      // -------------- Bottom Navigation
+      bottomNavigationBar: DGHABotNav(
+        activeTabColor: Styles.yellow,
+        activeTab: 1,
       ),
     );
   }
