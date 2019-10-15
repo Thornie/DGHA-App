@@ -61,8 +61,12 @@ class _InfoScreenState extends State<InfoScreen> {
       this.popUpHeight = this.popUpTextHeight * this.textScale * 0.7;
     }
 
-    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight ? this.popUpMaxHeight : this.popUpHeight;
-    this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
+    this.popUpHeight = this.popUpHeight > this.popUpMaxHeight
+        ? this.popUpMaxHeight
+        : this.popUpHeight;
+    this.drawerWidth = orientation == Orientation.portrait
+        ? this.scrWidth * 0.75
+        : this.scrHeight * 0.75;
   }
 
   void loadText(int index) {
@@ -78,7 +82,7 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-        drawer: MenuDrawer(
+      drawer: MenuDrawer(
         width: this.drawerWidth,
       ),
       body: SafeArea(child: OrientationBuilder(
@@ -101,7 +105,8 @@ class _InfoScreenState extends State<InfoScreen> {
                       child: languageName == "English"
                           ? Container()
                           : Container(
-                              padding: EdgeInsets.only(top: Styles.spacing, left: 20),
+                              padding: EdgeInsets.only(
+                                  top: Styles.spacing, left: 20),
                               child: SelectableText(
                                 "$languageName",
                                 style: Styles.highlightText,
@@ -135,16 +140,17 @@ class _InfoScreenState extends State<InfoScreen> {
                       });
                     },
                     child: DghaIcon(
-                      icon: FontAwesomeIcons.bars, 
+                      icon: FontAwesomeIcons.bars,
                       backgroundColor: Styles.midnightBlue,
                       iconColor: Styles.yellow,
-                      ),
+                    ),
                   ),
                 ),
                 childTwo: Container(
                   child: PopupMenuButton(
                     onSelected: (choice) {
-                      int newLangIndex = widget.texts.indexWhere((lang) => lang.languageName == choice);
+                      int newLangIndex = widget.texts
+                          .indexWhere((lang) => lang.languageName == choice);
                       loadText(newLangIndex);
                     },
                     child: Semantics(
@@ -163,7 +169,8 @@ class _InfoScreenState extends State<InfoScreen> {
                           height: this.popUpHeight,
                           value: lang.languageName,
                           child: Semantics(
-                            hint: "Double tap to select ${lang.languageName} translation.",
+                            hint:
+                                "Double tap to select ${lang.languageName} translation.",
                             child: Container(
                               child: Text(
                                 lang.languageName,
@@ -179,14 +186,14 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                 ),
               ),
-              DGHABotNav(
-                activeTabColor: Styles.yellow,
-                activeTab: 1,
-              ),
             ],
           );
         },
       )),
+      bottomNavigationBar: DGHABotNav(
+        activeTabColor: Styles.yellow,
+        activeTab: 1,
+      ),
     );
   }
 }
