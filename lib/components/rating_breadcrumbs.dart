@@ -48,99 +48,129 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 //----------Overall Rating
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: widget.navPosition >= 0
-                      ? widget.highlightedBackgroundColor
-                      : widget.backgroundColor,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: widget.navPosition >= 0
-                        ? widget.highlightedIconColor
-                        : widget.iconColor,
-                    size: 35,
+                Semantics(
+                  label: "Overall Rating",
+                  hint: widget.navPosition >= 0
+                      ? "Double tap to go to the overall rating page"
+                      : "",
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: widget.navPosition >= 0
+                        ? widget.highlightedBackgroundColor
+                        : widget.backgroundColor,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: widget.navPosition >= 0
+                          ? widget.highlightedIconColor
+                          : widget.iconColor,
+                      size: 35,
+                    ),
+                    onPressed: widget.navPosition >= 0
+                        ? () {
+                            widget.controller.jumpToPage(0);
+                          }
+                        : null,
                   ),
-                  onPressed: widget.navPosition >= 0
-                      ? () {
-                          widget.controller.jumpToPage(0);
-                        }
-                      : null,
                 ),
                 //----------Customer Service
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: widget.navPosition >= 1
-                      ? widget.highlightedBackgroundColor
-                      : widget.backgroundColor,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: widget.navPosition >= 1
-                        ? widget.highlightedIconColor
-                        : widget.iconColor,
-                    size: 35,
+                Semantics(
+                  label: "Customer Service Rating",
+                  hint: widget.navPosition >= 1
+                      ? "Double tap to go to the customer service rating page"
+                      : "",
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: widget.navPosition >= 1
+                        ? widget.highlightedBackgroundColor
+                        : widget.backgroundColor,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: widget.navPosition >= 1
+                          ? widget.highlightedIconColor
+                          : widget.iconColor,
+                      size: 35,
+                    ),
+                    onPressed: widget.navPosition >= 1
+                        ? () {
+                            widget.controller.jumpToPage(1);
+                          }
+                        : null,
                   ),
-                  onPressed: widget.navPosition >= 1
-                      ? () {
-                          widget.controller.jumpToPage(1);
-                        }
-                      : null,
                 ),
                 //----------Amenities
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: widget.navPosition >= 2
-                      ? widget.highlightedBackgroundColor
-                      : widget.backgroundColor,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: widget.navPosition >= 2
-                        ? widget.highlightedIconColor
-                        : widget.iconColor,
-                    size: 35,
+                Semantics(
+                  label: "Amenities Raint",
+                  hint: widget.navPosition >= 0
+                      ? "Double tap to go to the overall rating page"
+                      : "",
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: widget.navPosition >= 2
+                        ? widget.highlightedBackgroundColor
+                        : widget.backgroundColor,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: widget.navPosition >= 2
+                          ? widget.highlightedIconColor
+                          : widget.iconColor,
+                      size: 35,
+                    ),
+                    onPressed: widget.navPosition >= 2
+                        ? () {
+                            widget.controller.jumpToPage(2);
+                          }
+                        : null,
                   ),
-                  onPressed: widget.navPosition >= 2
-                      ? () {
-                          widget.controller.jumpToPage(2);
-                        }
-                      : null,
                 ),
                 //----------Location
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: widget.navPosition >= 3
-                      ? widget.highlightedBackgroundColor
-                      : widget.backgroundColor,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: widget.navPosition >= 3
-                        ? widget.highlightedIconColor
-                        : widget.iconColor,
-                    size: 35,
+                Semantics(
+                  label: "Location Rating",
+                  hint: widget.navPosition >= 1
+                      ? "Double tap to go to the location service rating page"
+                      : "",
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: widget.navPosition >= 3
+                        ? widget.highlightedBackgroundColor
+                        : widget.backgroundColor,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: widget.navPosition >= 3
+                          ? widget.highlightedIconColor
+                          : widget.iconColor,
+                      size: 35,
+                    ),
+                    onPressed: widget.navPosition >= 3
+                        ? () {
+                            widget.controller.jumpToPage(3);
+                          }
+                        : null,
                   ),
-                  onPressed: widget.navPosition >= 3
-                      ? () {
-                          widget.controller.jumpToPage(3);
-                        }
-                      : null,
                 ),
                 //----------Comment
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: widget.navPosition >= 4
-                      ? widget.highlightedBackgroundColor
-                      : widget.backgroundColor,
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: widget.navPosition >= 4
-                        ? widget.highlightedIconColor
-                        : widget.iconColor,
-                    size: 35,
+                Semantics(
+                  label: "Comment Page",
+                  hint: widget.navPosition >= 1
+                      ? "Double tap to go to the additonal comment page"
+                      : "",
+                  child: FloatingActionButton(
+                    heroTag: null,
+                    backgroundColor: widget.navPosition >= 4
+                        ? widget.highlightedBackgroundColor
+                        : widget.backgroundColor,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: widget.navPosition >= 4
+                          ? widget.highlightedIconColor
+                          : widget.iconColor,
+                      size: 35,
+                    ),
+                    onPressed: widget.navPosition >= 4
+                        ? () {
+                            widget.controller.jumpToPage(4);
+                          }
+                        : null,
                   ),
-                  onPressed: widget.navPosition >= 4
-                      ? () {
-                          widget.controller.jumpToPage(4);
-                        }
-                      : null,
                 ),
               ],
             ),

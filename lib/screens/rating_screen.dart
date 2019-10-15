@@ -138,14 +138,19 @@ class _RatingScreenState extends State<RatingScreen> {
           //----------Close Button
           Align(
             alignment: Alignment.topRight,
-            child: MaterialButton(
-              child: Icon(
-                Icons.close,
-                size: 40,
+            child: Semantics(
+              label: "Close button",
+              hint:
+                  "Double tap to close the ratings page and cancel your review",
+              child: MaterialButton(
+                child: Icon(
+                  Icons.close,
+                  size: 40,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
           ),
           //----------Page Navigation

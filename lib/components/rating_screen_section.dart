@@ -34,14 +34,18 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
             style: Styles.h3Style,
           ),
           actions: <Widget>[
-            MaterialButton(
-              child: Text(
-                "Close",
-                style: Styles.h2Style,
+            Semantics(
+              label: "Close button",
+              hint: "Double tap to close the hint pop up",
+              child: MaterialButton(
+                child: Text(
+                  "Close",
+                  style: Styles.h2Style,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
           ],
         );
@@ -74,17 +78,21 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
                   //----------More Info
                   Container(
                     height: 35,
-                    child: FloatingActionButton(
-                      heroTag: null,
-                      backgroundColor: Styles.midnightBlue,
-                      child: Icon(
-                        FontAwesomeIcons.question,
-                        color: Styles.yellow,
-                        size: 25,
+                    child: Semantics(
+                      label: "Hint button",
+                      hint: "Double tap to open the hint pop up",
+                      child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Styles.midnightBlue,
+                        child: Icon(
+                          FontAwesomeIcons.question,
+                          color: Styles.yellow,
+                          size: 25,
+                        ),
+                        onPressed: () {
+                          createAlertDialog(context);
+                        },
                       ),
-                      onPressed: () {
-                        createAlertDialog(context);
-                      },
                     ),
                   ),
                 ],
@@ -92,20 +100,24 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
               Stack(
                 children: <Widget>[
                   //----------Star Rating
-                  SmoothStarRating(
-                    allowHalfRating: false,
-                    onRatingChanged: (v) {
-                      setState(() {
-                        localRating = v;
-                        widget.rating = localRating;
-                      });
-                    },
-                    starCount: 5,
-                    rating: localRating,
-                    size: MediaQuery.of(context).size.height / 9,
-                    color: Styles.yellow,
-                    borderColor: Styles.midnightBlue,
-                    spacing: 0.0,
+                  Semantics(
+                    label: "Rating",
+                    hint: "Double tap a star to give a rating out of 5",
+                    child: SmoothStarRating(
+                      allowHalfRating: false,
+                      onRatingChanged: (v) {
+                        setState(() {
+                          localRating = v;
+                          widget.rating = localRating;
+                        });
+                      },
+                      starCount: 5,
+                      rating: localRating,
+                      size: MediaQuery.of(context).size.height / 9,
+                      color: Styles.yellow,
+                      borderColor: Styles.midnightBlue,
+                      spacing: 0.0,
+                    ),
                   ),
                   //----------Star Rating Outline (Needed for the outline to stay a separate color)
                   IgnorePointer(
@@ -124,19 +136,24 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
           ),
         ),
         //----------Next Button
-        RaisedButton(
-            child: Text(
-              widget.buttonTitle,
-              style: Styles.h3Style,
-            ),
-            color: Colors.white,
-            elevation: 5,
-            padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            onPressed: widget.onPressed),
+        Semantics(
+          label: "Next button",
+          hint: "Double tap to go to the next rating page",
+          child: RaisedButton(
+              child: Text(
+                widget.buttonTitle,
+                style: Styles.h3Style,
+              ),
+              color: Colors.white,
+              elevation: 5,
+              padding:
+                  EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              onPressed: widget.onPressed),
+        ),
       ],
     );
   }
@@ -167,14 +184,18 @@ class _CommentSectionState extends State<CommentSection> {
             style: Styles.h3Style,
           ),
           actions: <Widget>[
-            MaterialButton(
-              child: Text(
-                "Close",
-                style: Styles.h2Style,
+            Semantics(
+              label: "Close button",
+              hint: "Double tap to close the hint pop up",
+              child: MaterialButton(
+                child: Text(
+                  "Close",
+                  style: Styles.h2Style,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
           ],
         );
@@ -206,17 +227,21 @@ class _CommentSectionState extends State<CommentSection> {
                     //----------More Info
                     Container(
                       height: 35,
-                      child: FloatingActionButton(
-                        heroTag: null,
-                        backgroundColor: Styles.midnightBlue,
-                        child: Icon(
-                          FontAwesomeIcons.question,
-                          color: Styles.yellow,
-                          size: 25,
+                      child: Semantics(
+                        label: "Hint button",
+                        hint: "Double tap to open the hint pop up",
+                        child: FloatingActionButton(
+                          heroTag: null,
+                          backgroundColor: Styles.midnightBlue,
+                          child: Icon(
+                            FontAwesomeIcons.question,
+                            color: Styles.yellow,
+                            size: 25,
+                          ),
+                          onPressed: () {
+                            createAlertDialog(context);
+                          },
                         ),
-                        onPressed: () {
-                          createAlertDialog(context);
-                        },
                       ),
                     ),
                   ],
@@ -224,16 +249,21 @@ class _CommentSectionState extends State<CommentSection> {
                 //----------Comment Box
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: TextField(
-                    controller: widget.controller,
-                    keyboardType: TextInputType.multiline,
-                    minLines: 1,
-                    maxLines: 7,
-                    style: Styles.h3Style,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                  child: Semantics(
+                    label: "Comment",
+                    hint:
+                        "Double tap to leave a comment on your experience at this location",
+                    child: TextField(
+                      controller: widget.controller,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 7,
+                      style: Styles.h3Style,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
@@ -244,19 +274,24 @@ class _CommentSectionState extends State<CommentSection> {
           ),
         ),
         //----------Submit Button
-        RaisedButton(
-            child: Text(
-              "Submit",
-              style: Styles.h3Style,
-            ),
-            color: Colors.white,
-            elevation: 5,
-            padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            onPressed: widget.onPressed),
+        Semantics(
+          label: "Submit button",
+          hint: "Double tap to submit your review of this location",
+          child: RaisedButton(
+              child: Text(
+                "Submit",
+                style: Styles.h3Style,
+              ),
+              color: Colors.white,
+              elevation: 5,
+              padding:
+                  EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              onPressed: widget.onPressed),
+        ),
       ],
     );
   }
