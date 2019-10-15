@@ -6,14 +6,16 @@ class RatingBreadcrumbs extends StatefulWidget {
 
   final Color iconColor;
   final Color backgroundColor;
-  final Color highlightedColor;
+  final Color highlightedIconColor;
+  final Color highlightedBackgroundColor;
   final PageController controller;
 
   RatingBreadcrumbs(
       {this.navPosition,
       this.backgroundColor,
       this.iconColor,
-      this.highlightedColor,
+      this.highlightedIconColor,
+      this.highlightedBackgroundColor,
       this.controller});
   @override
   _RatingBreadcrumbsState createState() => _RatingBreadcrumbsState();
@@ -48,11 +50,13 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                 FloatingActionButton(
                   heroTag: null,
                   backgroundColor: widget.navPosition >= 0
-                      ? widget.highlightedColor
+                      ? widget.highlightedBackgroundColor
                       : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
-                    color: widget.iconColor,
+                    color: widget.navPosition >= 0
+                        ? widget.highlightedIconColor
+                        : widget.iconColor,
                     size: 35,
                   ),
                   onPressed: widget.navPosition >= 0
@@ -65,11 +69,13 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                 FloatingActionButton(
                   heroTag: null,
                   backgroundColor: widget.navPosition >= 1
-                      ? widget.highlightedColor
+                      ? widget.highlightedBackgroundColor
                       : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
-                    color: widget.iconColor,
+                    color: widget.navPosition >= 1
+                        ? widget.highlightedIconColor
+                        : widget.iconColor,
                     size: 35,
                   ),
                   onPressed: widget.navPosition >= 1
@@ -82,11 +88,13 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                 FloatingActionButton(
                   heroTag: null,
                   backgroundColor: widget.navPosition >= 2
-                      ? widget.highlightedColor
+                      ? widget.highlightedBackgroundColor
                       : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
-                    color: widget.iconColor,
+                    color: widget.navPosition >= 2
+                        ? widget.highlightedIconColor
+                        : widget.iconColor,
                     size: 35,
                   ),
                   onPressed: widget.navPosition >= 2
@@ -99,11 +107,13 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                 FloatingActionButton(
                   heroTag: null,
                   backgroundColor: widget.navPosition >= 3
-                      ? widget.highlightedColor
+                      ? widget.highlightedBackgroundColor
                       : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
-                    color: widget.iconColor,
+                    color: widget.navPosition >= 3
+                        ? widget.highlightedIconColor
+                        : widget.iconColor,
                     size: 35,
                   ),
                   onPressed: widget.navPosition >= 3
@@ -116,11 +126,13 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                 FloatingActionButton(
                   heroTag: null,
                   backgroundColor: widget.navPosition >= 4
-                      ? widget.highlightedColor
+                      ? widget.highlightedBackgroundColor
                       : widget.backgroundColor,
                   child: Icon(
                     Icons.arrow_forward,
-                    color: widget.iconColor,
+                    color: widget.navPosition >= 4
+                        ? widget.highlightedIconColor
+                        : widget.iconColor,
                     size: 35,
                   ),
                   onPressed: widget.navPosition >= 4

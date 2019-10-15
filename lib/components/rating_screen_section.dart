@@ -33,33 +33,52 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
                 widget.title,
                 style: Styles.h2Style,
               ),
-              //----------Star Rating
-              SmoothStarRating(
-                allowHalfRating: false,
-                onRatingChanged: (v) {
-                  setState(() {
-                    localRating = v;
-                    widget.rating = localRating;
-                  });
-                },
-                starCount: 5,
-                rating: localRating,
-                size: MediaQuery.of(context).size.height / 10,
-                color: Colors.green,
-                borderColor: Colors.green,
-                spacing: 0.0,
-              ),
+              Stack(
+                children: <Widget>[
+                  //----------Star Rating
+                  SmoothStarRating(
+                    allowHalfRating: false,
+                    onRatingChanged: (v) {
+                      setState(() {
+                        localRating = v;
+                        widget.rating = localRating;
+                      });
+                    },
+                    starCount: 5,
+                    rating: localRating,
+                    size: MediaQuery.of(context).size.height / 9,
+                    color: Styles.yellow,
+                    borderColor: Styles.midnightBlue,
+                    spacing: 0.0,
+                  ),
+                  //----------Star Rating Outline (Needed for the outline to stay a separate color)
+                  IgnorePointer(
+                    child: SmoothStarRating(
+                      allowHalfRating: false,
+                      starCount: 5,
+                      size: MediaQuery.of(context).size.height / 9,
+                      color: Styles.midnightBlue,
+                      borderColor: Styles.midnightBlue,
+                      spacing: 0.0,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
         //----------Next Button
-        MaterialButton(
-            height: 50,
-            minWidth: 100,
-            color: Colors.blue,
+        RaisedButton(
             child: Text(
               widget.buttonTitle,
               style: Styles.h3Style,
+            ),
+            color: Colors.white,
+            elevation: 5,
+            padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(20.0),
             ),
             onPressed: widget.onPressed),
       ],
@@ -113,14 +132,18 @@ class _CommentSectionState extends State<CommentSection> {
             ),
           ),
         ),
-        //----------Next Button
-        MaterialButton(
-            height: 50,
-            minWidth: 100,
-            color: Colors.blue,
+        //----------Submit Button
+        RaisedButton(
             child: Text(
               "Submit",
               style: Styles.h3Style,
+            ),
+            color: Colors.white,
+            elevation: 5,
+            padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(20.0),
             ),
             onPressed: widget.onPressed),
       ],

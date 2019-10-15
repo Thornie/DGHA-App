@@ -144,9 +144,10 @@ class _RatingScreenState extends State<RatingScreen> {
             padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
             child: RatingBreadcrumbs(
               navPosition: navPosition,
-              iconColor: Styles.midnightBlue,
-              backgroundColor: Colors.grey,
-              highlightedColor: Styles.yellow,
+              iconColor: Colors.white,
+              backgroundColor: Styles.grey,
+              highlightedIconColor: Styles.yellow,
+              highlightedBackgroundColor: Styles.midnightBlue,
               controller: pageController,
             ),
           ),
