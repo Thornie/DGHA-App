@@ -39,9 +39,11 @@ class _RatingScreenState extends State<RatingScreen> {
     overallRatingScreen = new RatingScreenSection(
       title: "Overall",
       buttonTitle: "Next",
+      //If the page already has a rating, grab that from the object
+      rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
         setState(() {
-          navPosition = 1;
+          if (navPosition < 1) navPosition = 1;
         });
         overallRating = overallRatingScreen.rating;
         pageController.jumpToPage(1);
@@ -50,9 +52,13 @@ class _RatingScreenState extends State<RatingScreen> {
     customerServiceRatingScreen = new RatingScreenSection(
       title: "Customer Service",
       buttonTitle: "Next",
+      //If the page already has a rating, grab that from the object
+      rating: customerServiceRatingScreen != null
+          ? customerServiceRatingScreen.rating
+          : 0,
       onPressed: () {
         setState(() {
-          navPosition = 2;
+          if (navPosition < 2) navPosition = 2;
         });
         customerServiceRating = customerServiceRatingScreen.rating;
         pageController.jumpToPage(2);
@@ -61,9 +67,12 @@ class _RatingScreenState extends State<RatingScreen> {
     amenitiesRatingScreen = new RatingScreenSection(
       title: "Amenities",
       buttonTitle: "Next",
+      //If the page already has a rating, grab that from the object
+      rating: amenitiesRatingScreen != null ? amenitiesRatingScreen.rating : 0,
+
       onPressed: () {
         setState(() {
-          navPosition = 3;
+          if (navPosition < 3) navPosition = 3;
         });
         amenitiesRating = amenitiesRatingScreen.rating;
         pageController.jumpToPage(3);
@@ -72,9 +81,11 @@ class _RatingScreenState extends State<RatingScreen> {
     locationRatingScreen = new RatingScreenSection(
       title: "Location",
       buttonTitle: "Next",
+      //If the page already has a rating, grab that from the object
+      rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
         setState(() {
-          navPosition = 4;
+          if (navPosition < 4) navPosition = 4;
         });
         locationRating = locationRatingScreen.rating;
         pageController.jumpToPage(4);
