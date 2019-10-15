@@ -258,7 +258,8 @@ class _CommentSectionState extends State<CommentSection> {
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
                       maxLines: 7,
-                      style: Styles.h3Style,
+                      maxLength: 140,
+                      style: Styles.pStyle,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
