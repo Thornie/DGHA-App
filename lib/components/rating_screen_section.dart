@@ -67,13 +67,18 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
   }
 }
 
-class CommentSection extends StatelessWidget {
+class CommentSection extends StatefulWidget {
   final String title;
   final Function onPressed;
-  String comment;
+  final TextEditingController controller;
 
-  CommentSection({this.title, this.onPressed, this.comment});
+  CommentSection({this.title, this.onPressed, this.controller});
 
+  @override
+  _CommentSectionState createState() => _CommentSectionState();
+}
+
+class _CommentSectionState extends State<CommentSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -81,20 +86,21 @@ class CommentSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
-            height: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 //----------Title
                 Text(
-                  title,
+                  widget.title,
                   style: Styles.h2Style,
                 ),
                 //----------Comment Box
                 TextField(
+                  controller: widget.controller,
                   keyboardType: TextInputType.multiline,
-                  maxLines: 6,
-                  minLines: 6,
+                  minLines: 1,
+                  maxLines: 7,
+                  style: Styles.h3Style,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -116,7 +122,7 @@ class CommentSection extends StatelessWidget {
               "Submit",
               style: Styles.h3Style,
             ),
-            onPressed: onPressed),
+            onPressed: widget.onPressed),
       ],
     );
   }

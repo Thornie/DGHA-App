@@ -30,6 +30,9 @@ class _RatingScreenState extends State<RatingScreen> {
   double locationRating = 0;
   String comment = "";
 
+  //Comment Text Controller
+  TextEditingController commentController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     //-------------------- Rating PageView Screens
@@ -79,8 +82,10 @@ class _RatingScreenState extends State<RatingScreen> {
     );
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
+      controller: commentController,
       onPressed: () {
-        //TODO: Save to database from here
+        comment = commentController.text;
+        //TODO: Save to database here
         print("Overall: $overallRating");
         print("Customer Service: $customerServiceRating");
         print("Amenities: $amenitiesRating");
@@ -89,46 +94,52 @@ class _RatingScreenState extends State<RatingScreen> {
       },
     );
 
-    return Column(
-      children: <Widget>[
-        //----------Close Button
-        Align(
-          alignment: Alignment.topRight,
-          child: MaterialButton(
-            child: Icon(
-              Icons.close,
-              size: 40,
+    return GestureDetector(
+      //Close the keyboard when uder taps on screen
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Column(
+        children: <Widget>[
+          //----------Close Button
+          Align(
+            alignment: Alignment.topRight,
+            child: MaterialButton(
+              child: Icon(
+                Icons.close,
+                size: 40,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
           ),
-        ),
-        //----------Page Navigation
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-          child: RatingBreadcrumbs(
-            navPosition: navPosition,
-            iconColor: Styles.midnightBlue,
-            backgroundColor: Colors.grey,
-            highlightedColor: Styles.yellow,
+          //----------Page Navigation
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+            child: RatingBreadcrumbs(
+              navPosition: navPosition,
+              iconColor: Styles.midnightBlue,
+              backgroundColor: Colors.grey,
+              highlightedColor: Styles.yellow,
+            ),
           ),
-        ),
-        //----------Rating Section
-        Expanded(
-          child: PageView(
-            controller: controller,
-            physics: NeverScrollableScrollPhysics(),
-            children: <Widget>[
-              overallRatingScreen,
-              customerServiceRatingScreen,
-              amenitiesRatingScreen,
-              locationRatingScreen,
-              commentSectionScreen,
-            ],
+          //----------Rating Section
+          Expanded(
+            child: PageView(
+              controller: controller,
+              physics: NeverScrollableScrollPhysics(),
+              children: <Widget>[
+                overallRatingScreen,
+                customerServiceRatingScreen,
+                amenitiesRatingScreen,
+                locationRatingScreen,
+                commentSectionScreen,
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
