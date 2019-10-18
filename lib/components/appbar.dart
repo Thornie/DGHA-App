@@ -10,7 +10,12 @@ class DghaAppBar extends StatelessWidget {
   final bool isMenu;
   final String semanticLabel;
 
-  DghaAppBar({this.childOne, this.childTwo, this.text, this.isMenu, this.semanticLabel});
+  DghaAppBar(
+      {this.childOne,
+      this.childTwo,
+      this.text,
+      this.isMenu,
+      this.semanticLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +28,18 @@ class DghaAppBar extends StatelessWidget {
             bottomLeft: Radius.circular(Styles.normalRadius),
             bottomRight: Radius.circular(Styles.normalRadius),
           ),
-          boxShadow: [BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, 3))]),
+          boxShadow: [
+            BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, 3))
+          ]),
       child: Row(
         children: <Widget>[
-          this.childOne,
+          this.childOne != null
+              ? this.childOne
+              //DGHAIcon used as padding so the title is centered properly
+              : DghaIcon(
+                  icon: FontAwesomeIcons.bars,
+                  backgroundColor: Colors.transparent,
+                  iconColor: Colors.transparent),
           Expanded(
             child: Semantics(
               label: this.semanticLabel,
@@ -41,12 +54,13 @@ class DghaAppBar extends StatelessWidget {
               ),
             ),
           ),
-          //DGHAIcon used as padding so the title is centered properly
-          this.childTwo != null ? this.childTwo : DghaIcon(
-            icon: FontAwesomeIcons.bars, 
-            backgroundColor: Colors.transparent,
-            iconColor: Colors.transparent
-          ),
+          this.childTwo != null
+              ? this.childTwo
+              //DGHAIcon used as padding so the title is centered properly
+              : DghaIcon(
+                  icon: FontAwesomeIcons.bars,
+                  backgroundColor: Colors.transparent,
+                  iconColor: Colors.transparent),
         ],
       ),
     );
