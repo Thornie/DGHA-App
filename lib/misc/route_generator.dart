@@ -2,21 +2,35 @@ import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:dgha_brochure/screens/info_screens.dart';
 import 'package:dgha_brochure/screens/menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_menu_screen.dart';
+import 'package:dgha_brochure/screens/rating_screen.dart';
+import 'package:dgha_brochure/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 
-class RouteGenerator{
+class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final ScreenArguments arguments = settings.arguments; 
+    ScreenArguments screenArguments;
+    try {
+      screenArguments = settings.arguments;
+    } catch (e) {}
 
-    switch(settings.name) {
+    switch (settings.name) {
       case InfoScreen.id:
-        return MaterialPageRoute(builder: (_) => InfoScreen(appBarTitle: arguments.title, texts: arguments.texts,)); 
+        return MaterialPageRoute(
+            builder: (_) => InfoScreen(
+                  appBarTitle: screenArguments.title,
+                  texts: screenArguments.texts,
+                ));
       case MenuScreen.id:
-        return MaterialPageRoute(builder: (_) => MenuScreen()); 
+        return MaterialPageRoute(builder: (_) => MenuScreen());
       case RatingMenuScreen.id:
         return MaterialPageRoute(builder: (_) => RatingMenuScreen());
+      case ReviewScreen.id:
+        return MaterialPageRoute(
+            builder: (_) => ReviewScreen(settings.arguments));
+      case RatingScreen.id:
+        return MaterialPageRoute(builder: (_) => RatingScreen());
       default:
-        return MaterialPageRoute(builder: (_) => MenuScreen()); 
+        return MaterialPageRoute(builder: (_) => MenuScreen());
     }
   }
 }
