@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
@@ -17,8 +18,7 @@ class ReviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: <Widget>[
             DghaAppBar(
               text: "Reviews",
@@ -85,19 +85,68 @@ class ReviewScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
+            //----------New Review Button
             GestureDetector(
-              child: DghaIcon(
-                backgroundColor: Styles.midnightBlue,
-                icon: FontAwesomeIcons.pen,
-                iconColor: Styles.yellow,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: DghaIcon(
+                      backgroundColor: Styles.midnightBlue,
+                      icon: FontAwesomeIcons.pen,
+                      iconColor: Styles.yellow,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                ],
               ),
               onTap: () {
                 Navigator.pushNamed(context, RatingScreen.id);
               },
             ),
+            //----------Reviews
+            Container(
+              height: (3 * 160).toDouble(),
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: LocationRatingBar(
+                          title: "Overall Review",
+                          rating: 2,
+                          isSmall: true,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20, left: 20),
+                        child: Container(
+                          height: 110,
+                          decoration: BoxDecoration(border: Border.all()),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SelectableText(
+                              "ssdseu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                              style: Styles.pStyle,
+                              scrollPhysics: NeverScrollableScrollPhysics(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
+      bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
     );
   }
 }
@@ -106,20 +155,24 @@ class ReviewScreen extends StatelessWidget {
 class LocationRatingBar extends StatelessWidget {
   final String title;
   final double rating;
+  final bool isSmall;
 
-  LocationRatingBar({this.title, this.rating});
+  LocationRatingBar({this.title, this.rating, this.isSmall = false});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment:
+          isSmall ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
       children: <Widget>[
         //----------Title
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             title,
-            style: Styles.h3Style,
+            style: isSmall
+                ? Styles.h3Style.copyWith(fontSize: 18)
+                : Styles.h3Style,
           ),
         ),
         Stack(
@@ -129,12 +182,16 @@ class LocationRatingBar extends StatelessWidget {
               rating: rating,
               borderColor: Styles.midnightBlue,
               color: Styles.yellow,
-              size: MediaQuery.of(context).size.width / 10,
+              size: isSmall
+                  ? MediaQuery.of(context).size.width / 13
+                  : MediaQuery.of(context).size.width / 10,
             ),
             //----------Star Rating Outline
             SmoothStarRating(
               borderColor: Styles.midnightBlue,
-              size: MediaQuery.of(context).size.width / 10,
+              size: isSmall
+                  ? MediaQuery.of(context).size.width / 13
+                  : MediaQuery.of(context).size.width / 10,
             )
           ],
         ),
