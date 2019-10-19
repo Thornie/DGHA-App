@@ -113,7 +113,8 @@ class ReviewScreen extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.pushNamed(context, RatingScreen.id);
+                Navigator.pushNamed(context, RatingScreen.id,
+                    arguments: locationData.placeID);
               },
             ),
             //----------Reviews

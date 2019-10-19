@@ -28,7 +28,8 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => ReviewScreen(settings.arguments));
       case RatingScreen.id:
-        return MaterialPageRoute(builder: (_) => RatingScreen());
+        return MaterialPageRoute(
+            builder: (_) => RatingScreen(settings.arguments));
       default:
         return MaterialPageRoute(builder: (_) => MenuScreen());
     }

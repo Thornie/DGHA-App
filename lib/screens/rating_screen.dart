@@ -8,6 +8,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RatingScreen extends StatefulWidget {
   static const String id = "Rating Screen";
+  //Use for saving review
+  final String placeID;
+
+  RatingScreen(this.placeID);
   @override
   _RatingScreenState createState() => _RatingScreenState();
 }

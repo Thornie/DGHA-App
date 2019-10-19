@@ -17,12 +17,14 @@ class _SearchRatingScreenState extends State<SearchRatingScreen> {
     locationList = new List<LocationData>();
     for (var i = 0; i < 5; i++) {
       locationList.add(new LocationData(
-          name: "Swinburne University Of Technology",
-          address: "John St, Hawthorn VIC 3122",
-          overallRating: 4,
-          customerServiceRating: 3,
-          amenitiesRating: 5,
-          locationRating: 3));
+        name: "Swinburne University Of Technology",
+        address: "John St, Hawthorn VIC 3122",
+        overallRating: 4,
+        customerServiceRating: 3,
+        amenitiesRating: 5,
+        locationRating: 3,
+        placeID: "SAMPLE",
+      ));
     }
 
     return Column(
