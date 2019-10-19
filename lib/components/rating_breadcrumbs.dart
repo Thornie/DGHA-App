@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -53,19 +54,20 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.navPosition >= 0
                       ? "Double tap to go to the overall rating page"
                       : "",
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    backgroundColor: widget.navPosition >= 0
-                        ? widget.highlightedBackgroundColor
-                        : widget.backgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.navPosition >= 0
+                  child: GestureDetector(
+                    child: DghaIcon(
+                      padding: 3,
+                      paddingPadding: 0,
+                      size: 35,
+                      backgroundColor: widget.navPosition >= 0
+                          ? widget.highlightedBackgroundColor
+                          : widget.backgroundColor,
+                      icon: Icons.arrow_forward,
+                      iconColor: widget.navPosition >= 0
                           ? widget.highlightedIconColor
                           : widget.iconColor,
-                      size: 35,
                     ),
-                    onPressed: widget.navPosition >= 0
+                    onTap: widget.navPosition >= 0
                         ? () {
                             widget.controller.jumpToPage(0);
                           }
@@ -78,19 +80,20 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.navPosition >= 1
                       ? "Double tap to go to the customer service rating page"
                       : "",
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    backgroundColor: widget.navPosition >= 1
-                        ? widget.highlightedBackgroundColor
-                        : widget.backgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.navPosition >= 1
+                  child: GestureDetector(
+                    child: DghaIcon(
+                      padding: 3,
+                      paddingPadding: 0,
+                      size: 35,
+                      backgroundColor: widget.navPosition >= 1
+                          ? widget.highlightedBackgroundColor
+                          : widget.backgroundColor,
+                      icon: Icons.arrow_forward,
+                      iconColor: widget.navPosition >= 1
                           ? widget.highlightedIconColor
                           : widget.iconColor,
-                      size: 35,
                     ),
-                    onPressed: widget.navPosition >= 1
+                    onTap: widget.navPosition >= 1
                         ? () {
                             widget.controller.jumpToPage(1);
                           }
@@ -103,19 +106,20 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.navPosition >= 0
                       ? "Double tap to go to the overall rating page"
                       : "",
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    backgroundColor: widget.navPosition >= 2
-                        ? widget.highlightedBackgroundColor
-                        : widget.backgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.navPosition >= 2
+                  child: GestureDetector(
+                    child: DghaIcon(
+                      padding: 3,
+                      paddingPadding: 0,
+                      size: 35,
+                      backgroundColor: widget.navPosition >= 2
+                          ? widget.highlightedBackgroundColor
+                          : widget.backgroundColor,
+                      icon: Icons.arrow_forward,
+                      iconColor: widget.navPosition >= 2
                           ? widget.highlightedIconColor
                           : widget.iconColor,
-                      size: 35,
                     ),
-                    onPressed: widget.navPosition >= 2
+                    onTap: widget.navPosition >= 2
                         ? () {
                             widget.controller.jumpToPage(2);
                           }
@@ -128,19 +132,20 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.navPosition >= 1
                       ? "Double tap to go to the location service rating page"
                       : "",
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    backgroundColor: widget.navPosition >= 3
-                        ? widget.highlightedBackgroundColor
-                        : widget.backgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.navPosition >= 3
+                  child: GestureDetector(
+                    child: DghaIcon(
+                      padding: 3,
+                      paddingPadding: 0,
+                      size: 35,
+                      backgroundColor: widget.navPosition >= 3
+                          ? widget.highlightedBackgroundColor
+                          : widget.backgroundColor,
+                      icon: Icons.arrow_forward,
+                      iconColor: widget.navPosition >= 3
                           ? widget.highlightedIconColor
                           : widget.iconColor,
-                      size: 35,
                     ),
-                    onPressed: widget.navPosition >= 3
+                    onTap: widget.navPosition >= 3
                         ? () {
                             widget.controller.jumpToPage(3);
                           }
@@ -153,19 +158,20 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.navPosition >= 1
                       ? "Double tap to go to the additonal comment page"
                       : "",
-                  child: FloatingActionButton(
-                    heroTag: null,
-                    backgroundColor: widget.navPosition >= 4
-                        ? widget.highlightedBackgroundColor
-                        : widget.backgroundColor,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: widget.navPosition >= 4
+                  child: GestureDetector(
+                    child: DghaIcon(
+                      padding: 3,
+                      paddingPadding: 0,
+                      size: 35,
+                      backgroundColor: widget.navPosition >= 4
+                          ? widget.highlightedBackgroundColor
+                          : widget.backgroundColor,
+                      icon: Icons.arrow_forward,
+                      iconColor: widget.navPosition >= 4
                           ? widget.highlightedIconColor
                           : widget.iconColor,
-                      size: 35,
                     ),
-                    onPressed: widget.navPosition >= 4
+                    onTap: widget.navPosition >= 4
                         ? () {
                             widget.controller.jumpToPage(4);
                           }

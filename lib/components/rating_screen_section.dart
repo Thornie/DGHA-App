@@ -113,7 +113,7 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
                       },
                       starCount: 5,
                       rating: localRating,
-                      size: MediaQuery.of(context).size.height / 9,
+                      size: MediaQuery.of(context).size.width / 6,
                       color: Styles.yellow,
                       borderColor: Styles.midnightBlue,
                       spacing: 0.0,
@@ -124,7 +124,7 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
                     child: SmoothStarRating(
                       allowHalfRating: false,
                       starCount: 5,
-                      size: MediaQuery.of(context).size.height / 9,
+                      size: MediaQuery.of(context).size.width / 6,
                       color: Styles.midnightBlue,
                       borderColor: Styles.midnightBlue,
                       spacing: 0.0,

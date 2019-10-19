@@ -1,9 +1,13 @@
+import 'package:dgha_brochure/components/appbar.dart';
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/rating_breadcrumbs.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/components/rating_screen_section.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RatingScreen extends StatefulWidget {
+  static const String id = "Rating Screen";
   @override
   _RatingScreenState createState() => _RatingScreenState();
 }
@@ -128,58 +132,64 @@ class _RatingScreenState extends State<RatingScreen> {
       },
     );
 
-    return GestureDetector(
-      //Close the keyboard when uder taps on screen
-      onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
-      },
-      child: Column(
-        children: <Widget>[
-          //----------Close Button
-          Align(
-            alignment: Alignment.topRight,
-            child: Semantics(
-              label: "Close button",
-              hint:
-                  "Double tap to close the ratings page and cancel your review",
-              child: MaterialButton(
-                child: Icon(
-                  Icons.close,
-                  size: 40,
+    return Scaffold(
+      body: SafeArea(
+        child: GestureDetector(
+          //Close the keyboard when uder taps on screen
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Column(
+            children: <Widget>[
+              //----------App Bar
+              DghaAppBar(
+                isMenu: true,
+                text: "Rating",
+                semanticLabel:
+                    "Double tap to close the ratings page and cancel your review",
+                childOne: GestureDetector(
+                  child: DghaIcon(
+                    size: 35,
+                    padding: 4,
+                    backgroundColor: Styles.midnightBlue,
+                    iconColor: Styles.yellow,
+                    icon: Icons.close,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
               ),
-            ),
+              //----------Page Navigation
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 30, bottom: 20),
+                child: RatingBreadcrumbs(
+                  navPosition: navPosition,
+                  iconColor: Colors.white,
+                  backgroundColor: Styles.grey,
+                  highlightedIconColor: Styles.yellow,
+                  highlightedBackgroundColor: Styles.midnightBlue,
+                  controller: pageController,
+                ),
+              ),
+              //----------Rating Section
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: <Widget>[
+                    overallRatingScreen,
+                    customerServiceRatingScreen,
+                    amenitiesRatingScreen,
+                    locationRatingScreen,
+                    commentSectionScreen,
+                  ],
+                ),
+              ),
+            ],
           ),
-          //----------Page Navigation
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-            child: RatingBreadcrumbs(
-              navPosition: navPosition,
-              iconColor: Colors.white,
-              backgroundColor: Styles.grey,
-              highlightedIconColor: Styles.yellow,
-              highlightedBackgroundColor: Styles.midnightBlue,
-              controller: pageController,
-            ),
-          ),
-          //----------Rating Section
-          Expanded(
-            child: PageView(
-              controller: pageController,
-              physics: NeverScrollableScrollPhysics(),
-              children: <Widget>[
-                overallRatingScreen,
-                customerServiceRatingScreen,
-                amenitiesRatingScreen,
-                locationRatingScreen,
-                commentSectionScreen,
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
