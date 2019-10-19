@@ -4,8 +4,10 @@ class Styles {
   // ----------------- COLOURS
   static final Color yellow = Color(0xfffae100);
   static final Color midnightBlue = Color(0xff00205b);
+  static final Color transMidnightBlue = Color(0x7000205b);
   static final Color grey = Color(0xff576a80);
   static final Color transparent = Color(0x00000000);
+  static final Color softGrey = Color(0xfff2f5f8);
 
   // ----------------- SIZES
   // ---------- APP
@@ -30,4 +32,5 @@ class Styles {
   static TextStyle linkStyle =
       TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue, decoration: TextDecoration.underline, decorationColor: midnightBlue);
   static TextStyle highlightText = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue);
+  static TextStyle searchStyle = TextStyle(fontFamily: "Poppins", fontSize: 18, color: midnightBlue);
 }
