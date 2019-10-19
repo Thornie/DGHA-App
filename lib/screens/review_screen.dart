@@ -3,6 +3,7 @@ import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
+import 'package:dgha_brochure/models/location_rating_data.dart';
 import 'package:dgha_brochure/screens/rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,11 +12,20 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 class ReviewScreen extends StatelessWidget {
   static const String id = "Review Screen";
   final LocationData locationData;
+  List<LocationRatingData> locationRatingData;
 
   ReviewScreen(this.locationData);
 
   @override
   Widget build(BuildContext context) {
+    locationRatingData = new List<LocationRatingData>();
+    for (var i = 0; i < 5; i++) {
+      locationRatingData.add(new LocationRatingData(
+          rating: 3,
+          comment:
+              "ssdseu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
+    }
+
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -108,10 +118,10 @@ class ReviewScreen extends StatelessWidget {
             ),
             //----------Reviews
             Container(
-              height: (3 * 160).toDouble(),
+              height: (locationRatingData.length * 160).toDouble(),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 3,
+                itemCount: locationRatingData.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: <Widget>[
@@ -119,7 +129,7 @@ class ReviewScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 20.0),
                         child: LocationRatingBar(
                           title: "Overall Review",
-                          rating: 2,
+                          rating: locationRatingData[index].rating,
                           isSmall: true,
                         ),
                       ),
@@ -127,11 +137,12 @@ class ReviewScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 20, left: 20),
                         child: Container(
                           height: 110,
+                          width: double.maxFinite,
                           decoration: BoxDecoration(border: Border.all()),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SelectableText(
-                              "ssdseu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                              locationRatingData[index].comment,
                               style: Styles.pStyle,
                               scrollPhysics: NeverScrollableScrollPhysics(),
                             ),
