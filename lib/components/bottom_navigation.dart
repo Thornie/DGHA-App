@@ -5,13 +5,15 @@ import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class DGHABotNav extends StatelessWidget {
-  final Color activeTabColor;
-  // 0 for ratings tab
-  // 1 for dog info tab
-  final int activeTab;
+enum ActivePageEnum {
+  ratingsPage,
+  infoPage,
+}
 
-  DGHABotNav({this.activeTabColor, this.activeTab});
+class DGHABotNav extends StatelessWidget {
+  final ActivePageEnum activeTab;
+
+  DGHABotNav({this.activeTab});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +42,8 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == 0
-                        ? this.activeTabColor
+                    color: this.activeTab == ActivePageEnum.ratingsPage
+                        ? Styles.yellow
                         : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Styles.normalRadius),
@@ -73,8 +75,8 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == 1
-                        ? this.activeTabColor
+                    color: this.activeTab == ActivePageEnum.infoPage
+                        ? Styles.yellow
                         : Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(Styles.normalRadius),

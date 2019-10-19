@@ -190,10 +190,7 @@ class _InfoScreenState extends State<InfoScreen> {
           );
         },
       )),
-      bottomNavigationBar: DGHABotNav(
-        activeTabColor: Styles.yellow,
-        activeTab: 1,
-      ),
+      bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.infoPage),
     );
   }
 }

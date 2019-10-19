@@ -172,10 +172,7 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
       ),
       // -------------- Bottom Navigation
-      bottomNavigationBar: DGHABotNav(
-        activeTabColor: Styles.yellow,
-        activeTab: 1,
-      ),
+      bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.infoPage),
     );
   }
 

@@ -17,10 +17,7 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
         child: SearchRatingScreen(),
       ),
       //-------------------- Bottom navigation --------------------//
-      bottomNavigationBar: DGHABotNav(
-        activeTabColor: Styles.yellow,
-        activeTab: 0,
-      ),
+      bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
     );
   }
 }
