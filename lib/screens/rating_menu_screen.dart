@@ -1,5 +1,4 @@
 import 'package:dgha_brochure/components/bottom_navigation.dart';
-import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/search_ratings_screen.dart';
 import 'package:flutter/material.dart';
 

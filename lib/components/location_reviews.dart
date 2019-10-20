@@ -41,11 +41,13 @@ class LocationReviews extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    SmoothStarRating(
-                      size: MediaQuery.of(context).size.width / 15,
-                      rating: locationData.overallRating,
-                      color: Styles.yellow,
-                      borderColor: Styles.midnightBlue,
+                    IgnorePointer(
+                      child: SmoothStarRating(
+                        size: MediaQuery.of(context).size.width / 15,
+                        rating: locationData.overallRating,
+                        color: Styles.yellow,
+                        borderColor: Styles.midnightBlue,
+                      ),
                     ),
                     IgnorePointer(
                       child: SmoothStarRating(
