@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.07,
                   ),
 
-                  // NOTE: Email
+                  // NOTE: Email Text Field
                   Container(
                     child: buildTextField(
                       prefixIcon: FontAwesomeIcons.solidEnvelope,
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 30,
                   ),
 
-                  // NOTE: Password
+                  // NOTE: Password Text Field
                   Container(
                     child: buildTextField(
                       prefixIcon: FontAwesomeIcons.lock,
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 30,
                   ),
 
-                  // NOTE: Submit
+                  // NOTE: Login Button
                   Center(
                     child: GestureDetector(
                       onTap: () async {
@@ -128,34 +128,39 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // NOTE: Skip
+            // NOTE: Skip Button
             Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                padding: EdgeInsets.symmetric(vertical: 10),
-                margin: EdgeInsets.only(bottom: 30),
-                decoration: BoxDecoration(
-                  color: Styles.yellow,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Styles.grey,
-                      blurRadius: 3,
-                      offset: Offset(2, 3),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(RatingMenuScreen.id);
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.only(bottom: 30),
+                  decoration: BoxDecoration(
+                    color: Styles.yellow,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Styles.grey,
+                        blurRadius: 3,
+                        offset: Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "Skip",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 3,
+                      decorationColor: Styles.midnightBlue,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Styles.midnightBlue,
                     ),
-                  ],
-                ),
-                child: Text(
-                  "Skip",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 3,
-                    decorationColor: Styles.midnightBlue,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Styles.midnightBlue,
                   ),
                 ),
               ),
