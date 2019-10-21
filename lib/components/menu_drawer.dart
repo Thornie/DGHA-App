@@ -2,10 +2,15 @@ import 'package:dgha_brochure/components/menu_expansion_tile.dart';
 import 'package:dgha_brochure/components/menu_tile.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha_brochure/models/menu_tile_data.dart';
+import 'package:dgha_brochure/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MenuDrawer extends StatelessWidget {
   final double width;
+  final _auth = FirebaseAuth.instance;
 
   MenuDrawer({this.width});
 
@@ -32,8 +37,27 @@ class MenuDrawer extends StatelessWidget {
                 MenuTile(tile: Data.guideDogInfoTileData),
                 MenuTile(tile: Data.guideDogAccessTileData),
                 MenuExpansionTile(tile: Data.lawsTilesListData),
-                MenuTile(tile: Data.signUpTileData),
+                MenuTile(tile: Data.membershipTitleData),
                 MenuTile(tile: Data.donateTileData),
+                MenuTile(
+                    tile: new MenuTileData(
+                        title: "Sign in",
+                        icon: FontAwesomeIcons.signInAlt,
+                        semanticLabel: "Login",
+                        semanticHint: "Double tap to go to the sign in page",
+                        onTap: () {
+                          Navigator.of(context).pushNamed(LoginScreen.id);
+                        })),
+                MenuTile(
+                    tile: new MenuTileData(
+                        title: "Sign out",
+                        icon: FontAwesomeIcons.signOutAlt,
+                        semanticLabel: "Log out",
+                        semanticHint: "Double tap to sign out",
+                        onTap: () {
+                          _auth.signOut();
+                          Navigator.of(context).pushNamed(LoginScreen.id);
+                        })),
               ],
             ),
           ),
