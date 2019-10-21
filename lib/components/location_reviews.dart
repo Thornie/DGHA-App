@@ -13,7 +13,7 @@ class LocationReviews extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         margin: EdgeInsets.all(7),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -29,39 +29,31 @@ class LocationReviews extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Stack(
               children: <Widget>[
-                Expanded(
-                  child: Text(
-                    locationData.name,
-                    style: Styles.h3Style,
-                    overflow: TextOverflow.ellipsis,
+                IgnorePointer(
+                  child: SmoothStarRating(
+                    size: MediaQuery.of(context).size.width / 15,
+                    rating: locationData.overallRating,
+                    color: Styles.yellow,
+                    borderColor: Styles.midnightBlue,
                   ),
                 ),
-                Stack(
-                  children: <Widget>[
-                    IgnorePointer(
-                      child: SmoothStarRating(
-                        size: MediaQuery.of(context).size.width / 15,
-                        rating: locationData.overallRating,
-                        color: Styles.yellow,
-                        borderColor: Styles.midnightBlue,
-                      ),
-                    ),
-                    IgnorePointer(
-                      child: SmoothStarRating(
-                        allowHalfRating: false,
-                        starCount: 5,
-                        size: MediaQuery.of(context).size.width / 15,
-                        color: Styles.midnightBlue,
-                        borderColor: Styles.midnightBlue,
-                        spacing: 0.0,
-                      ),
-                    ),
-                  ],
+                IgnorePointer(
+                  child: SmoothStarRating(
+                    allowHalfRating: false,
+                    starCount: 5,
+                    size: MediaQuery.of(context).size.width / 15,
+                    color: Styles.midnightBlue,
+                    borderColor: Styles.midnightBlue,
+                    spacing: 0.0,
+                  ),
                 ),
               ],
+            ),
+            Text(
+              locationData.name,
+              style: Styles.h3Style,
             ),
             Text(
               locationData.address,
