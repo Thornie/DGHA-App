@@ -181,12 +181,12 @@ class Data {
       semanticLabel: "Western Australia Law",
       semanticHint: "Double Tap to read more about Western Australian Law regarding Guide Dogs");
 
-  static final MenuTileData signUpTileData = new MenuTileData(
-      title: "Sign Up",
+  static final MenuTileData membershipTitleData = new MenuTileData(
+      title: "Membership",
       icon: FontAwesomeIcons.solidUser,
       link: "http://dgha.org.au/dgha/membership/",
-      semanticLabel: "Sign Up",
-      semanticHint: "Double tap to go to the Guide Dog Handlder Australia Sign Up page");
+      semanticLabel: "Membership",
+      semanticHint: "Double tap to go to the Guide Dog Handlder Australia Membership page");
 
   static final MenuTileData donateTileData = new MenuTileData(
       title: "Donation",
