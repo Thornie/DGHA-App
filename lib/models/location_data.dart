@@ -5,12 +5,19 @@ class LocationData {
   final double customerServiceRating;
   final double amenitiesRating;
   final double locationRating;
+  final String placeId;
+  final double latitude;
+  final double longitude;
 
-  LocationData(
-      {this.name,
-      this.address,
-      this.overallRating,
-      this.customerServiceRating,
-      this.amenitiesRating,
-      this.locationRating});
+  LocationData({
+    this.name,
+    this.address,
+    this.overallRating,
+    this.customerServiceRating,
+    this.amenitiesRating,
+    this.locationRating,
+    this.placeId = "",
+    this.latitude = 0,
+    this.longitude = 0,
+  });
 }
