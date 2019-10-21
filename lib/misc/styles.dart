@@ -32,5 +32,5 @@ class Styles {
   static TextStyle linkStyle =
       TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue, decoration: TextDecoration.underline, decorationColor: midnightBlue);
   static TextStyle highlightText = TextStyle(fontFamily: "Manjari", fontWeight: FontWeight.w700, fontSize: 18, backgroundColor: yellow, color: midnightBlue);
-  static TextStyle searchStyle = TextStyle(fontFamily: "Poppins", fontSize: 18, color: midnightBlue);
+  static TextStyle inputStyle = TextStyle(fontFamily: "Poppins", fontSize: 18, color: midnightBlue);
 }
