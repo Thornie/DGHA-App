@@ -17,6 +17,9 @@ dependencies:
   geolocator: ^5.1.4
   google_maps_webservice: ^0.0.15
   http: ^0.12.0
+  firebase_core: ^0.4.0
+  firebase_auth: ^0.14.0
+  cloud_firestore: ^0.12.9
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +40,7 @@ flutter:
     - assets/languages/laws/tas/
     - assets/languages/laws/vic/
     - assets/languages/laws/wa/
+    - assets/images/dgha_logo/
 
   fonts:
     - family: Manjari
