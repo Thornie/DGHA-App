@@ -1,5 +1,6 @@
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:dgha_brochure/screens/info_screens.dart';
+import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_screen.dart';
@@ -14,6 +15,8 @@ class RouteGenerator {
     } catch (e) {}
 
     switch (settings.name) {
+      case LoginScreen.id:
+        return MaterialPageRoute(builder: (_) => LoginScreen());
       case InfoScreen.id:
         return MaterialPageRoute(
             builder: (_) => InfoScreen(
@@ -25,8 +28,7 @@ class RouteGenerator {
       case RatingMenuScreen.id:
         return MaterialPageRoute(builder: (_) => RatingMenuScreen());
       case ReviewScreen.id:
-        return MaterialPageRoute(
-            builder: (_) => ReviewScreen(settings.arguments));
+        return MaterialPageRoute(builder: (_) => ReviewScreen(settings.arguments));
       case RatingScreen.id:
         return MaterialPageRoute(builder: (_) => RatingScreen());
       default:
