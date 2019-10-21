@@ -1,8 +1,8 @@
 import 'package:dgha_brochure/models/languages.dart';
 
-class ScreenArguments {
+class InfoScrArgs {
   final String title;
-  final List<Language> texts; 
+  final List<Language> texts;
 
-  ScreenArguments({this.title, this.texts}); 
+  InfoScrArgs({this.title, this.texts});
 }
