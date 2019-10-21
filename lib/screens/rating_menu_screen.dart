@@ -26,24 +26,6 @@ class RatingMenuScreen extends StatefulWidget {
 }
 
 class _RatingMenuScreenState extends State<RatingMenuScreen> {
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-
-      if (user != null) {
-        loggedInUser = user;
-
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // -------------------------- NOTE: FIRESTORE
   final _firestore = Firestore.instance;
 
   // -------------------------- NOTE: CONTROLLERS
