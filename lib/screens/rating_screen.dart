@@ -4,7 +4,6 @@ import 'package:dgha_brochure/components/rating_breadcrumbs.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/components/rating_screen_section.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RatingScreen extends StatefulWidget {
   static const String id = "Rating Screen";

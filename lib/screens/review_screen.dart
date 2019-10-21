@@ -1,24 +1,24 @@
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/location_rating_data.dart';
 import 'package:dgha_brochure/screens/rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class ReviewScreen extends StatelessWidget {
   static const String id = "Review Screen";
   final LocationData locationData;
-  List<LocationRatingData> locationRatingData;
 
   ReviewScreen(this.locationData);
 
   @override
   Widget build(BuildContext context) {
-    locationRatingData = new List<LocationRatingData>();
+    List<LocationRatingData> locationRatingData =
+        new List<LocationRatingData>();
     for (var i = 0; i < 5; i++) {
       locationRatingData.add(new LocationRatingData(
           rating: 3,
@@ -187,25 +187,12 @@ class LocationRatingBar extends StatelessWidget {
                 : Styles.h3Style,
           ),
         ),
-        Stack(
-          children: <Widget>[
-            //----------Star Rating
-            SmoothStarRating(
-              rating: rating,
-              borderColor: Styles.midnightBlue,
-              color: Styles.yellow,
-              size: isSmall
-                  ? MediaQuery.of(context).size.width / 13
-                  : MediaQuery.of(context).size.width / 10,
-            ),
-            //----------Star Rating Outline
-            SmoothStarRating(
-              borderColor: Styles.midnightBlue,
-              size: isSmall
-                  ? MediaQuery.of(context).size.width / 13
-                  : MediaQuery.of(context).size.width / 10,
-            )
-          ],
+        DghaStarRating(
+          changeRatingOnTap: false,
+          rating: rating,
+          height: isSmall
+              ? MediaQuery.of(context).size.width / 13
+              : MediaQuery.of(context).size.width / 10,
         ),
       ],
     );

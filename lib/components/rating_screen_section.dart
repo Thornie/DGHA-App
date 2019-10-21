@@ -1,7 +1,7 @@
+import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 //The component for each rating page (overall, customer service, etc)
 class RatingScreenSection extends StatefulWidget {
@@ -55,8 +55,6 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
 
   @override
   Widget build(BuildContext context) {
-    double localRating = widget.rating;
-
     return Column(
       children: <Widget>[
         Container(
@@ -97,41 +95,14 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
                   ),
                 ],
               ),
-              Stack(
-                children: <Widget>[
-                  //----------Star Rating
-                  Semantics(
-                    label: "Rating",
-                    hint: "Double tap a star to give a rating out of 5",
-                    child: SmoothStarRating(
-                      allowHalfRating: false,
-                      onRatingChanged: (v) {
-                        setState(() {
-                          localRating = v;
-                          widget.rating = localRating;
-                        });
-                      },
-                      starCount: 5,
-                      rating: localRating,
-                      size: MediaQuery.of(context).size.width / 6,
-                      color: Styles.yellow,
-                      borderColor: Styles.midnightBlue,
-                      spacing: 0.0,
-                    ),
-                  ),
-                  //----------Star Rating Outline (Needed for the outline to stay a separate color)
-                  IgnorePointer(
-                    child: SmoothStarRating(
-                      allowHalfRating: false,
-                      starCount: 5,
-                      size: MediaQuery.of(context).size.width / 6,
-                      color: Styles.midnightBlue,
-                      borderColor: Styles.midnightBlue,
-                      spacing: 0.0,
-                    ),
-                  ),
-                ],
-              )
+              DghaStarRating(
+                height: MediaQuery.of(context).size.width / 7,
+                rating: widget.rating,
+                starCount: 5,
+                onTap: (rating) {
+                  widget.rating = rating;
+                },
+              ),
             ],
           ),
         ),

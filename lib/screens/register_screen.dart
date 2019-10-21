@@ -4,7 +4,6 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 
