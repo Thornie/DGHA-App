@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
@@ -8,6 +9,7 @@ import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/place.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -24,7 +26,27 @@ class RatingMenuScreen extends StatefulWidget {
 }
 
 class _RatingMenuScreenState extends State<RatingMenuScreen> {
-  // -------------------------- Controllers
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+
+      if (user != null) {
+        loggedInUser = user;
+
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // -------------------------- NOTE: FIRESTORE
+  final _firestore = Firestore.instance;
+
+  // -------------------------- NOTE: CONTROLLERS
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final TextEditingController _txtFldCont = new TextEditingController();
   String userInput = "";
@@ -51,7 +73,9 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
   @override
   void initState() {
     super.initState();
-    getInitialLocations();
+    getPlacesFromDatabase();
+    // getInitialLocations();
+    // getCurrentUser();
   }
 
   void calcDimensions(Orientation orientation) {
@@ -63,6 +87,28 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
     } else {
       this.drawerWidth = this.scrHeight * 0.75;
     }
+  }
+
+  void getPlacesFromDatabase() async {
+    final placesFromDatabase = await _firestore.collection('location').getDocuments();
+    List<LocationData> locations = new List<LocationData>();
+
+    for (var place in placesFromDatabase.documents) {
+      LocationData locationData = new LocationData(
+          name: place.data['name'],
+          address: place.data['address'],
+          overallRating: place.data['avgOverallRating'].toDouble(),
+          amenitiesRating: place.data['avgAmenitiesRating'].toDouble(),
+          customerServiceRating: place.data['avgCustServRating'].toDouble(),
+          placeId: place.data['placeId']);
+
+      locations.add(locationData);
+    }
+
+    setState(() {
+      this.iniLocationList = locations;
+      this.locationList = locations;
+    });
   }
 
   void getInitialLocations() async {
@@ -187,7 +233,7 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
                             onSubmitted: (value) {
                               getLocations(value);
                             },
-                            style: Styles.searchStyle,
+                            style: Styles.inputStyle,
                             cursorColor: Styles.midnightBlue,
                             cursorWidth: 5,
                             decoration: InputDecoration(
@@ -227,7 +273,7 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
                   ),
                 ),
                 DghaAppBar(
-                  text: "Places",
+                  text: "Explore",
                   isMenu: true,
                   childOne: GestureDetector(
                     onTap: () {
