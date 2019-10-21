@@ -1,18 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/rating_breadcrumbs.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/components/rating_screen_section.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:dgha_brochure/models/review.dart';
 
 class RatingScreen extends StatefulWidget {
   static const String id = "Rating Screen";
+
+  final String placeId;
+  final String placeName;
+
+  RatingScreen({this.placeId, this.placeName});
   @override
   _RatingScreenState createState() => _RatingScreenState();
 }
 
 class _RatingScreenState extends State<RatingScreen> {
+  // ------------ NOTE: FIRESTORE
+  final _firestore = Firestore.instance;
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser loggedInUser;
+
   int navPosition = 0;
   Widget currentPage;
   final pageController = PageController(
@@ -38,14 +51,34 @@ class _RatingScreenState extends State<RatingScreen> {
   TextEditingController commentController = new TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  // ------ NOTE: GET CURRENT USER
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+
+      if (user != null) {
+        loggedInUser = user;
+      } else {
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     //-------------------- Rating PageView Screens --------------------//
     //----------Overall Rating
     overallRatingScreen = new RatingScreenSection(
       title: "Overall",
       buttonTitle: "Next",
-      hintText:
-          "Give an overall rating out of 5 on your experience at this location.",
+      hintText: "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
@@ -62,12 +95,9 @@ class _RatingScreenState extends State<RatingScreen> {
     customerServiceRatingScreen = new RatingScreenSection(
       title: "Customer Service",
       buttonTitle: "Next",
-      hintText:
-          "Give a score out of 5 on the customer service provided to you at this location.",
+      hintText: "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
-      rating: customerServiceRatingScreen != null
-          ? customerServiceRatingScreen.rating
-          : 0,
+      rating: customerServiceRatingScreen != null ? customerServiceRatingScreen.rating : 0,
       onPressed: () {
         if (customerServiceRatingScreen.rating != 0) {
           setState(() {
@@ -100,8 +130,7 @@ class _RatingScreenState extends State<RatingScreen> {
     locationRatingScreen = new RatingScreenSection(
       title: "Location",
       buttonTitle: "Next",
-      hintText:
-          "Give a score out of 5 on the accessibility and ease of access to this location.",
+      hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
@@ -118,17 +147,28 @@ class _RatingScreenState extends State<RatingScreen> {
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
       controller: commentController,
-      hintText:
-          "Add a comment to your review to give more detail on your experience. This is optional.",
+      hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
       onPressed: () {
         comment = commentController.text;
-        //TODO: Save to database here
-        print("Overall: $overallRating");
-        print("Customer Service: $customerServiceRating");
-        print("Amenities: $amenitiesRating");
-        print("Location: $locationRating");
-        print("Comment: $comment");
-        Navigator.of(context).pop();
+
+        Map<String, dynamic> review = {
+          'email': loggedInUser.email,
+          'amentiesRating': amenitiesRating,
+          'comment': comment,
+          'custServRating': customerServiceRating,
+          'locationRating': locationRating,
+          'overallRating': overallRating,
+          'placeId': widget.placeId,
+          'placeName': widget.placeName
+        };
+
+        _firestore.collection('reviews').add(review).then((data) {
+          if (data.documentID != null) {
+            Navigator.of(context).pop();
+          } else {
+            print("ruh oh!");
+          }
+        });
       },
     );
 
@@ -145,8 +185,7 @@ class _RatingScreenState extends State<RatingScreen> {
               DghaAppBar(
                 isMenu: true,
                 text: "Rating",
-                semanticLabel:
-                    "Double tap to close the ratings page and cancel your review",
+                semanticLabel: "Double tap to close the ratings page and cancel your review",
                 childOne: GestureDetector(
                   child: DghaIcon(
                     size: 35,
@@ -162,8 +201,7 @@ class _RatingScreenState extends State<RatingScreen> {
               ),
               //----------Page Navigation
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 15, right: 15, top: 30, bottom: 20),
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 30, bottom: 20),
                 child: RatingBreadcrumbs(
                   navPosition: navPosition,
                   iconColor: Colors.white,
