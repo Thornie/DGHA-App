@@ -22,7 +22,7 @@ class MenuCard extends StatelessWidget {
       explicitChildNodes: false,
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(card.pageToNavigateTo, arguments: ScreenArguments(title: card.pageTitle, texts: card.texts));
+          Navigator.of(context).pushNamed(card.pageToNavigateTo, arguments: InfoScrArgs(title: card.pageTitle, texts: card.texts));
         },
         child: Semantics(
           child: Container(
@@ -52,8 +52,7 @@ class MenuCard extends StatelessWidget {
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
                   ),
                   child: Text(
                     card.cardTitle,
