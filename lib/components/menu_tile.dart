@@ -7,7 +7,7 @@ import 'package:dgha_brochure/models/menu_tile_data.dart';
 
 class MenuTile extends StatelessWidget {
   final MenuTileData tile;
-  final double paddingLeft; 
+  final double paddingLeft;
 
   MenuTile({this.tile, this.paddingLeft});
 
@@ -21,11 +21,15 @@ class MenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (tile.link == null) {
-          Navigator.pop(context);
-          Navigator.of(context).pushNamed(tile.pageToNavigateTo, arguments: ScreenArguments(title: tile.title, texts: tile.texts));
+        if (tile.onTap == null) {
+          if (tile.link == null) {
+            Navigator.pop(context);
+            Navigator.of(context).pushNamed(tile.pageToNavigateTo, arguments: InfoScrArgs(title: tile.title, texts: tile.texts));
+          } else {
+            _launchUrl(tile.link);
+          }
         } else {
-          _launchUrl(tile.link);
+          tile.onTap();
         }
       },
       child: Semantics(
@@ -38,14 +42,25 @@ class MenuTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                child: tile.icon != null ? DghaIcon(icon: tile.icon, backgroundColor: Styles.midnightBlue, iconColor: Styles.yellow,) : Container(),
+                child: tile.icon != null
+                    ? DghaIcon(
+                        icon: tile.icon,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                      )
+                    : Container(),
               ),
               SizedBox(width: this.paddingLeft != null ? this.paddingLeft : 20),
               Expanded(
                 flex: 8,
                 child: Container(
                   padding: EdgeInsets.only(top: 10),
-                  child: Text(this.tile.title, style: Styles.h3LinkStyle, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                  child: Text(
+                    this.tile.title,
+                    style: Styles.h3LinkStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
               Expanded(
