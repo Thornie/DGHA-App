@@ -33,7 +33,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
           left: BorderSide(width: 2, color: Styles.midnightBlue),
         ),
       ),
-      height: 40,
+      height: 60,
       child: Stack(
         children: <Widget>[
           //----------Line
@@ -58,7 +58,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 35,
+                      size: 50,
                       backgroundColor: widget.navPosition >= 0
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -84,7 +84,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 35,
+                      size: 50,
                       backgroundColor: widget.navPosition >= 1
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -110,7 +110,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 35,
+                      size: 50,
                       backgroundColor: widget.navPosition >= 2
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -136,7 +136,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 35,
+                      size: 50,
                       backgroundColor: widget.navPosition >= 3
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -162,7 +162,7 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 35,
+                      size: 50,
                       backgroundColor: widget.navPosition >= 4
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
