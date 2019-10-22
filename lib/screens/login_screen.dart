@@ -5,7 +5,7 @@ import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+//import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8.0),
-                child: TextField(
+                child: TextFormField(
                   onChanged: (value) {
                     email = value;
                   },
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8.0),
-                child: TextField(
+                child: TextFormField(
                   onChanged: (value) {
                     password = value;
                   },
