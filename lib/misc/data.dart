@@ -2,6 +2,7 @@ import 'package:dgha_brochure/models/languages.dart';
 import 'package:dgha_brochure/models/menu_card_data.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
 import 'package:dgha_brochure/screens/info_screens.dart';
+import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {
@@ -194,6 +195,9 @@ class Data {
       link: "http://dgha.org.au/dgha/membership/",
       semanticLabel: "Donation",
       semanticHint: "Double tap to go to the Guide Dog Handler Australia Donation page");
+
+  static final MenuTileData login =
+      new MenuTileData(title: "Login", pageToNavigateTo: LoginScreen.id, icon: FontAwesomeIcons.signInAlt, semanticLabel: "Login", semanticHint: "Double tap to go to the Login/Register page");
 
   // ---------------------------------------- LANGUAGES
   // ---------------------- GENERAL INFO LANGUAGES

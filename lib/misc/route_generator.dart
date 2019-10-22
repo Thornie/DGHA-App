@@ -5,6 +5,7 @@ import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_screen.dart';
+import 'package:dgha_brochure/screens/register_screen.dart';
 import 'package:dgha_brochure/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 

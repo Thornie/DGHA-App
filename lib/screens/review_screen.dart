@@ -2,17 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
-import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:dgha_brochure/screens/rating_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:dgha_brochure/models/review.dart';
 
 class ReviewScreen extends StatefulWidget {
@@ -229,21 +228,10 @@ class LocationRatingBar extends StatelessWidget {
             style: isSmall ? Styles.h3Style.copyWith(fontSize: 18) : Styles.h3Style,
           ),
         ),
-        Stack(
-          children: <Widget>[
-            //----------Star Rating
-            SmoothStarRating(
-              rating: rating,
-              borderColor: Styles.midnightBlue,
-              color: Styles.yellow,
-              size: isSmall ? MediaQuery.of(context).size.width / 13 : MediaQuery.of(context).size.width / 10,
-            ),
-            //----------Star Rating Outline
-            SmoothStarRating(
-              borderColor: Styles.midnightBlue,
-              size: isSmall ? MediaQuery.of(context).size.width / 13 : MediaQuery.of(context).size.width / 10,
-            )
-          ],
+        DghaStarRating(
+          changeRatingOnTap: false,
+          rating: rating,
+          height: isSmall ? MediaQuery.of(context).size.width / 13 : MediaQuery.of(context).size.width / 10,
         ),
       ],
     );

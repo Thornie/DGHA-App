@@ -1,8 +1,8 @@
+import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/screens/review_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class LocationReviews extends StatelessWidget {
   final LocationData locationData;
@@ -13,7 +13,7 @@ class LocationReviews extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         margin: EdgeInsets.all(7),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -29,44 +29,20 @@ class LocationReviews extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    locationData.name,
-                    style: Styles.h3Style,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Stack(
-                  children: <Widget>[
-                    SmoothStarRating(
-                      size: MediaQuery.of(context).size.width / 15,
-                      rating: locationData.overallRating,
-                      color: Styles.yellow,
-                      borderColor: Styles.midnightBlue,
-                    ),
-                    IgnorePointer(
-                      child: SmoothStarRating(
-                        allowHalfRating: false,
-                        starCount: 5,
-                        size: MediaQuery.of(context).size.width / 15,
-                        color: Styles.midnightBlue,
-                        borderColor: Styles.midnightBlue,
-                        spacing: 0.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            IgnorePointer(
+              child: DghaStarRating(
+                height: 30,
+                rating: locationData.overallRating,
+                starCount: 5,
+              ),
+            ),
+            Text(
+              locationData.name,
+              style: Styles.h3Style,
             ),
             Text(
               locationData.address,
               style: Styles.pStyle,
-            ),
-            SizedBox(
-              height: 20.0,
             ),
           ],
         ),
