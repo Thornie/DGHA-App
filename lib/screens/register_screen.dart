@@ -77,6 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onChanged: (value) {
                     password = value;
                   },
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Type your Password',
                     prefixIcon: Icon(
@@ -95,6 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onChanged: (value) {
                     confirmpass = value;
                   },
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Confirm Password',
                     prefixIcon: Icon(

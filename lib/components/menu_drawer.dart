@@ -34,6 +34,7 @@ class MenuDrawer extends StatelessWidget {
                 MenuExpansionTile(tile: Data.lawsTilesListData),
                 MenuTile(tile: Data.signUpTileData),
                 MenuTile(tile: Data.donateTileData),
+                MenuTile(tile: Data.login),
               ],
             ),
           ),
