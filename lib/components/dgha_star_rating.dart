@@ -34,19 +34,30 @@ class _DghaStarRatingState extends State<DghaStarRating> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.starCount,
             itemBuilder: (context, index) {
+              IconData starIcon;
+              //Set the star to either a full star, half star or empty 
+              if (widget.rating > index) {
+                if (widget.rating.roundToDouble() > index)
+                  starIcon = Icons.star;
+                else
+                  starIcon = Icons.star_half;
+              }
+              else
+                starIcon = Icons.star_border;
+
               return Stack(
                 children: <Widget>[
                   //---------- Star Rating
                   GestureDetector(
                     child: Icon(
-                      widget.rating > index ? Icons.star : Icons.star_border,
+                      starIcon,
                       size: constraint.biggest.height,
                       color: widget.rating > index
                           ? Styles.yellow
                           : Styles.midnightBlue,
                     ),
                     onTap: () {
-                      //Only change the rating if bool is true
+                      //Only change the rating if changeRatingOnTap is true
                       if (widget.changeRatingOnTap) {
                         setState(() {
                           widget.rating = index.toDouble() + 1;
