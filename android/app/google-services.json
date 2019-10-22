@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "788500038476",
+    "firebase_url": "https://dgha-project.firebaseio.com",
+    "project_id": "dgha-project",
+    "storage_bucket": "dgha-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788500038476:android:7c94991f716a15947f85e9",
+        "android_client_info": {
+          "package_name": "com.rufferees.dgha_brochure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHzyYmb7rWfsUH-Uquw-DWGAWcJIoHrd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
