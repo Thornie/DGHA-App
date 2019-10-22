@@ -1,12 +1,12 @@
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
-import 'package:dgha_brochure/screens/info_screens.dart';
+import 'package:dgha_brochure/screens/info_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
-import 'package:dgha_brochure/screens/menu_screen.dart';
-import 'package:dgha_brochure/screens/rating_menu_screen.dart';
-import 'package:dgha_brochure/screens/rating_screen.dart';
+import 'package:dgha_brochure/screens/info_menu_screen.dart';
+import 'package:dgha_brochure/screens/explore_screen.dart';
+import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:dgha_brochure/screens/register_screen.dart';
-import 'package:dgha_brochure/screens/review_screen.dart';
+import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -25,25 +25,25 @@ class RouteGenerator {
                   appBarTitle: infoScrArgs.title,
                   texts: infoScrArgs.texts,
                 ));
-      case MenuScreen.id:
-        return MaterialPageRoute(builder: (_) => MenuScreen());
-      case RatingMenuScreen.id:
-        return MaterialPageRoute(builder: (_) => RatingMenuScreen());
-      case ReviewScreen.id:
-        return MaterialPageRoute(builder: (_) => ReviewScreen(settings.arguments));
-      case RatingScreen.id:
+      case InfoMenuScreen.id:
+        return MaterialPageRoute(builder: (_) => InfoMenuScreen());
+      case ExploreScreen.id:
+        return MaterialPageRoute(builder: (_) => ExploreScreen());
+      case PlaceDetailsScreen.id:
+        return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
+      case UserRatingScreen.id:
         ReviewScrArgs reviewScrArgs;
         try {
           reviewScrArgs = settings.arguments;
         } catch (e) {}
 
         return MaterialPageRoute(
-            builder: (_) => RatingScreen(
+            builder: (_) => UserRatingScreen(
                   placeId: reviewScrArgs.placeId,
                   placeName: reviewScrArgs.placeName,
                 ));
       default:
-        return MaterialPageRoute(builder: (_) => MenuScreen());
+        return MaterialPageRoute(builder: (_) => InfoMenuScreen());
     }
   }
 }

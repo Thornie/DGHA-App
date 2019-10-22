@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/components/location_reviews.dart';
+import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/helper.dart';
@@ -18,13 +18,13 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class RatingMenuScreen extends StatefulWidget {
+class ExploreScreen extends StatefulWidget {
   static const String id = "Rating Menu Screen";
   @override
-  _RatingMenuScreenState createState() => _RatingMenuScreenState();
+  _ExploreScreenState createState() => _ExploreScreenState();
 }
 
-class _RatingMenuScreenState extends State<RatingMenuScreen> {
+class _ExploreScreenState extends State<ExploreScreen> {
   final _firestore = Firestore.instance;
 
   // -------------------------- NOTE: CONTROLLERS
@@ -280,11 +280,11 @@ class _RatingMenuScreenState extends State<RatingMenuScreen> {
     );
   }
 
-  List<LocationReviews> locationWidgets() {
-    List<LocationReviews> widgets = new List<LocationReviews>();
+  List<PlaceCard> locationWidgets() {
+    List<PlaceCard> widgets = new List<PlaceCard>();
 
     for (var i = 0; i < this.locationList.length; i++) {
-      LocationReviews w = new LocationReviews(
+      PlaceCard w = new PlaceCard(
         locationData: this.locationList[i],
       );
       widgets.add(w);

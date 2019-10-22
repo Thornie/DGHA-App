@@ -1,13 +1,13 @@
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
-import 'package:dgha_brochure/screens/review_screen.dart';
+import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
 
-class LocationReviews extends StatelessWidget {
+class PlaceCard extends StatelessWidget {
   final LocationData locationData;
 
-  LocationReviews({@required this.locationData});
+  PlaceCard({@required this.locationData});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class LocationReviews extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, ReviewScreen.id, arguments: locationData);
+        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
       },
     );
   }

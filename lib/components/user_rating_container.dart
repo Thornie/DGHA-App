@@ -4,25 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //The component for each rating page (overall, customer service, etc)
-class RatingScreenSection extends StatefulWidget {
+class UserRatingContainer extends StatefulWidget {
   final String title;
   final String buttonTitle;
   final Function onPressed;
   final String hintText;
   double rating;
 
-  RatingScreenSection(
-      {this.title,
-      this.buttonTitle = "Next",
-      this.onPressed,
-      this.rating = 0,
-      this.hintText = ""});
+  UserRatingContainer({
+    this.title,
+    this.buttonTitle = "Next",
+    this.onPressed,
+    this.rating = 0,
+    this.hintText = "",
+  });
 
   @override
-  _RatingScreenSectionState createState() => _RatingScreenSectionState();
+  _UserRatingContainerState createState() => _UserRatingContainerState();
 }
 
-class _RatingScreenSectionState extends State<RatingScreenSection> {
+class _UserRatingContainerState extends State<UserRatingContainer> {
   //Popup dialog box
   Future<String> createAlertDialog(BuildContext context) {
     return showDialog(
@@ -117,8 +118,7 @@ class _RatingScreenSectionState extends State<RatingScreenSection> {
               ),
               color: Colors.white,
               elevation: 5,
-              padding:
-                  EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+              padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.grey),
                 borderRadius: BorderRadius.circular(20.0),
@@ -136,8 +136,7 @@ class CommentSection extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
 
-  CommentSection(
-      {this.title, this.onPressed, this.controller, this.hintText = ""});
+  CommentSection({this.title, this.onPressed, this.controller, this.hintText = ""});
 
   @override
   _CommentSectionState createState() => _CommentSectionState();
@@ -222,8 +221,7 @@ class _CommentSectionState extends State<CommentSection> {
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Semantics(
                     label: "Comment",
-                    hint:
-                        "Double tap to leave a comment on your experience at this location",
+                    hint: "Double tap to leave a comment on your experience at this location",
                     child: TextField(
                       controller: widget.controller,
                       keyboardType: TextInputType.multiline,
@@ -256,8 +254,7 @@ class _CommentSectionState extends State<CommentSection> {
               ),
               color: Colors.white,
               elevation: 5,
-              padding:
-                  EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
+              padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.grey),
                 borderRadius: BorderRadius.circular(20.0),

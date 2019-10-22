@@ -2,21 +2,21 @@ import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
-import 'package:dgha_brochure/components/menu_card.dart';
+import 'package:dgha_brochure/components/info_card.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/menu_card_data.dart';
+import 'package:dgha_brochure/models/info_menu_card_data.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 
-class MenuScreen extends StatefulWidget {
+class InfoMenuScreen extends StatefulWidget {
   static const String id = "Menu Screen";
   @override
-  _MenuScreenState createState() => _MenuScreenState();
+  _InfoMenuScreenState createState() => _InfoMenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _InfoMenuScreenState extends State<InfoMenuScreen> {
   // used for closing or opening drawer
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -47,8 +47,7 @@ class _MenuScreenState extends State<MenuScreen> {
     this.scrHeight = MediaQuery.of(context).size.height;
     this.textScale = MediaQuery.of(context).textScaleFactor;
 
-    double cardNewMinWidth =
-        (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
+    double cardNewMinWidth = (this.textMinWidth * this.textScale) + Styles.textPadding * 2;
 
     // reset card's width
     double cardNewWidth = 0;
@@ -57,13 +56,11 @@ class _MenuScreenState extends State<MenuScreen> {
     double cardMaxWidth = (this.scrWidth - (Styles.spacing * 2));
 
     // get the number of cards that can fit on a screen
-    int numOfCards =
-        ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
+    int numOfCards = ((this.scrWidth - (Styles.spacing * 2)) / cardNewMinWidth).floor();
 
     // make sure that all cards are big enough to fit all the text
     while (cardNewWidth < cardNewMinWidth) {
-      double scrWidthIncludingPadding =
-          scrWidth - (Styles.spacing * 2) - (Styles.spacing * (numOfCards - 1));
+      double scrWidthIncludingPadding = scrWidth - (Styles.spacing * 2) - (Styles.spacing * (numOfCards - 1));
       cardNewWidth = scrWidthIncludingPadding / (numOfCards);
 
       // better that the cards are bigger than it need to be, rather than too small
@@ -75,9 +72,7 @@ class _MenuScreenState extends State<MenuScreen> {
       cardNewWidth = cardMaxWidth;
     }
 
-    this.drawerWidth = orientation == Orientation.portrait
-        ? this.scrWidth * 0.75
-        : this.scrHeight * 0.75;
+    this.drawerWidth = orientation == Orientation.portrait ? this.scrWidth * 0.75 : this.scrHeight * 0.75;
     this.cardWidth = cardNewWidth;
     this.cardHeight = this.cardWidth * 1.15;
   }
@@ -106,8 +101,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       // -------------- GENERAL INFORMATION
                       Semantics(
                         label: "General Information Section",
-                        hint:
-                            "There are ${Data.generalInfoCardData.length} cards in this section",
+                        hint: "There are ${Data.generalInfoCardData.length} cards in this section",
                         explicitChildNodes: true,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,8 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       // -------------- LAWS INFORMATION
                       Semantics(
                         label: "Federal and State Laws Section",
-                        hint:
-                            "There are ${Data.lawInfoCardDataABC.length} cards in this section, Slide up and down to see more cards",
+                        hint: "There are ${Data.lawInfoCardDataABC.length} cards in this section, Slide up and down to see more cards",
                         explicitChildNodes: true,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,11 +181,11 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  List<Widget> _buildCards(List<MenuCardData> cardsData, bool isSeparated) {
+  List<Widget> _buildCards(List<InfoMenuCardData> cardsData, bool isSeparated) {
     List<Widget> cards = new List<Widget>();
 
     for (int i = 0; i < cardsData.length; i++) {
-      Widget w = MenuCard(
+      Widget w = InfoCard(
         card: cardsData[i],
         cardWidth: this.cardWidth,
         cardHeight: this.cardHeight,
@@ -209,7 +202,7 @@ class _MenuScreenState extends State<MenuScreen> {
     return cards;
   }
 
-  Widget _buildCardsList(List<MenuCardData> cardsData) {
+  Widget _buildCardsList(List<InfoMenuCardData> cardsData) {
     return Padding(
       padding: EdgeInsets.fromLTRB(Styles.spacing, 10, Styles.spacing, 0),
       child: Wrap(

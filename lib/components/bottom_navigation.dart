@@ -1,7 +1,7 @@
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/menu_screen.dart';
-import 'package:dgha_brochure/screens/rating_menu_screen.dart';
+import 'package:dgha_brochure/screens/info_menu_screen.dart';
+import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,9 +25,7 @@ class DGHABotNav extends StatelessWidget {
           topLeft: Radius.circular(Styles.normalRadius),
           topRight: Radius.circular(Styles.normalRadius),
         ),
-        boxShadow: [
-          BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, -3))
-        ],
+        boxShadow: [BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, -3))],
       ),
       child: Stack(
         children: <Widget>[
@@ -42,9 +40,7 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == ActivePageEnum.ratingsPage
-                        ? Styles.yellow
-                        : Colors.white,
+                    color: this.activeTab == ActivePageEnum.ratingsPage ? Styles.yellow : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Styles.normalRadius),
                     ),
@@ -59,7 +55,7 @@ class DGHABotNav extends StatelessWidget {
                         iconColor: Styles.midnightBlue,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RatingMenuScreen.id);
+                        Navigator.of(context).pushNamed(ExploreScreen.id);
                       },
                     ),
                   ),
@@ -75,9 +71,7 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == ActivePageEnum.infoPage
-                        ? Styles.yellow
-                        : Colors.white,
+                    color: this.activeTab == ActivePageEnum.infoPage ? Styles.yellow : Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(Styles.normalRadius),
                     ),
@@ -92,7 +86,7 @@ class DGHABotNav extends StatelessWidget {
                         iconColor: Styles.midnightBlue,
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed(MenuScreen.id);
+                        Navigator.of(context).pushNamed(InfoMenuScreen.id);
                       },
                     ),
                   ),

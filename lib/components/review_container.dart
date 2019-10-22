@@ -1,5 +1,5 @@
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/review_screen.dart';
+import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dgha_brochure/models/review.dart';
 

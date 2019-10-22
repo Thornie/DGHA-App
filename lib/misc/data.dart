@@ -1,7 +1,7 @@
 import 'package:dgha_brochure/models/languages.dart';
-import 'package:dgha_brochure/models/menu_card_data.dart';
+import 'package:dgha_brochure/models/info_menu_card_data.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
-import 'package:dgha_brochure/screens/info_screens.dart';
+import 'package:dgha_brochure/screens/info_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,8 +10,8 @@ class Data {
   static final String kGoogleApiKey = "AIzaSyCj1t28RYFPFpa1xL_kjlIwCrH8CEryoJs";
   // -------------------------------------- CARD DATA
   // ------------- GENERAL INFO CARDS
-  static final List<MenuCardData> generalInfoCardData = [guideDogCardData, accessCardData];
-  static final MenuCardData guideDogCardData = new MenuCardData(
+  static final List<InfoMenuCardData> generalInfoCardData = [guideDogCardData, accessCardData];
+  static final InfoMenuCardData guideDogCardData = new InfoMenuCardData(
       cardTitle: "Guide Dogs",
       pageToNavigateTo: InfoScreen.id,
       texts: infoLang,
@@ -20,7 +20,7 @@ class Data {
       semanticLabel: "Guide Dogs",
       semanticHint: "Double tap to read more about Guide Dogs");
 
-  static final MenuCardData accessCardData = new MenuCardData(
+  static final InfoMenuCardData accessCardData = new InfoMenuCardData(
       cardTitle: "Access",
       pageToNavigateTo: InfoScreen.id,
       texts: accessLang,
@@ -30,7 +30,7 @@ class Data {
       semanticHint: "Double Tap to read more about Guide Dogs Access");
 
   // -------------- LAWS INFO CARDS
-  static final List<MenuCardData> lawInfoCardDataABC = [
+  static final List<InfoMenuCardData> lawInfoCardDataABC = [
     actCardData,
     fedCardData,
     nswCardData,
@@ -42,7 +42,7 @@ class Data {
     waCardLaw,
   ];
 
-  static final MenuCardData fedCardData = new MenuCardData(
+  static final InfoMenuCardData fedCardData = new InfoMenuCardData(
       cardTitle: "Federal",
       pageToNavigateTo: InfoScreen.id,
       texts: fedLang,
@@ -51,7 +51,7 @@ class Data {
       semanticLabel: "Federal",
       semanticHint: "Double Tap to read more about Federal Law regarding Guide Dogs");
 
-  static final MenuCardData actCardData = new MenuCardData(
+  static final InfoMenuCardData actCardData = new InfoMenuCardData(
       cardTitle: "ACT",
       pageToNavigateTo: InfoScreen.id,
       texts: actLang,
@@ -60,7 +60,7 @@ class Data {
       semanticLabel: "Australian Capital Territory",
       semanticHint: "Double Tap to read more about Australian Capital Territory Law regarding Guide Dogs");
 
-  static final MenuCardData nswCardData = new MenuCardData(
+  static final InfoMenuCardData nswCardData = new InfoMenuCardData(
       cardTitle: "NSW",
       pageToNavigateTo: InfoScreen.id,
       texts: nswLang,
@@ -69,7 +69,7 @@ class Data {
       semanticLabel: "New South Wales",
       semanticHint: "Double Tap to read more about New South Wales Law regarding Guide Dogs");
 
-  static final MenuCardData ntCardData = new MenuCardData(
+  static final InfoMenuCardData ntCardData = new InfoMenuCardData(
       cardTitle: "NT",
       pageToNavigateTo: InfoScreen.id,
       texts: ntLang,
@@ -78,7 +78,7 @@ class Data {
       semanticLabel: "Northern Territory",
       semanticHint: "Double Tap to read more about Northern Territory Law regarding Guide Dogs");
 
-  static final MenuCardData qldCardData = new MenuCardData(
+  static final InfoMenuCardData qldCardData = new InfoMenuCardData(
       cardTitle: "QLD",
       pageToNavigateTo: InfoScreen.id,
       texts: qldLang,
@@ -87,7 +87,7 @@ class Data {
       semanticLabel: "Queensland",
       semanticHint: "Double Tap to read more about Queensland Law regarding Guide Dogs");
 
-  static final MenuCardData saCardData = new MenuCardData(
+  static final InfoMenuCardData saCardData = new InfoMenuCardData(
       cardTitle: "SA",
       pageToNavigateTo: InfoScreen.id,
       texts: saLang,
@@ -96,7 +96,7 @@ class Data {
       semanticLabel: "South Australia",
       semanticHint: "Double Tap to read more about South Australian Law regarding Guide Dogs");
 
-  static final MenuCardData tasCardData = new MenuCardData(
+  static final InfoMenuCardData tasCardData = new InfoMenuCardData(
       cardTitle: "TAS",
       pageToNavigateTo: InfoScreen.id,
       texts: tasLang,
@@ -105,7 +105,7 @@ class Data {
       semanticLabel: "Tasmania",
       semanticHint: "Double Tap to read more about Tasmanian Law regarding Guide Dogs");
 
-  static final MenuCardData vicCardData = new MenuCardData(
+  static final InfoMenuCardData vicCardData = new InfoMenuCardData(
       cardTitle: "VIC",
       pageToNavigateTo: InfoScreen.id,
       texts: vicLang,
@@ -114,7 +114,7 @@ class Data {
       semanticLabel: "Victoria",
       semanticHint: "Double Tap to read more about Victorian Law regarding Guide Dogs");
 
-  static final MenuCardData waCardLaw = new MenuCardData(
+  static final InfoMenuCardData waCardLaw = new InfoMenuCardData(
       cardTitle: "WA",
       pageToNavigateTo: InfoScreen.id,
       texts: waLang,

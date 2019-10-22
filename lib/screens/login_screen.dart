@@ -1,5 +1,5 @@
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/rating_menu_screen.dart';
+import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         try {
                           final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
                           if (user != null) {
-                            Navigator.of(context).pushNamed(RatingMenuScreen.id);
+                            Navigator.of(context).pushNamed(ExploreScreen.id);
                           }
                         } catch (exception) {
                           print(exception);
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(RatingMenuScreen.id);
+                  Navigator.of(context).pushNamed(ExploreScreen.id);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.5,

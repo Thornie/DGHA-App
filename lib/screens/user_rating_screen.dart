@@ -3,22 +3,22 @@ import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/rating_breadcrumbs.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/components/rating_screen_section.dart';
+import 'package:dgha_brochure/components/user_rating_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class RatingScreen extends StatefulWidget {
+class UserRatingScreen extends StatefulWidget {
   static const String id = "Rating Screen";
 
   final String placeId;
   final String placeName;
 
-  RatingScreen({this.placeId, this.placeName});
+  UserRatingScreen({this.placeId, this.placeName});
   @override
-  _RatingScreenState createState() => _RatingScreenState();
+  _UserRatingScreenState createState() => _UserRatingScreenState();
 }
 
-class _RatingScreenState extends State<RatingScreen> {
+class _UserRatingScreenState extends State<UserRatingScreen> {
   // ------------ NOTE: FIRESTORE
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -32,10 +32,10 @@ class _RatingScreenState extends State<RatingScreen> {
   );
 
   //Initialize ratingPages
-  RatingScreenSection overallRatingScreen;
-  RatingScreenSection customerServiceRatingScreen;
-  RatingScreenSection amenitiesRatingScreen;
-  RatingScreenSection locationRatingScreen;
+  UserRatingContainer overallRatingScreen;
+  UserRatingContainer customerServiceRatingScreen;
+  UserRatingContainer amenitiesRatingScreen;
+  UserRatingContainer locationRatingScreen;
   CommentSection commentSectionScreen;
 
   //Store Rating Vairables
@@ -73,7 +73,7 @@ class _RatingScreenState extends State<RatingScreen> {
   Widget build(BuildContext context) {
     //-------------------- Rating PageView Screens --------------------//
     //----------Overall Rating
-    overallRatingScreen = new RatingScreenSection(
+    overallRatingScreen = new UserRatingContainer(
       title: "Overall",
       buttonTitle: "Next",
       hintText: "Give an overall rating out of 5 on your experience at this location.",
@@ -90,7 +90,7 @@ class _RatingScreenState extends State<RatingScreen> {
       },
     );
     //----------Customer Service Rating
-    customerServiceRatingScreen = new RatingScreenSection(
+    customerServiceRatingScreen = new UserRatingContainer(
       title: "Customer Service",
       buttonTitle: "Next",
       hintText: "Give a score out of 5 on the customer service provided to you at this location.",
@@ -107,7 +107,7 @@ class _RatingScreenState extends State<RatingScreen> {
       },
     );
     //----------Amenities Rating
-    amenitiesRatingScreen = new RatingScreenSection(
+    amenitiesRatingScreen = new UserRatingContainer(
       title: "Amenities",
       buttonTitle: "Next",
       hintText: "Give a score out of 5 on the amenities here at this location.",
@@ -125,7 +125,7 @@ class _RatingScreenState extends State<RatingScreen> {
       },
     );
     //----------Location Rating
-    locationRatingScreen = new RatingScreenSection(
+    locationRatingScreen = new UserRatingContainer(
       title: "Location",
       buttonTitle: "Next",
       hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",

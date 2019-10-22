@@ -1,16 +1,16 @@
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/menu_card_data.dart';
+import 'package:dgha_brochure/models/info_menu_card_data.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:flutter/material.dart';
 
-class MenuCard extends StatelessWidget {
+class InfoCard extends StatelessWidget {
   final double cardWidth;
   final double cardHeight;
-  final MenuCardData card;
+  final InfoMenuCardData card;
   final int cardIndex;
   final int listLength;
 
-  MenuCard({this.cardWidth, this.cardHeight, this.card, this.cardIndex, this.listLength});
+  InfoCard({this.cardWidth, this.cardHeight, this.card, this.cardIndex, this.listLength});
 
   @override
   Widget build(BuildContext context) {

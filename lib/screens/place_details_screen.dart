@@ -8,23 +8,23 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
-import 'package:dgha_brochure/screens/rating_screen.dart';
+import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha_brochure/models/review.dart';
 
-class ReviewScreen extends StatefulWidget {
+class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
   final LocationData locationData;
 
-  ReviewScreen(this.locationData);
+  PlaceDetailsScreen(this.locationData);
 
   @override
-  _ReviewScreenState createState() => _ReviewScreenState();
+  _PlaceDetailsScreenState createState() => _PlaceDetailsScreenState();
 }
 
-class _ReviewScreenState extends State<ReviewScreen> {
+class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   // ------------- NOTE: FIRESTORE
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -146,7 +146,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).pushNamed(RatingScreen.id, arguments: ReviewScrArgs(placeId: placeId, placeName: widget.locationData.name));
+                              Navigator.of(context).pushNamed(UserRatingScreen.id, arguments: ReviewScrArgs(placeId: placeId, placeName: widget.locationData.name));
                             } else {
                               Navigator.pop(context);
                               Navigator.of(context).pushNamed(LoginScreen.id);
