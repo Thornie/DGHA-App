@@ -7,6 +7,7 @@ import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
+import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,13 +153,12 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).popAndPushNamed(
+                              Navigator.of(context).pushNamed(
                                   UserRatingScreen.id,
                                   arguments: ReviewScrArgs(
                                       placeId: placeId,
                                       placeName: widget.locationData.name));
                             } else {
-                              Navigator.pop(context);
                               Navigator.of(context)
                                   .popAndPushNamed(LoginScreen.id);
                             }
@@ -189,7 +189,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 hint: "Double tap to go back and view other locations",
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
                   },
                   child: DghaIcon(
                     icon: FontAwesomeIcons.arrowLeft,

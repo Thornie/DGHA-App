@@ -21,6 +21,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
   final _auth = FirebaseAuth.instance;
   bool isLoggedIn = false;
 
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
   void getCurrentUser() async {
     try {
       final user = await _auth.currentUser();
@@ -38,9 +44,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    if (!isLoggedIn) {
-      getCurrentUser();
-    }
     return SafeArea(
       child: ClipRRect(
         borderRadius: BorderRadius.only(
