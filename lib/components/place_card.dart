@@ -13,6 +13,7 @@ class PlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        width: double.maxFinite,
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.all(7),
         decoration: BoxDecoration(
@@ -48,7 +49,8 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
+        Navigator.pushNamed(context, PlaceDetailsScreen.id,
+            arguments: locationData);
       },
     );
   }
