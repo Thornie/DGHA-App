@@ -1,5 +1,5 @@
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/place_details_screen.dart';
+import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:dgha_brochure/models/review.dart';
 
@@ -25,10 +25,11 @@ class ReviewContainer extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 // ------ NOTE: Overall Review
-                LocationRatingBar(
+                RatingWithTitle(
                   title: "Rated: ",
                   rating: this.review.overallRating,
                   isSmall: true,
+                  spaceBetween: false,
                 ),
                 Container(
                   width: double.infinity,
