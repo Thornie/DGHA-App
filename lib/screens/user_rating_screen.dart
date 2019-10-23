@@ -24,7 +24,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
 
-  int navPosition = 0;
+  int maxNavPos = 0;
+  int currentNavPos = 0;
   Widget currentPage;
   final pageController = PageController(
     initialPage: 0,
@@ -76,13 +77,15 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     overallRatingScreen = new UserRatingContainer(
       title: "Overall",
       buttonTitle: "Next",
-      hintText: "Give an overall rating out of 5 on your experience at this location.",
+      hintText:
+          "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
         if (overallRatingScreen.rating != 0) {
           setState(() {
-            if (navPosition < 1) navPosition = 1;
+            if (maxNavPos < 1) maxNavPos = 1;
+            currentNavPos = 1;
           });
           overallRating = overallRatingScreen.rating;
           pageController.jumpToPage(1);
@@ -93,13 +96,17 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     customerServiceRatingScreen = new UserRatingContainer(
       title: "Customer Service",
       buttonTitle: "Next",
-      hintText: "Give a score out of 5 on the customer service provided to you at this location.",
+      hintText:
+          "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
-      rating: customerServiceRatingScreen != null ? customerServiceRatingScreen.rating : 0,
+      rating: customerServiceRatingScreen != null
+          ? customerServiceRatingScreen.rating
+          : 0,
       onPressed: () {
         if (customerServiceRatingScreen.rating != 0) {
           setState(() {
-            if (navPosition < 2) navPosition = 2;
+            if (maxNavPos < 2) maxNavPos = 2;
+            currentNavPos = 2;
           });
           customerServiceRating = customerServiceRatingScreen.rating;
           pageController.jumpToPage(2);
@@ -117,7 +124,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       onPressed: () {
         if (amenitiesRatingScreen.rating != 0) {
           setState(() {
-            if (navPosition < 3) navPosition = 3;
+            if (maxNavPos < 3) maxNavPos = 3;
+            currentNavPos = 3;
           });
           amenitiesRating = amenitiesRatingScreen.rating;
           pageController.jumpToPage(3);
@@ -128,13 +136,15 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     locationRatingScreen = new UserRatingContainer(
       title: "Location",
       buttonTitle: "Next",
-      hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",
+      hintText:
+          "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
         if (locationRatingScreen.rating != 0) {
           setState(() {
-            if (navPosition < 4) navPosition = 4;
+            if (maxNavPos < 4) maxNavPos = 4;
+            currentNavPos = 4;
           });
           locationRating = locationRatingScreen.rating;
           pageController.jumpToPage(4);
@@ -145,7 +155,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
       controller: commentController,
-      hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
+      hintText:
+          "Add a comment to your review to give more detail on your experience. This is optional.",
       onPressed: () {
         comment = commentController.text;
 
@@ -180,13 +191,11 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
           child: Column(
             children: <Widget>[
               //----------App Bar
-              DghaAppBar(
-                isMenu: true,
-                text: "Rating",
-                semanticLabel: "Double tap to close the ratings page and cancel your review",
-                childOne: GestureDetector(
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
                   child: DghaIcon(
-                    size: 35,
+                    size: 40,
                     padding: 4,
                     backgroundColor: Styles.midnightBlue,
                     iconColor: Styles.yellow,
@@ -199,9 +208,11 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
               ),
               //----------Page Navigation
               Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 30, bottom: 20),
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 30, bottom: 20),
                 child: RatingBreadcrumbs(
-                  navPosition: navPosition,
+                  maxNavPos: maxNavPos,
+                  currentNavPos: currentNavPos,
                   iconColor: Colors.white,
                   backgroundColor: Styles.grey,
                   highlightedIconColor: Styles.yellow,
@@ -222,6 +233,9 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                     commentSectionScreen,
                   ],
                 ),
+              ),
+              Expanded(
+                child: SizedBox(),
               ),
             ],
           ),
