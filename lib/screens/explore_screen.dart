@@ -71,7 +71,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   void getPlacesFromDatabase() async {
-    final placesFromDatabase = await _firestore.collection('location').getDocuments();
+    final placesFromDatabase =
+        await _firestore.collection('location').getDocuments();
     List<LocationData> locations = new List<LocationData>();
 
     for (var place in placesFromDatabase.documents) {
@@ -86,10 +87,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
       locations.add(locationData);
     }
 
-    setState(() {
-      this.iniLocationList = locations;
-      this.locationList = locations;
-    });
+    //Sometimes failed to set state when page was disposed to quick
+    try {
+      setState(() {
+        this.iniLocationList = locations;
+        this.locationList = locations;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   void getInitialLocations() async {
@@ -98,7 +104,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     Position position = await getCurrentPosition();
     List<Placemark> placemarks = await getStateName(position);
-    http.Response res = await getNearByPlaces(latitude: position.latitude, longitude: position.longitude, radius: this.radius, type: 'restaurant', apiKey: Data.kGoogleApiKey);
+    http.Response res = await getNearByPlaces(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        radius: this.radius,
+        type: 'restaurant',
+        apiKey: Data.kGoogleApiKey);
 
     if (res.statusCode == 200) {
       ResponseData data = ResponseData.fromJson(json.decode(res.body));
@@ -110,7 +121,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
 
     for (var i = 0; i < places.length; i++) {
-      LocationData l = new LocationData(name: places[i].name, address: places[i].address, overallRating: places[i].rating.toDouble(), customerServiceRating: 0, amenitiesRating: 0, locationRating: 0);
+      LocationData l = new LocationData(
+          name: places[i].name,
+          address: places[i].address,
+          overallRating: places[i].rating.toDouble(),
+          customerServiceRating: 0,
+          amenitiesRating: 0,
+          locationRating: 0);
 
       locations.add(l);
     }
@@ -127,7 +144,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     List<PlaceByQuery> places = new List<PlaceByQuery>();
     List<LocationData> locations = new List<LocationData>();
 
-    http.Response res = await getPlacesByQuery(input: input, state: this.stateName, apiKey: Data.kGoogleApiKey);
+    http.Response res = await getPlacesByQuery(
+        input: input, state: this.stateName, apiKey: Data.kGoogleApiKey);
 
     if (res.statusCode == 200) {
       ResponseData data = ResponseData.fromJson(json.decode(res.body));
@@ -139,7 +157,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
       for (var i = 0; i < places.length; i++) {
         LocationData ld = new LocationData(
-            name: places[i].name, address: Helper().formatAddress(places[i].address), overallRating: places[i].rating.toDouble(), customerServiceRating: 0, amenitiesRating: 0, locationRating: 0);
+            name: places[i].name,
+            address: Helper().formatAddress(places[i].address),
+            overallRating: places[i].rating.toDouble(),
+            customerServiceRating: 0,
+            amenitiesRating: 0,
+            locationRating: 0);
         locations.add(ld);
       }
       setState(() {
@@ -149,21 +172,30 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   Future<Position> getCurrentPosition() {
-    return Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
+    return Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
   }
 
   Future<List<Placemark>> getStateName(Position pos) async {
     return Geolocator().placemarkFromCoordinates(pos.latitude, pos.longitude);
   }
 
-  Future<http.Response> getNearByPlaces({double latitude, double longitude, double radius, String type, String apiKey}) {
-    String url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=$type&key=$apiKey';
+  Future<http.Response> getNearByPlaces(
+      {double latitude,
+      double longitude,
+      double radius,
+      String type,
+      String apiKey}) {
+    String url =
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=$type&key=$apiKey';
     return http.get(url);
   }
 
-  Future<http.Response> getPlacesByQuery({String input, String state, String apiKey}) {
+  Future<http.Response> getPlacesByQuery(
+      {String input, String state, String apiKey}) {
     String formattedInput = Helper().formatStringForQuery(input);
-    String url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
+    String url =
+        'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
 
     return http.get(url);
   }
@@ -193,7 +225,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
                       // --------------- NOTE: Search Bar
                       Container(
-                        margin: EdgeInsets.fromLTRB(Styles.spacing, 10, Styles.spacing, 0),
+                        margin: EdgeInsets.fromLTRB(
+                            Styles.spacing, 10, Styles.spacing, 0),
                         decoration: BoxDecoration(
                           color: Styles.yellow,
                           borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -226,7 +259,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               suffixIcon: IconButton(
                                 padding: EdgeInsets.all(20),
                                 onPressed: () {
-                                  Future.delayed(Duration(milliseconds: 50)).then((_) {
+                                  Future.delayed(Duration(milliseconds: 50))
+                                      .then((_) {
                                     _txtFldCont.clear();
                                   });
                                 },
@@ -237,15 +271,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ),
                               ),
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(30, 10, 30, 10),
                               hintText: "Search place names or address",
-                              hintStyle: TextStyle(color: Styles.transMidnightBlue),
+                              hintStyle:
+                                  TextStyle(color: Styles.transMidnightBlue),
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(Styles.spacing, 20, Styles.spacing, 30),
+                        padding: EdgeInsets.fromLTRB(
+                            Styles.spacing, 20, Styles.spacing, 30),
                         child: Column(
                           children: locationWidgets(),
                         ),

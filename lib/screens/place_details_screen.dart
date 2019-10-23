@@ -152,14 +152,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).pushNamed(
+                              Navigator.of(context).popAndPushNamed(
                                   UserRatingScreen.id,
                                   arguments: ReviewScrArgs(
                                       placeId: placeId,
                                       placeName: widget.locationData.name));
                             } else {
                               Navigator.pop(context);
-                              Navigator.of(context).pushNamed(LoginScreen.id);
+                              Navigator.of(context)
+                                  .popAndPushNamed(LoginScreen.id);
                             }
                           },
                           child: DghaIcon(

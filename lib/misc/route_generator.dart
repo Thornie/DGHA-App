@@ -14,6 +14,9 @@ class RouteGenerator {
     switch (settings.name) {
       case LoginScreen.id:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case LoginScreen.id_start:
+        return MaterialPageRoute(
+            builder: (_) => LoginScreen(isStartPage: true));
       case InfoScreen.id:
         InfoScrArgs infoScrArgs;
 
@@ -30,7 +33,8 @@ class RouteGenerator {
       case ExploreScreen.id:
         return MaterialPageRoute(builder: (_) => ExploreScreen());
       case PlaceDetailsScreen.id:
-        return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
+        return MaterialPageRoute(
+            builder: (_) => PlaceDetailsScreen(settings.arguments));
       case UserRatingScreen.id:
         ReviewScrArgs reviewScrArgs;
         try {

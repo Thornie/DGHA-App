@@ -18,7 +18,9 @@ class MenuDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: ClipRRect(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(Styles.normalRadius),
+            bottomRight: Radius.circular(Styles.normalRadius)),
         child: Container(
           width: this.width,
           constraints: BoxConstraints(
@@ -29,7 +31,8 @@ class MenuDrawer extends StatelessWidget {
             elevation: 20,
             semanticLabel: "Side bar menu",
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: Styles.appBarHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Styles.appBarHorizontalPadding),
               children: <Widget>[
                 SizedBox(
                   height: Styles.iconSize / 3,
@@ -40,24 +43,31 @@ class MenuDrawer extends StatelessWidget {
                 MenuTile(tile: Data.membershipTitleData),
                 MenuTile(tile: Data.donateTileData),
                 MenuTile(
-                    tile: new MenuTileData(
-                        title: "Sign in",
-                        icon: FontAwesomeIcons.signInAlt,
-                        semanticLabel: "Login",
-                        semanticHint: "Double tap to go to the sign in page",
-                        onTap: () {
-                          Navigator.of(context).pushNamed(LoginScreen.id);
-                        })),
+                  tile: new MenuTileData(
+                    title: "Sign in",
+                    icon: FontAwesomeIcons.signInAlt,
+                    semanticLabel: "Login",
+                    semanticHint: "Double tap to go to the sign in page",
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.of(context).popAndPushNamed(LoginScreen.id);
+                    },
+                  ),
+                ),
                 MenuTile(
-                    tile: new MenuTileData(
-                        title: "Sign out",
-                        icon: FontAwesomeIcons.signOutAlt,
-                        semanticLabel: "Log out",
-                        semanticHint: "Double tap to sign out",
-                        onTap: () {
-                          _auth.signOut();
-                          Navigator.of(context).pushNamed(LoginScreen.id);
-                        })),
+                  tile: new MenuTileData(
+                    title: "Sign out",
+                    icon: FontAwesomeIcons.signOutAlt,
+                    semanticLabel: "Log out",
+                    semanticHint: "Double tap to sign out",
+                    pageToNavigateTo: LoginScreen.id,
+                    onTap: () {
+                      _auth.signOut();
+                      Navigator.pop(context);
+                      Navigator.of(context).popAndPushNamed(LoginScreen.id);
+                    },
+                  ),
+                ),
               ],
             ),
           ),

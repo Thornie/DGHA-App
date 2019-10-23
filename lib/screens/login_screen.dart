@@ -6,6 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "Login Screen";
+  static const String id_start = "Login Screen Start";
+
+  //Must be false on every page except for the page that loads in the main.dart file
+  //This is needed so that when the user presses the back button too many times, they don't go to an empty black screen
+  final bool isStartPage;
+
+  LoginScreen({this.isStartPage = false});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -40,7 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage("assets/images/dgha_logo/logo.png")),
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/dgha_logo/logo.png")),
                         ),
                       ),
                       Container(
@@ -89,9 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: GestureDetector(
                       onTap: () async {
                         try {
-                          final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                          final user = await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
                           if (user != null) {
-                            Navigator.of(context).pushNamed(ExploreScreen.id);
+                            Navigator.of(context)
+                                .popAndPushNamed(ExploreScreen.id);
                           }
                         } catch (exception) {
                           print(exception);
@@ -132,7 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ExploreScreen.id);
+                  if (widget.isStartPage)
+                    Navigator.of(context).pushNamed(ExploreScreen.id);
+                  else
+                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -171,7 +185,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  TextField buildTextField({IconData prefixIcon, String hintText, bool obscureText = false, Function(String) onChange}) {
+  TextField buildTextField(
+      {IconData prefixIcon,
+      String hintText,
+      bool obscureText = false,
+      Function(String) onChange}) {
     final TextEditingController _txtController = new TextEditingController();
     return TextField(
       controller: _txtController,

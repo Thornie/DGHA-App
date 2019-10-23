@@ -10,7 +10,7 @@ class DGHA extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Styles.midnightBlue),
-      initialRoute: LoginScreen.id,
+      initialRoute: LoginScreen.id_start,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
