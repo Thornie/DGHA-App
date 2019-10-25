@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/misc/data.dart';
@@ -11,8 +12,6 @@ import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:geolocator/geolocator.dart';
 import "package:google_maps_webservice/places.dart";
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -55,8 +54,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
   void initState() {
     super.initState();
     getPlacesFromDatabase();
-    // getInitialLocations();
-    // getCurrentUser();
   }
 
   void calcDimensions(Orientation orientation) {
@@ -92,37 +89,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     });
   }
 
-  void getInitialLocations() async {
-    List<Place> places = new List<Place>();
-    List<LocationData> locations = new List<LocationData>();
-
-    Position position = await getCurrentPosition();
-    List<Placemark> placemarks = await getStateName(position);
-    http.Response res = await getNearByPlaces(latitude: position.latitude, longitude: position.longitude, radius: this.radius, type: 'restaurant', apiKey: Data.kGoogleApiKey);
-
-    if (res.statusCode == 200) {
-      ResponseData data = ResponseData.fromJson(json.decode(res.body));
-
-      for (var i = 0; i < data.results.length; i++) {
-        Place p = Place.fromJson(data.results[i]);
-        places.add(p);
-      }
-    }
-
-    for (var i = 0; i < places.length; i++) {
-      LocationData l = new LocationData(name: places[i].name, address: places[i].address, overallRating: places[i].rating.toDouble(), customerServiceRating: 0, amenitiesRating: 0, locationRating: 0);
-
-      locations.add(l);
-    }
-
-    setState(() {
-      this.iniLocationList = locations;
-      this.locationList = locations;
-      this.stateName = placemarks.first.administrativeArea;
-      this.fetching = false;
-    });
-  }
-
   void getLocations(String input) async {
     List<PlaceByQuery> places = new List<PlaceByQuery>();
     List<LocationData> locations = new List<LocationData>();
@@ -148,19 +114,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
   }
 
-  Future<Position> getCurrentPosition() {
-    return Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
-  }
-
-  Future<List<Placemark>> getStateName(Position pos) async {
-    return Geolocator().placemarkFromCoordinates(pos.latitude, pos.longitude);
-  }
-
-  Future<http.Response> getNearByPlaces({double latitude, double longitude, double radius, String type, String apiKey}) {
-    String url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=$type&key=$apiKey';
-    return http.get(url);
-  }
-
   Future<http.Response> getPlacesByQuery({String input, String state, String apiKey}) {
     String formattedInput = Helper().formatStringForQuery(input);
     String url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
@@ -184,75 +137,37 @@ class _ExploreScreenState extends State<ExploreScreen> {
               children: <Widget>[
                 Container(
                   height: this.scrHeight,
+                  margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
-                      SizedBox(
-                        height: 80,
-                      ),
+                      SizedBox(height: Styles.heightFromAppBar),
 
                       // --------------- NOTE: Search Bar
                       Container(
-                        margin: EdgeInsets.fromLTRB(Styles.spacing, 10, Styles.spacing, 0),
-                        decoration: BoxDecoration(
-                          color: Styles.yellow,
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Styles.grey,
-                              blurRadius: 3,
-                              offset: Offset(2, 3),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            controller: _txtFldCont,
-
-                            // ----- NOTE: onSubmit
-                            onSubmitted: (value) {
-                              getLocations(value);
-                            },
-                            style: Styles.inputStyle,
-                            cursorColor: Styles.midnightBlue,
-                            cursorWidth: 5,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.search,
-                                color: Styles.midnightBlue,
-                                size: Styles.iconSize,
-                              ),
-                              suffixIcon: IconButton(
-                                padding: EdgeInsets.all(20),
-                                onPressed: () {
-                                  Future.delayed(Duration(milliseconds: 50)).then((_) {
-                                    _txtFldCont.clear();
-                                  });
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.times,
-                                  color: Styles.midnightBlue,
-                                  size: Styles.iconSize,
-                                ),
-                              ),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              hintText: "Search place names or address",
-                              hintStyle: TextStyle(color: Styles.transMidnightBlue),
-                            ),
-                          ),
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: buildSearchTextField(
+                          prefixIcon: FontAwesomeIcons.search,
+                          hintText: "Search place name",
+                          onSubmitted: (value) {
+                            getLocations(value);
+                          },
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(Styles.spacing, 20, Styles.spacing, 30),
-                        child: Column(
-                          children: locationWidgets(),
-                        ),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      // ----- NOTE: place cards
+                      Column(
+                        children: placeWidgets(),
                       ),
                     ],
                   ),
                 ),
+
+                // ----- NOTE: App Bar
                 DghaAppBar(
                   text: "Explore",
                   isMenu: true,
@@ -280,7 +195,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     );
   }
 
-  List<PlaceCard> locationWidgets() {
+  List<PlaceCard> placeWidgets() {
     List<PlaceCard> widgets = new List<PlaceCard>();
 
     for (var i = 0; i < this.locationList.length; i++) {
@@ -289,7 +204,56 @@ class _ExploreScreenState extends State<ExploreScreen> {
       );
       widgets.add(w);
     }
-
     return widgets;
+  }
+
+  Widget buildSearchTextField({IconData prefixIcon, String hintText, Function(String) onSubmitted}) {
+    final TextEditingController _txtController = new TextEditingController();
+    return Container(
+      decoration: BoxDecoration(
+        color: Styles.yellow,
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        boxShadow: [
+          BoxShadow(
+            color: Styles.grey,
+            blurRadius: 3,
+            offset: Offset(2, 3),
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: _txtController,
+        onSubmitted: (value) {
+          onSubmitted(value);
+        },
+        style: Styles.inputStyle,
+        cursorColor: Styles.midnightBlue,
+        cursorWidth: 5,
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 25, right: 20),
+            child: Icon(prefixIcon, color: Styles.midnightBlue),
+          ),
+          suffix: GestureDetector(
+            onTap: () {
+              Future.delayed(Duration(milliseconds: 50)).then((_) {
+                _txtController.clear();
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.only(right: 25, left: 10),
+              child: Icon(
+                FontAwesomeIcons.times,
+                color: Styles.midnightBlue,
+                size: Styles.iconSize,
+              ),
+            ),
+          ),
+          border: InputBorder.none,
+          hintText: hintText,
+          contentPadding: EdgeInsets.symmetric(vertical: 20),
+        ),
+      ),
+    );
   }
 }
