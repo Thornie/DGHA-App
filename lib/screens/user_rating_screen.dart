@@ -234,8 +234,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                   ],
                 ),
               ),
-              Expanded(
-                child: SizedBox(),
+              SizedBox(
+                height: (MediaQuery.of(context).size.height - 230) / 2,
               ),
             ],
           ),

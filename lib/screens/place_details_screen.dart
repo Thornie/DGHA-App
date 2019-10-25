@@ -71,9 +71,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       snapShotReviews.add(r);
     }
 
-    setState(() {
-      this.reviews = snapShotReviews;
-    });
+    try {
+      setState(() {
+        this.reviews = snapShotReviews;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -154,13 +158,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
                               Navigator.of(context).pushNamed(
-                                  UserRatingScreen.id,
-                                  arguments: ReviewScrArgs(
-                                      placeId: placeId,
-                                      placeName: widget.locationData.name));
+                                UserRatingScreen.id,
+                                arguments: ReviewScrArgs(
+                                  placeId: placeId,
+                                  placeName: widget.locationData.name,
+                                ),
+                              );
                             } else {
-                              Navigator.of(context)
-                                  .popAndPushNamed(LoginScreen.id);
+                              Navigator.of(context).pushNamed(
+                                LoginScreen.id_user_rating,
+                                arguments: widget.locationData,
+                              );
                             }
                           },
                           child: DghaIcon(

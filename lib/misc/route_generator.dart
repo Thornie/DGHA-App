@@ -17,6 +17,12 @@ class RouteGenerator {
       case LoginScreen.id_start:
         return MaterialPageRoute(
             builder: (_) => LoginScreen(isStartPage: true));
+      case LoginScreen.id_user_rating:
+        return MaterialPageRoute(
+            builder: (_) => LoginScreen(
+                  goToReviewScreen: true,
+                  locationData: settings.arguments,
+                ));
       case InfoScreen.id:
         InfoScrArgs infoScrArgs;
 

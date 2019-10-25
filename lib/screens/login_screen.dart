@@ -1,5 +1,9 @@
 import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha_brochure/models/location_data.dart';
+import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
+import 'package:dgha_brochure/screens/place_details_screen.dart';
+import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,12 +11,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 class LoginScreen extends StatefulWidget {
   static const String id = "Login Screen";
   static const String id_start = "Login Screen Start";
+  static const String id_user_rating = "Login Screen User Rating";
 
   //Must be false on every page except for the page that loads in the main.dart file
   //This is needed so that when the user presses the back button too many times, they don't go to an empty black screen
   final bool isStartPage;
 
-  LoginScreen({this.isStartPage = false});
+  final bool goToReviewScreen;
+  final LocationData locationData;
+
+  LoginScreen({
+    this.isStartPage = false,
+    this.goToReviewScreen = false,
+    this.locationData,
+  });
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -153,6 +165,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       if (widget.isStartPage)
                         Navigator.of(context).pushNamed(ExploreScreen.id);
+                      else if (widget.goToReviewScreen)
+                        Navigator.of(context).popAndPushNamed(
+                            PlaceDetailsScreen.id,
+                            arguments: widget.locationData);
                       else
                         Navigator.of(context).popAndPushNamed(ExploreScreen.id);
                     },
@@ -254,7 +270,16 @@ class _LoginScreenState extends State<LoginScreen> {
         final user = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
         if (user != null) {
-          Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+          if (widget.goToReviewScreen)
+            Navigator.of(context).popAndPushNamed(
+              UserRatingScreen.id,
+              arguments: ReviewScrArgs(
+                placeId: widget.locationData.placeId,
+                placeName: widget.locationData.name,
+              ),
+            );
+          else
+            Navigator.of(context).popAndPushNamed(ExploreScreen.id);
         }
       } catch (exception) {
         print(exception);
