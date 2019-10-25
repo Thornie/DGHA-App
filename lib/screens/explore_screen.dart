@@ -27,7 +27,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   // -------------------------- NOTE: CONTROLLERS
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final TextEditingController _txtFldCont = new TextEditingController();
   String userInput = "";
 
   // -------------------------- LOCATION
