@@ -15,6 +15,7 @@ class Styles {
   static final double normalRadius = 20;
   static final double imageMargin = 8;
   static final double spacing = 20;
+  static final double heightFromAppBar = 80;
   // ---------- TEXT
   static final double textPadding = 10;
   // ---------- ICON
