@@ -43,11 +43,6 @@ flutter:
     - assets/images/dgha_logo/
 
   fonts:
-    - family: Manjari
-      fonts:
-        - asset: assets/fonts/Manjari/Manjari-Regular.ttf
-        - asset: assets/fonts/Manjari/Manjari-Bold.ttf
-          weight: 700
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins/Poppins-Regular.ttf
