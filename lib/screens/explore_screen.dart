@@ -202,118 +202,123 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.softGrey,
-      key: _scaffoldKey,
-      drawer: MenuDrawer(
-        width: this.drawerWidth,
-      ),
-      body: SafeArea(
-        child: OrientationBuilder(
-          builder: (context, orientation) {
-            calcDimensions(orientation);
-            return Stack(
-              children: <Widget>[
-                Container(
-                  height: this.scrHeight,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    children: <Widget>[
-                      SizedBox(
-                        height: 80,
-                      ),
-
-                      // --------------- NOTE: Search Bar
-                      Container(
-                        margin: EdgeInsets.fromLTRB(
-                            Styles.spacing, 10, Styles.spacing, 0),
-                        decoration: BoxDecoration(
-                          color: Styles.yellow,
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Styles.grey,
-                              blurRadius: 3,
-                              offset: Offset(2, 3),
-                            ),
-                          ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Scaffold(
+        backgroundColor: Styles.softGrey,
+        key: _scaffoldKey,
+        drawer: MenuDrawer(
+          width: this.drawerWidth,
+        ),
+        body: SafeArea(
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              calcDimensions(orientation);
+              return Stack(
+                children: <Widget>[
+                  Container(
+                    height: this.scrHeight,
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      children: <Widget>[
+                        SizedBox(
+                          height: 80,
                         ),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            controller: _txtFldCont,
 
-                            // ----- NOTE: onSubmit
-                            onSubmitted: (value) {
-                              getLocations(value);
-                            },
-                            style: Styles.inputStyle,
-                            cursorColor: Styles.midnightBlue,
-                            cursorWidth: 5,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.search,
-                                color: Styles.midnightBlue,
-                                size: Styles.iconSize,
+                        // --------------- NOTE: Search Bar
+                        Container(
+                          margin: EdgeInsets.fromLTRB(
+                              Styles.spacing, 10, Styles.spacing, 0),
+                          decoration: BoxDecoration(
+                            color: Styles.yellow,
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Styles.grey,
+                                blurRadius: 3,
+                                offset: Offset(2, 3),
                               ),
-                              suffixIcon: IconButton(
-                                padding: EdgeInsets.all(20),
-                                onPressed: () {
-                                  Future.delayed(Duration(milliseconds: 50))
-                                      .then((_) {
-                                    _txtFldCont.clear();
-                                  });
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.times,
+                            ],
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: TextField(
+                              controller: _txtFldCont,
+
+                              // ----- NOTE: onSubmit
+                              onSubmitted: (value) {
+                                getLocations(value);
+                              },
+                              style: Styles.inputStyle,
+                              cursorColor: Styles.midnightBlue,
+                              cursorWidth: 5,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  FontAwesomeIcons.search,
                                   color: Styles.midnightBlue,
                                   size: Styles.iconSize,
                                 ),
+                                suffixIcon: IconButton(
+                                  padding: EdgeInsets.all(20),
+                                  onPressed: () {
+                                    Future.delayed(Duration(milliseconds: 50))
+                                        .then((_) {
+                                      _txtFldCont.clear();
+                                    });
+                                  },
+                                  icon: Icon(
+                                    FontAwesomeIcons.times,
+                                    color: Styles.midnightBlue,
+                                    size: Styles.iconSize,
+                                  ),
+                                ),
+                                border: InputBorder.none,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                hintText: "Search place names or address",
+                                hintStyle:
+                                    TextStyle(color: Styles.transMidnightBlue),
                               ),
-                              border: InputBorder.none,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              hintText: "Search place names or address",
-                              hintStyle:
-                                  TextStyle(color: Styles.transMidnightBlue),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            Styles.spacing, 20, Styles.spacing, 30),
-                        child: Column(
-                          children: locationWidgets(),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              Styles.spacing, 20, Styles.spacing, 30),
+                          child: Column(
+                            children: locationWidgets(),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                DghaAppBar(
-                  text: "Explore",
-                  isMenu: true,
-                  childOne: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _scaffoldKey.currentState.openDrawer();
-                      });
-                    },
-                    child: DghaIcon(
-                      icon: FontAwesomeIcons.bars,
-                      backgroundColor: Styles.midnightBlue,
-                      iconColor: Styles.yellow,
+                      ],
                     ),
                   ),
-                )
-              ],
-            );
-          },
+                  DghaAppBar(
+                    text: "Explore",
+                    isMenu: true,
+                    childOne: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
+                      },
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.bars,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
         ),
-      ),
 
-      //-------------------- Bottom navigation --------------------//
-      bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
+        //-------------------- Bottom navigation --------------------//
+        bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
+      ),
     );
   }
 
