@@ -35,26 +35,32 @@ class _DghaStarRatingState extends State<DghaStarRating> {
             itemCount: widget.starCount,
             itemBuilder: (context, index) {
               IconData starIcon;
-              //Set the star to either a full star, half star or empty 
+              //Set the star to either a full star, half star or empty
               if (widget.rating > index) {
                 if (widget.rating.roundToDouble() > index)
                   starIcon = Icons.star;
                 else
                   starIcon = Icons.star_half;
-              }
-              else
+              } else
                 starIcon = Icons.star_border;
 
               return Stack(
                 children: <Widget>[
                   //---------- Star Rating
                   GestureDetector(
-                    child: Icon(
-                      starIcon,
-                      size: constraint.biggest.height,
-                      color: widget.rating > index
-                          ? Styles.yellow
-                          : Styles.midnightBlue,
+                    child: Semantics(
+                      label: widget.changeRatingOnTap ? "Star" : "",
+                      hint: widget.changeRatingOnTap
+                          ? "Double tap to rate ${index + 1} stars"
+                          : "",
+                      excludeSemantics: true,
+                      child: Icon(
+                        starIcon,
+                        size: constraint.biggest.height,
+                        color: widget.rating > index
+                            ? Styles.yellow
+                            : Styles.midnightBlue,
+                      ),
                     ),
                     onTap: () {
                       //Only change the rating if changeRatingOnTap is true
@@ -63,8 +69,7 @@ class _DghaStarRatingState extends State<DghaStarRating> {
                           widget.rating = index.toDouble() + 1;
                         });
                       }
-                      if (widget.onTap != null)
-                        widget.onTap(widget.rating);
+                      if (widget.onTap != null) widget.onTap(widget.rating);
                     },
                   ),
                   //----------Star Rating Outline

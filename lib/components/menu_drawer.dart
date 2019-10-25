@@ -8,19 +8,49 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MenuDrawer extends StatelessWidget {
+class MenuDrawer extends StatefulWidget {
   final double width;
-  final _auth = FirebaseAuth.instance;
 
   MenuDrawer({this.width});
+
+  @override
+  _MenuDrawerState createState() => _MenuDrawerState();
+}
+
+class _MenuDrawerState extends State<MenuDrawer> {
+  final _auth = FirebaseAuth.instance;
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+
+      if (user != null) {
+        setState(() {
+          isLoggedIn = true;
+        });
+        print("huh");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ClipRRect(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(Styles.normalRadius),
+            bottomRight: Radius.circular(Styles.normalRadius)),
         child: Container(
-          width: this.width,
+          width: this.widget.width,
           constraints: BoxConstraints(
             minWidth: 300,
             maxWidth: 500,
@@ -29,7 +59,8 @@ class MenuDrawer extends StatelessWidget {
             elevation: 20,
             semanticLabel: "Side bar menu",
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: Styles.appBarHorizontalPadding),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Styles.appBarHorizontalPadding),
               children: <Widget>[
                 SizedBox(
                   height: Styles.iconSize / 3,
@@ -40,24 +71,28 @@ class MenuDrawer extends StatelessWidget {
                 MenuTile(tile: Data.membershipTitleData),
                 MenuTile(tile: Data.donateTileData),
                 MenuTile(
-                    tile: new MenuTileData(
-                        title: "Sign in",
-                        icon: FontAwesomeIcons.signInAlt,
-                        semanticLabel: "Login",
-                        semanticHint: "Double tap to go to the sign in page",
-                        onTap: () {
-                          Navigator.of(context).pushNamed(LoginScreen.id);
-                        })),
-                MenuTile(
-                    tile: new MenuTileData(
-                        title: "Sign out",
-                        icon: FontAwesomeIcons.signOutAlt,
-                        semanticLabel: "Log out",
-                        semanticHint: "Double tap to sign out",
-                        onTap: () {
-                          _auth.signOut();
-                          Navigator.of(context).pushNamed(LoginScreen.id);
-                        })),
+                  tile: new MenuTileData(
+                    title: isLoggedIn ? "Sign out" : "Sign in",
+                    icon: isLoggedIn
+                        ? FontAwesomeIcons.signOutAlt
+                        : FontAwesomeIcons.signInAlt,
+                    semanticLabel: isLoggedIn ? "Log out" : "Login",
+                    semanticHint: isLoggedIn
+                        ? "Double tap to sign out"
+                        : "Double tap to go to the sign in page",
+                    pageToNavigateTo: LoginScreen.id,
+                    onTap: () {
+                      if (isLoggedIn) {
+                        _auth.signOut();
+                        Navigator.pop(context);
+                        Navigator.of(context).popAndPushNamed(LoginScreen.id);
+                      } else {
+                        Navigator.pop(context);
+                        Navigator.of(context).popAndPushNamed(LoginScreen.id);
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
           ),

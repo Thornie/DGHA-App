@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:flutter/material.dart';
@@ -32,18 +33,41 @@ class _UserRatingContainerState extends State<UserRatingContainer> {
         return AlertDialog(
           content: Text(
             widget.hintText,
-            style: Styles.h3Style,
+            style: Styles.pStyle,
           ),
           actions: <Widget>[
             Semantics(
+              button: true,
               label: "Close button",
               hint: "Double tap to close the hint pop up",
-              child: MaterialButton(
-                child: Text(
-                  "Close",
-                  style: Styles.h2Style,
+              excludeSemantics: true,
+              child: GestureDetector(
+                child: Container(
+                  width: 100,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Styles.midnightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Styles.grey,
+                        blurRadius: 3,
+                        offset: Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "Close",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Styles.yellow,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
-                onPressed: () {
+                onTap: () {
                   Navigator.of(context).pop();
                 },
               ),
@@ -57,73 +81,95 @@ class _UserRatingContainerState extends State<UserRatingContainer> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          height: 200,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  //----------Title
-                  Text(
-                    widget.title,
-                    style: Styles.h2Style,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  //----------More Info
-                  Container(
-                    height: 35,
-                    child: Semantics(
-                      label: "Hint button",
-                      hint: "Double tap to open the hint pop up",
-                      child: FloatingActionButton(
-                        heroTag: null,
+        Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                //----------Title
+                Text(
+                  widget.title,
+                  style: Styles.h2Style,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                //----------More Info
+                Container(
+                  height: 50,
+                  child: Semantics(
+                    button: true,
+                    label: "Hint button",
+                    hint: "Double tap to open the hint pop up",
+                    excludeSemantics: true,
+                    child: GestureDetector(
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.question,
+                        iconColor: Styles.yellow,
                         backgroundColor: Styles.midnightBlue,
-                        child: Icon(
-                          FontAwesomeIcons.question,
-                          color: Styles.yellow,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          createAlertDialog(context);
-                        },
+                        size: 30,
+                        padding: 6,
+                        paddingPadding: 4,
                       ),
+                      onTap: () {
+                        createAlertDialog(context);
+                      },
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            DghaStarRating(
+              height: MediaQuery.of(context).size.width / 7,
+              rating: widget.rating,
+              starCount: 5,
+              onTap: (rating) {
+                widget.rating = rating;
+              },
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            //----------Next Button
+            GestureDetector(
+              onTap: widget.onPressed,
+              child: Semantics(
+                label: "Next",
+                hint: "Double tap to go to the next page",
+                excludeSemantics: true,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Styles.midnightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Styles.grey,
+                        blurRadius: 3,
+                        offset: Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "Next",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Styles.yellow,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
               ),
-              DghaStarRating(
-                height: MediaQuery.of(context).size.width / 7,
-                rating: widget.rating,
-                starCount: 5,
-                onTap: (rating) {
-                  widget.rating = rating;
-                },
-              ),
-            ],
-          ),
-        ),
-        //----------Next Button
-        Semantics(
-          label: "Next button",
-          hint: "Double tap to go to the next rating page",
-          child: RaisedButton(
-              child: Text(
-                widget.buttonTitle,
-                style: Styles.h3Style,
-              ),
-              color: Colors.white,
-              elevation: 5,
-              padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              onPressed: widget.onPressed),
+            ),
+          ],
         ),
       ],
     );
@@ -136,7 +182,8 @@ class CommentSection extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
 
-  CommentSection({this.title, this.onPressed, this.controller, this.hintText = ""});
+  CommentSection(
+      {this.title, this.onPressed, this.controller, this.hintText = ""});
 
   @override
   _CommentSectionState createState() => _CommentSectionState();
@@ -151,18 +198,41 @@ class _CommentSectionState extends State<CommentSection> {
         return AlertDialog(
           content: Text(
             widget.hintText,
-            style: Styles.h3Style,
+            style: Styles.pStyle,
           ),
           actions: <Widget>[
             Semantics(
+              button: true,
               label: "Close button",
               hint: "Double tap to close the hint pop up",
-              child: MaterialButton(
-                child: Text(
-                  "Close",
-                  style: Styles.h2Style,
+              excludeSemantics: true,
+              child: GestureDetector(
+                child: Container(
+                  width: 100,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Styles.midnightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Styles.grey,
+                        blurRadius: 3,
+                        offset: Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "Close",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Styles.yellow,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
-                onPressed: () {
+                onTap: () {
                   Navigator.of(context).pop();
                 },
               ),
@@ -176,90 +246,114 @@ class _CommentSectionState extends State<CommentSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    //----------Title
-                    Text(
-                      widget.title,
-                      style: Styles.h2Style,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    //----------More Info
-                    Container(
-                      height: 35,
-                      child: Semantics(
-                        label: "Hint button",
-                        hint: "Double tap to open the hint pop up",
-                        child: FloatingActionButton(
-                          heroTag: null,
+        Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //----------Title
+                  Text(
+                    widget.title,
+                    style: Styles.h2Style,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  //----------More Info
+                  Container(
+                    height: 50,
+                    child: Semantics(
+                      button: true,
+                      label: "Hint button",
+                      hint: "Double tap to open the hint pop up",
+                      excludeSemantics: true,
+                      child: GestureDetector(
+                        child: DghaIcon(
+                          icon: FontAwesomeIcons.question,
+                          iconColor: Styles.yellow,
                           backgroundColor: Styles.midnightBlue,
-                          child: Icon(
-                            FontAwesomeIcons.question,
-                            color: Styles.yellow,
-                            size: 25,
-                          ),
-                          onPressed: () {
-                            createAlertDialog(context);
-                          },
+                          size: 30,
+                          padding: 6,
+                          paddingPadding: 4,
                         ),
+                        onTap: () {
+                          createAlertDialog(context);
+                        },
                       ),
                     ),
-                  ],
-                ),
-                //----------Comment Box
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: Semantics(
-                    label: "Comment",
-                    hint: "Double tap to leave a comment on your experience at this location",
-                    child: TextField(
-                      controller: widget.controller,
-                      keyboardType: TextInputType.multiline,
-                      minLines: 1,
-                      maxLines: 7,
-                      maxLength: 140,
-                      style: Styles.pStyle,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              //----------Comment Box
+              Semantics(
+                label: "Comment",
+                hint:
+                    "Double tap to leave a comment on your experience at this location",
+                excludeSemantics: true,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: widget.controller,
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,
+                    maxLines: 7,
+                    maxLength: 140,
+                    style: Styles.pStyle,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              //----------Submit Button
+              GestureDetector(
+                onTap: widget.onPressed,
+                child: Semantics(
+                  label: "Submit",
+                  hint: "Double tap to submit your review",
+                  excludeSemantics: true,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Styles.midnightBlue,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Styles.grey,
+                          blurRadius: 3,
+                          offset: Offset(2, 3),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      "Submit",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Styles.yellow,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        //----------Submit Button
-        Semantics(
-          label: "Submit button",
-          hint: "Double tap to submit your review of this location",
-          child: RaisedButton(
-              child: Text(
-                "Submit",
-                style: Styles.h3Style,
-              ),
-              color: Colors.white,
-              elevation: 5,
-              padding: EdgeInsets.only(top: 15, bottom: 15, left: 50, right: 50),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              onPressed: widget.onPressed),
         ),
       ],
     );

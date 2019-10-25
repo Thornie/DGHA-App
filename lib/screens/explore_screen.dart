@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/misc/data.dart';
@@ -83,10 +82,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
       locations.add(locationData);
     }
 
-    setState(() {
-      this.iniLocationList = locations;
-      this.locationList = locations;
-    });
+    //Sometimes failed to set state when page was disposed to quick
+    try {
+      setState(() {
+        this.iniLocationList = locations;
+        this.locationList = locations;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   void getLocations(String input) async {
@@ -183,7 +187,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       iconColor: Styles.yellow,
                     ),
                   ),
-                )
+                ),
               ],
             );
           },

@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/components/dgha_star_rating.dart';
+import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
+import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,7 +57,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void getReviews() async {
     List<Review> snapShotReviews = new List<Review>();
-    QuerySnapshot snapshot = await _firestore.collection('reviews').where("placeId", isEqualTo: widget.locationData.placeId).getDocuments();
+    QuerySnapshot snapshot = await _firestore
+        .collection('reviews')
+        .where("placeId", isEqualTo: widget.locationData.placeId)
+        .getDocuments();
 
     for (var doc in snapshot.documents) {
       Review r = new Review(
@@ -67,9 +71,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       snapShotReviews.add(r);
     }
 
-    setState(() {
-      this.reviews = snapShotReviews;
-    });
+    try {
+      setState(() {
+        this.reviews = snapShotReviews;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -106,7 +114,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     height: 30,
                   ),
                   //----------Overall Rating
-                  LocationRatingBar(
+                  RatingWithTitle(
                     title: "Overall Rating",
                     rating: widget.locationData.overallRating,
                   ),
@@ -114,19 +122,22 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     height: 10,
                   ),
                   //----------Customer Service Rating
-                  LocationRatingBar(
+                  RatingWithTitle(
                     title: "Customer Service",
                     rating: widget.locationData.customerServiceRating,
+                    isSmall: true,
                   ),
                   //----------Amenities Rating
-                  LocationRatingBar(
+                  RatingWithTitle(
                     title: "Amenities",
                     rating: widget.locationData.amenitiesRating,
+                    isSmall: true,
                   ),
                   //----------Location Rating
-                  LocationRatingBar(
+                  RatingWithTitle(
                     title: "Location",
                     rating: widget.locationData.locationRating,
+                    isSmall: true,
                   ),
                   SizedBox(
                     height: 30,
@@ -146,16 +157,31 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).pushNamed(UserRatingScreen.id, arguments: ReviewScrArgs(placeId: placeId, placeName: widget.locationData.name));
+                              Navigator.of(context).pushNamed(
+                                UserRatingScreen.id,
+                                arguments: ReviewScrArgs(
+                                  placeId: placeId,
+                                  placeName: widget.locationData.name,
+                                ),
+                              );
                             } else {
-                              Navigator.pop(context);
-                              Navigator.of(context).pushNamed(LoginScreen.id);
+                              Navigator.of(context).pushNamed(
+                                LoginScreen.id_user_rating,
+                                arguments: widget.locationData,
+                              );
                             }
                           },
-                          child: DghaIcon(
-                            icon: FontAwesomeIcons.pen,
-                            iconColor: Styles.yellow,
-                            backgroundColor: Styles.midnightBlue,
+                          child: Semantics(
+                            button: true,
+                            label: "Write Review",
+                            hint:
+                                "Double tap to leave a review for ${widget.locationData.name}",
+                            excludeSemantics: true,
+                            child: DghaIcon(
+                              icon: FontAwesomeIcons.pen,
+                              iconColor: Styles.yellow,
+                              backgroundColor: Styles.midnightBlue,
+                            ),
                           ),
                         ),
                       ],
@@ -178,7 +204,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 hint: "Double tap to go back and view other locations",
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
                   },
                   child: DghaIcon(
                     icon: FontAwesomeIcons.arrowLeft,
@@ -204,36 +230,5 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
 
     return reviewWidgets;
-  }
-}
-
-//The widget to display the average ratings on the page
-class LocationRatingBar extends StatelessWidget {
-  final String title;
-  final double rating;
-  final bool isSmall;
-
-  LocationRatingBar({this.title, this.rating, this.isSmall = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: isSmall ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        //----------Title
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(
-            title,
-            style: isSmall ? Styles.h3Style.copyWith(fontSize: 18) : Styles.h3Style,
-          ),
-        ),
-        DghaStarRating(
-          changeRatingOnTap: false,
-          rating: rating,
-          height: isSmall ? MediaQuery.of(context).size.width / 13 : MediaQuery.of(context).size.width / 10,
-        ),
-      ],
-    );
   }
 }
