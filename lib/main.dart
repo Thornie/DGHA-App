@@ -1,6 +1,7 @@
 import 'package:dgha_brochure/misc/route_generator.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/first_screen.dart';
+import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
