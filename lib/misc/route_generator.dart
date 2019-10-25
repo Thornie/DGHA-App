@@ -42,6 +42,8 @@ class RouteGenerator {
                   placeId: reviewScrArgs.placeId,
                   placeName: reviewScrArgs.placeName,
                 ));
+      case RegisterScreen.id:
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       default:
         return MaterialPageRoute(builder: (_) => InfoMenuScreen());
     }
