@@ -1,14 +1,8 @@
-// import 'package:dgha_brochure/components/appbar.dart';
-// import 'package:dgha_brochure/components/dgha_icon.dart';
-// import 'package:dgha_brochure/misc/styles.dart';
-// import 'package:dgha_brochure/screens/rating_menu_screen.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:dgha_brochure/screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String id = "Register Screen";
@@ -17,21 +11,30 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // NOTE: Variables
+  // ------------------------ NOTE: Variables
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String email;
   String passwordV1;
   String passwordV2;
 
+  double containerHeight;
+  double marginHeight;
+
+  void calcDimensions() {
+    double scrHeight = MediaQuery.of(context).size.height;
+
+    this.containerHeight = scrHeight;
+    this.marginHeight = scrHeight * 0.05;
+  }
+
   @override
   Widget build(BuildContext context) {
-    double loginPadding = MediaQuery.of(context).size.width * 0.05;
-
+    calcDimensions();
     return Scaffold(
       body: SafeArea(
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          margin: EdgeInsets.symmetric(horizontal: loginPadding),
+          height: this.containerHeight,
+          margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,8 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 child: Column(
                   children: <Widget>[
+                    // Top margin
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
+                      height: this.marginHeight,
                     ),
 
                     // NOTE: Header
@@ -62,14 +66,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
+
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      height: this.marginHeight * 0.5,
                     ),
 
                     // NOTE: Email
                     Container(
                       child: buildTextField(
-                        prefixIcon: FontAwesomeIcons.solidEnvelope,
                         hintText: "Email",
                         onChange: (value) {
                           this.email = value;
@@ -78,13 +82,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
 
                     SizedBox(
-                      height: 30,
+                      height: this.marginHeight * 0.5,
                     ),
 
                     // NOTE: Password V1
                     Container(
                       child: buildTextField(
-                        prefixIcon: FontAwesomeIcons.lock,
                         hintText: "Password",
                         obscureText: true,
                         onChange: (value) {
@@ -93,13 +96,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: this.marginHeight * 0.5,
                     ),
 
                     // NOTE: Password V2
                     Container(
                       child: buildTextField(
-                        prefixIcon: FontAwesomeIcons.lock,
                         hintText: "Confirm Password",
                         obscureText: true,
                         onChange: (value) {
@@ -109,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
 
                     SizedBox(
-                      height: 30,
+                      height: this.marginHeight * 0.5,
                     ),
 
                     // NOTE: Terms and Condition
@@ -118,11 +120,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextSpan(
                           children: [
                             TextSpan(text: 'By clicking "Register" you agree to the following '),
-                            TextSpan(text: 'Terms and Conditions', style: Styles.highlightText),
+                            TextSpan(text: 'Terms and Conditions.', style: Styles.highlightText),
                           ],
                         ),
                         style: Styles.pStyle,
                       ),
+                    ),
+
+                    SizedBox(
+                      height: this.marginHeight * 0.5,
                     ),
 
                     // NOTE: Register
@@ -187,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.5,
                     padding: EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.only(bottom: 30),
+                    margin: EdgeInsets.only(bottom: this.marginHeight * 0.5),
                     decoration: BoxDecoration(
                       color: Styles.yellow,
                       borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -234,21 +240,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
       cursorWidth: 5,
       obscureText: obscureText,
       decoration: InputDecoration(
-        prefixIcon: Padding(
-          padding: EdgeInsets.only(left: 35, right: 25),
-          child: Icon(prefixIcon),
-        ),
-        suffixIcon: IconButton(
-          padding: EdgeInsets.only(left: 25, right: 35),
-          onPressed: () {
+        prefix: prefixIcon == null
+            ? Padding(padding: EdgeInsets.only(left: 20))
+            : Padding(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Icon(prefixIcon),
+              ),
+        suffix: GestureDetector(
+          onTap: () {
             Future.delayed(Duration(milliseconds: 50)).then((_) {
               _txtController.clear();
             });
           },
-          icon: Icon(
-            FontAwesomeIcons.times,
-            color: Styles.midnightBlue,
-            size: Styles.iconSize,
+          child: Padding(
+            padding: EdgeInsets.only(right: 10, left: 10),
+            child: Icon(
+              FontAwesomeIcons.times,
+              color: Styles.midnightBlue,
+              size: Styles.iconSize,
+            ),
           ),
         ),
         enabledBorder: OutlineInputBorder(
