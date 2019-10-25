@@ -242,44 +242,56 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               ),
                             ],
                           ),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: TextField(
-                              controller: _txtFldCont,
+                          child: Semantics(
+                            label: "Search",
+                            hint: "Double tap to search for a location",
+                            excludeSemantics: true,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: TextField(
+                                controller: _txtFldCont,
 
-                              // ----- NOTE: onSubmit
-                              onSubmitted: (value) {
-                                getLocations(value);
-                              },
-                              style: Styles.inputStyle,
-                              cursorColor: Styles.midnightBlue,
-                              cursorWidth: 5,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  FontAwesomeIcons.search,
-                                  color: Styles.midnightBlue,
-                                  size: Styles.iconSize,
-                                ),
-                                suffixIcon: IconButton(
-                                  padding: EdgeInsets.all(20),
-                                  onPressed: () {
-                                    Future.delayed(Duration(milliseconds: 50))
-                                        .then((_) {
-                                      _txtFldCont.clear();
-                                    });
-                                  },
-                                  icon: Icon(
-                                    FontAwesomeIcons.times,
+                                // ----- NOTE: onSubmit
+                                onSubmitted: (value) {
+                                  getLocations(value);
+                                },
+                                style: Styles.inputStyle,
+                                cursorColor: Styles.midnightBlue,
+                                cursorWidth: 5,
+                                decoration: InputDecoration(
+                                  prefixIcon: Icon(
+                                    FontAwesomeIcons.search,
                                     color: Styles.midnightBlue,
                                     size: Styles.iconSize,
                                   ),
+                                  suffixIcon: Semantics(
+                                    button: true,
+                                    label: "Clear",
+                                    hint: "Double tap to clear the search bar",
+                                    excludeSemantics: true,
+                                    child: IconButton(
+                                      padding: EdgeInsets.all(20),
+                                      onPressed: () {
+                                        Future.delayed(
+                                                Duration(milliseconds: 50))
+                                            .then((_) {
+                                          _txtFldCont.clear();
+                                        });
+                                      },
+                                      icon: Icon(
+                                        FontAwesomeIcons.times,
+                                        color: Styles.midnightBlue,
+                                        size: Styles.iconSize,
+                                      ),
+                                    ),
+                                  ),
+                                  border: InputBorder.none,
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                  hintText: "Search place names or address",
+                                  hintStyle: TextStyle(
+                                      color: Styles.transMidnightBlue),
                                 ),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(30, 10, 30, 10),
-                                hintText: "Search place names or address",
-                                hintStyle:
-                                    TextStyle(color: Styles.transMidnightBlue),
                               ),
                             ),
                           ),
@@ -297,19 +309,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   DghaAppBar(
                     text: "Explore",
                     isMenu: true,
-                    childOne: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _scaffoldKey.currentState.openDrawer();
-                        });
-                      },
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.bars,
-                        backgroundColor: Styles.midnightBlue,
-                        iconColor: Styles.yellow,
+                    semanticLabel: "Explore",
+                    childOne: Semantics(
+                      button: true,
+                      label: "Menu",
+                      hint: "Double tap to open side bar menu",
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _scaffoldKey.currentState.openDrawer();
+                          });
+                        },
+                        child: DghaIcon(
+                          icon: FontAwesomeIcons.bars,
+                          backgroundColor: Styles.midnightBlue,
+                          iconColor: Styles.yellow,
+                        ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               );
             },

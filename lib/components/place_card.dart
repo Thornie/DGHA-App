@@ -12,40 +12,46 @@ class PlaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.all(7),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
-          boxShadow: [
-            BoxShadow(
-              color: Styles.grey,
-              blurRadius: 6,
-              offset: Offset(1, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            IgnorePointer(
-              child: DghaStarRating(
-                height: 30,
-                rating: locationData.overallRating,
-                starCount: 5,
+      child: Semantics(
+        label: "${locationData.name}",
+        hint: "Double tap to view more details",
+        excludeSemantics: true,
+        child: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.all(15),
+          margin: EdgeInsets.all(7),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius:
+                BorderRadius.all(Radius.circular(Styles.normalRadius)),
+            boxShadow: [
+              BoxShadow(
+                color: Styles.grey,
+                blurRadius: 6,
+                offset: Offset(1, 2),
               ),
-            ),
-            Text(
-              locationData.name,
-              style: Styles.h3Style,
-            ),
-            Text(
-              locationData.address,
-              style: Styles.pStyle,
-            ),
-          ],
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              IgnorePointer(
+                child: DghaStarRating(
+                  height: 30,
+                  rating: locationData.overallRating,
+                  starCount: 5,
+                ),
+              ),
+              Text(
+                locationData.name,
+                style: Styles.h3Style,
+              ),
+              Text(
+                locationData.address,
+                style: Styles.pStyle,
+              ),
+            ],
+          ),
         ),
       ),
       onTap: () {

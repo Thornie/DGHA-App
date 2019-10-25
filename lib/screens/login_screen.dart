@@ -87,35 +87,45 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       // NOTE: Email Text Field
-                      Container(
-                        child: buildTextField(
-                            prefixIcon: FontAwesomeIcons.solidEnvelope,
-                            hintText: "Email",
-                            controller: _emailController,
-                            onChange: (value) {
-                              email = value;
-                            },
-                            onClear: () {
-                              email = "";
-                            }),
+                      Semantics(
+                        label: "Email",
+                        hint: "Double tap to enter your email address",
+                        excludeSemantics: true,
+                        child: Container(
+                          child: buildTextField(
+                              prefixIcon: FontAwesomeIcons.solidEnvelope,
+                              hintText: "Email",
+                              controller: _emailController,
+                              onChange: (value) {
+                                email = value;
+                              },
+                              onClear: () {
+                                email = "";
+                              }),
+                        ),
                       ),
                       SizedBox(
                         height: 30,
                       ),
 
                       // NOTE: Password Text Field
-                      Container(
-                        child: buildTextField(
-                            prefixIcon: FontAwesomeIcons.lock,
-                            hintText: "Password",
-                            obscureText: true,
-                            controller: _passController,
-                            onChange: (value) {
-                              password = value;
-                            },
-                            onClear: () {
-                              password = "";
-                            }),
+                      Semantics(
+                        label: "Password",
+                        hint: "Double tap to enter your password",
+                        excludeSemantics: true,
+                        child: Container(
+                          child: buildTextField(
+                              prefixIcon: FontAwesomeIcons.lock,
+                              hintText: "Password",
+                              obscureText: true,
+                              controller: _passController,
+                              onChange: (value) {
+                                password = value;
+                              },
+                              onClear: () {
+                                password = "";
+                              }),
+                        ),
                       ),
                       SizedBox(
                         height: 30,
@@ -123,33 +133,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       // NOTE: Login Button
                       Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            signIn();
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              color: Styles.midnightBlue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Styles.grey,
-                                  blurRadius: 3,
-                                  offset: Offset(2, 3),
+                        child: Semantics(
+                          button: true,
+                          label: "Sign in",
+                          hint: "Double tap to sign into your account",
+                          excludeSemantics: true,
+                          child: GestureDetector(
+                            onTap: () {
+                              signIn();
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              decoration: BoxDecoration(
+                                color: Styles.midnightBlue,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Styles.grey,
+                                    blurRadius: 3,
+                                    offset: Offset(2, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Text(
+                                "Sign in",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Styles.yellow,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
                                 ),
-                              ],
-                            ),
-                            child: Text(
-                              "Sign in",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Styles.yellow,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
                               ),
                             ),
                           ),
@@ -161,43 +177,50 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 // NOTE: Skip Button
                 Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      if (widget.isStartPage)
-                        Navigator.of(context).pushNamed(ExploreScreen.id);
-                      else if (widget.goToReviewScreen)
-                        Navigator.of(context).popAndPushNamed(
-                            PlaceDetailsScreen.id,
-                            arguments: widget.locationData);
-                      else
-                        Navigator.of(context).popAndPushNamed(ExploreScreen.id);
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      margin: EdgeInsets.only(bottom: 30),
-                      decoration: BoxDecoration(
-                        color: Styles.yellow,
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Styles.grey,
-                            blurRadius: 3,
-                            offset: Offset(2, 3),
+                  child: Semantics(
+                    button: true,
+                    label: "Skip",
+                    hint: "Double tap to skip and sign in later",
+                    excludeSemantics: true,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (widget.isStartPage)
+                          Navigator.of(context).pushNamed(ExploreScreen.id);
+                        else if (widget.goToReviewScreen)
+                          Navigator.of(context).popAndPushNamed(
+                              PlaceDetailsScreen.id,
+                              arguments: widget.locationData);
+                        else
+                          Navigator.of(context)
+                              .popAndPushNamed(ExploreScreen.id);
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        margin: EdgeInsets.only(bottom: 30),
+                        decoration: BoxDecoration(
+                          color: Styles.yellow,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Styles.grey,
+                              blurRadius: 3,
+                              offset: Offset(2, 3),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "Skip",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            decoration: TextDecoration.underline,
+                            decorationThickness: 3,
+                            decorationColor: Styles.midnightBlue,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Styles.midnightBlue,
                           ),
-                        ],
-                      ),
-                      child: Text(
-                        "Skip",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          decoration: TextDecoration.underline,
-                          decorationThickness: 3,
-                          decorationColor: Styles.midnightBlue,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Styles.midnightBlue,
                         ),
                       ),
                     ),

@@ -194,12 +194,18 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
-                  child: DghaIcon(
-                    size: 40,
-                    padding: 4,
-                    backgroundColor: Styles.midnightBlue,
-                    iconColor: Styles.yellow,
-                    icon: Icons.close,
+                  child: Semantics(
+                    button: true,
+                    label: "Close",
+                    hint: "Double tap to cancel your review",
+                    excludeSemantics: true,
+                    child: DghaIcon(
+                      size: 35,
+                      padding: 4,
+                      backgroundColor: Styles.midnightBlue,
+                      iconColor: Styles.yellow,
+                      icon: Icons.close,
+                    ),
                   ),
                   onTap: () {
                     Navigator.of(context).pop();
@@ -209,7 +215,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
               //----------Page Navigation
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15, right: 15, top: 30, bottom: 20),
+                    left: 15, right: 15, top: 20, bottom: 20),
                 child: RatingBreadcrumbs(
                   maxNavPos: maxNavPos,
                   currentNavPos: currentNavPos,

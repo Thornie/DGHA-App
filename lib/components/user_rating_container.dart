@@ -37,8 +37,10 @@ class _UserRatingContainerState extends State<UserRatingContainer> {
           ),
           actions: <Widget>[
             Semantics(
+              button: true,
               label: "Close button",
               hint: "Double tap to close the hint pop up",
+              excludeSemantics: true,
               child: GestureDetector(
                 child: Container(
                   width: 100,
@@ -98,16 +100,18 @@ class _UserRatingContainerState extends State<UserRatingContainer> {
                 Container(
                   height: 50,
                   child: Semantics(
+                    button: true,
                     label: "Hint button",
                     hint: "Double tap to open the hint pop up",
+                    excludeSemantics: true,
                     child: GestureDetector(
                       child: DghaIcon(
                         icon: FontAwesomeIcons.question,
                         iconColor: Styles.yellow,
                         backgroundColor: Styles.midnightBlue,
-                        size: 32,
-                        padding: 7,
-                        paddingPadding: 2,
+                        size: 30,
+                        padding: 6,
+                        paddingPadding: 4,
                       ),
                       onTap: () {
                         createAlertDialog(context);
@@ -134,28 +138,33 @@ class _UserRatingContainerState extends State<UserRatingContainer> {
             //----------Next Button
             GestureDetector(
               onTap: widget.onPressed,
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: Styles.midnightBlue,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Styles.grey,
-                      blurRadius: 3,
-                      offset: Offset(2, 3),
+              child: Semantics(
+                label: "Next",
+                hint: "Double tap to go to the next page",
+                excludeSemantics: true,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Styles.midnightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Styles.grey,
+                        blurRadius: 3,
+                        offset: Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "Next",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Styles.yellow,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
                     ),
-                  ],
-                ),
-                child: Text(
-                  "Next",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Styles.yellow,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
                   ),
                 ),
               ),
@@ -193,8 +202,10 @@ class _CommentSectionState extends State<CommentSection> {
           ),
           actions: <Widget>[
             Semantics(
+              button: true,
               label: "Close button",
               hint: "Double tap to close the hint pop up",
+              excludeSemantics: true,
               child: GestureDetector(
                 child: Container(
                   width: 100,
@@ -255,16 +266,18 @@ class _CommentSectionState extends State<CommentSection> {
                   Container(
                     height: 50,
                     child: Semantics(
+                      button: true,
                       label: "Hint button",
                       hint: "Double tap to open the hint pop up",
+                      excludeSemantics: true,
                       child: GestureDetector(
                         child: DghaIcon(
                           icon: FontAwesomeIcons.question,
                           iconColor: Styles.yellow,
                           backgroundColor: Styles.midnightBlue,
-                          size: 32,
-                          padding: 7,
-                          paddingPadding: 2,
+                          size: 30,
+                          padding: 6,
+                          paddingPadding: 4,
                         ),
                         onTap: () {
                           createAlertDialog(context);
@@ -282,6 +295,7 @@ class _CommentSectionState extends State<CommentSection> {
                 label: "Comment",
                 hint:
                     "Double tap to leave a comment on your experience at this location",
+                excludeSemantics: true,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
@@ -307,28 +321,33 @@ class _CommentSectionState extends State<CommentSection> {
               //----------Submit Button
               GestureDetector(
                 onTap: widget.onPressed,
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Styles.midnightBlue,
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Styles.grey,
-                        blurRadius: 3,
-                        offset: Offset(2, 3),
+                child: Semantics(
+                  label: "Submit",
+                  hint: "Double tap to submit your review",
+                  excludeSemantics: true,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Styles.midnightBlue,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Styles.grey,
+                          blurRadius: 3,
+                          offset: Offset(2, 3),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      "Submit",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Styles.yellow,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
                       ),
-                    ],
-                  ),
-                  child: Text(
-                    "Submit",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Styles.yellow,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
                     ),
                   ),
                 ),

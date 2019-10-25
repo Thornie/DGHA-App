@@ -32,12 +32,17 @@ class RatingWithTitle extends StatelessWidget {
                 : Styles.h3Style,
           ),
         ),
-        DghaStarRating(
-          changeRatingOnTap: false,
-          rating: rating,
-          height: isSmall
-              ? MediaQuery.of(context).size.width / 14
-              : MediaQuery.of(context).size.width / 11,
+        Semantics(
+          label: "Star Rating",
+          hint: "$rating out of 5 stars",
+          excludeSemantics: true,
+          child: DghaStarRating(
+            changeRatingOnTap: false,
+            rating: rating,
+            height: isSmall
+                ? MediaQuery.of(context).size.width / 14
+                : MediaQuery.of(context).size.width / 11,
+          ),
         ),
       ],
     );

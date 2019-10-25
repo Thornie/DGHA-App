@@ -57,11 +57,12 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.maxNavPos >= 0
                       ? "Double tap to go to the overall rating page"
                       : "",
+                  excludeSemantics: true,
                   child: GestureDetector(
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 43,
+                      size: 37,
                       backgroundColor: widget.maxNavPos >= 0
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -86,11 +87,12 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.maxNavPos >= 1
                       ? "Double tap to go to the customer service rating page"
                       : "",
+                  excludeSemantics: true,
                   child: GestureDetector(
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 43,
+                      size: 37,
                       backgroundColor: widget.maxNavPos >= 1
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -115,11 +117,12 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.maxNavPos >= 2
                       ? "Double tap to go to the overall rating page"
                       : "",
+                  excludeSemantics: true,
                   child: GestureDetector(
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 43,
+                      size: 37,
                       backgroundColor: widget.maxNavPos >= 2
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -144,11 +147,12 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.maxNavPos >= 3
                       ? "Double tap to go to the location service rating page"
                       : "",
+                  excludeSemantics: true,
                   child: GestureDetector(
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 43,
+                      size: 37,
                       backgroundColor: widget.maxNavPos >= 3
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,
@@ -173,11 +177,12 @@ class _RatingBreadcrumbsState extends State<RatingBreadcrumbs> {
                   hint: widget.maxNavPos >= 4
                       ? "Double tap to go to the additonal comment page"
                       : "",
+                  excludeSemantics: true,
                   child: GestureDetector(
                     child: DghaIcon(
                       padding: 3,
                       paddingPadding: 0,
-                      size: 43,
+                      size: 37,
                       backgroundColor: widget.maxNavPos >= 4
                           ? widget.highlightedBackgroundColor
                           : widget.backgroundColor,

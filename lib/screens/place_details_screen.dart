@@ -171,10 +171,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                               );
                             }
                           },
-                          child: DghaIcon(
-                            icon: FontAwesomeIcons.pen,
-                            iconColor: Styles.yellow,
-                            backgroundColor: Styles.midnightBlue,
+                          child: Semantics(
+                            button: true,
+                            label: "Write Review",
+                            hint:
+                                "Double tap to leave a review for ${widget.locationData.name}",
+                            excludeSemantics: true,
+                            child: DghaIcon(
+                              icon: FontAwesomeIcons.pen,
+                              iconColor: Styles.yellow,
+                              backgroundColor: Styles.midnightBlue,
+                            ),
                           ),
                         ),
                       ],
