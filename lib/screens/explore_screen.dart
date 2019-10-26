@@ -8,7 +8,9 @@ import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha_brochure/services/open_dynamic_link.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:google_maps_webservice/places.dart";
@@ -51,6 +53,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   void initState() {
     super.initState();
+    Data.pages.add(PageNav.exploreMenuScr);
+
+    OpenDynamicLink.initDynamicLink(context);
     getPlacesFromDatabase();
   }
 
