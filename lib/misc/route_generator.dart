@@ -14,8 +14,6 @@ class RouteGenerator {
     switch (settings.name) {
       case LoginScreen.id:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case LoginScreen.id_start:
-        return MaterialPageRoute(builder: (_) => LoginScreen(isStartPage: true));
       case LoginScreen.id_user_rating:
         return MaterialPageRoute(
             builder: (_) => LoginScreen(

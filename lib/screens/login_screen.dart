@@ -12,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "Login Screen";
-  static const String id_start = "Login Screen Start";
   static const String id_user_rating = "Login Screen User Rating";
 
   //Must be false on every page except for the page that loads in the main.dart file
