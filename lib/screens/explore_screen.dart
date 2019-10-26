@@ -19,7 +19,7 @@ import 'dart:async';
 import 'dart:convert';
 
 class ExploreScreen extends StatefulWidget {
-  static const String id = "Rating Menu Screen";
+  static const String id = "Explore Screen";
   @override
   _ExploreScreenState createState() => _ExploreScreenState();
 }
