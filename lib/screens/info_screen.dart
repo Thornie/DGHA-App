@@ -167,7 +167,7 @@ class _InfoScreenState extends State<InfoScreen> {
                             child: Container(
                               child: Text(
                                 lang.languageName,
-                                style: Styles.h3LinkStyle,
+                                style: Styles.txtBtnStyle,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

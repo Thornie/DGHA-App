@@ -22,8 +22,7 @@ class PlaceCard extends StatelessWidget {
           margin: EdgeInsets.all(7),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius:
-                BorderRadius.all(Radius.circular(Styles.normalRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
             boxShadow: [
               BoxShadow(
                 color: Styles.grey,
@@ -55,8 +54,7 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.popAndPushNamed(context, PlaceDetailsScreen.id,
-            arguments: locationData);
+        Navigator.popAndPushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
       },
     );
   }

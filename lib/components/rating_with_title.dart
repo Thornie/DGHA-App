@@ -9,27 +9,20 @@ class RatingWithTitle extends StatelessWidget {
   final bool isSmall;
   final bool spaceBetween;
 
-  RatingWithTitle(
-      {this.title,
-      this.rating,
-      this.isSmall = false,
-      this.spaceBetween = true});
+  RatingWithTitle({this.title, this.rating, this.isSmall = false, this.spaceBetween = true});
 
   @override
   Widget build(BuildContext context) {
+    double scale = MediaQuery.of(context).textScaleFactor;
     return Row(
-      mainAxisAlignment: spaceBetween
-          ? MainAxisAlignment.spaceBetween
-          : MainAxisAlignment.start,
+      mainAxisAlignment: spaceBetween ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
       children: <Widget>[
         //----------Title
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 3),
           child: Text(
             title,
-            style: isSmall
-                ? Styles.h3Style.copyWith(fontSize: 17)
-                : Styles.h3Style,
+            style: Styles.h4Style,
           ),
         ),
         Semantics(
@@ -39,9 +32,7 @@ class RatingWithTitle extends StatelessWidget {
           child: DghaStarRating(
             changeRatingOnTap: false,
             rating: rating,
-            height: isSmall
-                ? MediaQuery.of(context).size.width / 14
-                : MediaQuery.of(context).size.width / 11,
+            height: isSmall ? 26 * scale : 30 * scale,
           ),
         ),
       ],

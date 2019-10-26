@@ -234,7 +234,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         onSubmitted: (value) {
           onSubmitted(value);
         },
-        style: Styles.inputStyle,
+        style: Styles.pStyle,
         cursorColor: Styles.midnightBlue,
         cursorWidth: 5,
         decoration: InputDecoration(

@@ -47,14 +47,14 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                         icon: widget.tile.icon,
                         backgroundColor: Styles.midnightBlue,
                         iconColor: Styles.yellow,
-                        ),
+                      ),
                       SizedBox(width: 20),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.only(top: 10),
                           child: Text(
                             widget.tile.title,
-                            style: Styles.h3LinkStyle,
+                            style: Styles.txtBtnStyle,
                           ),
                         ),
                       ),
@@ -71,7 +71,7 @@ class _MenuExpansionTileState extends State<MenuExpansionTile> with TickerProvid
                     button: true,
                     hint: this.isCollapsed ? "Double tap to close menu" : widget.tile.semanticHint,
 
-                    // hide the text because its ugly lol. 
+                    // hide the text because its ugly lol.
                     child: Text(
                       'Laws',
                       style: TextStyle(color: Styles.transparent),

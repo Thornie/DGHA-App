@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/data.dart';
@@ -92,34 +93,33 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               child: ListView(
                 children: <Widget>[
                   SizedBox(
-                    height: 80,
+                    height: Styles.heightFromAppBar,
                   ),
-                  //----------Location Name
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
+
+                  //---------- NOTE: Place Name
+                  Container(
                     child: Text(
                       widget.locationData.name,
-                      style: Styles.h3Style,
+                      style: Styles.h2Style,
                     ),
                   ),
-                  //----------Location
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
+
+                  // --------- NOTE: Address
+                  Container(
                     child: Text(
                       widget.locationData.address,
                       style: Styles.pStyle,
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  //----------Overall Rating
-                  RatingWithTitle(
-                    title: "Overall Rating",
-                    rating: widget.locationData.overallRating,
-                  ),
-                  SizedBox(
-                    height: 10,
+
+                  // --------- NOTE: Stars
+                  SizedBox(height: Styles.spacing * 0.5),
+                  Center(
+                    child: DghaStarRating(
+                      changeRatingOnTap: false,
+                      rating: widget.locationData.overallRating,
+                      height: 42,
+                    ),
                   ),
                   //----------Customer Service Rating
                   RatingWithTitle(
@@ -139,31 +139,28 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     rating: widget.locationData.locationRating,
                     isSmall: true,
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(
-                          "User Reviews",
-                          style: Styles.h3Style,
+                          "Reviews",
+                          style: Styles.h2Style,
                         ),
 
-                        // ---------- NOTE: Review
+                        // ---------- NOTE: Review Btn
                         GestureDetector(
                           onTap: () {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).pushNamed(
-                                UserRatingScreen.id,
-                                arguments: ReviewScrArgs(
-                                  placeId: placeId,
-                                  placeName: widget.locationData.name,
-                                ),
-                              );
+                              Navigator.of(context).pushNamed(UserRatingScreen.id,
+                                  arguments: ReviewScrArgs(
+                                    placeId: placeId,
+                                    placeName: widget.locationData.name,
+                                  ));
                             } else {
                               Navigator.of(context).pushNamed(
                                 LoginScreen.id_user_rating,

@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: DghaTextButton(
                         minWidth: this.buttonMinWidth,
                         text: "Sign In",
-                        textStyle: Styles.btnTxtYellowStyle,
+                        textStyle: Styles.yellowTxtBtnStyle,
                         colour: Styles.midnightBlue,
                         onTap: () {
                           this.signIn();
