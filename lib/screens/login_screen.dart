@@ -1,6 +1,7 @@
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/header_row.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
+import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
@@ -155,7 +156,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   textStyle: Styles.btnTextBlueUnderlineStyle,
                   colour: Styles.yellow,
                   onTap: () {
-                    Navigator.pop(context);
+                    if (Data.pages.length == 0) {
+                      Navigator.popAndPushNamed(context, ExploreScreen.id);
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                   bottomMargin: this.marginHeight * 0.5,
                 ),
