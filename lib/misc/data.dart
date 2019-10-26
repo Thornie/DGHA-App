@@ -1,6 +1,7 @@
 import 'package:dgha_brochure/models/languages.dart';
 import 'package:dgha_brochure/models/info_menu_card_data.dart';
 import 'package:dgha_brochure/models/menu_tile_data.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/screens/info_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +9,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Data {
   // -------------------------------------- KEY (will delete this later)
   static final String kGoogleApiKey = "AIzaSyCj1t28RYFPFpa1xL_kjlIwCrH8CEryoJs";
+
+  // -------------------------------------- NAVIGATION
+  static List<PageNav> pages = new List<PageNav>();
   // -------------------------------------- CARD DATA
   // ------------- GENERAL INFO CARDS
   static final List<InfoMenuCardData> generalInfoCardData = [guideDogCardData, accessCardData];
