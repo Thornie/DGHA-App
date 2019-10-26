@@ -47,8 +47,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
     return SafeArea(
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(Styles.normalRadius),
-            bottomRight: Radius.circular(Styles.normalRadius)),
+          topRight: Radius.circular(Styles.normalRadius),
+          bottomRight: Radius.circular(Styles.normalRadius),
+        ),
         child: Container(
           width: this.widget.width,
           constraints: BoxConstraints(
@@ -59,8 +60,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             elevation: 20,
             semanticLabel: "Side bar menu",
             child: ListView(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Styles.appBarHorizontalPadding),
+              padding: EdgeInsets.symmetric(horizontal: Styles.appBarHorizontalPadding),
               children: <Widget>[
                 SizedBox(
                   height: Styles.iconSize / 3,
@@ -73,21 +73,15 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 MenuTile(
                   tile: new MenuTileData(
                     title: isLoggedIn ? "Sign out" : "Sign in",
-                    icon: isLoggedIn
-                        ? FontAwesomeIcons.signOutAlt
-                        : FontAwesomeIcons.signInAlt,
+                    icon: isLoggedIn ? FontAwesomeIcons.signOutAlt : FontAwesomeIcons.signInAlt,
                     semanticLabel: isLoggedIn ? "Log out" : "Login",
-                    semanticHint: isLoggedIn
-                        ? "Double tap to sign out"
-                        : "Double tap to go to the sign in page",
+                    semanticHint: isLoggedIn ? "Double tap to sign out" : "Double tap to go to the sign in page",
                     pageToNavigateTo: LoginScreen.id,
                     onTap: () {
                       if (isLoggedIn) {
                         _auth.signOut();
-                        Navigator.pop(context);
                         Navigator.of(context).popAndPushNamed(LoginScreen.id);
                       } else {
-                        Navigator.pop(context);
                         Navigator.of(context).popAndPushNamed(LoginScreen.id);
                       }
                     },
