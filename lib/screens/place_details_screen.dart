@@ -4,8 +4,10 @@ import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:dgha_brochure/components/review_container.dart';
+import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
@@ -39,6 +41,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     super.initState();
     getReviews();
     getCurrentUser();
+    Data.pages.add(PageNav.placeDetailsScr);
   }
 
   void getCurrentUser() async {
@@ -57,10 +60,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void getReviews() async {
     List<Review> snapShotReviews = new List<Review>();
-    QuerySnapshot snapshot = await _firestore
-        .collection('reviews')
-        .where("placeId", isEqualTo: widget.locationData.placeId)
-        .getDocuments();
+    QuerySnapshot snapshot = await _firestore.collection('reviews').where("placeId", isEqualTo: widget.locationData.placeId).getDocuments();
 
     for (var doc in snapshot.documents) {
       Review r = new Review(
@@ -151,7 +151,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           style: Styles.h3Style,
                         ),
 
-                        // ---------- NOTE: Review Button
+                        // ---------- NOTE: Review
                         GestureDetector(
                           onTap: () {
                             if (this.loggedInUser != null) {
@@ -174,8 +174,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           child: Semantics(
                             button: true,
                             label: "Write Review",
-                            hint:
-                                "Double tap to leave a review for ${widget.locationData.name}",
+                            hint: "Double tap to leave a review for ${widget.locationData.name}",
                             excludeSemantics: true,
                             child: DghaIcon(
                               icon: FontAwesomeIcons.pen,
@@ -194,6 +193,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 ],
               ),
             ),
+
+            // ---- NOTE: App Bar
             DghaAppBar(
               text: "Reviews",
               isMenu: true,

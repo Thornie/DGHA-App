@@ -1,5 +1,7 @@
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/screens/info_menu_screen.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +28,7 @@ class DGHABotNav extends StatelessWidget {
           topLeft: Radius.circular(Styles.normalRadius),
           topRight: Radius.circular(Styles.normalRadius),
         ),
-        boxShadow: [
-          BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, -3))
-        ],
+        boxShadow: [BoxShadow(color: Styles.grey, blurRadius: 3, offset: Offset(0, -3))],
       ),
       child: Stack(
         children: <Widget>[
@@ -43,9 +43,7 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == ActivePageEnum.ratingsPage
-                        ? Styles.yellow
-                        : Colors.white,
+                    color: this.activeTab == ActivePageEnum.ratingsPage ? Styles.yellow : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Styles.normalRadius),
                     ),
@@ -60,7 +58,9 @@ class DGHABotNav extends StatelessWidget {
                         iconColor: Styles.midnightBlue,
                       ),
                       onPressed: () {
-                        Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+                        if (Data.pages.last != PageNav.exploreMenuScr) {
+                          Navigator.pushNamedAndRemoveUntil(context, ExploreScreen.id, ModalRoute.withName(ExploreScreen.id));
+                        }
                       },
                     ),
                   ),
@@ -76,9 +76,7 @@ class DGHABotNav extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: this.activeTab == ActivePageEnum.infoPage
-                        ? Styles.yellow
-                        : Colors.white,
+                    color: this.activeTab == ActivePageEnum.infoPage ? Styles.yellow : Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(Styles.normalRadius),
                     ),
@@ -93,8 +91,9 @@ class DGHABotNav extends StatelessWidget {
                         iconColor: Styles.midnightBlue,
                       ),
                       onPressed: () {
-                        Navigator.of(context)
-                            .popAndPushNamed(InfoMenuScreen.id);
+                        if (Data.pages.last != PageNav.infoMenuScr) {
+                          Navigator.pushNamed(context, InfoMenuScreen.id);
+                        }
                       },
                     ),
                   ),

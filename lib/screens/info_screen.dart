@@ -3,9 +3,11 @@ import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/components/selectable_contrainer.dart';
+import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/languages.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -38,11 +40,12 @@ class _InfoScreenState extends State<InfoScreen> {
 
   List<String> spans = new List<String>();
 
+  // NOTE: init
   @override
   void initState() {
     super.initState();
     loadText(0);
-    // setLang(0);
+    Data.pages.add(PageNav.infoScr);
   }
 
   void calcDimensions(Orientation orientation) {

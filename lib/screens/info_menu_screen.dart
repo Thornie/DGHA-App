@@ -6,6 +6,7 @@ import 'package:dgha_brochure/components/info_card.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/info_menu_card_data.dart';
+import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,15 @@ class _InfoMenuScreenState extends State<InfoMenuScreen> {
   // card text properties
   final double textMinWidth = 102;
   final double textMinHeight = 34;
+
+  // NOTE: init
+  @override
+  void initState() {
+    super.initState();
+    Data.pages.add(PageNav.infoMenuScr);
+
+    print(Data.pages.length);
+  }
 
   void calcDimensions(Orientation orientation) {
     this.scrWidth = MediaQuery.of(context).size.width;

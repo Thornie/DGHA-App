@@ -5,7 +5,6 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
-import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,16 +17,15 @@ class LoginScreen extends StatefulWidget {
 
   //Must be false on every page except for the page that loads in the main.dart file
   //This is needed so that when the user presses the back button too many times, they don't go to an empty black screen
-  final bool isStartPage;
 
   final bool goToReviewScreen;
   final LocationData locationData;
 
   LoginScreen({
-    this.isStartPage = false,
     this.goToReviewScreen = false,
     this.locationData,
   });
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -37,8 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   String email = "";
   String password = "";
-  final TextEditingController _emailController = new TextEditingController();
-  final TextEditingController _passController = new TextEditingController();
 
   double containerHeight;
   double marginHeight;
@@ -66,8 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
               placeName: widget.locationData.name,
             ),
           );
-        else
+        else {
           Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+        }
       }
     } catch (exception) {
       print(exception);
@@ -159,12 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textStyle: Styles.btnTextBlueUnderlineStyle,
                   colour: Styles.yellow,
                   onTap: () {
-                    if (widget.isStartPage)
-                      Navigator.of(context).pushNamed(ExploreScreen.id);
-                    else if (widget.goToReviewScreen)
-                      Navigator.of(context).popAndPushNamed(PlaceDetailsScreen.id, arguments: widget.locationData);
-                    else
-                      Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+                    Navigator.pop(context);
                   },
                   bottomMargin: this.marginHeight * 0.5,
                 ),

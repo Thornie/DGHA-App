@@ -1,6 +1,7 @@
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/header_row.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
+import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   double containerHeight;
   double marginHeight;
   double buttonMinWidth;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void calcDimensions() {
     double scrWidth = MediaQuery.of(context).size.width;
@@ -148,7 +154,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 textStyle: Styles.btnTextBlueUnderlineStyle,
                 colour: Styles.yellow,
                 onTap: () {
-                  Navigator.of(context).pushNamed(ExploreScreen.id);
+                  Navigator.pop(context);
+                  // Navigator.of(context).pushNamed(ExploreScreen.id);
                 },
                 bottomMargin: this.marginHeight * 0.5,
               ),

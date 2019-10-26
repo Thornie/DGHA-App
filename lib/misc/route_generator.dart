@@ -1,6 +1,5 @@
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
-import 'package:dgha_brochure/screens/first_screen.dart';
 import 'package:dgha_brochure/screens/info_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/info_menu_screen.dart';
@@ -13,13 +12,10 @@ import 'package:flutter/material.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case FirstScreen.id:
-        return MaterialPageRoute(builder: (_) => FirstScreen());
       case LoginScreen.id:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case LoginScreen.id_start:
-        return MaterialPageRoute(
-            builder: (_) => LoginScreen(isStartPage: true));
+        return MaterialPageRoute(builder: (_) => LoginScreen(isStartPage: true));
       case LoginScreen.id_user_rating:
         return MaterialPageRoute(
             builder: (_) => LoginScreen(
@@ -41,8 +37,7 @@ class RouteGenerator {
       case ExploreScreen.id:
         return MaterialPageRoute(builder: (_) => ExploreScreen());
       case PlaceDetailsScreen.id:
-        return MaterialPageRoute(
-            builder: (_) => PlaceDetailsScreen(settings.arguments));
+        return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
       case UserRatingScreen.id:
         ReviewScrArgs reviewScrArgs;
         try {
