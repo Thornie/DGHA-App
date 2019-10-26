@@ -27,7 +27,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
       onChanged: (value) {
         widget.onChange(value);
       },
-      style: Styles.inputStyle,
+      style: Styles.pStyle,
       cursorColor: Styles.midnightBlue,
       cursorWidth: 5,
       obscureText: widget.obscureText,

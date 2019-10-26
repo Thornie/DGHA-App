@@ -5,7 +5,6 @@ import 'package:dgha_brochure/models/review.dart';
 
 class ReviewContainer extends StatelessWidget {
   final Review review;
-
   ReviewContainer({this.review});
 
   @override
@@ -19,12 +18,12 @@ class ReviewContainer extends StatelessWidget {
             color: Styles.midnightBlue,
           ),
           SizedBox(
-            height: 10,
+            height: Styles.spacing,
           ),
           Container(
             child: Column(
               children: <Widget>[
-                // ------ NOTE: Overall Review
+                // ------ NOTE: Rate: ⭐⭐⭐⭐⭐
                 RatingWithTitle(
                   title: "Rated: ",
                   rating: this.review.overallRating,
@@ -33,8 +32,6 @@ class ReviewContainer extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  // decoration: BoxDecoration(border: Border.all()),
                   child: SelectableText(
                     this.review.comment,
                     style: Styles.pStyle,

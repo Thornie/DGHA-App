@@ -124,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TextSpan(
                           children: [
                             TextSpan(text: 'By clicking "Register" you agree to the following '),
-                            TextSpan(text: 'Terms and Conditions.', style: Styles.highlightText),
+                            TextSpan(text: 'Terms and Conditions.', style: Styles.linkStyle),
                           ],
                         ),
                         style: Styles.pStyle,
@@ -137,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     DghaTextButton(
                       minWidth: this.buttonMinWidth,
                       text: "Sign Up",
-                      textStyle: Styles.btnTxtYellowStyle,
+                      textStyle: Styles.yellowTxtBtnStyle,
                       colour: Styles.midnightBlue,
                       onTap: () {
                         this.signUp();
