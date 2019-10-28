@@ -6,6 +6,7 @@ class Styles {
   static final Color midnightBlue = Color(0xff00205b);
   static final Color transMidnightBlue = Color(0x7000205b);
   static final Color grey = Color(0xff576a80);
+  static final Color red = Color(0xffe05c41);
   static final Color transparent = Color(0x00000000);
   static final Color softGrey = Color(0xfff2f5f8);
 

@@ -4,6 +4,7 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/info_menu_screen.dart';
+import 'package:dgha_brochure/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -58,7 +59,8 @@ class DGHABotNav extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (Data.pages.last != PageNav.exploreMenuScr) {
-                          Navigator.pushNamedAndRemoveUntil(context, ExploreScreen.id, ModalRoute.withName(ExploreScreen.id));
+                          Navigator.pushNamed(context, RegisterScreen.id);
+                          //Navigator.pushNamedAndRemoveUntil(context, ExploreScreen.id, ModalRoute.withName(ExploreScreen.id));
                         }
                       },
                     ),
