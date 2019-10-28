@@ -99,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       excludeSemantics: true,
                       child: Container(
                         child: UserInputTextField(
+                          keyboardType: TextInputType.emailAddress,
                           prefixIcon: FontAwesomeIcons.solidEnvelope,
                           hintText: "Email",
                           onChange: (value) {

@@ -83,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // NOTE: Email
                     Container(
                       child: UserInputTextField(
+                        keyboardType: TextInputType.emailAddress,
                         hintText: "Email",
                         onChange: (value) {
                           this.email = value;

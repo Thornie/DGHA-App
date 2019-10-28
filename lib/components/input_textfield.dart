@@ -10,8 +10,10 @@ class UserInputTextField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
   final Function(String) onChange;
+  final keyboardType;
+  
 
-  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.onChange});
+  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.onChange, this.keyboardType});
 
   @override
   _UserInputTextFieldState createState() => _UserInputTextFieldState();
@@ -23,6 +25,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.emailAddress,
       controller: _txtController,
       onChanged: (value) {
         widget.onChange(value);
