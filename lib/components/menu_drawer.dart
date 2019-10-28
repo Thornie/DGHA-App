@@ -19,6 +19,8 @@ class MenuDrawer extends StatefulWidget {
 
 class _MenuDrawerState extends State<MenuDrawer> {
   final _auth = FirebaseAuth.instance;
+  double width = 0;
+  bool widthIsSet = false;
   bool isLoggedIn = false;
 
   @override
@@ -42,6 +44,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
     }
   }
 
+  double setWidth() {
+    if (widthIsSet == false) {
+      width = MediaQuery.of(context).size.height * 0.75;
+    }
+    return width;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +60,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           bottomRight: Radius.circular(Styles.normalRadius),
         ),
         child: Container(
-          width: this.widget.width,
+          width: setWidth(),
           constraints: BoxConstraints(
             minWidth: 300,
             maxWidth: 500,
