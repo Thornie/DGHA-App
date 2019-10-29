@@ -188,62 +188,67 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
           onTap: () {
             FocusScope.of(context).requestFocus(new FocusNode());
           },
-          child: Column(
-            children: <Widget>[
-              //----------App Bar
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  child: Semantics(
-                    button: true,
-                    label: "Close",
-                    hint: "Double tap to cancel your review",
-                    excludeSemantics: true,
-                    child: DghaIcon(
-                      size: 35,
-                      padding: 4,
-                      backgroundColor: Styles.midnightBlue,
-                      iconColor: Styles.yellow,
-                      icon: Icons.close,
+          child: SingleChildScrollView(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: <Widget>[
+                  //----------App Bar
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      child: Semantics(
+                        button: true,
+                        label: "Close",
+                        hint: "Double tap to cancel your review",
+                        excludeSemantics: true,
+                        child: DghaIcon(
+                          size: 35,
+                          padding: 4,
+                          backgroundColor: Styles.midnightBlue,
+                          iconColor: Styles.yellow,
+                          icon: Icons.close,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+                  //----------Page Navigation
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 20, bottom: 20),
+                    child: RatingBreadcrumbs(
+                      maxNavPos: maxNavPos,
+                      currentNavPos: currentNavPos,
+                      iconColor: Colors.white,
+                      backgroundColor: Styles.grey,
+                      highlightedIconColor: Styles.yellow,
+                      highlightedBackgroundColor: Styles.midnightBlue,
+                      controller: pageController,
+                    ),
+                  ),
+                  //----------Rating Section
+                  Expanded(
+                    child: PageView(
+                      controller: pageController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: <Widget>[
+                        overallRatingScreen,
+                        customerServiceRatingScreen,
+                        amenitiesRatingScreen,
+                        locationRatingScreen,
+                        commentSectionScreen,
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: (MediaQuery.of(context).size.height - 230) / 2,
+                  ),
+                ],
               ),
-              //----------Page Navigation
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15, right: 15, top: 20, bottom: 20),
-                child: RatingBreadcrumbs(
-                  maxNavPos: maxNavPos,
-                  currentNavPos: currentNavPos,
-                  iconColor: Colors.white,
-                  backgroundColor: Styles.grey,
-                  highlightedIconColor: Styles.yellow,
-                  highlightedBackgroundColor: Styles.midnightBlue,
-                  controller: pageController,
-                ),
-              ),
-              //----------Rating Section
-              Expanded(
-                child: PageView(
-                  controller: pageController,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    overallRatingScreen,
-                    customerServiceRatingScreen,
-                    amenitiesRatingScreen,
-                    locationRatingScreen,
-                    commentSectionScreen,
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: (MediaQuery.of(context).size.height - 230) / 2,
-              ),
-            ],
+            ),
           ),
         ),
       ),

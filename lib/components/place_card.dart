@@ -54,7 +54,7 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.popAndPushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
+        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
       },
     );
   }

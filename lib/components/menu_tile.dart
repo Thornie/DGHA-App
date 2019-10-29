@@ -24,7 +24,7 @@ class MenuTile extends StatelessWidget {
         if (tile.onTap == null) {
           if (tile.link == null) {
             Navigator.pop(context);
-            Navigator.of(context).popAndPushNamed(tile.pageToNavigateTo, arguments: InfoScrArgs(title: tile.title, texts: tile.texts));
+            Navigator.of(context).pushNamed(tile.pageToNavigateTo, arguments: InfoScrArgs(title: tile.title, texts: tile.texts));
           } else {
             _launchUrl(tile.link);
           }
