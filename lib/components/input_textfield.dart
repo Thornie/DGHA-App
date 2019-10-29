@@ -9,11 +9,12 @@ class UserInputTextField extends StatefulWidget {
   final IconData prefixIcon;
   final String hintText;
   final bool obscureText;
+  final bool highlightRed;
   final Function(String) onChange;
-  final keyboardType;
+  final TextInputType keyboardType;
   
 
-  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.onChange, this.keyboardType});
+  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.highlightRed, this.onChange, this.keyboardType});
 
   @override
   _UserInputTextFieldState createState() => _UserInputTextFieldState();
@@ -59,11 +60,11 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(color: Styles.grey, width: 3),
+            borderSide: BorderSide(color: widget.highlightRed ? Styles.red : Styles.grey, width: 3),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(color: Styles.midnightBlue, width: 3),
+            borderSide: BorderSide(color: widget.highlightRed ? Styles.red : Styles.midnightBlue, width: 3),
           ),
           hintText: widget.hintText,
           contentPadding: EdgeInsets.symmetric(vertical: 20)),

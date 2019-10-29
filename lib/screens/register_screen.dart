@@ -24,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   double marginHeight;
   double buttonMinWidth;
 
+  bool passwordMatch = true;
+
   @override
   void initState() {
     super.initState();
@@ -41,10 +43,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void signUp() {
     if (this.passwordV1 == this.passwordV2) {
       try {
-        final newUser = _auth.createUserWithEmailAndPassword(email: this.email, password: this.passwordV1);
+        final newUser = _auth.createUserWithEmailAndPassword(
+            email: this.email, password: this.passwordV1);
 
         if (newUser != null) {
-          final loggedInUser = _auth.signInWithEmailAndPassword(email: this.email, password: this.passwordV1);
+          final loggedInUser = _auth.signInWithEmailAndPassword(
+              email: this.email, password: this.passwordV1);
 
           if (loggedInUser != null) {
             Navigator.of(context).pushNamed(ExploreScreen.id);
@@ -111,8 +115,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: UserInputTextField(
                         hintText: "Confirm Password",
                         obscureText: true,
+                        highlightRed: !passwordMatch,
                         onChange: (value) {
                           this.passwordV2 = value;
+                          setState(() {
+                            if (passwordV1 != passwordV2) passwordMatch = false;
+                            else passwordMatch = true;
+                          });
                         },
                       ),
                     ),
@@ -124,8 +133,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: 'By clicking "Register" you agree to the following '),
-                            TextSpan(text: 'Terms and Conditions.', style: Styles.linkStyle),
+                            TextSpan(
+                                text:
+                                    'By clicking "Register" you agree to the following '),
+                            TextSpan(
+                                text: 'Terms and Conditions.',
+                                style: Styles.linkStyle),
                           ],
                         ),
                         style: Styles.pStyle,
