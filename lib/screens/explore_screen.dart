@@ -30,6 +30,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   // -------------------------- NOTE: CONTROLLERS
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String userInput = "";
+  final TextEditingController _txtController = new TextEditingController();
 
   // -------------------------- LOCATION
   final places = new GoogleMapsPlaces(apiKey: Data.kGoogleApiKey);
@@ -216,7 +217,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   Widget buildSearchTextField({IconData prefixIcon, String hintText, Function(String) onSubmitted}) {
-    final TextEditingController _txtController = new TextEditingController();
     return Container(
       decoration: BoxDecoration(
         color: Styles.yellow,
