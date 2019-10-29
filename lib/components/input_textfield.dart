@@ -13,8 +13,7 @@ class UserInputTextField extends StatefulWidget {
   final Function(String) onChange;
   final TextInputType keyboardType;
   
-
-  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.highlightRed, this.onChange, this.keyboardType});
+  UserInputTextField({this.prefixIcon, this.hintText, this.obscureText = false, this.highlightRed = false, this.onChange, this.keyboardType});
 
   @override
   _UserInputTextFieldState createState() => _UserInputTextFieldState();
