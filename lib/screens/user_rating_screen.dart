@@ -173,7 +173,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
 
         _firestore.collection('reviews').add(review).then((data) {
           if (data.documentID != null) {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           } else {
             print("ruh oh!");
           }
@@ -211,7 +211,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop(false);
                       },
                     ),
                   ),

@@ -152,15 +152,20 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
                         // ---------- NOTE: Review Btn
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             if (this.loggedInUser != null) {
                               print(widget.locationData.placeId);
                               String placeId = widget.locationData.placeId;
-                              Navigator.of(context).pushNamed(UserRatingScreen.id,
+                              final result = await Navigator.pushNamed(context, UserRatingScreen.id,
                                   arguments: ReviewScrArgs(
                                     placeId: placeId,
                                     placeName: widget.locationData.name,
                                   ));
+                              if (result) {
+                                setState(() {
+                                  getReviews();
+                                });
+                              }
                             } else {
                               Navigator.of(context).pushNamed(
                                 LoginScreen.id_user_rating,
