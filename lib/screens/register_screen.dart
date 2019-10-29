@@ -43,12 +43,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void signUp() {
     if (this.passwordV1 == this.passwordV2) {
       try {
-        final newUser = _auth.createUserWithEmailAndPassword(
-            email: this.email, password: this.passwordV1);
+        final newUser = _auth.createUserWithEmailAndPassword(email: this.email, password: this.passwordV1);
 
         if (newUser != null) {
-          final loggedInUser = _auth.signInWithEmailAndPassword(
-              email: this.email, password: this.passwordV1);
+          final loggedInUser = _auth.signInWithEmailAndPassword(email: this.email, password: this.passwordV1);
 
           if (loggedInUser != null) {
             Navigator.of(context).pushNamed(ExploreScreen.id);
@@ -65,116 +63,122 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    calcDimensions();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
-        child: Container(
-          height: this.containerHeight,
-          margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            calcDimensions();
+            return SingleChildScrollView(
+              child: Container(
+                // height: this.containerHeight,
+                margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: this.marginHeight * 0.5),
-                    HeaderRow(text: "Sign Up"),
-                    SizedBox(height: this.marginHeight * 0.7),
-
-                    // NOTE: Email
                     Container(
-                      child: UserInputTextField(
-                        keyboardType: TextInputType.emailAddress,
-                        hintText: "Email",
-                        onChange: (value) {
-                          this.email = value;
-                        },
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: this.marginHeight * 0.5),
+                          HeaderRow(text: "Sign Up"),
+                          SizedBox(height: this.marginHeight * 0.7),
+
+                          // NOTE: Email
+                          Container(
+                            child: UserInputTextField(
+                              keyboardType: TextInputType.emailAddress,
+                              hintText: "Email",
+                              onChange: (value) {
+                                this.email = value;
+                              },
+                            ),
+                          ),
+
+                          SizedBox(height: this.marginHeight * 0.5),
+
+                          // NOTE: Password V1
+                          Container(
+                            child: UserInputTextField(
+                              hintText: "Password",
+                              obscureText: true,
+                              onChange: (value) {
+                                this.passwordV1 = value;
+                              },
+                            ),
+                          ),
+
+                          SizedBox(height: this.marginHeight * 0.5),
+
+                          // NOTE: Password V2
+                          Container(
+                            child: UserInputTextField(
+                              hintText: "Confirm Password",
+                              obscureText: true,
+                              highlightRed: !passwordMatch,
+                              onChange: (value) {
+                                this.passwordV2 = value;
+                                setState(() {
+                                  if (passwordV1 != passwordV2)
+                                    passwordMatch = false;
+                                  else
+                                    passwordMatch = true;
+                                });
+                              },
+                            ),
+                          ),
+
+                          SizedBox(height: this.marginHeight * 0.5),
+
+                          // NOTE: Terms and Condition
+                          Container(
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(text: 'By clicking "Register" you agree to the following '),
+                                  TextSpan(text: 'Terms and Conditions.', style: Styles.linkStyle),
+                                ],
+                              ),
+                              style: Styles.pStyle,
+                            ),
+                          ),
+
+                          SizedBox(height: this.marginHeight * 0.5),
+
+                          // NOTE: Register
+                          DghaTextButton(
+                            minWidth: this.buttonMinWidth,
+                            text: "Sign Up",
+                            textStyle: Styles.yellowTxtBtnStyle,
+                            colour: Styles.midnightBlue,
+                            onTap: () {
+                              this.signUp();
+                            },
+                          ),
+                        ],
                       ),
                     ),
 
                     SizedBox(height: this.marginHeight * 0.5),
 
-                    // NOTE: Password V1
-                    Container(
-                      child: UserInputTextField(
-                        hintText: "Password",
-                        obscureText: true,
-                        onChange: (value) {
-                          this.passwordV1 = value;
-                        },
-                      ),
-                    ),
-
-                    SizedBox(height: this.marginHeight * 0.5),
-
-                    // NOTE: Password V2
-                    Container(
-                      child: UserInputTextField(
-                        hintText: "Confirm Password",
-                        obscureText: true,
-                        highlightRed: !passwordMatch,
-                        onChange: (value) {
-                          this.passwordV2 = value;
-                          setState(() {
-                            if (passwordV1 != passwordV2) passwordMatch = false;
-                            else passwordMatch = true;
-                          });
-                        },
-                      ),
-                    ),
-
-                    SizedBox(height: this.marginHeight * 0.5),
-
-                    // NOTE: Terms and Condition
-                    Container(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                                text:
-                                    'By clicking "Register" you agree to the following '),
-                            TextSpan(
-                                text: 'Terms and Conditions.',
-                                style: Styles.linkStyle),
-                          ],
-                        ),
-                        style: Styles.pStyle,
-                      ),
-                    ),
-
-                    SizedBox(height: this.marginHeight * 0.5),
-
-                    // NOTE: Register
+                    // NOTE: Skip
                     DghaTextButton(
                       minWidth: this.buttonMinWidth,
-                      text: "Sign Up",
-                      textStyle: Styles.yellowTxtBtnStyle,
-                      colour: Styles.midnightBlue,
+                      text: "Skip",
+                      textStyle: Styles.btnTextBlueUnderlineStyle,
+                      colour: Styles.yellow,
                       onTap: () {
-                        this.signUp();
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed(ExploreScreen.id);
                       },
+                      bottomMargin: this.marginHeight * 0.5,
                     ),
                   ],
                 ),
               ),
-
-              // NOTE: Skip
-              DghaTextButton(
-                minWidth: this.buttonMinWidth,
-                text: "Skip",
-                textStyle: Styles.btnTextBlueUnderlineStyle,
-                colour: Styles.yellow,
-                onTap: () {
-                  Navigator.pop(context);
-                  // Navigator.of(context).pushNamed(ExploreScreen.id);
-                },
-                bottomMargin: this.marginHeight * 0.5,
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
