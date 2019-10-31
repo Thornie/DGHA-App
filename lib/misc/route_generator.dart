@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:dgha_brochure/screens/info_screen.dart';
@@ -35,6 +36,8 @@ class RouteGenerator {
       case ExploreScreen.id:
         return MaterialPageRoute(builder: (_) => ExploreScreen());
       case PlaceDetailsScreen.id:
+        // LocationData blah = settings.arguments as LocationData;
+        // print(blah.placeId);
         return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
       case UserRatingScreen.id:
         ReviewScrArgs reviewScrArgs;

@@ -106,6 +106,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     if (res.statusCode == 200) {
       ResponseData data = ResponseData.fromJson(json.decode(res.body));
+      print(data.results);
 
       for (var i = 0; i < data.results.length; i++) {
         PlaceByQuery pbq = PlaceByQuery.fromJson(data.results[i]);
@@ -114,7 +115,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
       for (var i = 0; i < places.length; i++) {
         LocationData ld = new LocationData(
-            name: places[i].name, address: Helper().formatAddress(places[i].address), overallRating: places[i].rating.toDouble(), customerServiceRating: 0, amenitiesRating: 0, locationRating: 0);
+            name: places[i].name,
+            address: Helper().formatAddress(places[i].address),
+            overallRating: places[i].rating.toDouble(),
+            customerServiceRating: 0,
+            amenitiesRating: 0,
+            locationRating: 0,
+            placeId: places[i].placeId);
         locations.add(ld);
       }
       setState(() {
