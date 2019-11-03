@@ -64,15 +64,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
             calcDimensions();
             return SingleChildScrollView(
               child: Container(
-                // height: this.containerHeight,
                 margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

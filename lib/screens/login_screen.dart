@@ -75,12 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     calcDimensions();
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            // height: this.containerHeight,
             margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
