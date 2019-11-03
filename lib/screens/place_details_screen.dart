@@ -64,12 +64,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     QuerySnapshot snapshot = await _firestore.collection('reviews').where("placeId", isEqualTo: widget.locationData.placeId).getDocuments();
 
     for (var doc in snapshot.documents) {
-      Review r = new Review(
-        email: doc.data['email'],
-        overallRating: doc.data['overallRating'].toDouble(),
-        comment: doc.data['comment'],
-      );
-      snapShotReviews.add(r);
+      if (doc.data['comment'] != "") {
+        print("comment: " + doc.data['comment']);
+        Review r = new Review(
+          email: doc.data['email'],
+          overallRating: doc.data['overallRating'].toDouble(),
+          comment: doc.data['comment'],
+        );
+        snapShotReviews.add(r);
+      }
     }
 
     try {
