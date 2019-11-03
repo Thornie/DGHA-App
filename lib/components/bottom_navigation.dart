@@ -58,7 +58,8 @@ class DGHABotNav extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (Data.pages.last != PageNav.exploreMenuScr) {
-                          Navigator.pushNamedAndRemoveUntil(context, ExploreScreen.id, ModalRoute.withName(ExploreScreen.id));
+                          Navigator.pushNamed(context, ExploreScreen.id);
+                          // Navigator.pushNamedAndRemoveUntil(context, ExploreScreen.id, ModalRoute.withName(ExploreScreen.id));
                         }
                       },
                     ),

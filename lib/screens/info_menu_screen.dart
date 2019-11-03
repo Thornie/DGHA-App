@@ -48,8 +48,16 @@ class _InfoMenuScreenState extends State<InfoMenuScreen> {
   void initState() {
     super.initState();
     Data.pages.add(PageNav.infoMenuScr);
+  }
 
-    print(Data.pages.length);
+  // NOTE: dispose
+  @override
+  void dispose() {
+    super.dispose();
+
+    if (Data.pages.last == PageNav.infoMenuScr) {
+      Data.pages.removeLast();
+    }
   }
 
   void calcDimensions(Orientation orientation) {
