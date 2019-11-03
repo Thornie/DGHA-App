@@ -205,14 +205,19 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 button: true,
                 label: "Menu",
                 hint: "Double tap to go back and view other locations",
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
-                  },
-                  child: DghaIcon(
-                    icon: FontAwesomeIcons.arrowLeft,
-                    backgroundColor: Styles.midnightBlue,
-                    iconColor: Styles.yellow,
+                child: Semantics(
+                  button: true,
+                  label: "Menu",
+                  hint: "Double tap to open side bar menu",
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+                    },
+                    child: DghaIcon(
+                      icon: FontAwesomeIcons.arrowLeft,
+                      backgroundColor: Styles.midnightBlue,
+                      iconColor: Styles.yellow,
+                    ),
                   ),
                 ),
               ),
