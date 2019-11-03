@@ -23,6 +23,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  bool isSubmittingReview = false;
 
   int maxNavPos = 0;
   int currentNavPos = 0;
@@ -77,8 +78,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     overallRatingScreen = new UserRatingContainer(
       title: "Overall",
       buttonTitle: "Next",
-      hintText:
-          "Give an overall rating out of 5 on your experience at this location.",
+      hintText: "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
@@ -96,12 +96,9 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     customerServiceRatingScreen = new UserRatingContainer(
       title: "Customer Service",
       buttonTitle: "Next",
-      hintText:
-          "Give a score out of 5 on the customer service provided to you at this location.",
+      hintText: "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
-      rating: customerServiceRatingScreen != null
-          ? customerServiceRatingScreen.rating
-          : 0,
+      rating: customerServiceRatingScreen != null ? customerServiceRatingScreen.rating : 0,
       onPressed: () {
         if (customerServiceRatingScreen.rating != 0) {
           setState(() {
@@ -136,8 +133,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     locationRatingScreen = new UserRatingContainer(
       title: "Location",
       buttonTitle: "Next",
-      hintText:
-          "Give a score out of 5 on the accessibility and ease of access to this location.",
+      hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
@@ -155,29 +151,38 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
       controller: commentController,
-      hintText:
-          "Add a comment to your review to give more detail on your experience. This is optional.",
-      onPressed: () {
-        comment = commentController.text;
+      hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
+      onPressed: () async {
+        if (!this.isSubmittingReview) {
+          setState(() {
+            this.isSubmittingReview = true;
+          });
 
-        Map<String, dynamic> review = {
-          'email': loggedInUser.email,
-          'amentiesRating': amenitiesRating,
-          'comment': comment,
-          'custServRating': customerServiceRating,
-          'locationRating': locationRating,
-          'overallRating': overallRating,
-          'placeId': widget.placeId,
-          'placeName': widget.placeName
-        };
+          comment = commentController.text;
 
-        _firestore.collection('reviews').add(review).then((data) {
-          if (data.documentID != null) {
-            Navigator.of(context).pop(true);
-          } else {
-            print("ruh oh!");
-          }
-        });
+          Map<String, dynamic> review = {
+            'email': loggedInUser.email,
+            'amentiesRating': amenitiesRating,
+            'comment': comment,
+            'custServRating': customerServiceRating,
+            'locationRating': locationRating,
+            'overallRating': overallRating,
+            'placeId': widget.placeId,
+            'placeName': widget.placeName
+          };
+
+          await _firestore.collection('reviews').add(review).then((data) {
+            if (data.documentID != null) {
+              Navigator.of(context).pop(true);
+            } else {
+              print("ruh oh!");
+            }
+          });
+
+          setState(() {
+            this.isSubmittingReview = false;
+          });
+        }
       },
     );
 
@@ -189,8 +194,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
             FocusScope.of(context).requestFocus(new FocusNode());
           },
           child: SingleChildScrollView(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: <Widget>[
                   //----------App Bar
@@ -217,8 +222,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                   ),
                   //----------Page Navigation
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 20, bottom: 20),
+                    padding: const EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
                     child: RatingBreadcrumbs(
                       maxNavPos: maxNavPos,
                       currentNavPos: currentNavPos,
