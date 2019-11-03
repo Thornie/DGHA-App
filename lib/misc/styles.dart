@@ -9,6 +9,7 @@ class Styles {
   static final Color red = Color(0xffe05c41);
   static final Color transparent = Color(0x00000000);
   static final Color softGrey = Color(0xfff2f5f8);
+  static final Color mediumGrey = Color(0xff828282);
 
   // ----------------- SIZES
   // ---------- APP
