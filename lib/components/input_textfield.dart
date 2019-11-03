@@ -43,6 +43,14 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
     debugPrint("Focus: " + _focus.hasFocus.toString());
   }
 
+  double _getTextFieldWidth() {
+    if (widget.prefixIcon != null) {
+      return MediaQuery.of(context).size.width - (Styles.spacing * 2) - ((Styles.iconPadding + Styles.iconPaddingPadding + Styles.iconSize) * 3);
+    } else {
+      return MediaQuery.of(context).size.width - (Styles.spacing * 2) - ((Styles.iconPadding + Styles.iconPaddingPadding + Styles.iconSize) * 2.25);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,13 +69,15 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
         // direction: Axis.horizontal,
         children: <Widget>[
           Container(
-            child: DghaIcon(
-              icon: widget.prefixIcon,
-              iconColor: _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey,
-            ),
+            child: widget.prefixIcon != null
+                ? DghaIcon(
+                    icon: widget.prefixIcon,
+                    iconColor: _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey,
+                  )
+                : SizedBox(width: 30),
           ),
           Container(
-            width: MediaQuery.of(context).size.width - (Styles.spacing * 2) - ((Styles.iconPadding + Styles.iconPaddingPadding + Styles.iconSize) * 3),
+            width: _getTextFieldWidth(),
             child: TextField(
               keyboardType: widget.keyboardType,
               controller: _txtController,
@@ -87,21 +97,21 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
             ),
           ),
           Container(
-            child: _focus.hasFocus
-                ? GestureDetector(
-                    onTap: () {
-                      Future.delayed(Duration(milliseconds: 50)).then((_) {
-                        _txtController.clear();
-                      });
-                    },
-                    child: Container(
-                      child: DghaIcon(
-                        icon: FontAwesomeIcons.times,
-                        iconColor: Styles.midnightBlue,
-                      ),
-                    ),
-                  )
-                : Container(),
+            child: GestureDetector(
+              onTap: () {
+                if (_focus.hasFocus) {
+                  Future.delayed(Duration(milliseconds: 50)).then((_) {
+                    _txtController.clear();
+                  });
+                }
+              },
+              child: Container(
+                child: DghaIcon(
+                  icon: FontAwesomeIcons.times,
+                  iconColor: _focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+                ),
+              ),
+            ),
           ),
         ],
       ),
