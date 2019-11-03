@@ -3,6 +3,7 @@ import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
+import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/data.dart';
@@ -81,6 +82,28 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
   }
 
+  void reviewBtnHandler() async {
+    if (this.loggedInUser != null) {
+      print(widget.locationData.placeId);
+      String placeId = widget.locationData.placeId;
+      final result = await Navigator.pushNamed(context, UserRatingScreen.id,
+          arguments: ReviewScrArgs(
+            placeId: placeId,
+            placeName: widget.locationData.name,
+          ));
+      if (result) {
+        setState(() {
+          getReviews();
+        });
+      }
+    } else {
+      Navigator.of(context).pushNamed(
+        LoginScreen.id_user_rating,
+        arguments: widget.locationData,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,34 +135,14 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     ),
                   ),
 
-                  // --------- NOTE: Stars
                   SizedBox(height: Styles.spacing * 0.5),
-                  Center(
-                    child: DghaStarRating(
-                      changeRatingOnTap: false,
-                      rating: widget.locationData.overallRating,
-                      height: 42,
-                    ),
-                  ),
-                  //----------Customer Service Rating
-                  RatingWithTitle(
-                    title: "Customer Service",
-                    rating: widget.locationData.customerServiceRating,
-                    isSmall: true,
-                  ),
-                  //----------Amenities Rating
-                  RatingWithTitle(
-                    title: "Amenities",
-                    rating: widget.locationData.amenitiesRating,
-                    isSmall: true,
-                  ),
-                  //----------Location Rating
-                  RatingWithTitle(
-                    title: "Location",
-                    rating: widget.locationData.locationRating,
-                    isSmall: true,
+
+                  // --------- NOTE: Stars
+                  Container(
+                    child: widget.locationData.overallRating != 0 ? stars() : Container(),
                   ),
 
+                  // --------- NOTE: Review Section
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,26 +155,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
                         // ---------- NOTE: Review Btn
                         GestureDetector(
-                          onTap: () async {
-                            if (this.loggedInUser != null) {
-                              print(widget.locationData.placeId);
-                              String placeId = widget.locationData.placeId;
-                              final result = await Navigator.pushNamed(context, UserRatingScreen.id,
-                                  arguments: ReviewScrArgs(
-                                    placeId: placeId,
-                                    placeName: widget.locationData.name,
-                                  ));
-                              if (result) {
-                                setState(() {
-                                  getReviews();
-                                });
-                              }
-                            } else {
-                              Navigator.of(context).pushNamed(
-                                LoginScreen.id_user_rating,
-                                arguments: widget.locationData,
-                              );
-                            }
+                          onTap: () {
+                            reviewBtnHandler();
                           },
                           child: Semantics(
                             button: true,
@@ -188,9 +173,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                       ],
                     ),
                   ),
-                  //----------Reviews
-                  Column(
-                    children: buildReviews(),
+
+                  // --------- NOTE: Reviews
+                  Container(
+                    child: widget.locationData.overallRating != 0 ? Column(children: buildReviews()) : noReview(),
                   )
                 ],
               ),
@@ -224,6 +210,40 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     );
   }
 
+  Widget stars() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Center(
+            child: DghaStarRating(
+              changeRatingOnTap: false,
+              rating: widget.locationData.overallRating,
+              height: 42,
+            ),
+          ),
+          //----------Customer Service Rating
+          RatingWithTitle(
+            title: "Customer Service",
+            rating: widget.locationData.customerServiceRating,
+            isSmall: true,
+          ),
+          //----------Amenities Rating
+          RatingWithTitle(
+            title: "Amenities",
+            rating: widget.locationData.amenitiesRating,
+            isSmall: true,
+          ),
+          //----------Location Rating
+          RatingWithTitle(
+            title: "Location",
+            rating: widget.locationData.locationRating,
+            isSmall: true,
+          ),
+        ],
+      ),
+    );
+  }
+
   List<Widget> buildReviews() {
     List<Widget> reviewWidgets = new List<Widget>();
 
@@ -233,5 +253,29 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
 
     return reviewWidgets;
+  }
+
+  Widget noReview() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 2,
+            color: Styles.midnightBlue,
+          ),
+          SizedBox(
+            height: Styles.spacing,
+          ),
+          DghaTextButton(
+            minWidth: MediaQuery.of(context).size.width * 0.45,
+            text: "Write the first review!",
+            textStyle: Styles.yellowTxtBtnStyle,
+            colour: Styles.midnightBlue,
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
   }
 }
