@@ -18,7 +18,7 @@ class DghaTextButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           constraints: BoxConstraints(minWidth: this.minWidth),
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           margin: EdgeInsets.only(bottom: this.bottomMargin),
           decoration: BoxDecoration(
             color: this.colour,
