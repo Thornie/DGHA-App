@@ -10,12 +10,7 @@ class InfoCard extends StatelessWidget {
   final int cardIndex;
   final int listLength;
 
-  InfoCard(
-      {this.cardWidth,
-      this.cardHeight,
-      this.card,
-      this.cardIndex,
-      this.listLength});
+  InfoCard({this.cardWidth, this.cardHeight, this.card, this.cardIndex, this.listLength});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +22,10 @@ class InfoCard extends StatelessWidget {
       explicitChildNodes: false,
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).popAndPushNamed(card.pageToNavigateTo,
-              arguments: InfoScrArgs(title: card.pageTitle, texts: card.texts));
+          Navigator.of(context).pushNamed(
+            card.pageToNavigateTo,
+            arguments: InfoScrArgs(title: card.pageTitle, texts: card.texts),
+          );
         },
         child: Semantics(
           child: Container(
@@ -36,8 +33,7 @@ class InfoCard extends StatelessWidget {
             height: this.cardHeight,
             decoration: BoxDecoration(
               color: Styles.midnightBlue,
-              borderRadius:
-                  BorderRadius.all(Radius.circular(Styles.normalRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
               boxShadow: [
                 BoxShadow(
                   color: Styles.grey,
@@ -51,9 +47,7 @@ class InfoCard extends StatelessWidget {
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: Styles.imageMargin),
-                    decoration: BoxDecoration(
-                        image:
-                            DecorationImage(image: AssetImage(card.imagePath))),
+                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage(card.imagePath))),
                   ),
                 ),
                 Container(
@@ -61,9 +55,7 @@ class InfoCard extends StatelessWidget {
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(Styles.normalRadius),
-                        bottomRight: Radius.circular(Styles.normalRadius)),
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Styles.normalRadius), bottomRight: Radius.circular(Styles.normalRadius)),
                   ),
                   child: Text(
                     card.cardTitle,

@@ -60,6 +60,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
     getPlacesFromDatabase();
   }
 
+  // NOTE: disposed
+  @override
+  void dispose() {
+    super.dispose();
+    if (Data.pages.last == PageNav.exploreMenuScr) {
+      Data.pages.removeLast();
+    }
+  }
+
   void calcDimensions(Orientation orientation) {
     this.scrWidth = MediaQuery.of(context).size.width;
     this.scrHeight = MediaQuery.of(context).size.height;
