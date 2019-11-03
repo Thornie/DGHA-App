@@ -100,6 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                             prefixIcon: FontAwesomeIcons.solidEnvelope,
                             hintText: "Email",
+                            autoFocus: true,
                             onChange: (value) {
                               email = value;
                             },
