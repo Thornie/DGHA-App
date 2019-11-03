@@ -23,6 +23,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
+  bool isSubmittingReview = false;
 
   int maxNavPos = 0;
   int currentNavPos = 0;
@@ -151,27 +152,37 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       title: "Comment (Optional)",
       controller: commentController,
       hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
-      onPressed: () {
-        comment = commentController.text;
+      onPressed: () async {
+        if (!this.isSubmittingReview) {
+          setState(() {
+            this.isSubmittingReview = true;
+          });
 
-        Map<String, dynamic> review = {
-          'email': loggedInUser.email,
-          'amentiesRating': amenitiesRating,
-          'comment': comment,
-          'custServRating': customerServiceRating,
-          'locationRating': locationRating,
-          'overallRating': overallRating,
-          'placeId': widget.placeId,
-          'placeName': widget.placeName
-        };
+          comment = commentController.text;
 
-        _firestore.collection('reviews').add(review).then((data) {
-          if (data.documentID != null) {
-            Navigator.of(context).pop(true);
-          } else {
-            print("ruh oh!");
-          }
-        });
+          Map<String, dynamic> review = {
+            'email': loggedInUser.email,
+            'amentiesRating': amenitiesRating,
+            'comment': comment,
+            'custServRating': customerServiceRating,
+            'locationRating': locationRating,
+            'overallRating': overallRating,
+            'placeId': widget.placeId,
+            'placeName': widget.placeName
+          };
+
+          await _firestore.collection('reviews').add(review).then((data) {
+            if (data.documentID != null) {
+              Navigator.of(context).pop(true);
+            } else {
+              print("ruh oh!");
+            }
+          });
+
+          setState(() {
+            this.isSubmittingReview = false;
+          });
+        }
       },
     );
 
