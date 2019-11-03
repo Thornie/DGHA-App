@@ -86,46 +86,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           SizedBox(height: this.marginHeight * 0.7),
 
                           // NOTE: Email
-                          Container(
-                            child: UserInputTextField(
-                              keyboardType: TextInputType.emailAddress,
-                              hintText: "Email",
-                              onChange: (value) {
-                                this.email = value;
-                              },
+                          Semantics(
+                            textField: true,
+                            label: "Email text field",
+                            child: Container(
+                              child: UserInputTextField(
+                                keyboardType: TextInputType.emailAddress,
+                                hintText: "Email",
+                                onChange: (value) {
+                                  this.email = value;
+                                },
+                              ),
                             ),
                           ),
 
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Password V1
-                          Container(
-                            child: UserInputTextField(
-                              hintText: "Password",
-                              obscureText: true,
-                              onChange: (value) {
-                                this.passwordV1 = value;
-                              },
+                          Semantics(
+                            textField: true,
+                            label: "Password text field",
+                            child: Container(
+                              child: UserInputTextField(
+                                hintText: "Password",
+                                obscureText: true,
+                                onChange: (value) {
+                                  this.passwordV1 = value;
+                                },
+                              ),
                             ),
                           ),
 
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Password V2
-                          Container(
-                            child: UserInputTextField(
-                              hintText: "Confirm Password",
-                              obscureText: true,
-                              highlightRed: !passwordMatch,
-                              onChange: (value) {
-                                this.passwordV2 = value;
-                                setState(() {
-                                  if (passwordV1 != passwordV2)
-                                    passwordMatch = false;
-                                  else
-                                    passwordMatch = true;
-                                });
-                              },
+                          Semantics(
+                            textField: true,
+                            label: "Confirm password text field",
+                            child: Container(
+                              child: UserInputTextField(
+                                hintText: "Confirm Password",
+                                obscureText: true,
+                                highlightRed: !passwordMatch,
+                                onChange: (value) {
+                                  this.passwordV2 = value;
+                                  setState(() {
+                                    if (passwordV1 != passwordV2)
+                                      passwordMatch = false;
+                                    else
+                                      passwordMatch = true;
+                                  });
+                                },
+                              ),
                             ),
                           ),
 
@@ -147,14 +159,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Register
-                          DghaTextButton(
-                            minWidth: this.buttonMinWidth,
-                            text: "Sign Up",
-                            textStyle: Styles.yellowTxtBtnStyle,
-                            colour: Styles.midnightBlue,
-                            onTap: () {
-                              this.signUp();
-                            },
+                          Semantics(
+                            button: true,
+                            label: "Sign Up button",
+                            hint: "Double tap to sign up",
+                            child: DghaTextButton(
+                              minWidth: this.buttonMinWidth,
+                              text: "Sign Up",
+                              textStyle: Styles.yellowTxtBtnStyle,
+                              colour: Styles.midnightBlue,
+                              onTap: () {
+                                this.signUp();
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -163,16 +180,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: this.marginHeight * 0.5),
 
                     // NOTE: Skip
-                    DghaTextButton(
-                      minWidth: this.buttonMinWidth,
-                      text: "Skip",
-                      textStyle: Styles.btnTextBlueUnderlineStyle,
-                      colour: Styles.yellow,
-                      onTap: () {
-                        Navigator.pop(context);
-                        // Navigator.of(context).pushNamed(ExploreScreen.id);
-                      },
-                      bottomMargin: this.marginHeight * 0.5,
+                    Semantics(
+                      button: true,
+                      label: "Skip button",
+                      hint: "Double tap to skip sign up",
+                      child: DghaTextButton(
+                        minWidth: this.buttonMinWidth,
+                        text: "Skip",
+                        textStyle: Styles.btnTextBlueUnderlineStyle,
+                        colour: Styles.yellow,
+                        onTap: () {
+                          Navigator.pop(context);
+                          // Navigator.of(context).pushNamed(ExploreScreen.id);
+                        },
+                        bottomMargin: this.marginHeight * 0.5,
+                      ),
                     ),
                   ],
                 ),
