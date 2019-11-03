@@ -34,12 +34,8 @@ class PlaceCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              IgnorePointer(
-                child: DghaStarRating(
-                  height: 30,
-                  rating: locationData.overallRating,
-                  starCount: 5,
-                ),
+              Container(
+                child: this.locationData.overallRating != 0 ? stars() : noRating(),
               ),
               Text(
                 locationData.name,
@@ -56,6 +52,36 @@ class PlaceCard extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
       },
+    );
+  }
+
+  Widget stars() {
+    return Row(
+      children: <Widget>[
+        IgnorePointer(
+          child: DghaStarRating(
+            height: 30,
+            rating: this.locationData.overallRating,
+            starCount: 5,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // TODO: Show the number of reviews
+  Widget noRating() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: Styles.yellow,
+          borderRadius: BorderRadius.all(
+            Radius.circular(Styles.normalRadius),
+          )),
+      child: Text(
+        "No Review",
+        style: Styles.boldPStyle,
+      ),
     );
   }
 }

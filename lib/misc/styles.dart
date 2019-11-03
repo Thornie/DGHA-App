@@ -49,6 +49,9 @@ class Styles {
   // ------ e.g. "Japanese"
   static TextStyle highlightText = pStyle.copyWith(backgroundColor: yellow);
 
+  // ------ e.g. "No Review"
+  static TextStyle boldPStyle = pStyle.copyWith(fontWeight: FontWeight.w600);
+
   // ------ link
   static TextStyle linkStyle = highlightText.copyWith(
     decoration: TextDecoration.underline,

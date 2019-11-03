@@ -117,7 +117,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
         LocationData ld = new LocationData(
             name: places[i].name,
             address: Helper().formatAddress(places[i].address),
-            overallRating: places[i].rating.toDouble(),
+            overallRating: 0,
+            // overallRating: places[i].rating.toDouble(),
             customerServiceRating: 0,
             amenitiesRating: 0,
             locationRating: 0,
