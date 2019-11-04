@@ -2,6 +2,7 @@ import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/header_row.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/misc/data.dart';
+import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
@@ -9,7 +10,6 @@ import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "Login Screen";
@@ -32,7 +32,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // ------------------------ NOTE: Variables
-  final _auth = FirebaseAuth.instance;
   String email = "";
   String password = "";
 
@@ -51,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void signIn() async {
     try {
-      final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await DghaApi.signIn(this.email, this.password);
 
-      if (user != null) {
-        if (widget.goToReviewScreen)
+      if (DghaApi.currentClient != null) {
+        if (widget.goToReviewScreen) {
           Navigator.of(context).popAndPushNamed(
             UserRatingScreen.id,
             arguments: ReviewScrArgs(
@@ -62,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               placeName: widget.locationData.name,
             ),
           );
-        else {
+        } else {
           Navigator.of(context).popAndPushNamed(ExploreScreen.id);
         }
       }

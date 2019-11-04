@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/rating_breadcrumbs.dart';
+import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/components/user_rating_container.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserRatingScreen extends StatefulWidget {
@@ -20,9 +19,6 @@ class UserRatingScreen extends StatefulWidget {
 
 class _UserRatingScreenState extends State<UserRatingScreen> {
   // ------------ NOTE: FIRESTORE
-  final _firestore = Firestore.instance;
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
   bool isSubmittingReview = false;
 
   int maxNavPos = 0;
@@ -53,22 +49,6 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
-  }
-
-  // ------ NOTE: GET CURRENT USER
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-
-      if (user != null) {
-        loggedInUser = user;
-      } else {
-        Navigator.pop(context);
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override
@@ -78,7 +58,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     overallRatingScreen = new UserRatingContainer(
       title: "Overall",
       buttonTitle: "Next",
-      hintText: "Give an overall rating out of 5 on your experience at this location.",
+      hintText:
+          "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
       onPressed: () {
@@ -96,9 +77,12 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     customerServiceRatingScreen = new UserRatingContainer(
       title: "Customer Service",
       buttonTitle: "Next",
-      hintText: "Give a score out of 5 on the customer service provided to you at this location.",
+      hintText:
+          "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
-      rating: customerServiceRatingScreen != null ? customerServiceRatingScreen.rating : 0,
+      rating: customerServiceRatingScreen != null
+          ? customerServiceRatingScreen.rating
+          : 0,
       onPressed: () {
         if (customerServiceRatingScreen.rating != 0) {
           setState(() {
@@ -133,7 +117,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     locationRatingScreen = new UserRatingContainer(
       title: "Location",
       buttonTitle: "Next",
-      hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",
+      hintText:
+          "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
       onPressed: () {
@@ -151,7 +136,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
     commentSectionScreen = new CommentSection(
       title: "Comment (Optional)",
       controller: commentController,
-      hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
+      hintText:
+          "Add a comment to your review to give more detail on your experience. This is optional.",
       onPressed: () async {
         if (!this.isSubmittingReview) {
           setState(() {
@@ -160,22 +146,18 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
 
           comment = commentController.text;
 
-          Map<String, dynamic> review = {
-            'email': loggedInUser.email,
-            'amentiesRating': amenitiesRating,
-            'comment': comment,
-            'custServRating': customerServiceRating,
-            'locationRating': locationRating,
-            'overallRating': overallRating,
-            'placeId': widget.placeId,
-            'placeName': widget.placeName
-          };
-
-          await _firestore.collection('reviews').add(review).then((data) {
-            if (data.documentID != null) {
+          await DghaApi.postReview(
+            widget.placeId,
+            overallRating.toInt(),
+            locationRating.toInt(),
+            amenitiesRating.toInt(),
+            customerServiceRating.toInt(),
+            comment,
+          ).then((response) {
+            if (response.statusCode == 201) {
               Navigator.of(context).pop(true);
             } else {
-              print("ruh oh!");
+              print("ruh oh! : ${response.statusCode}");
             }
           });
 
@@ -222,7 +204,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                   ),
                   //----------Page Navigation
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 20, bottom: 20),
                     child: RatingBreadcrumbs(
                       maxNavPos: maxNavPos,
                       currentNavPos: currentNavPos,

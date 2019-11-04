@@ -26,7 +26,7 @@ class ReviewContainer extends StatelessWidget {
                 // ------ NOTE: Rate: ⭐⭐⭐⭐⭐
                 RatingWithTitle(
                   title: "Rated: ",
-                  rating: this.review.overallRating,
+                  rating: this.review.overallRating.toDouble(),
                   isSmall: true,
                   spaceBetween: false,
                 ),

@@ -81,7 +81,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   void getPlacesFromDatabase() async {
-    final placesFromDatabase = await _firestore.collection('location').getDocuments();
+    final placesFromDatabase =
+        await _firestore.collection('location').getDocuments();
     List<LocationData> locations = new List<LocationData>();
 
     for (var place in placesFromDatabase.documents) {
@@ -111,7 +112,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     List<PlaceByQuery> places = new List<PlaceByQuery>();
     List<LocationData> locations = new List<LocationData>();
 
-    http.Response res = await getPlacesByQuery(input: input, state: this.stateName, apiKey: Data.kGoogleApiKey);
+    http.Response res = await getPlacesByQuery(
+        input: input, state: this.stateName, apiKey: Data.kGoogleApiKey);
 
     if (res.statusCode == 200) {
       ResponseData data = ResponseData.fromJson(json.decode(res.body));
@@ -140,9 +142,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
   }
 
-  Future<http.Response> getPlacesByQuery({String input, String state, String apiKey}) {
+  Future<http.Response> getPlacesByQuery(
+      {String input, String state, String apiKey}) {
     String formattedInput = Helper().formatStringForQuery(input);
-    String url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
+    String url =
+        'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
 
     return http.get(url);
   }
@@ -233,7 +237,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return widgets;
   }
 
-  Widget buildSearchTextField({IconData prefixIcon, String hintText, Function(String) onSubmitted}) {
+  Widget buildSearchTextField(
+      {IconData prefixIcon, String hintText, Function(String) onSubmitted}) {
     return Container(
       decoration: BoxDecoration(
         color: Styles.yellow,

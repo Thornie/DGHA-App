@@ -1,17 +1,17 @@
 class Review {
-  final String placeName;
   final String placeId;
-  final String email;
+  final String userId;
+  final String timeAdded;
   final String comment;
-  final double overallRating;
-  final double locationRating;
-  final double custServRating;
-  final double amenitiesRating;
+  final int overallRating;
+  final int locationRating;
+  final int custServRating;
+  final int amenitiesRating;
 
   Review({
-    this.placeName,
     this.placeId,
-    this.email,
+    this.userId,
+    this.timeAdded,
     this.comment,
     this.overallRating,
     this.locationRating,
