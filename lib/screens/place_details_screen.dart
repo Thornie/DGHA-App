@@ -18,6 +18,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha_brochure/models/review.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
@@ -104,6 +105,16 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         LoginScreen.id_user_rating,
         arguments: widget.locationData,
       );
+    }
+  }
+
+  void _launchMap(String placeId) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print("something wrong!");
     }
   }
 
@@ -211,6 +222,18 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     backgroundColor: Styles.midnightBlue,
                     iconColor: Styles.yellow,
                   ),
+                ),
+              ),
+
+              // NOTE: Map Btn
+              childTwo: GestureDetector(
+                onTap: () {
+                  _launchMap(widget.locationData.placeId);
+                },
+                child: DghaIcon(
+                  icon: FontAwesomeIcons.mapMarkerAlt,
+                  iconColor: Styles.yellow,
+                  backgroundColor: Styles.midnightBlue,
                 ),
               ),
             ),
