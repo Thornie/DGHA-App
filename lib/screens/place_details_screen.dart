@@ -179,8 +179,16 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
                   // --------- NOTE: Reviews
                   Container(
-                    child: widget.locationData.overallRating != 0 ? Column(children: buildReviews()) : noReview(),
-                  )
+                    child: this.reviews.length > 0 ? Column(children: buildReviews()) : textBtnSection("Write the first review!", this.reviewBtnHandler),
+                  ),
+
+                  SizedBox(height: Styles.spacing),
+
+                  // --------- NOTE: Report
+                  // TODO: add report function
+                  textBtnSection("Report Venue", () {}),
+
+                  SizedBox(height: Styles.spacing),
                 ],
               ),
             ),
@@ -194,19 +202,14 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 button: true,
                 label: "Menu",
                 hint: "Double tap to go back and view other locations",
-                child: Semantics(
-                  button: true,
-                  label: "Menu",
-                  hint: "Double tap to open side bar menu",
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).popAndPushNamed(ExploreScreen.id);
-                    },
-                    child: DghaIcon(
-                      icon: FontAwesomeIcons.arrowLeft,
-                      backgroundColor: Styles.midnightBlue,
-                      iconColor: Styles.yellow,
-                    ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+                  },
+                  child: DghaIcon(
+                    icon: FontAwesomeIcons.arrowLeft,
+                    backgroundColor: Styles.midnightBlue,
+                    iconColor: Styles.yellow,
                   ),
                 ),
               ),
@@ -263,7 +266,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     return reviewWidgets;
   }
 
-  Widget noReview() {
+  Widget textBtnSection(String text, Function onTap) {
     return Container(
       child: Column(
         children: <Widget>[
@@ -277,10 +280,12 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           ),
           DghaTextButton(
             minWidth: MediaQuery.of(context).size.width * 0.45,
-            text: "Write the first review!",
+            text: text,
             textStyle: Styles.yellowTxtBtnStyle,
             colour: Styles.midnightBlue,
-            onTap: () {},
+            onTap: () {
+              onTap();
+            },
           ),
         ],
       ),
