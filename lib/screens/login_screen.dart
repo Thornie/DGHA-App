@@ -7,6 +7,7 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
+import 'package:dgha_brochure/screens/report_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,15 +15,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class LoginScreen extends StatefulWidget {
   static const String id = "Login Screen";
   static const String id_user_rating = "Login Screen User Rating";
+  static const String id_report = "Login Screen Report";
 
   //Must be false on every page except for the page that loads in the main.dart file
   //This is needed so that when the user presses the back button too many times, they don't go to an empty black screen
 
   final bool goToReviewScreen;
+  final bool goToReportScreen;
   final LocationData locationData;
 
   LoginScreen({
     this.goToReviewScreen = false,
+    this.goToReportScreen = false,
     this.locationData,
   });
 
@@ -60,6 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
               placeId: widget.locationData.placeId,
               placeName: widget.locationData.name,
             ),
+          );
+        } else if (widget.goToReportScreen) {
+          Navigator.of(context).popAndPushNamed(
+            ReportScreen.id,
+            arguments: widget.locationData,
           );
         } else {
           Navigator.of(context).popAndPushNamed(ExploreScreen.id);
