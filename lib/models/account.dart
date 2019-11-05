@@ -3,7 +3,7 @@ class Account {
   final String email;
 
   Account({
-    this.id,
-    this.email,
+    this.id = "",
+    this.email = "",
   });
 }

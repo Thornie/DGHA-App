@@ -4,7 +4,6 @@ import 'package:dgha_brochure/models/review_place.dart';
 import 'package:dgha_brochure/models/review.dart';
 import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Class to handle all calls to the DGHA API
 class DghaApi {
@@ -99,6 +98,11 @@ class DghaApi {
         },
       );
 
+      //Prevent decoding errors with a blank body
+      if (response.body == "") {
+        return Account();
+      }
+
       var json = jsonDecode(response.body);
       Account account = new Account(id: json['id'], email: json['email']);
 
@@ -131,7 +135,7 @@ class DghaApi {
   ) async {
     if (currentClient != null) {
       http.Response response = await currentClient.put(
-        "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}/UpdatePassword/?currentPassword=$currentPassword&newPassword=$newPassword",
+        "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}/UpdatePassword?currentPassword=$currentPassword&newPassword=$newPassword",
         headers: {
           "content-type": "application/json",
         },
@@ -211,7 +215,7 @@ class DghaApi {
       },
     );
 
-    //Creates blank list in case there's an error to prevent further errors
+    //Prevent decoding errors with a blank body
     if (response.body == "") {
       return ReviewPlace(reviews: new List<Review>());
     }
@@ -255,6 +259,11 @@ class DghaApi {
       },
     );
 
+    //Prevent decoding errors with a blank body
+    if (response.body == "") {
+      return new List<Review>();
+    }
+
     Map<String, dynamic> json = jsonDecode(response.body);
 
     List<Review> userReviews = new List<Review>();
@@ -286,6 +295,11 @@ class DghaApi {
         "content-type": "application/json",
       },
     );
+
+    //Prevent decoding errors with a blank body
+    if (response.body == "") {
+      return Review();
+    }
 
     Map<String, dynamic> json = jsonDecode(response.body);
     Review review = new Review(

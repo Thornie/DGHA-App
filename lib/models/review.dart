@@ -9,13 +9,13 @@ class Review {
   final int amenitiesRating;
 
   Review({
-    this.placeId,
-    this.userId,
-    this.timeAdded,
-    this.comment,
-    this.overallRating,
-    this.locationRating,
-    this.custServRating,
-    this.amenitiesRating,
+    this.placeId = "",
+    this.userId = "",
+    this.timeAdded = "",
+    this.comment = "",
+    this.overallRating = 0,
+    this.locationRating = 0,
+    this.custServRating = 0,
+    this.amenitiesRating = 0,
   });
 }
