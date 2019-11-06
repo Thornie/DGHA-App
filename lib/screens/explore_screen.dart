@@ -228,12 +228,22 @@ class _ExploreScreenState extends State<ExploreScreen> {
   List<PlaceCard> placeWidgets() {
     List<PlaceCard> widgets = new List<PlaceCard>();
 
-    for (var i = 0; i < this.locationList.length; i++) {
-      PlaceCard w = new PlaceCard(
-        locationData: this.locationList[i],
-      );
-      widgets.add(w);
+    if (locationList.length > 0) {
+      for (var i = 0; i < this.locationList.length; i++) {
+        PlaceCard w = new PlaceCard(
+          locationData: this.locationList[i],
+        );
+        widgets.add(w);
+      }
+    } else {
+      for (var i = 0; i < this.iniLocationList.length; i++) {
+        PlaceCard w = new PlaceCard(
+          locationData: this.iniLocationList[i],
+        );
+        widgets.add(w);
+      }
     }
+
     return widgets;
   }
 
