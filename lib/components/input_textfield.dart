@@ -53,9 +53,15 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
 
   @override
   Widget build(BuildContext context) {
+    //
+    Color focusColor = Styles.yellow;
+    Color unfocusedColor = Colors.white;
+    if (widget.highlightRed) focusColor = Styles.red;
+    if (widget.highlightRed) unfocusedColor = Styles.red;
+
     return Container(
       decoration: BoxDecoration(
-        color: _focus.hasFocus ? Styles.yellow : Colors.white,
+        color: _focus.hasFocus ? focusColor : unfocusedColor,
         borderRadius: BorderRadius.all(Radius.circular(50)),
         boxShadow: [
           BoxShadow(

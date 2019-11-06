@@ -5,6 +5,7 @@ import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -60,7 +61,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         print(e);
       }
     } else {
-      // TODO: make the TextField red
       print("passwords are different");
     }
   }
@@ -93,6 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: Container(
                               child: UserInputTextField(
                                 keyboardType: TextInputType.emailAddress,
+                                prefixIcon: FontAwesomeIcons.solidEnvelope,
                                 hintText: "Email",
                                 onChange: (value) {
                                   this.email = value;
@@ -109,6 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             label: "Password text field",
                             child: Container(
                               child: UserInputTextField(
+                                prefixIcon: FontAwesomeIcons.lock,
                                 hintText: "Password",
                                 obscureText: true,
                                 onChange: (value) {
@@ -126,6 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             label: "Confirm password text field",
                             child: Container(
                               child: UserInputTextField(
+                                prefixIcon: FontAwesomeIcons.lock,
                                 hintText: "Confirm Password",
                                 obscureText: true,
                                 highlightRed: !passwordMatch,
