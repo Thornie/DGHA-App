@@ -1,11 +1,11 @@
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/header_row.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
-import 'package:dgha_brochure/misc/data.dart';
+import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String id = "Register Screen";
@@ -15,7 +15,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   // ------------------------ NOTE: Variables
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   String email;
   String passwordV1;
   String passwordV2;
@@ -40,17 +39,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     this.buttonMinWidth = scrWidth * 0.45;
   }
 
-  void signUp() {
+  void signUp() async {
     if (this.passwordV1 == this.passwordV2) {
       try {
-        final newUser = _auth.createUserWithEmailAndPassword(email: this.email, password: this.passwordV1);
+        print("TEST: ${DghaApi.currentClient}");
+        //Create Account
+        final Response newUser =
+            await DghaApi.postAccount(this.email, this.passwordV1);
 
-        if (newUser != null) {
-          final loggedInUser = _auth.signInWithEmailAndPassword(email: this.email, password: this.passwordV1);
-
-          if (loggedInUser != null) {
+        if (newUser.statusCode == 201) {
+          //Login
+          await DghaApi.signIn(this.email, this.passwordV1);
+          if (DghaApi.currentClient != null) {
             Navigator.of(context).pushNamed(ExploreScreen.id);
           }
+        } else {
+          print("FAIL");
         }
       } catch (e) {
         print(e);
@@ -145,8 +149,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: Text.rich(
                               TextSpan(
                                 children: [
-                                  TextSpan(text: 'By clicking "Register" you agree to the following '),
-                                  TextSpan(text: 'Terms and Conditions.', style: Styles.linkStyle),
+                                  TextSpan(
+                                      text:
+                                          'By clicking "Register" you agree to the following '),
+                                  TextSpan(
+                                      text: 'Terms and Conditions.',
+                                      style: Styles.linkStyle),
                                 ],
                               ),
                               style: Styles.pStyle,

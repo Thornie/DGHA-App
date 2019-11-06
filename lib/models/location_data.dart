@@ -10,8 +10,8 @@ class LocationData {
   final double longitude;
 
   LocationData({
-    this.name,
-    this.address,
+    this.name = "",
+    this.address = "",
     this.overallRating = 0,
     this.customerServiceRating = 0,
     this.amenitiesRating = 0,
