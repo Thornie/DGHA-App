@@ -43,7 +43,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   double setWidth() {
     if (widthIsSet == false) {
-      width = MediaQuery.of(context).size.height * 0.75;
+      width = MediaQuery.of(context).size.width * 0.75;
     }
     return width;
   }

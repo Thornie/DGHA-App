@@ -14,6 +14,7 @@ import 'package:dgha_brochure/models/review_place.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
+import 'package:dgha_brochure/screens/report_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -70,6 +71,18 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     } else {
       Navigator.of(context).pushNamed(
         LoginScreen.id_user_rating,
+        arguments: widget.locationData,
+      );
+    }
+  }
+
+  void reportBtnHandler() {
+    if (DghaApi.currentClient != null) {
+      Navigator.pushNamed(context, ReportScreen.id,
+          arguments: widget.locationData);
+    } else {
+      Navigator.of(context).pushNamed(
+        LoginScreen.id_report,
         arguments: widget.locationData,
       );
     }
@@ -169,8 +182,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   SizedBox(height: Styles.spacing),
 
                   // --------- NOTE: Report
-                  // TODO: add report function
-                  textBtnSection("Report Venue", () {}),
+                  textBtnSection("Report Venue", this.reportBtnHandler),
 
                   SizedBox(height: Styles.spacing),
                 ],
