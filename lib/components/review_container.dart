@@ -9,6 +9,14 @@ class ReviewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  String timeCut = review.timeAdded;
+
+  if (timeCut.length > 23) {
+    timeCut = timeCut.substring(0, 22);
+  }
+
+  DateTime time = DateTime.parse(timeCut);
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -18,7 +26,14 @@ class ReviewContainer extends StatelessWidget {
             color: Styles.midnightBlue,
           ),
           SizedBox(
-            height: Styles.spacing,
+            height: Styles.spacing/2,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+              child: Text(
+                "${time.day}/${time.month}/${time.year}", 
+                style: Styles.pStyle,
+            ),
           ),
           Container(
             child: Column(
