@@ -60,7 +60,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         print(e);
       }
     } else {
-      // TODO: make the TextField red
       print("passwords are different");
     }
   }
