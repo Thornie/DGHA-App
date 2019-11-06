@@ -81,103 +81,107 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    calcDimensions();
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: this.marginHeight * 0.5),
-                      HeaderRow(text: "Sign In"),
-                      SizedBox(height: this.marginHeight * 0.7),
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            calcDimensions();
+            return SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: this.marginHeight * 0.5),
+                          HeaderRow(text: "Sign In"),
+                          SizedBox(height: this.marginHeight * 0.7),
 
-                      // NOTE: Email
-                      Semantics(
-                        label: "Email",
-                        hint: "Double tap to enter your email address",
-                        excludeSemantics: true,
-                        child: Container(
-                          child: UserInputTextField(
-                            keyboardType: TextInputType.emailAddress,
-                            prefixIcon: FontAwesomeIcons.solidEnvelope,
-                            hintText: "Email",
-                            autoFocus: true,
-                            onChange: (value) {
-                              email = value;
-                            },
+                          // NOTE: Email
+                          Semantics(
+                            label: "Email",
+                            hint: "Double tap to enter your email address",
+                            excludeSemantics: true,
+                            child: Container(
+                              child: UserInputTextField(
+                                keyboardType: TextInputType.emailAddress,
+                                prefixIcon: FontAwesomeIcons.solidEnvelope,
+                                hintText: "Email",
+                                autoFocus: true,
+                                onChange: (value) {
+                                  email = value;
+                                },
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
 
-                      SizedBox(height: this.marginHeight * 0.5),
+                          SizedBox(height: this.marginHeight * 0.5),
 
-                      // NOTE: Password Text Field
-                      Semantics(
-                        label: "Password",
-                        hint: "Double tap to enter your password",
-                        child: Container(
-                          child: UserInputTextField(
-                            prefixIcon: FontAwesomeIcons.lock,
-                            hintText: "Password",
-                            obscureText: true,
-                            onChange: (value) {
-                              password = value;
-                            },
+                          // NOTE: Password Text Field
+                          Semantics(
+                            label: "Password",
+                            hint: "Double tap to enter your password",
+                            child: Container(
+                              child: UserInputTextField(
+                                prefixIcon: FontAwesomeIcons.lock,
+                                hintText: "Password",
+                                obscureText: true,
+                                onChange: (value) {
+                                  password = value;
+                                },
+                              ),
+                            ),
                           ),
-                        ),
+
+                          SizedBox(height: this.marginHeight * 0.5),
+
+                          // NOTE: Login
+                          Semantics(
+                            label: "Sign In",
+                            hint: "Double tap to sign into your account",
+                            child: DghaTextButton(
+                              minWidth: this.buttonMinWidth,
+                              text: "Sign In",
+                              textStyle: Styles.yellowTxtBtnStyle,
+                              colour: Styles.midnightBlue,
+                              onTap: () {
+                                this.signIn();
+                              },
+                            ),
+                          )
+                        ],
                       ),
+                    ),
 
-                      SizedBox(height: this.marginHeight * 0.5),
+                    SizedBox(height: this.marginHeight * 0.5),
 
-                      // NOTE: Login
-                      Semantics(
-                        label: "Sign In",
-                        hint: "Double tap to sign into your account",
-                        child: DghaTextButton(
-                          minWidth: this.buttonMinWidth,
-                          text: "Sign In",
-                          textStyle: Styles.yellowTxtBtnStyle,
-                          colour: Styles.midnightBlue,
-                          onTap: () {
-                            this.signIn();
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                    // NOTE: Skip Button
+                    Semantics(
+                      label: "Skip",
+                      hint: "Double tap to skip sign in",
+                      child: DghaTextButton(
+                        minWidth: this.buttonMinWidth,
+                        text: "Skip",
+                        textStyle: Styles.btnTextBlueUnderlineStyle,
+                        colour: Styles.yellow,
+                        onTap: () {
+                          if (Data.pages.length == 0) {
+                            Navigator.popAndPushNamed(context, ExploreScreen.id);
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                        bottomMargin: this.marginHeight * 0.5,
+                      ),
+                    ),
+                  ],
                 ),
-
-                SizedBox(height: this.marginHeight * 0.5),
-
-                // NOTE: Skip Button
-                Semantics(
-                  label: "Skip",
-                  hint: "Double tap to skip sign in",
-                  child: DghaTextButton(
-                    minWidth: this.buttonMinWidth,
-                    text: "Skip",
-                    textStyle: Styles.btnTextBlueUnderlineStyle,
-                    colour: Styles.yellow,
-                    onTap: () {
-                      if (Data.pages.length == 0) {
-                        Navigator.popAndPushNamed(context, ExploreScreen.id);
-                      } else {
-                        Navigator.pop(context);
-                      }
-                    },
-                    bottomMargin: this.marginHeight * 0.5,
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          }
         ),
       ),
     );
