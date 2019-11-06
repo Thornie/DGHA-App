@@ -179,8 +179,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             "Write the first review!", this.reviewBtnHandler),
                   ),
 
-                  SizedBox(height: Styles.spacing),
-
                   // --------- NOTE: Report
                   textBtnSection("Report Venue", this.reportBtnHandler),
 

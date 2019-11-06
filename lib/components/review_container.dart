@@ -35,6 +35,9 @@ class ReviewContainer extends StatelessWidget {
                 style: Styles.pStyle,
             ),
           ),
+          SizedBox(
+            height: Styles.spacing/4,
+          ),
           Container(
             child: Column(
               children: <Widget>[
