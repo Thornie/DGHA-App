@@ -251,6 +251,44 @@ class DghaApi {
     return reviews;
   }
 
+  static Future<List<Review>> getReviewsFromPlaceIdAndSet(
+    String placeId,
+    int setIndex,
+  ) async {
+    http.Response response = await http.get(
+      "$rootUrl/Reviews/placeId/$placeId/$setIndex",
+      headers: {
+        "content-type": "application/json",
+      },
+    );
+
+    //Prevent decoding errors with a blank body
+    if (response.body == "") {
+      return List<Review>();
+    }
+
+    List<dynamic> json = jsonDecode(response.body);
+
+    //Get all reviews
+    List<Review> userReviews = new List<Review>();
+    for (int i = 0; i < json.length; i++) {
+      Review r = new Review(
+        placeId: json[i]['placeId'],
+        userId: json[i]['userId'],
+        timeAdded: json[i]['timeAdded'],
+        comment: json[i]['comment'],
+        overallRating: json[i]['overallRating'],
+        locationRating: json[i]['locationRating'],
+        custServRating: json[i]['serviceRating'],
+        amenitiesRating: json[i]['amenitiesRating'],
+      );
+
+      userReviews.add(r);
+    }
+
+    return userReviews;
+  }
+
   static Future<List<Review>> getReviewsFromUser() async {
     http.Response response = await http.get(
       "$rootUrl/Reviews/userId/${parseJwt(currentClient.credentials.accessToken)['sub']}",
