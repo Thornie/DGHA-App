@@ -34,6 +34,8 @@ class PlaceDetailsScreen extends StatefulWidget {
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   ReviewPlace reviewPlace = new ReviewPlace(reviews: List<Review>());
   bool isLoading = false;
+  List<Review> reviewList = new List<Review>();
+  int reviewPageIndex = 0;
 
   // NOTE: Init
   @override
@@ -48,12 +50,18 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       this.isLoading = true;
     });
 
-    ReviewPlace list =
+    ReviewPlace reviewPlaceData =
         await DghaApi.getReviewsFromPlaceId(widget.locationData.placeId);
+    List<Review> list = List<Review>();
+
+    list = await DghaApi.getReviewsFromPlaceIdAndSet(
+        widget.locationData.placeId, reviewPageIndex);
+
     try {
       setState(() {
-        this.reviewPlace = list;
         this.isLoading = false;
+        this.reviewPlace = reviewPlaceData;
+        this.reviewList = list;
       });
     } catch (e) {
       print(e);
@@ -189,7 +197,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           ),
                         );
                       } else {
-                        if (reviewPlace.reviews.length > 0) {
+                        if (this.reviewList.length > 0) {
                           return Container(
                               child: Column(children: buildReviews()));
                         } else {
@@ -199,6 +207,36 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                         }
                       }
                     },
+                  ),
+
+                  // --------- NOTE: More Reviews Btn
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      iconBtnSection(FontAwesomeIcons.arrowLeft, () {
+                        if (reviewPageIndex - 1 >= 0) {
+                          setState(() {
+                            reviewPageIndex--;
+                            getReviews();
+                          });
+                        }
+                        print(reviewPageIndex);
+                      }),
+                      Text(
+                        (reviewPageIndex + 1).toString(),
+                        style: Styles.h2Style,
+                      ),
+                      iconBtnSection(FontAwesomeIcons.arrowRight, () {
+                        if (reviewPageIndex + 1 <
+                            (reviewPlace.count / 5).ceil()) {
+                          setState(() {
+                            reviewPageIndex++;
+                            getReviews();
+                          });
+                        }
+                        print(reviewPageIndex);
+                      }),
+                    ],
                   ),
 
                   // --------- NOTE: Report
@@ -286,14 +324,28 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   List<Widget> buildReviews() {
     List<Widget> reviewWidgets = new List<Widget>();
 
-    for (var review in this.reviewPlace.reviews) {
-      if (review.comment != "") {
-        Widget widget = ReviewContainer(review: review);
-        reviewWidgets.add(widget);
-      }
+    for (var review in this.reviewList) {
+      Widget widget = ReviewContainer(review: review);
+      reviewWidgets.add(widget);
     }
 
     return reviewWidgets;
+  }
+
+  Widget iconBtnSection(IconData icon, Function onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        child: DghaIcon(
+          icon: icon,
+          iconColor: Styles.yellow,
+          backgroundColor: Styles.midnightBlue,
+          size: MediaQuery.of(context).size.width * 0.05,
+          padding: 15,
+          paddingPadding: 3,
+        ),
+      ),
+    );
   }
 
   Widget textBtnSection(String text, Function onTap) {
