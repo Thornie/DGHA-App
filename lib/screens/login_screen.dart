@@ -38,10 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
   // ------------------------ NOTE: Variables
   String email = "";
   String password = "";
+  String loadingText = "Connecting...";
 
   double containerHeight;
   double marginHeight;
   double buttonMinWidth;
+
+  bool isLoading = false;
+  bool showLoadingText = false;
 
   void calcDimensions() {
     double scrWidth = MediaQuery.of(context).size.width;
@@ -53,29 +57,72 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void signIn() async {
+    setState(() {
+      this.loadingText = "Connecting...";
+      this.showLoadingText = true;
+      this.isLoading = true;
+    });
     try {
       await DghaApi.signIn(this.email, this.password);
 
       if (DghaApi.currentClient != null) {
         if (widget.goToReviewScreen) {
-          Navigator.of(context).popAndPushNamed(
+          await Navigator.of(context).popAndPushNamed(
             UserRatingScreen.id,
             arguments: ReviewScrArgs(
               placeId: widget.locationData.placeId,
               placeName: widget.locationData.name,
             ),
           );
+          setState(() {
+            this.isLoading = false;
+            this.showLoadingText = false;
+          });
         } else if (widget.goToReportScreen) {
-          Navigator.of(context).popAndPushNamed(
+          await Navigator.of(context).popAndPushNamed(
             ReportScreen.id,
             arguments: widget.locationData,
           );
+          setState(() {
+            this.isLoading = false;
+            this.showLoadingText = false;
+          });
         } else {
-          Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+          await Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+          setState(() {
+            this.isLoading = false;
+            this.showLoadingText = false;
+          });
         }
       }
     } catch (exception) {
-      print(exception);
+      setState(() {
+        if (exception.description == "invalid_username_or_password") {
+          this.loadingText = "Incorrent username or password";
+        } else {
+          this.isLoading = exception.description;
+        }
+        this.isLoading = false;
+      });
+    }
+  }
+
+  Widget buildLoadingWidget() {
+    if (this.showLoadingText) {
+      return Container(
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            this.loadingText,
+            style: Styles.h2Style,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        height: 0,
+      );
     }
   }
 
@@ -83,22 +130,29 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: OrientationBuilder(
-          builder: (context, orientation) {
-            calcDimensions();
-            return SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: Column(
+        child: OrientationBuilder(builder: (context, orientation) {
+          calcDimensions();
+          return SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Column(
                         children: <Widget>[
                           SizedBox(height: this.marginHeight * 0.5),
                           HeaderRow(text: "Sign In"),
                           SizedBox(height: this.marginHeight * 0.7),
+
+                          // NOTE: Connecting Text
+                          buildLoadingWidget(),
+
+                          SizedBox(
+                            height: this.marginHeight * 0.5,
+                          ),
 
                           // NOTE: Email
                           Semantics(
@@ -145,43 +199,49 @@ class _LoginScreenState extends State<LoginScreen> {
                               minWidth: this.buttonMinWidth,
                               text: "Sign In",
                               textStyle: Styles.yellowTxtBtnStyle,
-                              colour: Styles.midnightBlue,
+                              colour: this.isLoading
+                                  ? Styles.grey
+                                  : Styles.midnightBlue,
                               onTap: () {
-                                this.signIn();
+                                if (this.email != "" &&
+                                    this.password != "" &&
+                                    this.isLoading == false) {
+                                  this.signIn();
+                                }
                               },
                             ),
                           )
                         ],
                       ),
-                    ),
+                    ],
+                  ),
 
-                    SizedBox(height: this.marginHeight * 0.5),
+                  SizedBox(height: this.marginHeight * 0.5),
 
-                    // NOTE: Skip Button
-                    Semantics(
-                      label: "Skip",
-                      hint: "Double tap to skip sign in",
-                      child: DghaTextButton(
-                        minWidth: this.buttonMinWidth,
-                        text: "Skip",
-                        textStyle: Styles.btnTextBlueUnderlineStyle,
-                        colour: Styles.yellow,
-                        onTap: () {
-                          if (Data.pages.length == 0) {
-                            Navigator.popAndPushNamed(context, ExploreScreen.id);
-                          } else {
-                            Navigator.pop(context);
-                          }
-                        },
-                        bottomMargin: this.marginHeight * 0.5,
-                      ),
+                  // NOTE: Skip Button
+                  Semantics(
+                    label: "Skip",
+                    hint: "Double tap to skip sign in",
+                    child: DghaTextButton(
+                      minWidth: this.buttonMinWidth,
+                      text: "Skip",
+                      textStyle: Styles.btnTextBlueUnderlineStyle,
+                      colour: Styles.yellow,
+                      onTap: () {
+                        if (Data.pages.length == 0) {
+                          Navigator.popAndPushNamed(context, ExploreScreen.id);
+                        } else {
+                          Navigator.pop(context);
+                        }
+                      },
+                      bottomMargin: this.marginHeight * 0.5,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

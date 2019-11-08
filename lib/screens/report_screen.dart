@@ -22,6 +22,8 @@ class ReportScreen extends StatefulWidget {
 class _ReportScreenState extends State<ReportScreen> {
   final TextEditingController _txtController = new TextEditingController();
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,10 +90,13 @@ class _ReportScreenState extends State<ReportScreen> {
                   Container(
                     child: DghaTextButton(
                       minWidth: MediaQuery.of(context).size.width * 0.45,
-                      text: "Submit",
+                      text: isLoading ? "Sending..." : "Submit",
                       textStyle: Styles.yellowTxtBtnStyle,
-                      colour: Styles.midnightBlue,
+                      colour: isLoading ? Styles.grey : Styles.midnightBlue,
                       onTap: () async {
+                        setState(() {
+                          this.isLoading = true;
+                        });
                         Response response = await DghaApi.postComplaint(
                           widget.locationData.placeId,
                           _txtController.text,
@@ -99,8 +104,14 @@ class _ReportScreenState extends State<ReportScreen> {
 
                         if (response.statusCode == 201) {
                           Navigator.of(context).pop();
+                          setState(() {
+                            this.isLoading = false;
+                          });
                           print("Report Sent!");
                         } else {
+                          setState(() {
+                            this.isLoading = false;
+                          });
                           print("Error: ${response.statusCode}");
                         }
                       },

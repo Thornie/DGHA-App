@@ -26,6 +26,7 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen> {
   final _firestore = Firestore.instance;
+  bool isLoading = false;
 
   // -------------------------- NOTE: CONTROLLERS
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -81,6 +82,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   void getPlacesFromDatabase() async {
+    setState(() {
+      this.isLoading = true;
+    });
+
     final placesFromDatabase =
         await _firestore.collection('location').getDocuments();
     List<LocationData> locations = new List<LocationData>();
@@ -102,6 +107,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       setState(() {
         this.iniLocationList = locations;
         this.locationList = locations;
+        this.isLoading = false;
       });
     } catch (e) {
       print(e);
@@ -109,6 +115,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 
   void getLocations(String input) async {
+    setState(() {
+      this.isLoading = true;
+    });
+
     List<PlaceByQuery> places = new List<PlaceByQuery>();
     List<LocationData> locations = new List<LocationData>();
 
@@ -138,6 +148,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       }
       setState(() {
         this.locationList = locations;
+        this.isLoading = false;
       });
     }
   }
@@ -189,10 +200,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         height: 10,
                       ),
 
-                      // ----- NOTE: place cards
-                      Column(
-                        children: placeWidgets(),
-                      ),
+                      Builder(
+                        builder: (context) {
+                          if (this.isLoading) {
+                            // ----- NOTE: loading screen
+                            return Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Loading...",
+                                style: Styles.h1Style,
+                              ),
+                            );
+                          } else {
+                            // ----- NOTE: place cards
+                            return Column(
+                              children: placeWidgets(),
+                            );
+                          }
+                        },
+                      )
                     ],
                   ),
                 ),
