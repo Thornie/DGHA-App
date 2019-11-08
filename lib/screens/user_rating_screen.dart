@@ -46,6 +46,11 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
   //Comment Text Controller
   TextEditingController commentController = new TextEditingController();
 
+  //Loading screen variables
+  bool isLoading = false;
+  bool showLoadingText = false;
+  String loadingText = "Sending...";
+
   @override
   void initState() {
     super.initState();
@@ -139,6 +144,12 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       hintText:
           "Add a comment to your review to give more detail on your experience. This is optional.",
       onPressed: () async {
+        setState(() {
+          this.isLoading = true;
+          this.showLoadingText = true;
+          this.loadingText = "Sending...";
+        });
+
         if (!this.isSubmittingReview) {
           setState(() {
             this.isSubmittingReview = true;
@@ -156,8 +167,20 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
           ).then((response) {
             if (response.statusCode == 201) {
               Navigator.of(context).pop(true);
+              setState(() {
+                this.isLoading = false;
+                this.showLoadingText = false;
+              });
+            } else if (response.statusCode == 409) {
+              setState(() {
+                this.isLoading = false;
+                this.loadingText = "You have already left a review";
+              });
             } else {
-              print("ruh oh! : ${response.statusCode}");
+              setState(() {
+                this.isLoading = false;
+                this.loadingText = response.reasonPhrase;
+              });
             }
           });
 
@@ -167,6 +190,25 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
         }
       },
     );
+
+    Widget buildLoadingWidget() {
+      if (this.showLoadingText) {
+        return Container(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              this.loadingText,
+              style: Styles.h2Style,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      } else {
+        return Container(
+          height: 0,
+        );
+      }
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -202,6 +244,8 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                       },
                     ),
                   ),
+                  //----------Loading Text
+                  buildLoadingWidget(),
                   //----------Page Navigation
                   Padding(
                     padding: const EdgeInsets.only(

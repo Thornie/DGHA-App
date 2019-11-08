@@ -33,6 +33,7 @@ class PlaceDetailsScreen extends StatefulWidget {
 
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   ReviewPlace reviewPlace = new ReviewPlace(reviews: List<Review>());
+  bool isLoading = false;
 
   // NOTE: Init
   @override
@@ -43,11 +44,16 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   }
 
   void getReviews() async {
+    setState(() {
+      this.isLoading = true;
+    });
+
     ReviewPlace list =
         await DghaApi.getReviewsFromPlaceId(widget.locationData.placeId);
     try {
       setState(() {
         this.reviewPlace = list;
+        this.isLoading = false;
       });
     } catch (e) {
       print(e);
@@ -171,12 +177,28 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     ),
                   ),
 
-                  // --------- NOTE: Reviews
-                  Container(
-                    child: this.reviewPlace.reviews.length > 0
-                        ? Column(children: buildReviews())
-                        : textBtnSection(
-                            "Write the first review!", this.reviewBtnHandler),
+                  Builder(
+                    builder: (context) {
+                      if (this.isLoading) {
+                        // ----- NOTE: loading screen
+                        return Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Loading...",
+                            style: Styles.h1Style,
+                          ),
+                        );
+                      } else {
+                        if (reviewPlace.reviews.length > 0) {
+                          return Container(
+                              child: Column(children: buildReviews()));
+                        } else {
+                          return textBtnSection(
+                              "Write the first review!", this.reviewBtnHandler);
+                          // --------- NOTE: Reviews
+                        }
+                      }
+                    },
                   ),
 
                   // --------- NOTE: Report
@@ -265,8 +287,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     List<Widget> reviewWidgets = new List<Widget>();
 
     for (var review in this.reviewPlace.reviews) {
-      Widget widget = ReviewContainer(review: review);
-      reviewWidgets.add(widget);
+      if (review.comment != "") {
+        Widget widget = ReviewContainer(review: review);
+        reviewWidgets.add(widget);
+      }
     }
 
     return reviewWidgets;
