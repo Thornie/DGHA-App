@@ -216,7 +216,8 @@ class DghaApi {
     );
 
     //Prevent decoding errors with a blank body
-    if (response.body == "") {
+    if (response.body == "" || response.statusCode != 200) {
+      print(response.statusCode);
       return ReviewPlace(reviews: new List<Review>());
     }
 
@@ -263,7 +264,8 @@ class DghaApi {
     );
 
     //Prevent decoding errors with a blank body
-    if (response.body == "") {
+    if (response.body == "" || response.statusCode != 200) {
+      print(response.statusCode);
       return List<Review>();
     }
 

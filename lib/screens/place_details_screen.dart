@@ -113,6 +113,36 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
   }
 
+  Widget buildMoreReviewsWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        iconBtnSection(FontAwesomeIcons.arrowLeft, () {
+          if (reviewPageIndex - 1 >= 0) {
+            setState(() {
+              reviewPageIndex--;
+              getReviews();
+            });
+          }
+          print(reviewPageIndex);
+        }),
+        Text(
+          (reviewPageIndex + 1).toString(),
+          style: Styles.h2Style,
+        ),
+        iconBtnSection(FontAwesomeIcons.arrowRight, () {
+          if (reviewPageIndex + 1 < (reviewPlace.count / 5).ceil()) {
+            setState(() {
+              reviewPageIndex++;
+              getReviews();
+            });
+          }
+          print(reviewPageIndex);
+        }),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,8 +231,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           return Container(
                               child: Column(children: buildReviews()));
                         } else {
-                          return textBtnSection(
-                              "Write the first review!", this.reviewBtnHandler);
+                          return Column(
+                            children: <Widget>[
+                              textBtnSection("Write the first review!",
+                                  this.reviewBtnHandler),
+                              SizedBox(
+                                height: Styles.spacing,
+                              ),
+                            ],
+                          );
                           // --------- NOTE: Reviews
                         }
                       }
@@ -210,34 +247,9 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   ),
 
                   // --------- NOTE: More Reviews Btn
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      iconBtnSection(FontAwesomeIcons.arrowLeft, () {
-                        if (reviewPageIndex - 1 >= 0) {
-                          setState(() {
-                            reviewPageIndex--;
-                            getReviews();
-                          });
-                        }
-                        print(reviewPageIndex);
-                      }),
-                      Text(
-                        (reviewPageIndex + 1).toString(),
-                        style: Styles.h2Style,
-                      ),
-                      iconBtnSection(FontAwesomeIcons.arrowRight, () {
-                        if (reviewPageIndex + 1 <
-                            (reviewPlace.count / 5).ceil()) {
-                          setState(() {
-                            reviewPageIndex++;
-                            getReviews();
-                          });
-                        }
-                        print(reviewPageIndex);
-                      }),
-                    ],
-                  ),
+                  reviewPlace.averageRating != 0
+                      ? buildMoreReviewsWidget()
+                      : Container(),
 
                   // --------- NOTE: Report
                   textBtnSection("Report Venue", this.reportBtnHandler),
