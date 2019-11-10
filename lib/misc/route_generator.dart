@@ -1,4 +1,3 @@
-import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:dgha_brochure/screens/info_screen.dart';
@@ -6,6 +5,7 @@ import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/info_menu_screen.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/report_screen.dart';
+import 'package:dgha_brochure/screens/search_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
 import 'package:dgha_brochure/screens/register_screen.dart';
 import 'package:dgha_brochure/screens/place_details_screen.dart';
@@ -45,8 +45,7 @@ class RouteGenerator {
       case PlaceDetailsScreen.id:
         // LocationData blah = settings.arguments as LocationData;
         // print(blah.placeId);
-        return MaterialPageRoute(
-            builder: (_) => PlaceDetailsScreen(settings.arguments));
+        return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
       case UserRatingScreen.id:
         ReviewScrArgs reviewScrArgs;
         try {
@@ -61,8 +60,9 @@ class RouteGenerator {
       case RegisterScreen.id:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case ReportScreen.id:
-        return MaterialPageRoute(
-            builder: (_) => ReportScreen(settings.arguments));
+        return MaterialPageRoute(builder: (_) => ReportScreen(settings.arguments));
+      case SearchScreen.id:
+        return MaterialPageRoute(builder: (_) => SearchScreen());
       default:
         return MaterialPageRoute(builder: (_) => InfoMenuScreen());
     }
