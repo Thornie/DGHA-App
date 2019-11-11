@@ -26,6 +26,8 @@ class _SearchScreenState extends State<SearchScreen> {
       this.isLoading = true;
     });
     String formattedInput = Helper().formatStringForQuery(input);
+
+    // TODO: Will change to the other api url
     String url = 'http://dgha-search.azurewebsites.net/search?query=$formattedInput';
 
     http.Response res = await http.get(url, headers: {"Accept": "application/json"});
