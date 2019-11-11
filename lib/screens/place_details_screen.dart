@@ -8,11 +8,8 @@ import 'package:dgha_brochure/components/review_container.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/page_nav.dart';
-import 'package:dgha_brochure/models/review_place.dart';
-import 'package:dgha_brochure/models/review_scr_args.dart';
-import 'package:dgha_brochure/screens/explore_screen.dart';
+import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/report_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
@@ -23,16 +20,15 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
-  final LocationData locationData;
+  final PlaceData placeData;
 
-  PlaceDetailsScreen(this.locationData);
+  PlaceDetailsScreen(this.placeData);
 
   @override
   _PlaceDetailsScreenState createState() => _PlaceDetailsScreenState();
 }
 
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
-  ReviewPlace reviewPlace = new ReviewPlace(reviews: List<Review>());
   bool isLoading = false;
   List<Review> reviewList = new List<Review>();
   int reviewPageIndex = 0;
@@ -50,17 +46,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       this.isLoading = true;
     });
 
-    ReviewPlace reviewPlaceData =
-        await DghaApi.getReviewsFromPlaceId(widget.locationData.placeId);
     List<Review> list = List<Review>();
 
-    list = await DghaApi.getReviewsFromPlaceIdAndSet(
-        widget.locationData.placeId, reviewPageIndex);
+    list = await DghaApi.getReviewsFromPlaceIdAndSet(widget.placeData.placeId, reviewPageIndex);
 
     try {
       setState(() {
         this.isLoading = false;
-        this.reviewPlace = reviewPlaceData;
         this.reviewList = list;
       });
     } catch (e) {
@@ -70,77 +62,37 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void reviewBtnHandler() async {
     if (DghaApi.currentClient != null) {
-      print(widget.locationData.placeId);
-      String placeId = widget.locationData.placeId;
-      final result = await Navigator.pushNamed(context, UserRatingScreen.id,
-          arguments: ReviewScrArgs(
-            placeId: placeId,
-            placeName: widget.locationData.name,
-          ));
+      final result = await Navigator.pushNamed(context, UserRatingScreen.id, arguments: widget.placeData);
       if (result) {
-        setState(() {
-          getReviews();
-        });
+        getReviews();
       }
     } else {
       Navigator.of(context).pushNamed(
         LoginScreen.id_user_rating,
-        arguments: widget.locationData,
+        arguments: widget.placeData,
       );
     }
   }
 
   void reportBtnHandler() {
     if (DghaApi.currentClient != null) {
-      Navigator.pushNamed(context, ReportScreen.id,
-          arguments: widget.locationData);
+      Navigator.pushNamed(context, ReportScreen.id, arguments: widget.placeData);
     } else {
       Navigator.of(context).pushNamed(
         LoginScreen.id_report,
-        arguments: widget.locationData,
+        arguments: widget.placeData,
       );
     }
   }
 
   void _launchMap(String placeId) async {
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
+    final url = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
 
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       print("something wrong!");
     }
-  }
-
-  Widget buildMoreReviewsWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        iconBtnSection(FontAwesomeIcons.arrowLeft, () {
-          if (reviewPageIndex - 1 >= 0) {
-            setState(() {
-              reviewPageIndex--;
-              getReviews();
-            });
-          }
-          print(reviewPageIndex);
-        }),
-        Text(
-          (reviewPageIndex + 1).toString(),
-          style: Styles.h2Style,
-        ),
-        iconBtnSection(FontAwesomeIcons.arrowRight, () {
-          if (reviewPageIndex + 1 < (reviewPlace.count / 5).ceil()) {
-            setState(() {
-              reviewPageIndex++;
-              getReviews();
-            });
-          }
-          print(reviewPageIndex);
-        }),
-      ],
-    );
   }
 
   @override
@@ -161,7 +113,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   //---------- NOTE: Place Name
                   Container(
                     child: Text(
-                      widget.locationData.name,
+                      widget.placeData.name,
                       style: Styles.h2Style,
                     ),
                   ),
@@ -169,7 +121,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   // --------- NOTE: Address
                   Container(
                     child: Text(
-                      widget.locationData.address,
+                      widget.placeData.address,
                       style: Styles.pStyle,
                     ),
                   ),
@@ -177,10 +129,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   SizedBox(height: Styles.spacing * 0.5),
 
                   // --------- NOTE: Stars
-                  Container(
-                    child:
-                        reviewPlace.averageRating != 0 ? stars() : Container(),
-                  ),
+                  stars(),
 
                   // --------- NOTE: Review Section
                   Container(
@@ -201,8 +150,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           child: Semantics(
                             button: true,
                             label: "Write Review",
-                            hint:
-                                "Double tap to leave a review for ${widget.locationData.name}",
+                            hint: "Double tap to leave a review for ${widget.placeData.name}",
                             excludeSemantics: true,
                             child: DghaIcon(
                               icon: FontAwesomeIcons.pen,
@@ -228,13 +176,11 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                         );
                       } else {
                         if (this.reviewList.length > 0) {
-                          return Container(
-                              child: Column(children: buildReviews()));
+                          return Container(child: Column(children: buildReviews()));
                         } else {
                           return Column(
                             children: <Widget>[
-                              textBtnSection("Write the first review!",
-                                  this.reviewBtnHandler),
+                              textBtnSection("Write the first review!", this.reviewBtnHandler),
                               SizedBox(
                                 height: Styles.spacing,
                               ),
@@ -247,9 +193,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   ),
 
                   // --------- NOTE: More Reviews Btn
-                  reviewPlace.averageRating != 0
-                      ? buildMoreReviewsWidget()
-                      : Container(),
+                  // --------- TODO: Redesign
+                  // reviewPlace.averageRating != 0 ? buildMoreReviewsWidget() : Container(),
 
                   // --------- NOTE: Report
                   textBtnSection("Report Venue", this.reportBtnHandler),
@@ -263,14 +208,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
             DghaAppBar(
               text: "Reviews",
               isMenu: true,
-              semanticLabel: "${widget.locationData.name} Reviews",
+              semanticLabel: "${widget.placeData.name} Reviews",
               childOne: Semantics(
                 button: true,
                 label: "Menu",
                 hint: "Double tap to go back and view other locations",
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).popAndPushNamed(ExploreScreen.id);
+                    Navigator.pop(context);
+                    // Navigator.of(context).popAndPushNamed(ExploreScreen.id);
                   },
                   child: DghaIcon(
                     icon: FontAwesomeIcons.arrowLeft,
@@ -283,7 +229,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               // NOTE: Map Btn
               childTwo: GestureDetector(
                 onTap: () {
-                  _launchMap(widget.locationData.placeId);
+                  _launchMap(widget.placeData.placeId);
                 },
                 child: DghaIcon(
                   icon: FontAwesomeIcons.mapMarkerAlt,
@@ -306,26 +252,26 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           Center(
             child: DghaStarRating(
               changeRatingOnTap: false,
-              rating: reviewPlace.averageRating,
+              rating: widget.placeData.avgOverallRating,
               height: 42,
             ),
           ),
           //----------Customer Service Rating
           RatingWithTitle(
             title: "Customer Service",
-            rating: reviewPlace.averageServiceRating,
+            rating: widget.placeData.avgCustomerRating,
             isSmall: true,
           ),
           //----------Amenities Rating
           RatingWithTitle(
             title: "Amenities",
-            rating: reviewPlace.averageAmenitiesRating,
+            rating: widget.placeData.avgAmentitiesRating,
             isSmall: true,
           ),
           //----------Location Rating
           RatingWithTitle(
             title: "Location",
-            rating: reviewPlace.averageLocationRating,
+            rating: widget.placeData.avgLocationRating,
             isSmall: true,
           ),
         ],
@@ -385,4 +331,35 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       ),
     );
   }
+
+  // ------- NOTE: More Reviews
+  // Widget buildMoreReviewsWidget() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //     children: <Widget>[
+  //       iconBtnSection(FontAwesomeIcons.arrowLeft, () {
+  //         if (reviewPageIndex - 1 >= 0) {
+  //           setState(() {
+  //             reviewPageIndex--;
+  //             getReviews();
+  //           });
+  //         }
+  //         print(reviewPageIndex);
+  //       }),
+  //       Text(
+  //         (reviewPageIndex + 1).toString(),
+  //         style: Styles.h2Style,
+  //       ),
+  //       iconBtnSection(FontAwesomeIcons.arrowRight, () {
+  //         if (reviewPageIndex + 1 < (reviewPlace.count / 5).ceil()) {
+  //           setState(() {
+  //             reviewPageIndex++;
+  //             getReviews();
+  //           });
+  //         }
+  //         print(reviewPageIndex);
+  //       }),
+  //     ],
+  //   );
+  // }
 }
