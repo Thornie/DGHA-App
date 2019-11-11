@@ -10,6 +10,7 @@ import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha_brochure/screens/search_screen.dart';
 import 'package:dgha_brochure/services/open_dynamic_link.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -86,8 +87,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       this.isLoading = true;
     });
 
-    final placesFromDatabase =
-        await _firestore.collection('location').getDocuments();
+    final placesFromDatabase = await _firestore.collection('location').getDocuments();
     List<LocationData> locations = new List<LocationData>();
 
     for (var place in placesFromDatabase.documents) {
@@ -114,54 +114,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
   }
 
-  void getLocations(String input) async {
-    setState(() {
-      this.isLoading = true;
-    });
-
-    List<PlaceByQuery> places = new List<PlaceByQuery>();
-    List<LocationData> locations = new List<LocationData>();
-
-    http.Response res = await getPlacesByQuery(
-        input: input, state: this.stateName, apiKey: Data.kGoogleApiKey);
-
-    if (res.statusCode == 200) {
-      ResponseData data = ResponseData.fromJson(json.decode(res.body));
-      print(data.results);
-
-      for (var i = 0; i < data.results.length; i++) {
-        PlaceByQuery pbq = PlaceByQuery.fromJson(data.results[i]);
-        places.add(pbq);
-      }
-
-      for (var i = 0; i < places.length; i++) {
-        LocationData ld = new LocationData(
-            name: places[i].name,
-            address: Helper().formatAddress(places[i].address),
-            overallRating: 0,
-            // overallRating: places[i].rating.toDouble(),
-            customerServiceRating: 0,
-            amenitiesRating: 0,
-            locationRating: 0,
-            placeId: places[i].placeId);
-        locations.add(ld);
-      }
-      setState(() {
-        this.locationList = locations;
-        this.isLoading = false;
-      });
-    }
-  }
-
-  Future<http.Response> getPlacesByQuery(
-      {String input, String state, String apiKey}) {
-    String formattedInput = Helper().formatStringForQuery(input);
-    String url =
-        'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$formattedInput&key=$apiKey';
-
-    return http.get(url);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -183,23 +135,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       SizedBox(height: Styles.heightFromAppBar),
-
-                      // --------------- NOTE: Search Bar
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: buildSearchTextField(
-                          prefixIcon: FontAwesomeIcons.search,
-                          hintText: "Search place name",
-                          onSubmitted: (value) {
-                            getLocations(value);
-                          },
-                        ),
-                      ),
-
-                      SizedBox(
-                        height: 10,
-                      ),
-
                       Builder(
                         builder: (context) {
                           if (this.isLoading) {
@@ -239,6 +174,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       iconColor: Styles.yellow,
                     ),
                   ),
+                  childTwo: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, SearchScreen.id);
+                    },
+                    child: DghaIcon(
+                      icon: FontAwesomeIcons.search,
+                      backgroundColor: Styles.midnightBlue,
+                      iconColor: Styles.yellow,
+                    ),
+                  ),
                 ),
               ],
             );
@@ -271,55 +216,5 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
 
     return widgets;
-  }
-
-  Widget buildSearchTextField(
-      {IconData prefixIcon, String hintText, Function(String) onSubmitted}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Styles.yellow,
-        borderRadius: BorderRadius.all(Radius.circular(50)),
-        boxShadow: [
-          BoxShadow(
-            color: Styles.grey,
-            blurRadius: 3,
-            offset: Offset(2, 3),
-          ),
-        ],
-      ),
-      child: TextField(
-        controller: _txtController,
-        onSubmitted: (value) {
-          onSubmitted(value);
-        },
-        style: Styles.pStyle,
-        cursorColor: Styles.midnightBlue,
-        cursorWidth: 5,
-        decoration: InputDecoration(
-          prefixIcon: Padding(
-            padding: EdgeInsets.only(left: 25, right: 20),
-            child: Icon(prefixIcon, color: Styles.midnightBlue),
-          ),
-          suffix: GestureDetector(
-            onTap: () {
-              Future.delayed(Duration(milliseconds: 50)).then((_) {
-                _txtController.clear();
-              });
-            },
-            child: Padding(
-              padding: EdgeInsets.only(right: 25, left: 10),
-              child: Icon(
-                FontAwesomeIcons.times,
-                color: Styles.midnightBlue,
-                size: Styles.iconSize,
-              ),
-            ),
-          ),
-          border: InputBorder.none,
-          hintText: hintText,
-          contentPadding: EdgeInsets.symmetric(vertical: 20),
-        ),
-      ),
-    );
   }
 }

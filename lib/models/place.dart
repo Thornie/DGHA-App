@@ -1,38 +1,4 @@
-class ResponseData {
-  final List<dynamic> htmlAttributions;
-  final List<dynamic> results;
-  final String status;
-
-  ResponseData({this.htmlAttributions, this.results, this.status});
-
-  factory ResponseData.fromJson(Map<String, dynamic> json) {
-    return ResponseData(
-      htmlAttributions: json['html_attributions'],
-      results: json['results'],
-      status: json['status'],
-    );
-  }
-}
-
-class Place {
-  final String name;
-  final String placeId;
-  final dynamic rating;
-  final String address;
-  final List<dynamic> types;
-
-  Place({this.name, this.placeId, this.rating, this.types, this.address});
-
-  factory Place.fromJson(Map<String, dynamic> json) {
-    return Place(
-      name: json['name'],
-      placeId: json['place_id'],
-      rating: json['rating'],
-      types: json['types'],
-      address: json['vicinity'],
-    );
-  }
-}
+import 'package:flutter/cupertino.dart';
 
 class PlaceByQuery {
   final String name;
@@ -52,4 +18,38 @@ class PlaceByQuery {
       address: json['formatted_address'],
     );
   }
+}
+
+// NOTE: by the end there will only be ONE (1) Place class and it's this one
+class Place {
+  final String placeId;
+  final String name;
+  final String address;
+  final List<String> types;
+  final double avgOverallRating;
+  final double avgCustomerServiceRating;
+  final double avgLocationRating;
+  final double avgAmenitiesRating;
+  final int numOfRatings;
+
+  Place({
+    this.placeId,
+    this.name,
+    this.address,
+    this.types,
+    this.avgOverallRating,
+    this.avgCustomerServiceRating,
+    this.avgLocationRating,
+    this.avgAmenitiesRating,
+    this.numOfRatings,
+  });
+}
+
+class SearchAPIResponse {
+  final String placeId;
+  final String name;
+  final String address;
+  final List<dynamic> types;
+
+  SearchAPIResponse({this.placeId, this.name, this.address, this.types});
 }

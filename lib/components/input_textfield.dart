@@ -14,16 +14,21 @@ class UserInputTextField extends StatefulWidget {
   final Function(String) onChange;
   final TextInputType keyboardType;
   final bool autoFocus;
+  final Function prefixOnTap;
+  final Function(String) onSubmit;
+  final bool changeFocusColour;
 
-  UserInputTextField({
-    this.prefixIcon,
-    this.hintText,
-    this.obscureText = false,
-    this.highlightRed = false,
-    this.onChange,
-    this.keyboardType,
-    this.autoFocus = false,
-  });
+  UserInputTextField(
+      {this.prefixIcon,
+      this.hintText,
+      this.obscureText = false,
+      this.highlightRed = false,
+      this.onChange,
+      this.keyboardType,
+      this.autoFocus = false,
+      this.prefixOnTap,
+      this.onSubmit,
+      this.changeFocusColour = true});
 
   @override
   _UserInputTextFieldState createState() => _UserInputTextFieldState();
@@ -32,6 +37,9 @@ class UserInputTextField extends StatefulWidget {
 class _UserInputTextFieldState extends State<UserInputTextField> {
   final TextEditingController _txtController = new TextEditingController();
   FocusNode _focus = new FocusNode();
+
+  Color focusColor = Styles.yellow;
+  Color unfocusedColor = Colors.white;
 
   @override
   void initState() {
@@ -51,17 +59,31 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
     }
   }
 
+  Color _setTextFieldColour() {
+    Color textfieldColour = Styles.yellow;
+    if (widget.changeFocusColour) {
+      if (widget.highlightRed) {
+        textfieldColour = Styles.red;
+      } else {
+        textfieldColour = _focus.hasFocus ? Styles.yellow : Colors.white;
+      }
+    }
+    return textfieldColour;
+  }
+
+  Color _setPrefixColour() {
+    Color prefixColour = Styles.midnightBlue;
+    if (widget.changeFocusColour) {
+      prefixColour = _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey;
+    }
+    return prefixColour;
+  }
+
   @override
   Widget build(BuildContext context) {
-    //
-    Color focusColor = Styles.yellow;
-    Color unfocusedColor = Colors.white;
-    if (widget.highlightRed) focusColor = Styles.red;
-    if (widget.highlightRed) unfocusedColor = Styles.red;
-
     return Container(
       decoration: BoxDecoration(
-        color: _focus.hasFocus ? focusColor : unfocusedColor,
+        color: _setTextFieldColour(),
         borderRadius: BorderRadius.all(Radius.circular(50)),
         boxShadow: [
           BoxShadow(
@@ -72,13 +94,17 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
         ],
       ),
       child: Row(
-        // direction: Axis.horizontal,
         children: <Widget>[
           Container(
             child: widget.prefixIcon != null
-                ? DghaIcon(
-                    icon: widget.prefixIcon,
-                    iconColor: _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey,
+                ? GestureDetector(
+                    onTap: () {
+                      widget.prefixOnTap();
+                    },
+                    child: DghaIcon(
+                      icon: widget.prefixIcon,
+                      iconColor: _setPrefixColour(),
+                    ),
                   )
                 : SizedBox(width: 30),
           ),
@@ -89,6 +115,9 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
               controller: _txtController,
               focusNode: _focus,
               autofocus: widget.autoFocus,
+              onSubmitted: (value) {
+                widget.onSubmit(value);
+              },
               onChanged: (value) {
                 widget.onChange(value);
               },
