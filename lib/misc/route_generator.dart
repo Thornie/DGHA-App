@@ -1,4 +1,3 @@
-import 'package:dgha_brochure/models/review_scr_args.dart';
 import 'package:dgha_brochure/models/screen_args.dart';
 import 'package:dgha_brochure/screens/info_screen.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
@@ -20,13 +19,13 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => LoginScreen(
                   goToReviewScreen: true,
-                  locationData: settings.arguments,
+                  placeData: settings.arguments,
                 ));
       case LoginScreen.id_report:
         return MaterialPageRoute(
             builder: (_) => LoginScreen(
                   goToReportScreen: true,
-                  locationData: settings.arguments,
+                  placeData: settings.arguments,
                 ));
       case InfoScreen.id:
         InfoScrArgs infoScrArgs;
@@ -43,20 +42,9 @@ class RouteGenerator {
       case ExploreScreen.id:
         return MaterialPageRoute(builder: (_) => ExploreScreen());
       case PlaceDetailsScreen.id:
-        // LocationData blah = settings.arguments as LocationData;
-        // print(blah.placeId);
         return MaterialPageRoute(builder: (_) => PlaceDetailsScreen(settings.arguments));
       case UserRatingScreen.id:
-        ReviewScrArgs reviewScrArgs;
-        try {
-          reviewScrArgs = settings.arguments;
-        } catch (e) {}
-
-        return MaterialPageRoute(
-            builder: (_) => UserRatingScreen(
-                  placeId: reviewScrArgs.placeId,
-                  placeName: reviewScrArgs.placeName,
-                ));
+        return MaterialPageRoute(builder: (_) => UserRatingScreen(settings.arguments));
       case RegisterScreen.id:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case ReportScreen.id:

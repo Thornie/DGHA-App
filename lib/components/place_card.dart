@@ -1,19 +1,20 @@
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:dgha_brochure/models/place.dart';
 
 class PlaceCard extends StatelessWidget {
-  final LocationData locationData;
+  final PlaceData placeData;
+  final bool isFromSearchScreen;
 
-  PlaceCard({@required this.locationData});
+  PlaceCard({@required this.placeData, this.isFromSearchScreen = false});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Semantics(
-        label: "${locationData.name}",
+        label: "${placeData.name}",
         hint: "Double tap to view more details",
         excludeSemantics: true,
         child: Container(
@@ -34,15 +35,21 @@ class PlaceCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                child: this.locationData.overallRating != 0 ? stars() : noRating(),
+              Builder(
+                builder: (context) {
+                  if (this.placeData.numOfRatings > 0) {
+                    return stars();
+                  } else {
+                    return noRating();
+                  }
+                },
               ),
               Text(
-                locationData.name,
+                placeData.name,
                 style: Styles.h3Style,
               ),
               Text(
-                locationData.address,
+                placeData.address,
                 style: Styles.pStyle,
               ),
             ],
@@ -50,7 +57,11 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: locationData);
+        if (this.isFromSearchScreen) {
+          Navigator.popAndPushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
+        } else {
+          Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
+        }
       },
     );
   }
@@ -61,15 +72,23 @@ class PlaceCard extends StatelessWidget {
         IgnorePointer(
           child: DghaStarRating(
             height: 30,
-            rating: this.locationData.overallRating,
+            rating: this.placeData.avgOverallRating,
             starCount: 5,
           ),
         ),
+        SizedBox(
+          width: Styles.spacing * 0.25,
+        ),
+        Container(
+          child: Text(
+            "( ${placeData.numOfRatings.toString()} )",
+            style: Styles.boldPStyle,
+          ),
+        )
       ],
     );
   }
 
-  // TODO: Show the number of reviews
   Widget noRating() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),

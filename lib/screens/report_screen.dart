@@ -3,7 +3,7 @@ import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
+import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,9 +11,9 @@ import 'package:http/http.dart';
 
 class ReportScreen extends StatefulWidget {
   static const id = "Report Screen";
-  final LocationData locationData;
+  final PlaceData placeData;
 
-  ReportScreen(this.locationData);
+  ReportScreen(this.placeData);
 
   @override
   _ReportScreenState createState() => _ReportScreenState();
@@ -42,7 +42,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   //---------- NOTE: Place Name
                   Container(
                     child: Text(
-                      widget.locationData.name,
+                      widget.placeData.name,
                       style: Styles.h2Style,
                     ),
                   ),
@@ -50,7 +50,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   // --------- NOTE: Address
                   Container(
                     child: Text(
-                      widget.locationData.address,
+                      widget.placeData.address,
                       style: Styles.pStyle,
                     ),
                   ),
@@ -66,8 +66,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   ),
                   Semantics(
                     label: "Comment",
-                    hint:
-                        "Double tap to give more information on why you're reporting ${widget.locationData.name}",
+                    hint: "Double tap to give more information on why you're reporting ${widget.placeData.name}",
                     excludeSemantics: true,
                     child: TextField(
                       controller: _txtController,
@@ -98,7 +97,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           this.isLoading = true;
                         });
                         Response response = await DghaApi.postComplaint(
-                          widget.locationData.placeId,
+                          widget.placeData.placeId,
                           _txtController.text,
                         );
 
@@ -125,15 +124,14 @@ class _ReportScreenState extends State<ReportScreen> {
             DghaAppBar(
               text: "Report",
               isMenu: true,
-              semanticLabel: "Report ${widget.locationData.name}",
+              semanticLabel: "Report ${widget.placeData.name}",
               childOne: Semantics(
                 button: true,
                 label: "Menu",
                 hint: "Double tap to go back and cancel the report",
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).popAndPushNamed(PlaceDetailsScreen.id,
-                        arguments: widget.locationData);
+                    Navigator.of(context).popAndPushNamed(PlaceDetailsScreen.id, arguments: widget.placeData);
                   },
                   child: DghaIcon(
                     icon: FontAwesomeIcons.arrowLeft,
