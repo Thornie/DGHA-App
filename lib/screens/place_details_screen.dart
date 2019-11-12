@@ -37,7 +37,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    getReviews();
+
+    if (widget.placeData.numOfRatings > 0) {
+      getReviews();
+    }
     Data.pages.add(PageNav.placeDetailsScr);
   }
 
