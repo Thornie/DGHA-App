@@ -53,38 +53,27 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return state;
   }
 
+  // NOTE: Get Recommended
   void getRecommendedPlaces() async {
     setState(() {
       this.isLoading = true;
     });
 
-    // NOTE: only use this when using physical device
+    // only use this when using physical device
     // String state = await getState();
     String state = "Victoria";
 
-    String url = "https://dgha-api-testing.azurewebsites.net/location/all";
+    String url = "https://dgha-api-testing.azurewebsites.net/location/recommend?state=$state";
     http.Response res = await http.get(url, headers: {"Accept": "application/json"});
-    List<PlaceData> localPlaces = new List<PlaceData>();
+    List<PlaceData> _placeList = new List<PlaceData>();
 
     if (res.statusCode == 200) {
-      List<dynamic> dataList = json.decode(res.body);
-
-      for (var data in dataList) {
-        ApiPlaceResult apiResult = ApiPlaceResult.fromJson(data);
-        PlaceData place = apiResult.value;
-
-        // there's a place in the database right now thats in the US lol
-        if (place.address != "3220 Ingersoll Ave, Des Moines, IA 50312, USA") {
-          place.address = Helper().formatAddress(place.address);
-
-          localPlaces.add(place);
-        }
-      }
+      _placeList = PlaceData.decodePlaceDataList(res.body);
     }
 
     try {
       setState(() {
-        this.placeList = localPlaces;
+        this.placeList = _placeList;
         this.isLoading = false;
       });
     } catch (e) {
