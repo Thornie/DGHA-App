@@ -6,9 +6,8 @@ import 'package:dgha_brochure/models/place.dart';
 
 class PlaceCard extends StatelessWidget {
   final PlaceData placeData;
-  final bool isFromSearchScreen;
 
-  PlaceCard({@required this.placeData, this.isFromSearchScreen = false});
+  PlaceCard({@required this.placeData});
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +56,7 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        if (this.isFromSearchScreen) {
-          Navigator.popAndPushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
-        } else {
-          Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
-        }
+        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
       },
     );
   }
