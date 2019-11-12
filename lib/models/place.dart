@@ -1,22 +1,4 @@
-class PlaceByQuery {
-  final String name;
-  final String placeId;
-  final String address;
-  final dynamic rating;
-  final List<dynamic> types;
-
-  PlaceByQuery({this.name, this.placeId, this.rating, this.types, this.address});
-
-  factory PlaceByQuery.fromJson(Map<String, dynamic> json) {
-    return PlaceByQuery(
-      name: json['name'],
-      placeId: json['place_id'],
-      rating: json['rating'],
-      types: json['types'],
-      address: json['formatted_address'],
-    );
-  }
-}
+import 'dart:convert';
 
 class PlaceData {
   String placeId;
@@ -30,33 +12,46 @@ class PlaceData {
   double avgLocationRating;
   int numOfRatings;
 
-  PlaceData({this.placeId, this.name, this.address, this.state, this.types, this.avgOverallRating, this.avgCustomerRating, this.avgAmentitiesRating, this.avgLocationRating, this.numOfRatings});
+  PlaceData({
+    this.placeId,
+    this.name,
+    this.address,
+    this.state,
+    this.types,
+    this.avgOverallRating,
+    this.avgCustomerRating,
+    this.avgAmentitiesRating,
+    this.avgLocationRating,
+    this.numOfRatings,
+  });
 
-  PlaceData.fromJson(Map<String, dynamic> json) {
-    placeId = json['placeId'];
-    name = json['name'];
-    address = json['address'];
-    state = json['state'];
-    types = json['types'].cast<String>();
-    avgOverallRating = json['avgOverallRating'].toDouble();
-    avgCustomerRating = json['avgCustomerRating'].toDouble();
-    avgAmentitiesRating = json['avgAmentitiesRating'].toDouble();
-    avgLocationRating = json['avgLocationRating'].toDouble();
-    numOfRatings = json['numOfRatings'];
-  }
+  factory PlaceData.fromJson(Map<String, dynamic> json) => PlaceData(
+        placeId: json["placeId"],
+        name: json["name"],
+        address: json["address"],
+        state: json["state"],
+        types: List<String>.from(json["types"].map((x) => x)),
+        avgOverallRating: json["avgOverallRating"].toDouble(),
+        avgCustomerRating: json["avgCustomerRating"].toDouble(),
+        avgAmentitiesRating: json["avgAmentitiesRating"].toDouble(),
+        avgLocationRating: json["avgLocationRating"].toDouble(),
+        numOfRatings: json["numOfRatings"],
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['placeId'] = this.placeId;
-    data['name'] = this.name;
-    data['address'] = this.address;
-    data['state'] = this.state;
-    data['types'] = this.types;
-    data['avgOverallRating'] = this.avgOverallRating;
-    data['avgCustomerRating'] = this.avgCustomerRating;
-    data['avgAmentitiesRating'] = this.avgAmentitiesRating;
-    data['avgLocationRating'] = this.avgLocationRating;
-    data['numOfRatings'] = this.numOfRatings;
-    return data;
+  Map<String, dynamic> toJson() => {
+        "placeId": placeId,
+        "name": name,
+        "address": address,
+        "state": state,
+        "types": List<dynamic>.from(types.map((x) => x)),
+        "avgOverallRating": avgOverallRating,
+        "avgCustomerRating": avgCustomerRating,
+        "avgAmentitiesRating": avgAmentitiesRating,
+        "avgLocationRating": avgLocationRating,
+        "numOfRatings": numOfRatings,
+      };
+
+  static List<PlaceData> decodePlaceDataList(String data) {
+    return List<PlaceData>.from(json.decode(data).map((x) => PlaceData.fromJson(x)));
   }
 }
