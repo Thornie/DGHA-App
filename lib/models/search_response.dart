@@ -1,30 +1,30 @@
 import 'dart:convert';
 import 'package:dgha_brochure/models/place.dart';
 
-class SearchPlaceResponse {
-  List<PlaceData> results;
-  String nextPageToken;
+class SearchPlace {
+  List<PlaceData> places = new List<PlaceData>();
+  String nextPageToken = '';
 
-  SearchPlaceResponse({
-    this.results,
+  SearchPlace({
+    this.places,
     this.nextPageToken,
   });
 
-  factory SearchPlaceResponse.fromJson(Map<String, dynamic> json) => SearchPlaceResponse(
-        results: List<PlaceData>.from(json["results"].map((x) => PlaceData.fromJson(x))),
+  factory SearchPlace.fromJson(Map<String, dynamic> json) => SearchPlace(
+        places: List<PlaceData>.from(json["results"].map((x) => PlaceData.fromJson(x))),
         nextPageToken: json["nextPageToken"],
       );
 
   Map<String, dynamic> toJson() => {
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(places.map((x) => x.toJson())),
         "nextPageToken": nextPageToken,
       };
 
-  static SearchPlaceResponse decodePlaceReponseFromJson(String data) {
-    return SearchPlaceResponse.fromJson(json.decode(data));
+  static SearchPlace decodePlaceReponseFromJson(String data) {
+    return SearchPlace.fromJson(json.decode(data));
   }
 
-  static String encodePlaceResponseToJson(SearchPlaceResponse data) {
+  static String encodePlaceResponseToJson(SearchPlace data) {
     return json.encode(data.toJson());
   }
 }
