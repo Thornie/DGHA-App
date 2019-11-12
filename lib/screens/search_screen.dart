@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/bottom_navigation.dart';
+import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/misc/helper.dart';
@@ -19,16 +20,17 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<PlaceData> placeList = List<PlaceData>();
-  String nextPageToken = "";
+  String nextPageToken = '';
+  String input;
   bool isLoading = false;
 
   // NOTE: Get Place
-  void _search({String input}) async {
+  void _search() async {
     setState(() {
       this.isLoading = true;
     });
 
-    String formattedInput = Helper().formatStringForQuery(input);
+    String formattedInput = Helper().formatStringForQuery(this.input);
 
     // TODO: Will change to the other api url
     String url = 'https://dgha-api-testing.azurewebsites.net/location/search?query=$formattedInput&nextpagetoken=$nextPageToken';
@@ -39,13 +41,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
     if (res.statusCode == 200) {
       SearchPlaceResponse spr = SearchPlaceResponse.decodePlaceReponseFromJson(res.body);
-      _nextPageToken = spr.nextPageToken;
+      _nextPageToken = spr.nextPageToken != null ? spr.nextPageToken : '';
       _placeList = spr.results;
     }
 
     try {
       setState(() {
-        this.placeList = _placeList;
+        this.placeList.addAll(_placeList);
         this.nextPageToken = _nextPageToken;
         this.isLoading = false;
       });
@@ -65,28 +67,51 @@ class _SearchScreenState extends State<SearchScreen> {
               ListView(
                 physics: BouncingScrollPhysics(),
                 children: <Widget>[
-                  SizedBox(
-                    height: 100,
+                  SizedBox(height: 100),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+                    child: Column(
+                      children: placeWidgets(),
+                    ),
                   ),
+                  // Builder(
+                  //   builder: (context) {
+                  //     if (this.isLoading) {
+                  //       // ----- NOTE: loading screen
+                  //       return Align(
+                  //         alignment: Alignment.center,
+                  //         child: Text(
+                  //           "Loading...",
+                  //           style: Styles.h1Style,
+                  //         ),
+                  //       );
+                  //     } else {
+                  //       // ----- NOTE: place cards
+                  //       return Container(
+                  //         padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+                  //         child: Column(
+                  //           children: placeWidgets(),
+                  //         ),
+                  //       );
+                  //     }
+                  //   },
+                  // ),
+                  SizedBox(height: 7),
+                  // NOTE: More Btn
                   Builder(
                     builder: (context) {
-                      if (this.isLoading) {
-                        // ----- NOTE: loading screen
-                        return Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Loading...",
-                            style: Styles.h1Style,
-                          ),
+                      if (this.nextPageToken != '') {
+                        return DghaTextButton(
+                          minWidth: MediaQuery.of(context).size.width * 0.45,
+                          text: "More",
+                          textStyle: Styles.yellowTxtBtnStyle,
+                          colour: Styles.midnightBlue,
+                          onTap: () {
+                            this._search();
+                          },
                         );
                       } else {
-                        // ----- NOTE: place cards
-                        return Container(
-                          padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                          child: Column(
-                            children: placeWidgets(),
-                          ),
-                        );
+                        return Container();
                       }
                     },
                   ),
@@ -100,6 +125,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: double.infinity,
                 color: Color(0xffFAFAFA),
               ),
+
+              // NOTE: Search Bar
               Container(
                 padding: EdgeInsets.all(Styles.spacing),
                 child: UserInputTextField(
@@ -110,7 +137,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     Navigator.pop(context);
                   },
                   onSubmit: (value) {
-                    this._search(input: value);
+                    setState(() {
+                      this.input = value;
+                    });
+                    this._search();
                   },
                   changeFocusColour: false,
                 ),
