@@ -4,18 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:dgha_brochure/models/review.dart';
 
 class ReviewContainer extends StatelessWidget {
-  final Review review;
+  final ReviewData review;
   ReviewContainer({this.review});
 
   @override
   Widget build(BuildContext context) {
-  String timeCut = review.timeAdded;
 
-  if (timeCut.length > 23) {
-    timeCut = timeCut.substring(0, 22);
-  }
-
-  DateTime time = DateTime.parse(timeCut);
+    DateTime dateAdded = review.formatDateAdded();
 
     return Container(
       child: Column(
@@ -31,7 +26,7 @@ class ReviewContainer extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
               child: Text(
-                "${time.day}/${time.month}/${time.year}", 
+                "${dateAdded.day}/${dateAdded.month}/${dateAdded.year}", 
                 style: Styles.pStyle,
             ),
           ),

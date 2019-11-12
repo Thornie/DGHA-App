@@ -218,15 +218,15 @@ class DghaApi {
     //Prevent decoding errors with a blank body
     if (response.body == "" || response.statusCode != 200) {
       print(response.statusCode);
-      return ReviewPlace(reviews: new List<Review>());
+      return ReviewPlace(reviews: new List<ReviewData>());
     }
 
     Map<String, dynamic> json = jsonDecode(response.body);
 
     //Get all individual reviews
-    List<Review> userReviews = new List<Review>();
+    List<ReviewData> userReviews = new List<ReviewData>();
     for (int i = 0; i < json['reviews'].length; i++) {
-      Review r = new Review(
+      ReviewData r = new ReviewData(
         placeId: json['reviews'][i]['placeId'],
         userId: json['reviews'][i]['userId'],
         timeAdded: json['reviews'][i]['timeAdded'],
@@ -252,7 +252,7 @@ class DghaApi {
     return reviews;
   }
 
-  static Future<List<Review>> getReviewsFromPlaceIdAndSet(
+  static Future<List<ReviewData>> getReviewsFromPlaceIdAndSet(
     String placeId,
     int setIndex,
   ) async {
@@ -266,15 +266,15 @@ class DghaApi {
     //Prevent decoding errors with a blank body
     if (response.body == "" || response.statusCode != 200) {
       print(response.statusCode);
-      return List<Review>();
+      return List<ReviewData>();
     }
 
     List<dynamic> json = jsonDecode(response.body);
 
     //Get all reviews
-    List<Review> userReviews = new List<Review>();
+    List<ReviewData> userReviews = new List<ReviewData>();
     for (int i = 0; i < json.length; i++) {
-      Review r = new Review(
+      ReviewData r = new ReviewData(
         placeId: json[i]['placeId'],
         userId: json[i]['userId'],
         timeAdded: json[i]['timeAdded'],
@@ -291,7 +291,7 @@ class DghaApi {
     return userReviews;
   }
 
-  static Future<List<Review>> getReviewsFromUser() async {
+  static Future<List<ReviewData>> getReviewsFromUser() async {
     http.Response response = await http.get(
       "$rootUrl/Reviews/userId/${parseJwt(currentClient.credentials.accessToken)['sub']}",
       headers: {
@@ -301,14 +301,14 @@ class DghaApi {
 
     //Prevent decoding errors with a blank body
     if (response.body == "") {
-      return new List<Review>();
+      return new List<ReviewData>();
     }
 
     Map<String, dynamic> json = jsonDecode(response.body);
 
-    List<Review> userReviews = new List<Review>();
+    List<ReviewData> userReviews = new List<ReviewData>();
     for (int i = 0; i < json.length; i++) {
-      Review r = new Review(
+      ReviewData r = new ReviewData(
         placeId: json[i]['placeId'],
         userId: json[i]['userId'],
         timeAdded: json[i]['timeAdded'],
@@ -325,7 +325,7 @@ class DghaApi {
     return userReviews;
   }
 
-  static Future<Review> getReviewFromPlaceIdAndUserId(
+  static Future<ReviewData> getReviewFromPlaceIdAndUserId(
     String placeId,
     String userId,
   ) async {
@@ -338,11 +338,11 @@ class DghaApi {
 
     //Prevent decoding errors with a blank body
     if (response.body == "") {
-      return Review();
+      return ReviewData();
     }
 
     Map<String, dynamic> json = jsonDecode(response.body);
-    Review review = new Review(
+    ReviewData review = new ReviewData(
       placeId: json['placeId'],
       userId: json['userId'],
       timeAdded: json['timeAdded'],
