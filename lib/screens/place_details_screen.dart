@@ -3,8 +3,10 @@ import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
+import 'package:dgha_brochure/components/loading_text.dart';
 import 'package:dgha_brochure/components/rating_with_title.dart';
 import 'package:dgha_brochure/components/review_container.dart';
+import 'package:dgha_brochure/components/view_more_btn.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
@@ -17,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha_brochure/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
@@ -30,8 +33,11 @@ class PlaceDetailsScreen extends StatefulWidget {
 
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   bool isLoading = false;
-  List<Review> reviewList = new List<Review>();
-  int reviewPageIndex = 0;
+  bool isFirstLoad = true;
+
+  List<ReviewData> reviewList = new List<ReviewData>();
+  bool databaseHasMoreReviews = false;
+  int setNum = 0;
 
   // NOTE: Init
   @override
@@ -44,19 +50,41 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     Data.pages.add(PageNav.placeDetailsScr);
   }
 
+  // NOTE: Get Reviews
   void getReviews() async {
     setState(() {
       this.isLoading = true;
     });
 
-    List<Review> list = List<Review>();
+    http.Response res = await http.get('https://dgha-api-testing.azurewebsites.net/location/reviews?placeId=${widget.placeData.placeId}&set=$setNum', headers: {"Accept": "application/json"});
 
-    list = await DghaApi.getReviewsFromPlaceIdAndSet(widget.placeData.placeId, reviewPageIndex);
+    List<ReviewData> _reviewList = new List<ReviewData>();
+
+    if (res.statusCode == 200) {
+      _reviewList = ReviewData.decodeReviewListFromJson(res.body);
+
+      try {
+        if (_reviewList.length == 6) {
+          setState(() {
+            this.databaseHasMoreReviews = true;
+          });
+          _reviewList.removeLast();
+        } else {
+          setState(() {
+            this.databaseHasMoreReviews = false;
+          });
+        }
+      } catch (e) {
+        print("and i opp " + e);
+      }
+    }
 
     try {
       setState(() {
         this.isLoading = false;
-        this.reviewList = list;
+        this.reviewList.addAll(_reviewList);
+        this.setNum = this.setNum + 1; // can't use increment (i++)
+        this.isFirstLoad = false;
       });
     } catch (e) {
       print(e);
@@ -166,42 +194,53 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     ),
                   ),
 
+                  // LOADING PART
                   Builder(
                     builder: (context) {
-                      if (this.isLoading) {
-                        // ----- NOTE: loading screen
-                        return Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Loading...",
-                            style: Styles.h1Style,
-                          ),
-                        );
-                      } else {
-                        if (this.reviewList.length > 0) {
-                          return Container(child: Column(children: buildReviews()));
-                        } else {
-                          return Column(
-                            children: <Widget>[
-                              textBtnSection("Write the first review!", this.reviewBtnHandler),
-                              SizedBox(
-                                height: Styles.spacing,
-                              ),
-                            ],
+                      if (widget.placeData.numOfRatings > 0) {
+                        if (this.isFirstLoad) {
+                          return Container(
+                            child: Text(
+                              "Loading . . .",
+                              style: Styles.h2Style,
+                              textAlign: TextAlign.center,
+                            ),
                           );
-                          // --------- NOTE: Reviews
+                        } else {
+                          if (this.reviewList.isEmpty) {
+                            return PlaceDetailBtnText(
+                              text: "Write the first review!",
+                              onTap: this.reviewBtnHandler,
+                              bottomPadding: Styles.spacing,
+                            );
+                          } else {
+                            return Column(
+                              children: this
+                                  .reviewList
+                                  .map((review) => ReviewContainer(
+                                        review: review,
+                                      ))
+                                  .toList(),
+                            );
+                          }
                         }
+                      } else {
+                        return PlaceDetailBtnText(
+                          text: "Write the first review!",
+                          onTap: this.reviewBtnHandler,
+                          bottomPadding: Styles.spacing,
+                        );
                       }
                     },
                   ),
 
-                  // --------- NOTE: More Reviews Btn
-                  // --------- TODO: Redesign
-                  // reviewPlace.averageRating != 0 ? buildMoreReviewsWidget() : Container(),
-
-                  // --------- NOTE: Report
-                  textBtnSection("Report Venue", this.reportBtnHandler),
-
+                  ViewMoreBtn(
+                    condition: this.databaseHasMoreReviews,
+                    loadingCondition: this.isLoading,
+                    onTap: this.getReviews,
+                    bottomPadding: Styles.spacing,
+                  ),
+                  PlaceDetailBtnText(text: "Report Venue", onTap: this.reportBtnHandler),
                   SizedBox(height: Styles.spacing),
                 ],
               ),
@@ -241,6 +280,9 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 ),
               ),
             ),
+            LoadingText(
+              condition: this.isLoading && this.isFirstLoad,
+            )
           ],
         ),
       ),
@@ -309,8 +351,49 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     );
   }
 
-  Widget textBtnSection(String text, Function onTap) {
+  // // ------- NOTE: More Reviews
+  // Widget buildMoreReviewsWidget() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //     children: <Widget>[
+  //       iconBtnSection(FontAwesomeIcons.arrowLeft, () {
+  //         if (reviewPageIndex - 1 >= 0) {
+  //           setState(() {
+  //             reviewPageIndex--;
+  //             getReviews();
+  //           });
+  //         }
+  //         print(reviewPageIndex);
+  //       }),
+  //       Text(
+  //         (reviewPageIndex + 1).toString(),
+  //         style: Styles.h2Style,
+  //       ),
+  //       // iconBtnSection(FontAwesomeIcons.arrowRight, () {
+  //       //   if (reviewPageIndex + 1 < (this.reviewList.count / 5).ceil()) {
+  //       //     setState(() {
+  //       //       reviewPageIndex++;
+  //       //       getReviews();
+  //       //     });
+  //       //   }
+  //       //   print(reviewPageIndex);
+  //       // }),
+  //     ],
+  //   );
+  // }
+}
+
+class PlaceDetailBtnText extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  final double bottomPadding;
+
+  PlaceDetailBtnText({@required this.text, @required this.onTap, this.bottomPadding = 0});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(bottom: this.bottomPadding),
       child: Column(
         children: <Widget>[
           Container(
@@ -334,35 +417,4 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       ),
     );
   }
-
-  // ------- NOTE: More Reviews
-  // Widget buildMoreReviewsWidget() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: <Widget>[
-  //       iconBtnSection(FontAwesomeIcons.arrowLeft, () {
-  //         if (reviewPageIndex - 1 >= 0) {
-  //           setState(() {
-  //             reviewPageIndex--;
-  //             getReviews();
-  //           });
-  //         }
-  //         print(reviewPageIndex);
-  //       }),
-  //       Text(
-  //         (reviewPageIndex + 1).toString(),
-  //         style: Styles.h2Style,
-  //       ),
-  //       iconBtnSection(FontAwesomeIcons.arrowRight, () {
-  //         if (reviewPageIndex + 1 < (reviewPlace.count / 5).ceil()) {
-  //           setState(() {
-  //             reviewPageIndex++;
-  //             getReviews();
-  //           });
-  //         }
-  //         print(reviewPageIndex);
-  //       }),
-  //     ],
-  //   );
-  // }
 }
