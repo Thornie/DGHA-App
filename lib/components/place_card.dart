@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
+import 'package:dgha_brochure/components/review_count_container.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,7 @@ class PlaceCard extends StatelessWidget {
             children: <Widget>[
               Builder(
                 builder: (context) {
-                  if (this.placeData.numOfRatings > 0) {
-                    return stars();
-                  } else {
-                    return noRating();
-                  }
+                  return this.placeData.numOfRatings > 0 ? stars() : noRating();
                 },
               ),
               Text(
@@ -72,23 +69,9 @@ class PlaceCard extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: Styles.spacing * 0.5,
+          width: Styles.spacing * 0.25,
         ),
-        Container(
-          constraints: BoxConstraints(
-            // minHeight: 10,
-            minWidth: 28
-          ),
-          decoration: BoxDecoration(
-          color: Styles.yellow,
-          borderRadius: BorderRadius.all(Radius.circular(1000)),
-          ),
-          child: Text(
-            placeData.numOfRatings.toString(),
-            style: Styles.boldPStyle,
-            textAlign: TextAlign.center,
-          ),
-        )
+        ReviewCount(numOfRating: this.placeData.numOfRatings, textStyle: Styles.boldPStyle)
       ],
     );
   }
