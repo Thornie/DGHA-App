@@ -1,20 +1,18 @@
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
+import 'package:dgha_brochure/components/loading_text.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/place.dart';
-import 'package:dgha_brochure/models/response.dart';
 import 'package:dgha_brochure/screens/search_screen.dart';
 import 'package:dgha_brochure/services/open_dynamic_link.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -122,25 +120,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       SizedBox(height: Styles.heightFromAppBar),
-                      Builder(
-                        builder: (context) {
-                          if (this.isLoading) {
-                            // ----- NOTE: loading screen
-                            return Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Loading...",
-                                style: Styles.h1Style,
-                              ),
-                            );
-                          } else {
-                            // ----- NOTE: place cards
-                            return Column(
-                              children: placeWidgets(),
-                            );
-                          }
-                        },
-                      )
+                      Column(children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList(),),
                     ],
                   ),
                 ),
@@ -172,6 +152,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                   ),
                 ),
+
+                // ----- NOTE: Loading Screen
+                LoadingText(condition: this.isLoading)
               ],
             );
           },
