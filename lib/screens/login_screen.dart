@@ -4,8 +4,7 @@ import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
-import 'package:dgha_brochure/models/review_scr_args.dart';
+import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
 import 'package:dgha_brochure/screens/report_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
@@ -22,12 +21,12 @@ class LoginScreen extends StatefulWidget {
 
   final bool goToReviewScreen;
   final bool goToReportScreen;
-  final LocationData locationData;
+  final PlaceData placeData;
 
   LoginScreen({
     this.goToReviewScreen = false,
     this.goToReportScreen = false,
-    this.locationData,
+    this.placeData,
   });
 
   @override
@@ -67,13 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (DghaApi.currentClient != null) {
         if (widget.goToReviewScreen) {
-          await Navigator.of(context).popAndPushNamed(
-            UserRatingScreen.id,
-            arguments: ReviewScrArgs(
-              placeId: widget.locationData.placeId,
-              placeName: widget.locationData.name,
-            ),
-          );
+          await Navigator.of(context).popAndPushNamed(UserRatingScreen.id, arguments: widget.placeData);
           setState(() {
             this.isLoading = false;
             this.showLoadingText = false;
@@ -81,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
         } else if (widget.goToReportScreen) {
           await Navigator.of(context).popAndPushNamed(
             ReportScreen.id,
-            arguments: widget.locationData,
+            arguments: widget.placeData,
           );
           setState(() {
             this.isLoading = false;
@@ -96,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
     } catch (exception) {
+      // TODO: something is going on here
       setState(() {
         if (exception.description == "invalid_username_or_password") {
           this.loadingText = "Incorrent username or password";
@@ -199,13 +193,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               minWidth: this.buttonMinWidth,
                               text: "Sign In",
                               textStyle: Styles.yellowTxtBtnStyle,
-                              colour: this.isLoading
-                                  ? Styles.grey
-                                  : Styles.midnightBlue,
+                              colour: this.isLoading ? Styles.grey : Styles.midnightBlue,
                               onTap: () {
-                                if (this.email != "" &&
-                                    this.password != "" &&
-                                    this.isLoading == false) {
+                                if (this.email != "" && this.password != "" && this.isLoading == false) {
                                   this.signIn();
                                 }
                               },

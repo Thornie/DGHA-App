@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class PlaceByQuery {
   final String name;
   final String placeId;
@@ -20,36 +18,45 @@ class PlaceByQuery {
   }
 }
 
-// NOTE: by the end there will only be ONE (1) Place class and it's this one
-class Place {
-  final String placeId;
-  final String name;
-  final String address;
-  final List<String> types;
-  final double avgOverallRating;
-  final double avgCustomerServiceRating;
-  final double avgLocationRating;
-  final double avgAmenitiesRating;
-  final int numOfRatings;
+class PlaceData {
+  String placeId;
+  String name;
+  String address;
+  String state;
+  List<String> types;
+  double avgOverallRating;
+  double avgCustomerRating;
+  double avgAmentitiesRating;
+  double avgLocationRating;
+  int numOfRatings;
 
-  Place({
-    this.placeId,
-    this.name,
-    this.address,
-    this.types,
-    this.avgOverallRating,
-    this.avgCustomerServiceRating,
-    this.avgLocationRating,
-    this.avgAmenitiesRating,
-    this.numOfRatings,
-  });
-}
+  PlaceData({this.placeId, this.name, this.address, this.state, this.types, this.avgOverallRating, this.avgCustomerRating, this.avgAmentitiesRating, this.avgLocationRating, this.numOfRatings});
 
-class SearchAPIResponse {
-  final String placeId;
-  final String name;
-  final String address;
-  final List<dynamic> types;
+  PlaceData.fromJson(Map<String, dynamic> json) {
+    placeId = json['placeId'];
+    name = json['name'];
+    address = json['address'];
+    state = json['state'];
+    types = json['types'].cast<String>();
+    avgOverallRating = json['avgOverallRating'].toDouble();
+    avgCustomerRating = json['avgCustomerRating'].toDouble();
+    avgAmentitiesRating = json['avgAmentitiesRating'].toDouble();
+    avgLocationRating = json['avgLocationRating'].toDouble();
+    numOfRatings = json['numOfRatings'];
+  }
 
-  SearchAPIResponse({this.placeId, this.name, this.address, this.types});
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['placeId'] = this.placeId;
+    data['name'] = this.name;
+    data['address'] = this.address;
+    data['state'] = this.state;
+    data['types'] = this.types;
+    data['avgOverallRating'] = this.avgOverallRating;
+    data['avgCustomerRating'] = this.avgCustomerRating;
+    data['avgAmentitiesRating'] = this.avgAmentitiesRating;
+    data['avgLocationRating'] = this.avgLocationRating;
+    data['numOfRatings'] = this.numOfRatings;
+    return data;
+  }
 }

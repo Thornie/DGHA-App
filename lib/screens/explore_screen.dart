@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dgha_brochure/components/appbar.dart';
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_icon.dart';
@@ -7,17 +6,16 @@ import 'package:dgha_brochure/components/menu_drawer.dart';
 import 'package:dgha_brochure/misc/data.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha_brochure/models/response.dart';
 import 'package:dgha_brochure/screens/search_screen.dart';
 import 'package:dgha_brochure/services/open_dynamic_link.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import "package:google_maps_webservice/places.dart";
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 
 class ExploreScreen extends StatefulWidget {
   static const String id = "Explore Screen";
@@ -26,28 +24,13 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  final _firestore = Firestore.instance;
+  // ------------------------- NOTE: Variables
+  List<PlaceData> placeList = new List<PlaceData>();
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool isLoading = false;
 
-  // -------------------------- NOTE: CONTROLLERS
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  String userInput = "";
-  final TextEditingController _txtController = new TextEditingController();
-
-  // -------------------------- LOCATION
-  final places = new GoogleMapsPlaces(apiKey: Data.kGoogleApiKey);
-
-  double latitude;
-  double longitude;
-  String stateName;
-  String type;
-  final double radius = 1700;
-  bool fetching = true;
-
-  List<LocationData> iniLocationList = new List<LocationData>();
-  List<LocationData> locationList = new List<LocationData>();
-
-  // -------------------------- APP DIMENSIONS
+  // ---------- NOTE: Dimensions
   double scrWidth;
   double scrHeight;
   double drawerWidth;
@@ -59,7 +42,54 @@ class _ExploreScreenState extends State<ExploreScreen> {
     Data.pages.add(PageNav.exploreMenuScr);
 
     OpenDynamicLink.initDynamicLink(context);
-    getPlacesFromDatabase();
+    getRecommendedPlaces();
+  }
+
+  // NOTE: only works with physical device
+  Future<String> getState() async {
+    Position pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
+    List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(pos.latitude, pos.longitude);
+    String state = placemarks[0].administrativeArea;
+    return state;
+  }
+
+  void getRecommendedPlaces() async {
+    setState(() {
+      this.isLoading = true;
+    });
+
+    // NOTE: only use this when using physical device
+    // String state = await getState();
+    String state = "Victoria";
+
+    String url = "https://dgha-api-testing.azurewebsites.net/location/all";
+    http.Response res = await http.get(url, headers: {"Accept": "application/json"});
+    List<PlaceData> localPlaces = new List<PlaceData>();
+
+    if (res.statusCode == 200) {
+      List<dynamic> dataList = json.decode(res.body);
+
+      for (var data in dataList) {
+        ApiPlaceResult apiResult = ApiPlaceResult.fromJson(data);
+        PlaceData place = apiResult.value;
+
+        // there's a place in the database right now thats in the US lol
+        if (place.address != "3220 Ingersoll Ave, Des Moines, IA 50312, USA") {
+          place.address = Helper().formatAddress(place.address);
+
+          localPlaces.add(place);
+        }
+      }
+    }
+
+    try {
+      setState(() {
+        this.placeList = localPlaces;
+        this.isLoading = false;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   // NOTE: disposed
@@ -79,38 +109,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
       this.drawerWidth = this.scrWidth * 0.75;
     } else {
       this.drawerWidth = this.scrHeight * 0.75;
-    }
-  }
-
-  void getPlacesFromDatabase() async {
-    setState(() {
-      this.isLoading = true;
-    });
-
-    final placesFromDatabase = await _firestore.collection('location').getDocuments();
-    List<LocationData> locations = new List<LocationData>();
-
-    for (var place in placesFromDatabase.documents) {
-      LocationData locationData = new LocationData(
-          name: place.data['name'],
-          address: place.data['address'],
-          overallRating: place.data['avgOverallRating'].toDouble(),
-          amenitiesRating: place.data['avgAmenitiesRating'].toDouble(),
-          customerServiceRating: place.data['avgCustServRating'].toDouble(),
-          placeId: place.data['placeId']);
-
-      locations.add(locationData);
-    }
-
-    //Sometimes failed to set state when page was disposed to quick
-    try {
-      setState(() {
-        this.iniLocationList = locations;
-        this.locationList = locations;
-        this.isLoading = false;
-      });
-    } catch (e) {
-      print(e);
     }
   }
 
@@ -199,17 +197,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
   List<PlaceCard> placeWidgets() {
     List<PlaceCard> widgets = new List<PlaceCard>();
 
-    if (locationList.length > 0) {
-      for (var i = 0; i < this.locationList.length; i++) {
+    if (this.placeList.length > 0) {
+      for (var i = 0; i < this.placeList.length; i++) {
         PlaceCard w = new PlaceCard(
-          locationData: this.locationList[i],
-        );
-        widgets.add(w);
-      }
-    } else {
-      for (var i = 0; i < this.iniLocationList.length; i++) {
-        PlaceCard w = new PlaceCard(
-          locationData: this.iniLocationList[i],
+          placeData: this.placeList[i],
         );
         widgets.add(w);
       }

@@ -3,8 +3,8 @@ import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/location_data.dart';
 import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha_brochure/models/response.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +18,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<LocationData> places = List<LocationData>();
+  List<PlaceData> placeList = List<PlaceData>();
   bool isLoading = false;
 
   void _search({String input}) async {
@@ -28,35 +28,32 @@ class _SearchScreenState extends State<SearchScreen> {
     String formattedInput = Helper().formatStringForQuery(input);
 
     // TODO: Will change to the other api url
-    String url = 'http://dgha-search.azurewebsites.net/search?query=$formattedInput';
-
+    String url = 'https://dgha-api-testing.azurewebsites.net/search?query=$formattedInput';
     http.Response res = await http.get(url, headers: {"Accept": "application/json"});
 
+    List<PlaceData> localPlaces = new List<PlaceData>();
+
     if (res.statusCode == 200) {
-      List<dynamic> rawData = json.decode(res.body);
-      List<dynamic> dataV1 = rawData[0];
-      List<SearchAPIResponse> searchRes = dataV1.map((r) {
-        return SearchAPIResponse(placeId: r['placeId'], name: r['name'], address: r['address'], types: r['types']);
-      }).toList();
-      List<LocationData> locationData = new List<LocationData>();
+      List<dynamic> dataList = json.decode(res.body);
 
-      for (var i = 0; i < searchRes.length; i++) {
-        LocationData ld = new LocationData(
-          name: searchRes[i].name,
-          address: searchRes[i].address,
-          overallRating: 0,
-          customerServiceRating: 0,
-          amenitiesRating: 0,
-          locationRating: 0,
-          placeId: searchRes[i].placeId,
-        );
-        locationData.add(ld);
+      print(dataList);
+
+      for (var data in dataList) {
+        // ApiPlaceResult apiResult = ApiPlaceResult.fromJson(data);
+        PlaceData place = PlaceData.fromJson(data);
+        place.address = Helper().formatAddress(place.address);
+
+        localPlaces.add(place);
       }
+    }
 
+    try {
       setState(() {
-        this.places = locationData;
+        this.placeList = localPlaces;
         this.isLoading = false;
       });
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -132,9 +129,9 @@ class _SearchScreenState extends State<SearchScreen> {
   List<PlaceCard> placeWidgets() {
     List<PlaceCard> widgets = new List<PlaceCard>();
 
-    for (var i = 0; i < this.places.length; i++) {
+    for (var i = 0; i < this.placeList.length; i++) {
       PlaceCard w = new PlaceCard(
-        locationData: this.places[i],
+        placeData: this.placeList[i],
       );
       widgets.add(w);
     }
