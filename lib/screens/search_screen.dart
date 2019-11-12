@@ -3,13 +3,12 @@ import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/loading_text.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/components/view_more_btn.dart';
-import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/models/search_response.dart';
+import 'package:dgha_brochure/services/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
 
 class SearchScreen extends StatefulWidget {
   static const String id = "Search Screen";
@@ -18,8 +17,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<PlaceData> placeList = List<PlaceData>();
-  String nextPageToken = '';
+  SearchPlace searchPlace = new SearchPlace(places: List<PlaceData>(), nextPageToken: ''); 
   String input;
   bool isLoading = false;
   bool isFirstLoad = true;
@@ -30,25 +28,12 @@ class _SearchScreenState extends State<SearchScreen> {
       this.isLoading = true;
     });
 
-    String formattedInput = Helper().formatStringForQuery(this.input);
-
-    // TODO: Will change to the other api url
-    String url = 'https://dgha-api-testing.azurewebsites.net/location/search?query=$formattedInput&nextpagetoken=$nextPageToken';
-    http.Response res = await http.get(url, headers: {"Accept": "application/json"});
-
-    String _nextPageToken;
-    List<PlaceData> _placeList = new List<PlaceData>();
-
-    if (res.statusCode == 200) {
-      SearchPlaceResponse spr = SearchPlaceResponse.decodePlaceReponseFromJson(res.body);
-      _nextPageToken = spr.nextPageToken != null ? spr.nextPageToken : '';
-      _placeList = spr.results;
-    }
+    SearchPlace _spr = await PlaceService.getSearchedPlaces(this.input, this.searchPlace.nextPageToken); 
 
     try {
       setState(() {
-        this.placeList.addAll(_placeList);
-        this.nextPageToken = _nextPageToken;
+        this.searchPlace.places.addAll(_spr.places);
+        this.searchPlace.nextPageToken = _spr.nextPageToken;
         this.isLoading = false;
         this.isFirstLoad = false;
       });
@@ -73,12 +58,12 @@ class _SearchScreenState extends State<SearchScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
                     child: Column(
-                      children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList()
+                      children: this.searchPlace.places.map((place) => PlaceCard(placeData: place,)).toList()
                     ),
                   ),
                   SizedBox(height: 7),
                   // ------------------------------- NOTE: MORE button
-                  ViewMoreBtn(condition: this.nextPageToken != '', loadingCondition: this.isLoading, onTap: this._search,),
+                  ViewMoreBtn(condition: this.searchPlace.nextPageToken != '', loadingCondition: this.isLoading, onTap: this._search,),
                   SizedBox(height: 80)
                 ],
               ),
@@ -100,8 +85,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   onSubmit: (value) {
                     setState(() {
                       this.input = value;
-                      this.placeList.clear();
-                      this.nextPageToken = '';
+                      this.searchPlace.places.clear();
+                      this.searchPlace.nextPageToken = '';
                     });
                     this._search();
                   },
@@ -109,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               // ----------------------------------- NOTE: Big Loading Text
-              LoadingText(condition: this.isLoading && (this.isFirstLoad ||this.placeList.isEmpty))
+              LoadingText(condition: this.isLoading && (this.isFirstLoad ||this.searchPlace.places.isEmpty))
             ]),
           ),
         ),

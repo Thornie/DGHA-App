@@ -10,6 +10,7 @@ import 'package:dgha_brochure/models/page_nav.dart';
 import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/screens/search_screen.dart';
 import 'package:dgha_brochure/services/open_dynamic_link.dart';
+import 'package:dgha_brochure/services/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -41,15 +42,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     OpenDynamicLink.initDynamicLink(context);
     getRecommendedPlaces();
-  }
-
-  // NOTE: only works with physical device
-  Future<String> getState() async {
-    Position pos = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
-    List<Placemark> placemarks = await Geolocator().placemarkFromCoordinates(pos.latitude, pos.longitude);
-    String state = placemarks[0].administrativeArea;
-    return state;
-  }
+  }  
 
   // NOTE: Get Recommended
   void getRecommendedPlaces() async {
@@ -57,17 +50,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       this.isLoading = true;
     });
 
-    // only use this when using physical device
-    // String state = await getState();
-    String state = "Victoria";
-
-    String url = "https://dgha-api-testing.azurewebsites.net/location/recommend?state=$state";
-    http.Response res = await http.get(url, headers: {"Accept": "application/json"});
-    List<PlaceData> _placeList = new List<PlaceData>();
-
-    if (res.statusCode == 200) {
-      _placeList = PlaceData.decodePlaceDataList(res.body);
-    }
+    List<PlaceData> _placeList = await PlaceService.getRecommendedPlaces();
 
     try {
       setState(() {

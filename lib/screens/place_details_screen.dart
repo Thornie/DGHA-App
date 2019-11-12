@@ -15,6 +15,7 @@ import 'package:dgha_brochure/models/place.dart';
 import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:dgha_brochure/screens/report_screen.dart';
 import 'package:dgha_brochure/screens/user_rating_screen.dart';
+import 'package:dgha_brochure/services/review_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha_brochure/models/review.dart';
@@ -57,29 +58,19 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     });
 
     http.Response res = await http.get('https://dgha-api-testing.azurewebsites.net/location/reviews?placeId=${widget.placeData.placeId}&set=$setNum', headers: {"Accept": "application/json"});
-
-    List<ReviewData> _reviewList = new List<ReviewData>();
-
-    if (res.statusCode == 200) {
-      _reviewList = ReviewData.decodeReviewListFromJson(res.body);
-
-      try {
-        if (_reviewList.length == 6) {
-          setState(() {
-            this.databaseHasMoreReviews = true;
-          });
-          _reviewList.removeLast();
-        } else {
-          setState(() {
-            this.databaseHasMoreReviews = false;
-          });
-        }
-      } catch (e) {
-        print("and i opp " + e);
-      }
-    }
-
+    
+    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(widget.placeData.placeId, this.setNum); 
     try {
+      if(_reviewList.length == 6) {
+        setState(() {
+          this.databaseHasMoreReviews = true;
+        });
+        _reviewList.removeLast();
+      } else {
+        setState(() {
+          this.databaseHasMoreReviews = false; 
+        });
+      }
       setState(() {
         this.isLoading = false;
         this.reviewList.addAll(_reviewList);
