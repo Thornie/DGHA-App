@@ -1,6 +1,7 @@
 import 'package:dgha_brochure/components/bottom_navigation.dart';
 import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
+import 'package:dgha_brochure/components/loading_text.dart';
 import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
@@ -9,8 +10,6 @@ import 'package:dgha_brochure/models/search_response.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
 
 class SearchScreen extends StatefulWidget {
   static const String id = "Search Screen";
@@ -23,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   String nextPageToken = '';
   String input;
   bool isLoading = false;
+  bool isFirstLoad = true;
 
   // NOTE: Get Place
   void _search() async {
@@ -50,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
         this.placeList.addAll(_placeList);
         this.nextPageToken = _nextPageToken;
         this.isLoading = false;
+        this.isFirstLoad = false;
       });
     } catch (e) {
       print(e);
@@ -68,56 +69,17 @@ class _SearchScreenState extends State<SearchScreen> {
                 physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   SizedBox(height: 100),
+                  // ------------------------------- NOTE: Place Cards
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
                     child: Column(
-                      children: placeWidgets(),
+                      children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList()
                     ),
                   ),
-                  // Builder(
-                  //   builder: (context) {
-                  //     if (this.isLoading) {
-                  //       // ----- NOTE: loading screen
-                  //       return Align(
-                  //         alignment: Alignment.center,
-                  //         child: Text(
-                  //           "Loading...",
-                  //           style: Styles.h1Style,
-                  //         ),
-                  //       );
-                  //     } else {
-                  //       // ----- NOTE: place cards
-                  //       return Container(
-                  //         padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                  //         child: Column(
-                  //           children: placeWidgets(),
-                  //         ),
-                  //       );
-                  //     }
-                  //   },
-                  // ),
                   SizedBox(height: 7),
-                  // NOTE: More Btn
-                  Builder(
-                    builder: (context) {
-                      if (this.nextPageToken != '') {
-                        return DghaTextButton(
-                          minWidth: MediaQuery.of(context).size.width * 0.45,
-                          text: "More",
-                          textStyle: Styles.yellowTxtBtnStyle,
-                          colour: Styles.midnightBlue,
-                          onTap: () {
-                            this._search();
-                          },
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 80,
-                  )
+                  // ------------------------------- NOTE: MORE button
+                  buildMoreBtn(),
+                  SizedBox(height: 80)
                 ],
               ),
               Container(
@@ -125,8 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: double.infinity,
                 color: Color(0xffFAFAFA),
               ),
-
-              // NOTE: Search Bar
+              // ------------------------------------ NOTE: Search Bar
               Container(
                 padding: EdgeInsets.all(Styles.spacing),
                 child: UserInputTextField(
@@ -139,30 +100,43 @@ class _SearchScreenState extends State<SearchScreen> {
                   onSubmit: (value) {
                     setState(() {
                       this.input = value;
+                      this.placeList.clear();
+                      this.nextPageToken = '';
                     });
                     this._search();
                   },
                   changeFocusColour: false,
                 ),
               ),
+              // ----------------------------------- NOTE: Big Loading Text
+              LoadingText(condition: this.isLoading && this.placeList.isEmpty)
             ]),
           ),
         ),
       ),
+
+      // ------------------------------------------- NOTE: Bottom Nav Bar
       bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
     );
   }
 
-  List<PlaceCard> placeWidgets() {
-    List<PlaceCard> widgets = new List<PlaceCard>();
-
-    for (var i = 0; i < this.placeList.length; i++) {
-      PlaceCard w = new PlaceCard(
-        placeData: this.placeList[i],
-      );
-      widgets.add(w);
-    }
-
-    return widgets;
+  Builder buildMoreBtn() {
+    return Builder(
+      builder: (context) {
+        if (this.nextPageToken != '') {
+          return DghaTextButton(
+            minWidth: MediaQuery.of(context).size.width * 0.45,
+            text: this.isLoading ? "Loading . . ." : "View More",
+            textStyle: this.isLoading ? Styles.blackTxtBtnStyle : Styles.yellowTxtBtnStyle,
+            colour: this.isLoading ? Colors.grey : Styles.midnightBlue,
+            onTap: () {
+              this.isLoading ? null : this._search(); 
+            },
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 }
