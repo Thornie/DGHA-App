@@ -4,7 +4,7 @@ import 'package:dgha_brochure/components/place_card.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/place.dart';
-import 'package:dgha_brochure/models/response.dart';
+import 'package:dgha_brochure/models/search_response.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -19,37 +19,34 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<PlaceData> placeList = List<PlaceData>();
+  String nextPageToken = "";
   bool isLoading = false;
 
+  // NOTE: Get Place
   void _search({String input}) async {
     setState(() {
       this.isLoading = true;
     });
+
     String formattedInput = Helper().formatStringForQuery(input);
 
     // TODO: Will change to the other api url
-    String url = 'https://dgha-api-testing.azurewebsites.net/search?query=$formattedInput';
+    String url = 'https://dgha-api-testing.azurewebsites.net/location/search?query=$formattedInput&nextpagetoken=$nextPageToken';
     http.Response res = await http.get(url, headers: {"Accept": "application/json"});
 
-    List<PlaceData> localPlaces = new List<PlaceData>();
+    String _nextPageToken;
+    List<PlaceData> _placeList = new List<PlaceData>();
 
     if (res.statusCode == 200) {
-      List<dynamic> dataList = json.decode(res.body);
-
-      print(dataList);
-
-      for (var data in dataList) {
-        // ApiPlaceResult apiResult = ApiPlaceResult.fromJson(data);
-        PlaceData place = PlaceData.fromJson(data);
-        place.address = Helper().formatAddress(place.address);
-
-        localPlaces.add(place);
-      }
+      SearchPlaceResponse spr = SearchPlaceResponse.decodePlaceReponseFromJson(res.body);
+      _nextPageToken = spr.nextPageToken;
+      _placeList = spr.results;
     }
 
     try {
       setState(() {
-        this.placeList = localPlaces;
+        this.placeList = _placeList;
+        this.nextPageToken = _nextPageToken;
         this.isLoading = false;
       });
     } catch (e) {
