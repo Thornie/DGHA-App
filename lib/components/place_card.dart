@@ -72,12 +72,21 @@ class PlaceCard extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: Styles.spacing * 0.25,
+          width: Styles.spacing * 0.5,
         ),
         Container(
+          constraints: BoxConstraints(
+            // minHeight: 10,
+            minWidth: 28
+          ),
+          decoration: BoxDecoration(
+          color: Styles.yellow,
+          borderRadius: BorderRadius.all(Radius.circular(1000)),
+          ),
           child: Text(
-            "( ${placeData.numOfRatings.toString()} )",
+            placeData.numOfRatings.toString(),
             style: Styles.boldPStyle,
+            textAlign: TextAlign.center,
           ),
         )
       ],
@@ -93,7 +102,7 @@ class PlaceCard extends StatelessWidget {
             Radius.circular(Styles.normalRadius),
           )),
       child: Text(
-        "No Review",
+        "No Reviews",
         style: Styles.boldPStyle,
       ),
     );
