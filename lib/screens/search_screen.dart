@@ -1,8 +1,8 @@
 import 'package:dgha_brochure/components/bottom_navigation.dart';
-import 'package:dgha_brochure/components/dgha_text_btn.dart';
 import 'package:dgha_brochure/components/input_textfield.dart';
 import 'package:dgha_brochure/components/loading_text.dart';
 import 'package:dgha_brochure/components/place_card.dart';
+import 'package:dgha_brochure/components/view_more_btn.dart';
 import 'package:dgha_brochure/misc/helper.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/models/place.dart';
@@ -78,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   SizedBox(height: 7),
                   // ------------------------------- NOTE: MORE button
-                  buildMoreBtn(),
+                  ViewMoreBtn(condition: this.nextPageToken != '', loadingCondition: this.isLoading, onTap: this._search,),
                   SizedBox(height: 80)
                 ],
               ),
@@ -109,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               // ----------------------------------- NOTE: Big Loading Text
-              LoadingText(condition: this.isLoading && this.placeList.isEmpty)
+              LoadingText(condition: this.isLoading && (this.isFirstLoad ||this.placeList.isEmpty))
             ]),
           ),
         ),
@@ -117,26 +117,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
       // ------------------------------------------- NOTE: Bottom Nav Bar
       bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
-    );
-  }
-
-  Builder buildMoreBtn() {
-    return Builder(
-      builder: (context) {
-        if (this.nextPageToken != '') {
-          return DghaTextButton(
-            minWidth: MediaQuery.of(context).size.width * 0.45,
-            text: this.isLoading ? "Loading . . ." : "View More",
-            textStyle: this.isLoading ? Styles.blackTxtBtnStyle : Styles.yellowTxtBtnStyle,
-            colour: this.isLoading ? Colors.grey : Styles.midnightBlue,
-            onTap: () {
-              this.isLoading ? null : this._search(); 
-            },
-          );
-        } else {
-          return Container();
-        }
-      },
     );
   }
 }
