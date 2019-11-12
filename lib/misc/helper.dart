@@ -25,14 +25,4 @@ class Helper {
 
     return formattedInput;
   }
-
-  String formatAddress(String input) {
-    int indexOfState = input.indexOf("VIC");
-    if (indexOfState == -1) {
-      indexOfState = input.indexOf("Australia");
-    }
-    String newInput = input.substring(0, indexOfState);
-
-    return newInput;
-  }
 }
