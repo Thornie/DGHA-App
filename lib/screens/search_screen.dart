@@ -17,18 +17,19 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  SearchPlace searchPlace = new SearchPlace(places: List<PlaceData>(), nextPageToken: ''); 
+  // ------------------------- NOTE: Variables
+  SearchPlace searchPlace = new SearchPlace(places: List<PlaceData>(), nextPageToken: '');
   String input;
   bool isLoading = false;
   bool isFirstLoad = true;
 
-  // NOTE: Get Place
+  // ------------------------- NOTE: Get Place
   void _search() async {
     setState(() {
       this.isLoading = true;
     });
 
-    SearchPlace _spr = await PlaceService.getSearchedPlaces(this.input, this.searchPlace.nextPageToken); 
+    SearchPlace _spr = await PlaceService.getSearchedPlaces(this.input, this.searchPlace.nextPageToken);
 
     try {
       setState(() {
@@ -45,63 +46,74 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: SafeArea(
-            child: Stack(children: <Widget>[
-              ListView(
-                physics: BouncingScrollPhysics(),
-                children: <Widget>[
-                  SizedBox(height: 100),
-                  // ------------------------------- NOTE: Place Cards
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
-                    child: Column(
-                      children: this.searchPlace.places.map((place) => PlaceCard(placeData: place,)).toList()
-                    ),
-                  ),
-                  SizedBox(height: 7),
-                  // ------------------------------- NOTE: MORE button
-                  ViewMoreBtn(condition: this.searchPlace.nextPageToken != '', loadingCondition: this.isLoading, onTap: this._search,),
-                  SizedBox(height: 80)
-                ],
-              ),
+      body: SafeArea(
+        child: Stack(children: <Widget>[
+          // ------------------------------- NOTE: Body
+          ListView(
+            physics: BouncingScrollPhysics(),
+            children: <Widget>[
+              SizedBox(height: 100),
+
+              // ------------------------- NOTE: Place Cards
               Container(
-                height: 60,
-                width: double.infinity,
-                color: Color(0xffFAFAFA),
-              ),
-              // ------------------------------------ NOTE: Search Bar
-              Container(
-                padding: EdgeInsets.all(Styles.spacing),
-                child: UserInputTextField(
-                  prefixIcon: FontAwesomeIcons.arrowLeft,
-                  hintText: "Search place name",
-                  autoFocus: true,
-                  prefixOnTap: () {
-                    Navigator.pop(context);
-                  },
-                  onSubmit: (value) {
-                    setState(() {
-                      this.input = value;
-                      this.searchPlace.places.clear();
-                      this.searchPlace.nextPageToken = '';
-                    });
-                    this._search();
-                  },
-                  changeFocusColour: false,
+                padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
+                child: Column(
+                  children: this.searchPlace.places.map((place) => PlaceCard(placeData: place,)).toList(),
                 ),
               ),
-              // ----------------------------------- NOTE: Big Loading Text
-              LoadingText(condition: this.isLoading && (this.isFirstLoad ||this.searchPlace.places.isEmpty))
-            ]),
+
+              SizedBox(height: 7),
+
+              // ------------------------- NOTE: MORE button
+              ViewMoreBtn(
+                condition: this.searchPlace.nextPageToken != '',
+                loadingCondition: this.isLoading,
+                onTap: this._search,
+              ),
+
+              SizedBox(height: Styles.spacing)
+            ],
           ),
-        ),
+
+          // ------- hide the placeCards when scrolling up
+          Container(height: 60, width: double.infinity, color: Color(0xffFAFAFA)),
+
+          // ------------------------- NOTE: Search Bar
+          buildSearchBar(),
+
+          // ------------------------- NOTE: Big Loading Text
+          LoadingText(condition: this.isLoading && (this.isFirstLoad || this.searchPlace.places.isEmpty))
+        ]),
       ),
 
-      // ------------------------------------------- NOTE: Bottom Nav Bar
+      // ----------------------------- NOTE: Bottom Nav Bar
       bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
+    );
+  }
+
+  Widget buildSearchBar() {
+    return Container(
+      padding: EdgeInsets.all(Styles.spacing),
+      child: UserInputTextField(
+        prefixIcon: FontAwesomeIcons.arrowLeft,
+        hintText: "Search place name",
+        autoFocus: true,
+        prefixOnTap: () {
+          Navigator.pop(context);
+        },
+        onSubmit: (value) {
+
+          // empty out values for the new place
+          setState(() {
+            this.input = value;
+            this.searchPlace.places.clear();
+            this.searchPlace.nextPageToken = '';
+          });
+          
+          this._search();
+        },
+        changeFocusColour: false,
+      ),
     );
   }
 }

@@ -13,8 +13,6 @@ import 'package:dgha_brochure/services/open_dynamic_link.dart';
 import 'package:dgha_brochure/services/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:geolocator/geolocator.dart';
 
 class ExploreScreen extends StatefulWidget {
   static const String id = "Explore Screen";
@@ -29,22 +27,21 @@ class _ExploreScreenState extends State<ExploreScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool isLoading = false;
 
-  // ---------- NOTE: Dimensions
+  // -------------- NOTE: Dimensions
   double scrWidth;
   double scrHeight;
   double drawerWidth;
 
-  // NOTE: Init
+  // ------------------------- NOTE: Init
   @override
   void initState() {
     super.initState();
     Data.pages.add(PageNav.exploreMenuScr);
-
     OpenDynamicLink.initDynamicLink(context);
     getRecommendedPlaces();
-  }  
+  }
 
-  // NOTE: Get Recommended
+  // ------------------------- NOTE: Get Recommended
   void getRecommendedPlaces() async {
     setState(() {
       this.isLoading = true;
@@ -62,7 +59,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
   }
 
-  // NOTE: disposed
+  // ------------------------- NOTE: Disposed
   @override
   void dispose() {
     super.dispose();
@@ -93,22 +90,30 @@ class _ExploreScreenState extends State<ExploreScreen> {
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
+
+            // ------------------------- NOTE: Calc Dimensions
             calcDimensions(orientation);
+
             return Stack(
               children: <Widget>[
+
+                // --------------------- NOTE: Body
                 Container(
-                  height: this.scrHeight,
                   margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       SizedBox(height: Styles.heightFromAppBar),
-                      Column(children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList(),),
+
+                      // --------- NOTE: Place Cards
+                      Column(children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList()),
+
+                      SizedBox(height: Styles.spacing)
                     ],
                   ),
                 ),
 
-                // ----- NOTE: App Bar
+                // --------------------- NOTE: App Bar
                 DghaAppBar(
                   text: "Explore",
                   isMenu: true,
@@ -136,7 +141,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                 ),
 
-                // ----- NOTE: Loading Screen
+                // --------------------- NOTE: Loading Screen
                 LoadingText(condition: this.isLoading)
               ],
             );
@@ -144,23 +149,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
         ),
       ),
 
-      //-------------------- Bottom navigation --------------------//
+      // ------------------------------ NOTE: Bottom navigation
       bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
     );
-  }
-
-  List<PlaceCard> placeWidgets() {
-    List<PlaceCard> widgets = new List<PlaceCard>();
-
-    if (this.placeList.length > 0) {
-      for (var i = 0; i < this.placeList.length; i++) {
-        PlaceCard w = new PlaceCard(
-          placeData: this.placeList[i],
-        );
-        widgets.add(w);
-      }
-    }
-
-    return widgets;
   }
 }

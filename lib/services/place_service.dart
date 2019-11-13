@@ -36,6 +36,8 @@ class PlaceService {
 
     if(res.statusCode == 200) {
       SearchPlace spr = SearchPlace.decodePlaceReponseFromJson(res.body);
+
+      // if nextPageToken is null, it will break the app
       spr.nextPageToken = spr.nextPageToken != null ? spr.nextPageToken : '';
 
       return spr; 
