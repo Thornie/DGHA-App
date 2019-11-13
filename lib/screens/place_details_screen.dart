@@ -117,8 +117,38 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
   }
 
+  String getTypes() {
+    String types = "";
+
+    for (int i = 0; i < widget.placeData.types.length; i++) {
+      if (Data.allPlaceTypes.contains(widget.placeData.types[i])) {
+        //For each word in the string
+        String type = widget.placeData.types[i].replaceAll(RegExp('_'), ' ');
+        List<String> splitStr = type.split(" ");
+        String word = "";
+
+        for (int j = 0; j < splitStr.length; j++) {
+          //Captitalize first letter
+          word += '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
+        }
+        
+        types += "${word.trim()}, ";
+      }
+    }
+
+    //Remove end comma and whitespace
+    if (types != "") {
+      types = types.trim();
+      types = types.substring(0, types.length - 1);
+    }
+
+    return types;    
+  }
+
   @override
   Widget build(BuildContext context) {
+    String types = getTypes();
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -140,6 +170,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   Container(
                     child: Text(widget.placeData.address, style: Styles.pStyle),
                   ),
+
+                  SizedBox(height: Styles.spacing * 0.5),
+
+                  // ---------------- NOTE: Types
+                  types != "" ? Container(
+                    child: Text(types, style: Styles.pStyle),
+                  ) : Container(height: 0),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
