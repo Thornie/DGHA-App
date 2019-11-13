@@ -7,8 +7,9 @@ import 'package:dgha_brochure/screens/login_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {
-  // -------------------------------------- KEY (will delete this later)
-  static final String kGoogleApiKey = "AIzaSyCj1t28RYFPFpa1xL_kjlIwCrH8CEryoJs";
+  // -------------------------------------- URL
+  static final String rootUrl = "https://dgha-api.azurewebsites.net";
+  static final String rootTestingUrl = "https://dgha-api-testing.azurewebsites.net"; 
 
   // -------------------------------------- NAVIGATION
   static List<PageNav> pages = new List<PageNav>();

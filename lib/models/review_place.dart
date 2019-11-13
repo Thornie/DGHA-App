@@ -6,7 +6,7 @@ class ReviewPlace {
   final double averageAmenitiesRating;
   final double averageServiceRating;
   final int count;
-  final List<Review> reviews;
+  final List<ReviewData> reviews;
 
   ReviewPlace({
     this.averageRating = 0,

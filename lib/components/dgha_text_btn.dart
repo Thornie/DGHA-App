@@ -9,7 +9,7 @@ class DghaTextButton extends StatelessWidget {
   final Color colour;
   final double bottomMargin;
 
-  DghaTextButton({this.onTap, this.minWidth, this.text, this.colour, this.textStyle, this.bottomMargin = 0});
+  DghaTextButton({this.onTap, this.minWidth, this.text, this.colour = Styles.midnightBlue, this.textStyle, this.bottomMargin = 0});
 
   @override
   Widget build(BuildContext context) {

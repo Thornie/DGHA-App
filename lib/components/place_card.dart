@@ -1,4 +1,5 @@
 import 'package:dgha_brochure/components/dgha_star_rating.dart';
+import 'package:dgha_brochure/components/review_count_container.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,8 @@ import 'package:dgha_brochure/models/place.dart';
 
 class PlaceCard extends StatelessWidget {
   final PlaceData placeData;
-  final bool isFromSearchScreen;
 
-  PlaceCard({@required this.placeData, this.isFromSearchScreen = false});
+  PlaceCard({@required this.placeData});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +37,7 @@ class PlaceCard extends StatelessWidget {
             children: <Widget>[
               Builder(
                 builder: (context) {
-                  if (this.placeData.numOfRatings > 0) {
-                    return stars();
-                  } else {
-                    return noRating();
-                  }
+                  return this.placeData.numOfRatings > 0 ? stars() : noRating();
                 },
               ),
               Text(
@@ -57,11 +53,7 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        if (this.isFromSearchScreen) {
-          Navigator.popAndPushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
-        } else {
-          Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
-        }
+        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
       },
     );
   }
@@ -79,12 +71,7 @@ class PlaceCard extends StatelessWidget {
         SizedBox(
           width: Styles.spacing * 0.25,
         ),
-        Container(
-          child: Text(
-            "( ${placeData.numOfRatings.toString()} )",
-            style: Styles.boldPStyle,
-          ),
-        )
+        ReviewCount(numOfRating: this.placeData.numOfRatings, textStyle: Styles.boldPStyle)
       ],
     );
   }
@@ -98,7 +85,7 @@ class PlaceCard extends StatelessWidget {
             Radius.circular(Styles.normalRadius),
           )),
       child: Text(
-        "No Review",
+        "No Reviews",
         style: Styles.boldPStyle,
       ),
     );
