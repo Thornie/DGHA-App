@@ -233,7 +233,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, false);
                       },
                     ),
                   ),

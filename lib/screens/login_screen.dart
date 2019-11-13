@@ -89,15 +89,16 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
     } catch (exception) {
-      // TODO: something is going on here
-      setState(() {
-        if (exception.description == "invalid_username_or_password") {
-          this.loadingText = "Incorrent username or password";
-        } else {
-          this.isLoading = exception.description;
-        }
-        this.isLoading = false;
-      });
+      try {
+        setState(() {
+          if (exception.description == "invalid_username_or_password") {
+            this.loadingText = "Incorrent username or password";
+          } else {
+            this.isLoading = exception.description;
+          }
+          this.isLoading = false;
+        });
+      } catch (exception) {}
     }
   }
 
@@ -155,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             excludeSemantics: true,
                             child: Container(
                               child: UserInputTextField(
+                                autoFocus: true,
                                 keyboardType: TextInputType.emailAddress,
                                 prefixIcon: FontAwesomeIcons.solidEnvelope,
                                 hintText: "Email",
