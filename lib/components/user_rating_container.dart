@@ -181,9 +181,10 @@ class CommentSection extends StatefulWidget {
   final Function onPressed;
   final TextEditingController controller;
   final String hintText;
+  Color btnColor;
 
   CommentSection(
-      {this.title, this.onPressed, this.controller, this.hintText = ""});
+      {this.title, this.onPressed, this.controller, this.hintText = "", this.btnColor});
 
   @override
   _CommentSectionState createState() => _CommentSectionState();
@@ -245,6 +246,8 @@ class _CommentSectionState extends State<CommentSection> {
 
   @override
   Widget build(BuildContext context) {
+    Color color = widget.btnColor;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -329,7 +332,7 @@ class _CommentSectionState extends State<CommentSection> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     padding: EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: Styles.midnightBlue,
+                      color: color,
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                       boxShadow: [
                         BoxShadow(

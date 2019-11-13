@@ -136,6 +136,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       title: "Comment (Optional)",
       controller: commentController,
       hintText: "Add a comment to your review to give more detail on your experience. This is optional.",
+      btnColor: isLoading ? Styles.grey : Styles.midnightBlue,
       onPressed: () async {
         setState(() {
           this.isLoading = true;
