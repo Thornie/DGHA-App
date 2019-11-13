@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
       this.isLoading = true;
     });
     try {
-      await DghaApi.signIn(this.email, this.password);
+      await DghaApi.signIn(email: email, password: password);
 
       if (DghaApi.currentClient != null) {
         if (widget.goToReviewScreen) {

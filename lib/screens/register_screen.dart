@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         if (newUser.statusCode == 201) {
           //Login
-          await DghaApi.signIn(this.email, this.passwordV1);
+          await DghaApi.signIn(email: email, password: passwordV1);
           if (DghaApi.currentClient != null) {
             await Navigator.of(context).pushNamed(ExploreScreen.id);
             setState(() {
