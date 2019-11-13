@@ -300,53 +300,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       bottomPadding: Styles.spacing,
     );
   }
-
-  // Widget iconBtnSection(IconData icon, Function onTap) {
-  //   return GestureDetector(
-  //     onTap: onTap,
-  //     child: Container(
-  //       child: DghaIcon(
-  //         icon: icon,
-  //         iconColor: Styles.yellow,
-  //         backgroundColor: Styles.midnightBlue,
-  //         size: MediaQuery.of(context).size.width * 0.05,
-  //         padding: 15,
-  //         paddingPadding: 3,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // // ------- NOTE: More Reviews
-  // Widget buildMoreReviewsWidget() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: <Widget>[
-  //       iconBtnSection(FontAwesomeIcons.arrowLeft, () {
-  //         if (reviewPageIndex - 1 >= 0) {
-  //           setState(() {
-  //             reviewPageIndex--;
-  //             getReviews();
-  //           });
-  //         }
-  //         print(reviewPageIndex);
-  //       }),
-  //       Text(
-  //         (reviewPageIndex + 1).toString(),
-  //         style: Styles.h2Style,
-  //       ),
-  //       // iconBtnSection(FontAwesomeIcons.arrowRight, () {
-  //       //   if (reviewPageIndex + 1 < (this.reviewList.count / 5).ceil()) {
-  //       //     setState(() {
-  //       //       reviewPageIndex++;
-  //       //       getReviews();
-  //       //     });
-  //       //   }
-  //       //   print(reviewPageIndex);
-  //       // }),
-  //     ],
-  //   );
-  // }
 }
 
 class PlaceDetailBtnText extends StatelessWidget {
