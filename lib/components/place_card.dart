@@ -23,7 +23,8 @@ class PlaceCard extends StatelessWidget {
           margin: EdgeInsets.all(7),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(Styles.normalRadius)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(Styles.normalRadius)),
             boxShadow: [
               BoxShadow(
                 color: Styles.grey,
@@ -37,7 +38,9 @@ class PlaceCard extends StatelessWidget {
             children: <Widget>[
               Builder(
                 builder: (context) {
-                  return this.placeData.numOfRatings > 0 ? stars() : noRating();
+                  return this.placeData.numOfAllReviews > 0
+                      ? stars()
+                      : noRating();
                 },
               ),
               Text(
@@ -53,7 +56,8 @@ class PlaceCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, PlaceDetailsScreen.id, arguments: placeData);
+        Navigator.pushNamed(context, PlaceDetailsScreen.id,
+            arguments: placeData);
       },
     );
   }
@@ -71,7 +75,9 @@ class PlaceCard extends StatelessWidget {
         SizedBox(
           width: Styles.spacing * 0.25,
         ),
-        ReviewCount(numOfRating: this.placeData.numOfRatings, textStyle: Styles.boldPStyle)
+        ReviewCount(
+            numOfRating: this.placeData.numOfAllReviews,
+            textStyle: Styles.boldPStyle)
       ],
     );
   }

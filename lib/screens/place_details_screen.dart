@@ -47,7 +47,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     super.initState();
 
     // only run getReviews() if the place has ratings
-    if (widget.placeData.numOfRatings > 0) {
+    if (widget.placeData.numOfAllReviews > 0) {
       getReviews();
     }
     Data.pages.add(PageNav.placeDetailsScr);
@@ -59,7 +59,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       this.isLoading = true;
     });
 
-    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(widget.placeData.placeId, this.setNum);
+    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(
+        widget.placeData.placeId, this.setNum);
 
     try {
       // check if it is 6 because that means there will be more reviews to come
@@ -87,7 +88,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void reviewBtnHandler() async {
     if (DghaApi.currentClient != null) {
-      final result = await Navigator.pushNamed(context, UserRatingScreen.id, arguments: widget.placeData);
+      final result = await Navigator.pushNamed(context, UserRatingScreen.id,
+          arguments: widget.placeData);
       if (result) {
         getReviews();
       }
@@ -101,14 +103,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void reportBtnHandler() {
     if (DghaApi.currentClient != null) {
-      Navigator.pushNamed(context, ReportScreen.id, arguments: widget.placeData);
+      Navigator.pushNamed(context, ReportScreen.id,
+          arguments: widget.placeData);
     } else {
-      Navigator.of(context).pushNamed(LoginScreen.id_report, arguments: widget.placeData);
+      Navigator.of(context)
+          .pushNamed(LoginScreen.id_report, arguments: widget.placeData);
     }
   }
 
   void _launchMap(String placeId) async {
-    final url = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
 
     if (await canLaunch(url)) {
       await launch(url);
@@ -131,7 +136,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           //Captitalize first letter
           word += '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
         }
-        
+
         types += "${word.trim()}, ";
       }
     }
@@ -142,7 +147,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       types = types.substring(0, types.length - 1);
     }
 
-    return types;    
+    return types;
   }
 
   @override
@@ -174,9 +179,11 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   SizedBox(height: Styles.spacing * 0.5),
 
                   // ---------------- NOTE: Types
-                  types != "" ? Container(
-                    child: Text(types, style: Styles.pStyle),
-                  ) : Container(height: 0),
+                  types != ""
+                      ? Container(
+                          child: Text(types, style: Styles.pStyle),
+                        )
+                      : Container(height: 0),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
@@ -202,7 +209,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           child: Semantics(
                             button: true,
                             label: "Write Review",
-                            hint: "Double tap to leave a review for ${widget.placeData.name}",
+                            hint:
+                                "Double tap to leave a review for ${widget.placeData.name}",
                             excludeSemantics: true,
                             child: DghaIcon(
                               icon: FontAwesomeIcons.pen,
@@ -224,7 +232,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     onTap: this.getReviews,
                     bottomPadding: Styles.spacing,
                   ),
-                  PlaceDetailBtnText(text: "Report Venue", onTap: this.reportBtnHandler),
+                  PlaceDetailBtnText(
+                      text: "Report Venue", onTap: this.reportBtnHandler),
                   SizedBox(height: Styles.spacing),
                 ],
               ),
@@ -311,18 +320,23 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   Widget _buildeReviewSection() {
     return Builder(
       builder: (context) {
-        if(this.reviewList.isNotEmpty) {
+        if (this.reviewList.isNotEmpty) {
           return Column(
-            children: this.reviewList.map((review) => ReviewContainer(review: review,)).toList(),
+            children: this
+                .reviewList
+                .map((review) => ReviewContainer(
+                      review: review,
+                    ))
+                .toList(),
           );
-        } else if (widget.placeData.numOfRatings > 0 && this.isFirstLoad) {
+        } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
           return Container(
-              child: Text(
-                "Loading . . .",
-                style: Styles.h2Style,
-                textAlign: TextAlign.center,
-              ),
-            );
+            child: Text(
+              "Loading . . .",
+              style: Styles.h2Style,
+              textAlign: TextAlign.center,
+            ),
+          );
         } else {
           return _buildFirstReviewBtn();
         }
@@ -344,7 +358,8 @@ class PlaceDetailBtnText extends StatelessWidget {
   final Function onTap;
   final double bottomPadding;
 
-  PlaceDetailBtnText({@required this.text, @required this.onTap, this.bottomPadding = 0});
+  PlaceDetailBtnText(
+      {@required this.text, @required this.onTap, this.bottomPadding = 0});
 
   @override
   Widget build(BuildContext context) {
