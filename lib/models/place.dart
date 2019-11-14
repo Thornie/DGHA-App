@@ -10,7 +10,7 @@ class PlaceData {
   double avgCustomerRating;
   double avgAmentitiesRating;
   double avgLocationRating;
-  int numOfRatings;
+  int numOfAllReviews;
 
   PlaceData({
     this.placeId,
@@ -22,7 +22,7 @@ class PlaceData {
     this.avgCustomerRating,
     this.avgAmentitiesRating,
     this.avgLocationRating,
-    this.numOfRatings,
+    this.numOfAllReviews,
   });
 
   factory PlaceData.fromJson(Map<String, dynamic> json) => PlaceData(
@@ -35,7 +35,7 @@ class PlaceData {
         avgCustomerRating: json["avgCustomerRating"].toDouble(),
         avgAmentitiesRating: json["avgAmentitiesRating"].toDouble(),
         avgLocationRating: json["avgLocationRating"].toDouble(),
-        numOfRatings: json["numOfRatings"],
+        numOfAllReviews: json["numOfAllReviews"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,10 +48,11 @@ class PlaceData {
         "avgCustomerRating": avgCustomerRating,
         "avgAmentitiesRating": avgAmentitiesRating,
         "avgLocationRating": avgLocationRating,
-        "numOfRatings": numOfRatings,
+        "numOfAllReviews": numOfAllReviews,
       };
 
   static List<PlaceData> decodePlaceDataList(String data) {
-    return List<PlaceData>.from(json.decode(data).map((x) => PlaceData.fromJson(x)));
+    return List<PlaceData>.from(
+        json.decode(data).map((x) => PlaceData.fromJson(x)));
   }
 }
