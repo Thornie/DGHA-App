@@ -86,6 +86,12 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   }
 
   void reviewBtnHandler() async {
+    // Refresh the token if needed
+    if (DghaApi.currentClient.credentials.isExpired) {
+      DghaApi.currentClient = await DghaApi.currentClient.refreshCredentials();
+      print("Refreshed credentials");
+    }
+
     if (DghaApi.currentClient != null) {
       final result = await Navigator.pushNamed(context, UserRatingScreen.id, arguments: widget.placeData);
       if (result) {

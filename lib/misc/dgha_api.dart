@@ -66,7 +66,12 @@ class DghaApi {
         oauth2.Credentials credentials = new oauth2.Credentials.fromJson(credString);
         client = oauth2.Client(credentials, identifier: identifier, secret: secret);
 
+        if (needNewToken(client.credentials)) {
+          client = await client.refreshCredentials();
+        }
+
         currentClient = client;
+        print(client.credentials.expiration);
         return client;
       } else {
         print("Credentials don't exist");
@@ -86,6 +91,14 @@ class DghaApi {
 
       currentClient = client;
       return client;
+    }
+  }
+
+  static bool needNewToken(oauth2.Credentials credentials) {
+    if (credentials.expiration.isAfter(DateTime.now())) {
+      return true;
+    } else {
+      return false;
     }
   }
 

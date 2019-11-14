@@ -96,6 +96,13 @@ class _ReportScreenState extends State<ReportScreen> {
                         setState(() {
                           this.isLoading = true;
                         });
+                        
+                        // Refresh the token if needed
+                        if (DghaApi.currentClient.credentials.isExpired) {
+                          DghaApi.currentClient = await DghaApi.currentClient.refreshCredentials();
+                          print("Refreshed credentials");
+                        }
+
                         Response response = await DghaApi.postComplaint(
                           widget.placeData.placeId,
                           _txtController.text,
