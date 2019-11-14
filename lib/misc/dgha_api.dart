@@ -54,8 +54,6 @@ class DghaApi {
     String identifier = "ro.client";
     String secret = "secret";
 
-    oauth2.Client client;
-
     // Get credientials data
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -63,23 +61,21 @@ class DghaApi {
       String credString = prefs.getString('credentials');
       if (credString != null && credString != "") {
         // Get client from credentials file
-        oauth2.Credentials credentials = new oauth2.Credentials.fromJson(credString);
-        client = oauth2.Client(credentials, identifier: identifier, secret: secret);
+        oauth2.Credentials credentials =
+            new oauth2.Credentials.fromJson(credString);
+        currentClient =
+            oauth2.Client(credentials, identifier: identifier, secret: secret);
 
-        if (needNewToken(client.credentials)) {
-          client = await client.refreshCredentials();
-        }
+        await refreshCredentials();
 
-        currentClient = client;
-        print(client.credentials.expiration);
-        return client;
+        return currentClient;
       } else {
         print("Credentials don't exist");
         return null;
       }
     } else {
       // Request client from token endpoint
-      client = await oauth2.resourceOwnerPasswordGrant(
+      currentClient = await oauth2.resourceOwnerPasswordGrant(
         tokenEndpoint,
         email,
         password,
@@ -87,15 +83,19 @@ class DghaApi {
         secret: secret,
       );
 
-      prefs.setString('credentials', client.credentials.toJson());
+      prefs.setString('credentials', currentClient.credentials.toJson());
 
-      currentClient = client;
-      return client;
+      currentClient = currentClient;
+      return currentClient;
     }
   }
 
-  static bool needNewToken(oauth2.Credentials credentials) {
-    if (credentials.expiration.isAfter(DateTime.now())) {
+  static Future<bool> refreshCredentials() async {
+    // Refresh the token if needed
+    if (currentClient.credentials.isExpired) {
+      oauth2.Client client = await currentClient.refreshCredentials();
+      currentClient = client;
+      print("Refreshed");
       return true;
     } else {
       return false;
@@ -131,6 +131,8 @@ class DghaApi {
 
   static Future<Account> getAccount() async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.get(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {
@@ -155,6 +157,8 @@ class DghaApi {
 
   static Future<http.Response> deleteAccount() async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.delete(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {
@@ -174,6 +178,8 @@ class DghaApi {
     String newPassword,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.put(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}/UpdatePassword?currentPassword=$currentPassword&newPassword=$newPassword",
         headers: {
@@ -194,6 +200,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeID,
@@ -224,6 +232,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeId,
@@ -247,6 +257,7 @@ class DghaApi {
     }
   }
 
+  //TODO: review lees part
   static Future<ReviewPlace> getReviewsFromPlaceId(String placeId) async {
     http.Response response = await http.get(
       "$rootUrl/Reviews/placeId/$placeId",
@@ -405,6 +416,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeId,
@@ -430,6 +443,8 @@ class DghaApi {
 
   static Future<http.Response> deleteReview(String placeId) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.delete(
         "$rootUrl/Reviews/$placeId/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {
