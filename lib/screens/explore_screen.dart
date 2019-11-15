@@ -103,6 +103,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     children: <Widget>[
                       SizedBox(height: Styles.heightFromAppBar),
 
+                      // --------- NOTE: Loading Text
+                      LoadingText(condition: this.isLoading),
                       // --------- NOTE: Place Cards
                       Column(
                           children: this
@@ -157,7 +159,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
 
                 // --------------------- NOTE: Loading Screen
-                LoadingText(condition: this.isLoading)
+                
               ],
             );
           },

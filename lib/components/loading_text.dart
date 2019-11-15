@@ -10,8 +10,7 @@ class LoadingText extends StatelessWidget {
     return Builder(
       builder: (context) {
         if (this.condition) {
-          return Align(
-            alignment: Alignment.center,
+          return Center(
             child: Container(
               child: Text(
                 "Loading . . .",

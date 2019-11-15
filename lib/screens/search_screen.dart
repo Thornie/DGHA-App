@@ -71,11 +71,20 @@ class _SearchScreenState extends State<SearchScreen> {
             children: <Widget>[
               SizedBox(height: 100),
 
+              // ------------------------- NOTE: Big Loading Text
+              LoadingText(condition: this.isLoading && (this.isFirstLoad || this.searchPlace.places.isEmpty)),
+
               // ------------------------- NOTE: Place Cards
               Container(
                 padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
                 child: Column(
-                  children: this.searchPlace.places.map((place) => PlaceCard(placeData: place,)).toList(),
+                  children: this
+                      .searchPlace
+                      .places
+                      .map((place) => PlaceCard(
+                            placeData: place,
+                          ))
+                      .toList(),
                 ),
               ),
 
@@ -97,9 +106,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
           // ------------------------- NOTE: Search Bar
           buildSearchBar(),
-
-          // ------------------------- NOTE: Big Loading Text
-          LoadingText(condition: this.isLoading && (this.isFirstLoad || this.searchPlace.places.isEmpty))
         ]),
       ),
 
@@ -119,14 +125,13 @@ class _SearchScreenState extends State<SearchScreen> {
           Navigator.pop(context);
         },
         onSubmit: (value) {
-
           // empty out values for the new place
           setState(() {
             this.input = value;
             this.searchPlace.places.clear();
             this.searchPlace.nextPageToken = '';
           });
-          
+
           this._search();
         },
         changeFocusColour: false,
