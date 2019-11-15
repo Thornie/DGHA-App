@@ -194,14 +194,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   buildStar(rating: widget.placeData.avgLocationRating, ratingLabel: 'Location Rating', isBigStar: false),
 
                   // ---------------- NOTE: Review Heading Row
-                  Container(
+                  Semantics(
+                    explicitChildNodes: true,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Text(
-                          "Reviews",
-                          style: Styles.h2Style,
+                        Container(
+                          child: Text(
+                            "Reviews",
+                            style: Styles.h2Style,
+                          ),
                         ),
 
                         // ---------- NOTE: Review Btn
@@ -210,8 +213,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                             reviewBtnHandler();
                           },
                           child: Semantics(
-                            button: true,
                             label: "Write Review",
+                            button: true,
                             hint: "Double tap to leave a review for ${widget.placeData.name}",
                             excludeSemantics: true,
                             child: DghaIcon(
