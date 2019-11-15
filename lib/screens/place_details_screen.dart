@@ -50,6 +50,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     if (widget.placeData.numOfAllReviews > 0) {
       getReviews();
     }
+
     Data.pages.add(PageNav.placeDetailsScr);
   }
 
@@ -59,8 +60,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       this.isLoading = true;
     });
 
-    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(
-        widget.placeData.placeId, this.setNum);
+    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(widget.placeData.placeId, this.setNum);
 
     try {
       // check if it is 6 because that means there will be more reviews to come
@@ -90,8 +90,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     if (DghaApi.currentClient != null) {
       print(DghaApi.currentClient.credentials.expiration);
       print(DghaApi.currentClient.credentials.isExpired);
-      final result = await Navigator.pushNamed(context, UserRatingScreen.id,
-          arguments: widget.placeData);
+      final result = await Navigator.pushNamed(context, UserRatingScreen.id, arguments: widget.placeData);
       if (result) {
         getReviews();
       }
@@ -105,17 +104,14 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void reportBtnHandler() {
     if (DghaApi.currentClient != null) {
-      Navigator.pushNamed(context, ReportScreen.id,
-          arguments: widget.placeData);
+      Navigator.pushNamed(context, ReportScreen.id, arguments: widget.placeData);
     } else {
-      Navigator.of(context)
-          .pushNamed(LoginScreen.id_report, arguments: widget.placeData);
+      Navigator.of(context).pushNamed(LoginScreen.id_report, arguments: widget.placeData);
     }
   }
 
   void _launchMap(String placeId) async {
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
+    final url = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
 
     if (await canLaunch(url)) {
       await launch(url);
@@ -169,28 +165,33 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   SizedBox(height: Styles.heightFromAppBar),
 
                   // ---------------- NOTE: Place Name
-                  Container(
-                    child: Text(widget.placeData.name, style: Styles.h2Style),
-                  ),
+                  Container(child: Text(widget.placeData.name, style: Styles.h2Style)),
 
                   // ---------------- NOTE: Address
-                  Container(
-                    child: Text(widget.placeData.address, style: Styles.pStyle),
-                  ),
+                  Container(child: Text(widget.placeData.address, style: Styles.pStyle)),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
                   // ---------------- NOTE: Types
-                  types != ""
-                      ? Container(
+                  Builder(
+                    builder: (context) {
+                      if (types != "") {
+                        return Container(
                           child: Text(types, style: Styles.pStyle),
-                        )
-                      : Container(height: 0),
+                        );
+                      } else {
+                        return Container(height: 0);
+                      }
+                    },
+                  ),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
-                  // ---------------- NOTE: Stars
-                  buildStars(),
+                  // -------------------------------- NOTE: Stars
+                  buildStar(rating: widget.placeData.avgOverallRating, ratingLabel: 'Overall Rating', isBigStar: true),
+                  buildStar(rating: widget.placeData.avgCustomerRating, ratingLabel: 'Customer Service Rating', isBigStar: false),
+                  buildStar(rating: widget.placeData.avgAmentitiesRating, ratingLabel: 'Amenities Rating', isBigStar: false),
+                  buildStar(rating: widget.placeData.avgLocationRating, ratingLabel: 'Location Rating', isBigStar: false),
 
                   // ---------------- NOTE: Review Heading Row
                   Container(
@@ -211,8 +212,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                           child: Semantics(
                             button: true,
                             label: "Write Review",
-                            hint:
-                                "Double tap to leave a review for ${widget.placeData.name}",
+                            hint: "Double tap to leave a review for ${widget.placeData.name}",
                             excludeSemantics: true,
                             child: DghaIcon(
                               icon: FontAwesomeIcons.pen,
@@ -234,8 +234,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                     onTap: this.getReviews,
                     bottomPadding: Styles.spacing,
                   ),
-                  PlaceDetailBtnText(
-                      text: "Report Venue", onTap: this.reportBtnHandler),
+                  PlaceDetailBtnText(text: "Report Venue", onTap: this.reportBtnHandler),
                   SizedBox(height: Styles.spacing),
                 ],
               ),
@@ -268,7 +267,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 label: "Map",
                 button: true,
                 hint: "Double tap to open google maps",
-                              child: GestureDetector(
+                child: GestureDetector(
                   onTap: () {
                     _launchMap(widget.placeData.placeId);
                   },
@@ -290,37 +289,32 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     );
   }
 
-  Widget buildStars() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: DghaStarRating(
-              changeRatingOnTap: false,
-              rating: widget.placeData.avgOverallRating,
-              height: 42,
-            ),
-          ),
-          //---------- Customer Service Rating
-          RatingWithTitle(
-            title: "Customer Service",
-            rating: widget.placeData.avgCustomerRating,
-            isSmall: true,
-          ),
-          //---------- Amenities Rating
-          RatingWithTitle(
-            title: "Amenities",
-            rating: widget.placeData.avgAmentitiesRating,
-            isSmall: true,
-          ),
-          //---------- Location Rating
-          RatingWithTitle(
-            title: "Location",
-            rating: widget.placeData.avgLocationRating,
-            isSmall: true,
-          ),
-        ],
+  Semantics buildStar({double rating, String ratingLabel, bool isBigStar}) {
+    String ratingStr = rating.toStringAsPrecision(2);
+    return Semantics(
+      label: "$ratingLabel: $ratingStr stars",
+      child: Center(
+        child: Semantics(
+          excludeSemantics: true,
+          child: isBigStar ? buildBigStar(rating) : buildSmallStar(rating, ratingLabel),
+        ),
       ),
+    );
+  }
+
+  DghaStarRating buildBigStar(double rating) {
+    return DghaStarRating(
+      changeRatingOnTap: false,
+      rating: rating,
+      height: 42,
+    );
+  }
+
+  RatingWithTitle buildSmallStar(double rating, String ratingLabel) {
+    return RatingWithTitle(
+      title: ratingLabel,
+      rating: rating,
+      isSmall: true,
     );
   }
 
@@ -365,8 +359,7 @@ class PlaceDetailBtnText extends StatelessWidget {
   final Function onTap;
   final double bottomPadding;
 
-  PlaceDetailBtnText(
-      {@required this.text, @required this.onTap, this.bottomPadding = 0});
+  PlaceDetailBtnText({@required this.text, @required this.onTap, this.bottomPadding = 0});
 
   @override
   Widget build(BuildContext context) {
