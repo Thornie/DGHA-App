@@ -176,9 +176,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   Builder(
                     builder: (context) {
                       if (types != "") {
-                        return Container(
-                          child: Text(types, style: Styles.pStyle),
-                        );
+                        return Container(child: Text(types, style: Styles.pStyle));
                       } else {
                         return Container(height: 0);
                       }
@@ -196,36 +194,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   // ---------------- NOTE: Review Heading Row
                   Semantics(
                     explicitChildNodes: true,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            "Reviews",
-                            style: Styles.h2Style,
-                          ),
-                        ),
-
-                        // ---------- NOTE: Review Btn
-                        GestureDetector(
-                          onTap: () {
-                            reviewBtnHandler();
-                          },
-                          child: Semantics(
-                            label: "Write Review",
-                            button: true,
-                            hint: "Double tap to leave a review for ${widget.placeData.name}",
-                            excludeSemantics: true,
-                            child: DghaIcon(
-                              icon: FontAwesomeIcons.pen,
-                              iconColor: Styles.yellow,
-                              backgroundColor: Styles.midnightBlue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: buildReviewHeader(),
                   ),
 
                   // ---------------- NOTE: Reviews
@@ -289,6 +258,34 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         ),
       ),
       bottomNavigationBar: DGHABotNav(activeTab: ActivePageEnum.ratingsPage),
+    );
+  }
+
+  Row buildReviewHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Container(child: Text("Reviews", style: Styles.h2Style)),
+
+        // ---------- NOTE: Review Btn
+        GestureDetector(
+          onTap: () {
+            reviewBtnHandler();
+          },
+          child: Semantics(
+            label: "Write Review",
+            button: true,
+            hint: "Double tap to leave a review for ${widget.placeData.name}",
+            excludeSemantics: true,
+            child: DghaIcon(
+              icon: FontAwesomeIcons.pen,
+              iconColor: Styles.yellow,
+              backgroundColor: Styles.midnightBlue,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
