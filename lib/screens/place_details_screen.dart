@@ -130,11 +130,13 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         String type = widget.placeData.types[i].replaceAll(RegExp('_'), ' ');
         List<String> splitStr = type.split(" ");
 
+        String word = "";
         for (int j = 0; j < splitStr.length; j++) {
           //Captitalize first letter
-          String word = '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
-          types.add(word);
+          word += '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
         }
+
+        types.add(word);
 
         // types += "${word.trim()}, ";
       }
@@ -188,6 +190,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                       if (this.getTypes().length > 0) {
                         return Container(
                           child: Wrap(
+                            runSpacing: Styles.spacing * 0.5,
                               spacing: Styles.spacing * 0.5,
                               children: this
                                   .getTypes()
