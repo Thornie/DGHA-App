@@ -10,12 +10,12 @@ class DghaIcon extends StatelessWidget {
   final double padding;
 
   DghaIcon({
-    this.icon,
-    this.iconColor,
-    this.backgroundColor,
-    this.size,
-    this.paddingPadding,
-    this.padding,
+    @required this.icon,
+    this.iconColor = Styles.yellow,
+    this.backgroundColor = Styles.midnightBlue,
+    this.size = Styles.iconSize,
+    this.paddingPadding = Styles.iconPaddingPadding,
+    this.padding = Styles.iconPadding,
   });
 
   @override
