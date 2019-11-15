@@ -189,7 +189,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                         return Container(
                           child: Wrap(
                               spacing: Styles.spacing * 0.5,
-                              children: this.getTypes()
+                              children: this
+                                  .getTypes()
                                   .map((type) => YellowTagHighlight(
                                         text: type,
                                         textStyle: Styles.boldPStyle,
@@ -311,27 +312,45 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     return Semantics(
       label: "$ratingLabel: $ratingStr stars",
       child: Center(
-        child: Semantics(
-          excludeSemantics: true,
-          child: isBigStar ? buildBigStar(rating) : buildSmallStar(rating, ratingLabel),
-        ),
+        child: isBigStar ? buildBigStar(rating) : buildSmallStar(rating, ratingLabel),
       ),
     );
   }
 
-  DghaStarRating buildBigStar(double rating) {
-    return DghaStarRating(
-      changeRatingOnTap: false,
-      rating: rating,
-      height: 42,
+  Widget buildBigStar(double rating) {
+    return Semantics(
+      label: "${widget.placeData.numOfAllReviews} rated",
+      excludeSemantics: true,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+      DghaStarRating(
+        changeRatingOnTap: false,
+        rating: rating,
+        height: 42,
+      ),
+      SizedBox(
+        width: Styles.spacing * 0.25,
+      ),
+      YellowTagHighlight(
+        text: widget.placeData.numOfAllReviews.toString(),
+        textStyle: Styles.boldPStyle,
+        size: 30,
+        verticalPadding: 2,
+      )
+        ],
+      ),
     );
   }
 
-  RatingWithTitle buildSmallStar(double rating, String ratingLabel) {
-    return RatingWithTitle(
-      title: ratingLabel,
-      rating: rating,
-      isSmall: true,
+  Widget buildSmallStar(double rating, String ratingLabel) {
+    return Semantics(
+      excludeSemantics: true,
+      child: RatingWithTitle(
+        title: ratingLabel,
+        rating: rating,
+        isSmall: true,
+      ),
     );
   }
 

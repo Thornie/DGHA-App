@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 class YellowTagHighlight extends StatelessWidget {
   final String text; 
   final TextStyle textStyle; 
+  final double size;
+  final double verticalPadding; 
 
-  YellowTagHighlight({@required this.text, @required this.textStyle});
+  YellowTagHighlight({@required this.text, @required this.textStyle, this.size = 28, this.verticalPadding = 0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
         // minHeight: 10,
-        minWidth: 28
+        minWidth: size
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: verticalPadding),
       decoration: BoxDecoration(
       color: Styles.yellow,
       borderRadius: BorderRadius.all(Radius.circular(1000)),
