@@ -1,13 +1,13 @@
-import 'package:dgha_brochure/components/dgha_text_btn.dart';
-import 'package:dgha_brochure/components/header_row.dart';
-import 'package:dgha_brochure/components/input_textfield.dart';
-import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/dgha_api.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/place.dart';
-import 'package:dgha_brochure/screens/explore_screen.dart';
-import 'package:dgha_brochure/screens/report_screen.dart';
-import 'package:dgha_brochure/screens/user_rating_screen.dart';
+import 'package:dgha/components/dgha_text_btn.dart';
+import 'package:dgha/components/header_row.dart';
+import 'package:dgha/components/input_textfield.dart';
+import 'package:dgha/misc/data.dart';
+import 'package:dgha/misc/dgha_api.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/place.dart';
+import 'package:dgha/screens/explore_screen.dart';
+import 'package:dgha/screens/report_screen.dart';
+import 'package:dgha/screens/user_rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

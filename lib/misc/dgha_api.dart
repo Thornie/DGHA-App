@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:dgha_brochure/models/account.dart';
-import 'package:dgha_brochure/models/review_place.dart';
-import 'package:dgha_brochure/models/review.dart';
+import 'package:dgha/models/account.dart';
+import 'package:dgha/models/review_place.dart';
+import 'package:dgha/models/review.dart';
 import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,7 +1,7 @@
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/components/rating_with_title.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/components/rating_with_title.dart';
 import 'package:flutter/material.dart';
-import 'package:dgha_brochure/models/review.dart';
+import 'package:dgha/models/review.dart';
 
 class ReviewContainer extends StatelessWidget {
   final ReviewData review;

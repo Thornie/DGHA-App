@@ -1,13 +1,13 @@
-import 'package:dgha_brochure/components/appbar.dart';
-import 'package:dgha_brochure/components/bottom_navigation.dart';
-import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/components/menu_drawer.dart';
-import 'package:dgha_brochure/components/selectable_contrainer.dart';
-import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/helper.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/languages.dart';
-import 'package:dgha_brochure/models/page_nav.dart';
+import 'package:dgha/components/appbar.dart';
+import 'package:dgha/components/bottom_navigation.dart';
+import 'package:dgha/components/dgha_icon.dart';
+import 'package:dgha/components/menu_drawer.dart';
+import 'package:dgha/components/selectable_contrainer.dart';
+import 'package:dgha/misc/data.dart';
+import 'package:dgha/misc/helper.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/languages.dart';
+import 'package:dgha/models/page_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

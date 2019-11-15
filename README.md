@@ -1,4 +1,4 @@
-# dgha_brochure
+# dgha
 
 A new Flutter project.
 

@@ -1,4 +1,4 @@
-package com.example.dgha_brochure;
+package com.example.dgha;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

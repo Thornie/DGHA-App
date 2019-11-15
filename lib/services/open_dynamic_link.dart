@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/screens/register_screen.dart';
+import 'package:dgha/screens/register_screen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 

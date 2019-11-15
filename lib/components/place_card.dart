@@ -1,9 +1,9 @@
-import 'package:dgha_brochure/components/dgha_star_rating.dart';
-import 'package:dgha_brochure/components/review_count_container.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/place_details_screen.dart';
+import 'package:dgha/components/dgha_star_rating.dart';
+import 'package:dgha/components/review_count_container.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha/models/place.dart';
 
 class PlaceCard extends StatelessWidget {
   final PlaceData placeData;

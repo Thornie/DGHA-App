@@ -1,9 +1,9 @@
-import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/page_nav.dart';
-import 'package:dgha_brochure/screens/explore_screen.dart';
-import 'package:dgha_brochure/screens/info_menu_screen.dart';
+import 'package:dgha/components/dgha_icon.dart';
+import 'package:dgha/misc/data.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/page_nav.dart';
+import 'package:dgha/screens/explore_screen.dart';
+import 'package:dgha/screens/info_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

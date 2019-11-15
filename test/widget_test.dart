@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:dgha_brochure/main.dart';
+import 'package:dgha/main.dart';
 
 void main() {
   //If Unit Tests are wanted, put them here - James

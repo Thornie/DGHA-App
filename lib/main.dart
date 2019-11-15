@@ -1,9 +1,9 @@
-import 'package:dgha_brochure/misc/dgha_api.dart';
-import 'package:dgha_brochure/misc/route_generator.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/screens/explore_screen.dart';
+import 'package:dgha/misc/dgha_api.dart';
+import 'package:dgha/misc/route_generator.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:dgha_brochure/screens/login_screen.dart';
+import 'package:dgha/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(DGHA());

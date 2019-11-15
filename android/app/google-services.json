@@ -8,18 +8,32 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:788500038476:android:05c4e53fee4bf68c7f85e9",
+        "mobilesdk_app_id": "1:788500038476:android:5e2beb01aeec94077f85e9",
         "android_client_info": {
-          "package_name": "co.rufferees.dgha"
+          "package_name": "com.rufferees.dgha"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "788500038476-3p011tfslclcj7ck2ap8safok0n53iqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rufferees.dgha",
+            "certificate_hash": "67579edefa93e0c7a8a78d96009082b86bbcb86b"
+          }
+        },
         {
           "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyBL7tBMbzLkMm_WEez3TuH63cC2hYgD_lA"
+        },
+        {
+          "current_key": "AIzaSyCgYB7M7x0hRJNTeBOpMlvOaAQcOpQuYV0"
+        },
         {
           "current_key": "AIzaSyDHzyYmb7rWfsUH-Uquw-DWGAWcJIoHrd0"
         }
@@ -30,35 +44,14 @@
             {
               "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
               "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:788500038476:android:43a68eeddba098bc7f85e9",
-        "android_client_info": {
-          "package_name": "com.example.dgha_brochure"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDHzyYmb7rWfsUH-Uquw-DWGAWcJIoHrd0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
+            },
             {
-              "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "788500038476-jb8v9t0q9ckoo5efpd140v0hj7ssmd0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rufferees.dgha",
+                "app_store_id": "962194608"
+              }
             }
           ]
         }
@@ -73,11 +66,25 @@
       },
       "oauth_client": [
         {
+          "client_id": "788500038476-sfiddpgqasre50tkgl5pibfgprulq9qt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rufferees.dgha_brochure",
+            "certificate_hash": "67579edefa93e0c7a8a78d96009082b86bbcb86b"
+          }
+        },
+        {
           "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyBL7tBMbzLkMm_WEez3TuH63cC2hYgD_lA"
+        },
+        {
+          "current_key": "AIzaSyCgYB7M7x0hRJNTeBOpMlvOaAQcOpQuYV0"
+        },
         {
           "current_key": "AIzaSyDHzyYmb7rWfsUH-Uquw-DWGAWcJIoHrd0"
         }
@@ -88,6 +95,14 @@
             {
               "client_id": "788500038476-nht119irpvi162vcbnhsd5vtrp1l2eeo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "788500038476-jb8v9t0q9ckoo5efpd140v0hj7ssmd0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rufferees.dgha",
+                "app_store_id": "962194608"
+              }
             }
           ]
         }

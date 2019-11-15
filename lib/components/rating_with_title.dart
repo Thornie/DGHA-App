@@ -1,6 +1,6 @@
 //The widget to display the average ratings on the page
-import 'package:dgha_brochure/components/dgha_star_rating.dart';
-import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha/components/dgha_star_rating.dart';
+import 'package:dgha/misc/styles.dart';
 import 'package:flutter/material.dart';
 
 class RatingWithTitle extends StatelessWidget {
