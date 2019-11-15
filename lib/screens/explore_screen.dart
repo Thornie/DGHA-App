@@ -90,13 +90,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
-
             // ------------------------- NOTE: Calc Dimensions
             calcDimensions(orientation);
 
             return Stack(
               children: <Widget>[
-
                 // --------------------- NOTE: Body
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: Styles.spacing),
@@ -106,7 +104,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       SizedBox(height: Styles.heightFromAppBar),
 
                       // --------- NOTE: Place Cards
-                      Column(children: this.placeList.map((place) => PlaceCard(placeData: place,)).toList()),
+                      Column(
+                          children: this
+                              .placeList
+                              .map((place) => PlaceCard(
+                                    placeData: place,
+                                  ))
+                              .toList()),
 
                       SizedBox(height: Styles.spacing)
                     ],
@@ -117,26 +121,37 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 DghaAppBar(
                   text: "Explore",
                   isMenu: true,
-                  childOne: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _scaffoldKey.currentState.openDrawer();
-                      });
-                    },
-                    child: DghaIcon(
-                      icon: FontAwesomeIcons.bars,
-                      backgroundColor: Styles.midnightBlue,
-                      iconColor: Styles.yellow,
+                  semanticLabel: "Explore Page",
+                  childOne: Semantics(
+                    button: true,
+                    label: "Menu",
+                    hint: "Double tap to open side bar menu",
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
+                      },
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.bars,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                      ),
                     ),
                   ),
-                  childTwo: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SearchScreen.id);
-                    },
-                    child: DghaIcon(
-                      icon: FontAwesomeIcons.search,
-                      backgroundColor: Styles.midnightBlue,
-                      iconColor: Styles.yellow,
+                  childTwo: Semantics(
+                    button: true,
+                    label: "Search",
+                    hint: "Double tap to open search",
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, SearchScreen.id);
+                      },
+                      child: DghaIcon(
+                        icon: FontAwesomeIcons.search,
+                        backgroundColor: Styles.midnightBlue,
+                        iconColor: Styles.yellow,
+                      ),
                     ),
                   ),
                 ),
