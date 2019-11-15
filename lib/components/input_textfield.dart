@@ -17,6 +17,7 @@ class UserInputTextField extends StatefulWidget {
   final Function prefixOnTap;
   final Function(String) onSubmit;
   final bool changeFocusColour;
+  final String textFieldLabel; 
 
   UserInputTextField(
       {this.prefixIcon,
@@ -28,6 +29,7 @@ class UserInputTextField extends StatefulWidget {
       this.autoFocus = false,
       this.prefixOnTap,
       this.onSubmit,
+      this.textFieldLabel = "",
       this.changeFocusColour = true});
 
   @override
@@ -120,7 +122,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
       ),
       // -------------------------- NOTE: Textfield
       Semantics(
-        label: "Search textfield",
+        label: "${widget.textFieldLabel} textfield",
         hint: "Double tap to enter text",
         excludeSemantics: true,
         child: Container(
