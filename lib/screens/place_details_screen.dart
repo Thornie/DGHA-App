@@ -194,7 +194,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
                   // -------------------------------- NOTE: Stars
                   buildStar(rating: widget.placeData.avgOverallRating, ratingLabel: 'Overall Rating', isBigStar: true),
-                  buildStar(rating: widget.placeData.avgCustomerRating, ratingLabel: 'Customer Service Rating', isBigStar: false),
+                  buildStar(rating: widget.placeData.avgCustomerRating, ratingLabel: 'Service Rating', isBigStar: false),
                   buildStar(rating: widget.placeData.avgAmentitiesRating, ratingLabel: 'Amenities Rating', isBigStar: false),
                   buildStar(rating: widget.placeData.avgLocationRating, ratingLabel: 'Location Rating', isBigStar: false),
 

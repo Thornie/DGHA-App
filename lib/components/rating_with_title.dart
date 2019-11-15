@@ -14,23 +14,27 @@ class RatingWithTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scale = MediaQuery.of(context).textScaleFactor;
-    return Row(
-      mainAxisAlignment: spaceBetween ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
-      children: <Widget>[
-        //----------Title
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Text(
-            title,
-            style: Styles.h4Style,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Wrap(
+        alignment: spaceBetween ? WrapAlignment.spaceBetween : WrapAlignment.start,
+        children: <Widget>[
+          //----------Title
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Text(
+              title,
+              style: Styles.h4Style,
+            ),
           ),
-        ),
-        DghaStarRating(
-          changeRatingOnTap: false,
-          rating: rating,
-          height: isSmall ? 26 * scale : 30 * scale,
-        ),
-      ],
+          
+          DghaStarRating(
+            changeRatingOnTap: false,
+            rating: rating,
+            height: isSmall ? 26 * scale : 30 * scale,
+          ),
+        ],
+      ),
     );
   }
 }
