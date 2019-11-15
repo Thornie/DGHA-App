@@ -66,8 +66,7 @@ class DghaApi {
         currentClient =
             oauth2.Client(credentials, identifier: identifier, secret: secret);
 
-        //TODO: uncomment when credentials refreshing is fixed
-        //await refreshCredentials();
+        await refreshCredentials();
 
         return currentClient;
       } else {
@@ -93,14 +92,16 @@ class DghaApi {
 
   static Future<bool> refreshCredentials() async {
     // Refresh the token if needed
-    if (currentClient.credentials.isExpired) {
-      oauth2.Client client = await currentClient.refreshCredentials();
-      currentClient = client;
-      print("Refreshed");
-      return true;
-    } else {
-      return false;
-    }
+    //TODO: uncomment when credentials refreshing is fixed
+    // if (currentClient.credentials.isExpired) {
+    //   oauth2.Client client = await currentClient.refreshCredentials();
+    //   currentClient = client;
+    //   print("Refreshed");
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return true;
   }
 
   static void signOut() async {
