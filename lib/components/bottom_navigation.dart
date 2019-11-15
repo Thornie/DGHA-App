@@ -55,6 +55,7 @@ class DGHABotNav extends StatelessWidget {
                       child: DghaIcon(
                         icon: FontAwesomeIcons.solidStar,
                         iconColor: Styles.midnightBlue,
+                        backgroundColor: Colors.transparent,
                       ),
                       onPressed: () {
                         if (Data.pages.last != PageNav.exploreMenuScr) {
@@ -89,6 +90,7 @@ class DGHABotNav extends StatelessWidget {
                       child: DghaIcon(
                         icon: FontAwesomeIcons.dog,
                         iconColor: Styles.midnightBlue,
+                        backgroundColor: Colors.transparent,
                       ),
                       onPressed: () {
                         if (Data.pages.last != PageNav.infoMenuScr) {

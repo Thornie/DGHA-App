@@ -112,6 +112,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
                 child: DghaIcon(
                   icon: widget.prefixIcon,
                   iconColor: _setPrefixColour(),
+                  backgroundColor: Colors.transparent,
                 ),
               ),
             );
@@ -168,6 +169,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
                 child: DghaIcon(
                   icon: FontAwesomeIcons.times,
                   iconColor: focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+                  backgroundColor: Colors.transparent,
                 ),
               ),
             ),
