@@ -1,9 +1,9 @@
-import 'package:dgha_brochure/models/languages.dart';
-import 'package:dgha_brochure/models/info_menu_card_data.dart';
-import 'package:dgha_brochure/models/menu_tile_data.dart';
-import 'package:dgha_brochure/models/page_nav.dart';
-import 'package:dgha_brochure/screens/info_screen.dart';
-import 'package:dgha_brochure/screens/login_screen.dart';
+import 'package:dgha/models/languages.dart';
+import 'package:dgha/models/info_menu_card_data.dart';
+import 'package:dgha/models/menu_tile_data.dart';
+import 'package:dgha/models/page_nav.dart';
+import 'package:dgha/screens/info_screen.dart';
+import 'package:dgha/screens/login_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Data {

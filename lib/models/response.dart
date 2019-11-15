@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha/models/place.dart';
 
 class ApiPlaceResult {
   dynamic result;

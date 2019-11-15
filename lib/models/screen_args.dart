@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/models/languages.dart';
+import 'package:dgha/models/languages.dart';
 
 class InfoScrArgs {
   final String title;

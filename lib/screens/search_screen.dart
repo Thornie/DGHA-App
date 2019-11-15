@@ -1,12 +1,12 @@
-import 'package:dgha_brochure/components/bottom_navigation.dart';
-import 'package:dgha_brochure/components/input_textfield.dart';
-import 'package:dgha_brochure/components/loading_text.dart';
-import 'package:dgha_brochure/components/place_card.dart';
-import 'package:dgha_brochure/components/view_more_btn.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/place.dart';
-import 'package:dgha_brochure/models/search_response.dart';
-import 'package:dgha_brochure/services/place_service.dart';
+import 'package:dgha/components/bottom_navigation.dart';
+import 'package:dgha/components/input_textfield.dart';
+import 'package:dgha/components/loading_text.dart';
+import 'package:dgha/components/place_card.dart';
+import 'package:dgha/components/view_more_btn.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/place.dart';
+import 'package:dgha/models/search_response.dart';
+import 'package:dgha/services/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

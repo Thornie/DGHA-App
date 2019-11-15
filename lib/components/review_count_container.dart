@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/misc/styles.dart';
+import 'package:dgha/misc/styles.dart';
 import 'package:flutter/material.dart';
 
 class ReviewCount extends StatelessWidget {

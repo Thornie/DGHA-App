@@ -1,10 +1,10 @@
-import 'package:dgha_brochure/components/menu_expansion_tile.dart';
-import 'package:dgha_brochure/components/menu_tile.dart';
-import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/dgha_api.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/menu_tile_data.dart';
-import 'package:dgha_brochure/screens/login_screen.dart';
+import 'package:dgha/components/menu_expansion_tile.dart';
+import 'package:dgha/components/menu_tile.dart';
+import 'package:dgha/misc/data.dart';
+import 'package:dgha/misc/dgha_api.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/menu_tile_data.dart';
+import 'package:dgha/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

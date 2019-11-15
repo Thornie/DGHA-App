@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/models/review.dart';
+import 'package:dgha/models/review.dart';
 
 class ReviewPlace {
   final double averageRating;

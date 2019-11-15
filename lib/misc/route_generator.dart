@@ -1,13 +1,13 @@
-import 'package:dgha_brochure/models/screen_args.dart';
-import 'package:dgha_brochure/screens/info_screen.dart';
-import 'package:dgha_brochure/screens/login_screen.dart';
-import 'package:dgha_brochure/screens/info_menu_screen.dart';
-import 'package:dgha_brochure/screens/explore_screen.dart';
-import 'package:dgha_brochure/screens/report_screen.dart';
-import 'package:dgha_brochure/screens/search_screen.dart';
-import 'package:dgha_brochure/screens/user_rating_screen.dart';
-import 'package:dgha_brochure/screens/register_screen.dart';
-import 'package:dgha_brochure/screens/place_details_screen.dart';
+import 'package:dgha/models/screen_args.dart';
+import 'package:dgha/screens/info_screen.dart';
+import 'package:dgha/screens/login_screen.dart';
+import 'package:dgha/screens/info_menu_screen.dart';
+import 'package:dgha/screens/explore_screen.dart';
+import 'package:dgha/screens/report_screen.dart';
+import 'package:dgha/screens/search_screen.dart';
+import 'package:dgha/screens/user_rating_screen.dart';
+import 'package:dgha/screens/register_screen.dart';
+import 'package:dgha/screens/place_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {

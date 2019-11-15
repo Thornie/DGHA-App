@@ -1,9 +1,9 @@
-import 'package:dgha_brochure/components/dgha_icon.dart';
-import 'package:dgha_brochure/models/screen_args.dart';
+import 'package:dgha/components/dgha_icon.dart';
+import 'package:dgha/models/screen_args.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/menu_tile_data.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/menu_tile_data.dart';
 
 class MenuTile extends StatelessWidget {
   final MenuTileData tile;

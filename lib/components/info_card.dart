@@ -1,6 +1,6 @@
-import 'package:dgha_brochure/misc/styles.dart';
-import 'package:dgha_brochure/models/info_menu_card_data.dart';
-import 'package:dgha_brochure/models/screen_args.dart';
+import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/info_menu_card_data.dart';
+import 'package:dgha/models/screen_args.dart';
 import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {

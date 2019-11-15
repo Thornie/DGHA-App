@@ -1,7 +1,7 @@
-import 'package:dgha_brochure/misc/data.dart';
-import 'package:dgha_brochure/misc/helper.dart';
-import 'package:dgha_brochure/models/place.dart';
-import 'package:dgha_brochure/models/search_response.dart';
+import 'package:dgha/misc/data.dart';
+import 'package:dgha/misc/helper.dart';
+import 'package:dgha/models/place.dart';
+import 'package:dgha/models/search_response.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 

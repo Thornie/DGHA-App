@@ -1,4 +1,4 @@
-import 'package:dgha_brochure/models/review.dart';
+import 'package:dgha/models/review.dart';
 import 'package:http/http.dart' as http;
 
 // TODO: change the url to rootURL

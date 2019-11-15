@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dgha_brochure/models/place.dart';
+import 'package:dgha/models/place.dart';
 
 class SearchPlace {
   List<PlaceData> places = new List<PlaceData>();
