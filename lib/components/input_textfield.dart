@@ -36,7 +36,7 @@ class UserInputTextField extends StatefulWidget {
 
 class _UserInputTextFieldState extends State<UserInputTextField> {
   final TextEditingController _txtController = new TextEditingController();
-  FocusNode _focus = new FocusNode();
+  FocusNode focus = new FocusNode();
 
   Color focusColor = Styles.yellow;
   Color unfocusedColor = Colors.white;
@@ -44,11 +44,11 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   @override
   void initState() {
     super.initState();
-    _focus.addListener(_onFocusChange);
+    focus.addListener(_onFocusChange);
   }
 
   void _onFocusChange() {
-    debugPrint("Focus: " + _focus.hasFocus.toString());
+    debugPrint("Focus: " + focus.hasFocus.toString());
   }
 
   double _getTextFieldWidth() {
@@ -65,7 +65,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
       if (widget.highlightRed) {
         textfieldColour = Styles.red;
       } else {
-        textfieldColour = _focus.hasFocus ? Styles.yellow : Colors.white;
+        textfieldColour = focus.hasFocus ? Styles.yellow : Colors.white;
       }
     }
     return textfieldColour;
@@ -74,7 +74,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   Color _setPrefixColour() {
     Color prefixColour = Styles.midnightBlue;
     if (widget.changeFocusColour) {
-      prefixColour = _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey;
+      prefixColour = focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey;
     }
     return prefixColour;
   }
@@ -82,59 +82,81 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: _setTextFieldColour(),
-        borderRadius: BorderRadius.all(Radius.circular(50)),
-        boxShadow: [
-          BoxShadow(
-            color: Styles.grey,
-            blurRadius: 3,
-            offset: Offset(2, 3),
-          ),
-        ],
+        decoration: BoxDecoration(
+    color: _setTextFieldColour(),
+    borderRadius: BorderRadius.all(Radius.circular(50)),
+    boxShadow: [
+      BoxShadow(
+        color: Styles.grey,
+        blurRadius: 3,
+        offset: Offset(2, 3),
       ),
-      child: Row(
-        children: <Widget>[
-          Container(
-            child: widget.prefixIcon != null
-                ? GestureDetector(
-                    onTap: () {
-                      widget.prefixOnTap();
-                    },
-                    child: DghaIcon(
-                      icon: widget.prefixIcon,
-                      iconColor: _setPrefixColour(),
-                    ),
-                  )
-                : SizedBox(width: 30),
-          ),
-          Container(
-            width: _getTextFieldWidth(),
-            child: TextField(
-              keyboardType: widget.keyboardType,
-              controller: _txtController,
-              focusNode: _focus,
-              autofocus: widget.autoFocus,
-              onSubmitted: (value) {
-                widget.onSubmit(value);
-              },
-              onChanged: (value) {
-                widget.onChange(value);
-              },
-              style: Styles.pStyle,
-              cursorColor: Styles.midnightBlue,
-              cursorWidth: 5,
-              obscureText: widget.obscureText,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                border: InputBorder.none,
+    ],
+        ),
+        child: Row(
+    children: <Widget>[
+      // -------------------------- NOTE: Prefix Icon
+      Builder(
+        builder: (context) {
+          if (widget.prefixIcon != null) {
+            return Semantics(
+              label: "Back",
+              button: true,
+              hint: "Double tap to go back to Explore Page",
+              child: GestureDetector(
+                onTap: () {
+                  widget.prefixOnTap();
+                },
+                child: DghaIcon(
+                  icon: widget.prefixIcon,
+                  iconColor: _setPrefixColour(),
+                ),
               ),
+            );
+          } else {
+            return SizedBox(width: 30);
+          }
+        },
+      ),
+      // -------------------------- NOTE: Textfield
+      Semantics(
+        label: "Search textfield",
+        hint: "Double tap to enter text",
+        excludeSemantics: true,
+        child: Container(
+          width: _getTextFieldWidth(),
+          child: TextField(
+            keyboardType: widget.keyboardType,
+            controller: _txtController,
+            focusNode: focus,
+            onSubmitted: (value) {
+              widget.onSubmit(value);
+            },
+            onChanged: (value) {
+              widget.onChange(value);
+            },
+            style: Styles.pStyle,
+            cursorColor: Styles.midnightBlue,
+            cursorWidth: 5,
+            obscureText: widget.obscureText,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              border: InputBorder.none,
             ),
           ),
-          Container(
+        ),
+      ),
+
+      // -------------------------- NOTE: Suffix Icon
+      Semantics(
+        excludeSemantics: focus.hasFocus ? false : true,
+        child: Container(
+          child: Semantics(
+            label: "Clear text field",
+            hint: "Double tap to clear text field",
             child: GestureDetector(
               onTap: () {
-                if (_focus.hasFocus) {
+                if (focus.hasFocus) {
                   Future.delayed(Duration(milliseconds: 50)).then((_) {
                     _txtController.clear();
                   });
@@ -143,13 +165,15 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
               child: Container(
                 child: DghaIcon(
                   icon: FontAwesomeIcons.times,
-                  iconColor: _focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+                  iconColor: focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
                 ),
               ),
             ),
           ),
-        ],
+        ),
       ),
-    );
+    ],
+        ),
+      );
   }
 }
