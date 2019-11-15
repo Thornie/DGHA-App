@@ -4,6 +4,7 @@ import 'package:dgha_brochure/models/review_place.dart';
 import 'package:dgha_brochure/models/review.dart';
 import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Class to handle all calls to the DGHA API
 class DghaApi {
@@ -46,28 +47,68 @@ class DghaApi {
   }
 
   //------------------------------ Note: Authentication ------------------------------//
-  static Future<oauth2.Client> signIn(String username, String password) async {
+  static Future<oauth2.Client> signIn({String email, String password}) async {
     // Authentication parameters
     Uri tokenEndpoint = Uri.parse(
         "https://dgha-identityserver.azurewebsites.net/connect/token");
     String identifier = "ro.client";
     String secret = "secret";
 
-    // Request client from token endpoint
-    oauth2.Client client = await oauth2.resourceOwnerPasswordGrant(
-      tokenEndpoint,
-      username,
-      password,
-      identifier: identifier,
-      secret: secret,
-    );
+    // Get credientials data
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    currentClient = client;
-    return client;
+    if (email == null && password == null) {
+      String credString = prefs.getString('credentials');
+      if (credString != null && credString != "") {
+        // Get client from credentials file
+        oauth2.Credentials credentials =
+            new oauth2.Credentials.fromJson(credString);
+        currentClient =
+            oauth2.Client(credentials, identifier: identifier, secret: secret);
+
+        //TODO: uncomment when credentials refreshing is fixed
+        //await refreshCredentials();
+
+        return currentClient;
+      } else {
+        print("Credentials don't exist");
+        return null;
+      }
+    } else {
+      // Request client from token endpoint
+      currentClient = await oauth2.resourceOwnerPasswordGrant(
+        tokenEndpoint,
+        email,
+        password,
+        identifier: identifier,
+        secret: secret,
+      );
+
+      prefs.setString('credentials', currentClient.credentials.toJson());
+
+      currentClient = currentClient;
+      return currentClient;
+    }
   }
 
-  static void signOut() {
+  static Future<bool> refreshCredentials() async {
+    // Refresh the token if needed
+    if (currentClient.credentials.isExpired) {
+      oauth2.Client client = await currentClient.refreshCredentials();
+      currentClient = client;
+      print("Refreshed");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static void signOut() async {
     currentClient = null;
+
+    // Empty credentials file
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('credentials', "");
   }
 
   //------------------------------ Note: Accounts ------------------------------//
@@ -91,6 +132,8 @@ class DghaApi {
 
   static Future<Account> getAccount() async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.get(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {
@@ -115,6 +158,8 @@ class DghaApi {
 
   static Future<http.Response> deleteAccount() async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.delete(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {
@@ -134,6 +179,8 @@ class DghaApi {
     String newPassword,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.put(
         "$rootUrl/Accounts/${parseJwt(currentClient.credentials.accessToken)['sub']}/UpdatePassword?currentPassword=$currentPassword&newPassword=$newPassword",
         headers: {
@@ -154,6 +201,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeID,
@@ -184,6 +233,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeId,
@@ -365,6 +416,8 @@ class DghaApi {
     String comment,
   ) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       Map<String, dynamic> data = {
         "userID": parseJwt(currentClient.credentials.accessToken)['sub'],
         "placeID": placeId,
@@ -390,6 +443,8 @@ class DghaApi {
 
   static Future<http.Response> deleteReview(String placeId) async {
     if (currentClient != null) {
+      await refreshCredentials();
+
       http.Response response = await currentClient.delete(
         "$rootUrl/Reviews/$placeId/${parseJwt(currentClient.credentials.accessToken)['sub']}",
         headers: {

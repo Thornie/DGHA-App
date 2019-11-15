@@ -1,3 +1,4 @@
+import 'package:dgha_brochure/misc/dgha_api.dart';
 import 'package:dgha_brochure/misc/route_generator.dart';
 import 'package:dgha_brochure/misc/styles.dart';
 import 'package:dgha_brochure/screens/explore_screen.dart';
@@ -34,6 +35,7 @@ class _FirstScreenState extends State<FirstScreen> {
     var result = await loadLoginScr();
     bool hasOpened = result[0] as bool;
     SharedPreferences prefs = result[1] as SharedPreferences;
+    await DghaApi.signIn();
 
     if (hasOpened) {
       Future.delayed(Duration.zero, () {

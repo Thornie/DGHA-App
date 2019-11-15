@@ -66,7 +66,8 @@ class _ReportScreenState extends State<ReportScreen> {
                   ),
                   Semantics(
                     label: "Comment",
-                    hint: "Double tap to give more information on why you're reporting ${widget.placeData.name}",
+                    hint:
+                        "Double tap to give more information on why you're reporting ${widget.placeData.name}",
                     excludeSemantics: true,
                     child: TextField(
                       controller: _txtController,
@@ -96,6 +97,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         setState(() {
                           this.isLoading = true;
                         });
+
                         Response response = await DghaApi.postComplaint(
                           widget.placeData.placeId,
                           _txtController.text,
@@ -131,7 +133,8 @@ class _ReportScreenState extends State<ReportScreen> {
                 hint: "Double tap to go back and cancel the report",
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).popAndPushNamed(PlaceDetailsScreen.id, arguments: widget.placeData);
+                    Navigator.of(context).popAndPushNamed(PlaceDetailsScreen.id,
+                        arguments: widget.placeData);
                   },
                   child: DghaIcon(
                     icon: FontAwesomeIcons.arrowLeft,
