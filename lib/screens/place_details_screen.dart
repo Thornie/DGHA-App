@@ -264,14 +264,19 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               ),
 
               // NOTE: Map Btn
-              childTwo: GestureDetector(
-                onTap: () {
-                  _launchMap(widget.placeData.placeId);
-                },
-                child: DghaIcon(
-                  icon: FontAwesomeIcons.mapMarkerAlt,
-                  iconColor: Styles.yellow,
-                  backgroundColor: Styles.midnightBlue,
+              childTwo: Semantics(
+                label: "Map",
+                button: true,
+                hint: "Double tap to open google maps",
+                              child: GestureDetector(
+                  onTap: () {
+                    _launchMap(widget.placeData.placeId);
+                  },
+                  child: DghaIcon(
+                    icon: FontAwesomeIcons.mapMarkerAlt,
+                    iconColor: Styles.yellow,
+                    backgroundColor: Styles.midnightBlue,
+                  ),
                 ),
               ),
             ),
