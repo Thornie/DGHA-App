@@ -248,8 +248,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               semanticLabel: "${widget.placeData.name} Reviews",
               childOne: Semantics(
                 button: true,
-                label: "Menu",
-                hint: "Double tap to go back and view other locations",
+                label: "Back",
+                hint: "Double tap to go back",
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
