@@ -17,10 +17,12 @@ class UserInputTextField extends StatefulWidget {
   final Function prefixOnTap;
   final Function(String) onSubmit;
   final bool changeFocusColour;
-  final String textFieldLabel; 
+  final String textFieldLabel;
+  final bool activePrefix;
 
   UserInputTextField(
       {this.prefixIcon,
+      this.activePrefix = true,
       this.hintText,
       this.obscureText = false,
       this.highlightRed = false,
@@ -84,100 +86,107 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-    color: _setTextFieldColour(),
-    borderRadius: BorderRadius.all(Radius.circular(50)),
-    boxShadow: [
-      BoxShadow(
-        color: Styles.grey,
-        blurRadius: 3,
-        offset: Offset(2, 3),
+      decoration: BoxDecoration(
+        color: _setTextFieldColour(),
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        boxShadow: [
+          BoxShadow(
+            color: Styles.grey,
+            blurRadius: 3,
+            offset: Offset(2, 3),
+          ),
+        ],
       ),
-    ],
-        ),
-        child: Row(
-    children: <Widget>[
-      // -------------------------- NOTE: Prefix Icon
-      Builder(
-        builder: (context) {
-          if (widget.prefixIcon != null) {
-            return Semantics(
-              label: "Back",
-              button: true,
-              hint: "Double tap to go back to Explore Page",
-              child: GestureDetector(
-                onTap: () {
-                  widget.prefixOnTap();
-                },
-                child: DghaIcon(
+      child: Row(
+        children: <Widget>[
+          // -------------------------- NOTE: Prefix Icon
+          Builder(
+            builder: (context) {
+              if (widget.prefixIcon != null) {
+                var dghaIcon = DghaIcon(
                   icon: widget.prefixIcon,
                   iconColor: _setPrefixColour(),
                   backgroundColor: Colors.transparent,
-                ),
-              ),
-            );
-          } else {
-            return SizedBox(width: 30);
-          }
-        },
-      ),
-      // -------------------------- NOTE: Textfield
-      Semantics(
-        label: "${widget.textFieldLabel} textfield",
-        hint: "Double tap to enter text",
-        excludeSemantics: true,
-        child: Container(
-          width: _getTextFieldWidth(),
-          child: TextField(
-            keyboardType: widget.keyboardType,
-            controller: _txtController,
-            focusNode: focus,
-            onSubmitted: (value) {
-              widget.onSubmit(value);
-            },
-            onChanged: (value) {
-              widget.onChange(value);
-            },
-            style: Styles.pStyle,
-            cursorColor: Styles.midnightBlue,
-            cursorWidth: 5,
-            obscureText: widget.obscureText,
-            decoration: InputDecoration(
-              hintText: widget.hintText,
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-      ),
-
-      // -------------------------- NOTE: Suffix Icon
-      Semantics(
-        excludeSemantics: focus.hasFocus ? false : true,
-        child: Container(
-          child: Semantics(
-            label: "Clear text field",
-            hint: "Double tap to clear text field",
-            child: GestureDetector(
-              onTap: () {
-                if (focus.hasFocus) {
-                  Future.delayed(Duration(milliseconds: 50)).then((_) {
-                    _txtController.clear();
-                  });
+                );
+                if (widget.activePrefix) {
+                  return Semantics(
+                    label: "Back",
+                    button: true,
+                    hint: "Double tap to go back to Explore Page",
+                    child: GestureDetector(
+                      onTap: () {
+                        widget.prefixOnTap();
+                      },
+                      child: dghaIcon,
+                    ),
+                  );
+                } else {
+                  return dghaIcon;
                 }
-              },
-              child: Container(
-                child: DghaIcon(
-                  icon: FontAwesomeIcons.times,
-                  iconColor: focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
-                  backgroundColor: Colors.transparent,
+              }
+              return SizedBox(width: 30);
+            },
+          ),
+          // -------------------------- NOTE: Textfield
+          Semantics(
+            label: "${widget.textFieldLabel}",
+            textField: true,
+            hint: "Double tap to enter text",
+            excludeSemantics: true,
+            child: Container(
+              width: _getTextFieldWidth(),
+              child: TextField(
+                keyboardType: widget.keyboardType,
+                controller: _txtController,
+                focusNode: focus,
+                onSubmitted: (value) {
+                  widget.onSubmit(value);
+                },
+                onChanged: (value) {
+                  widget.onChange(value);
+                },
+                style: Styles.pStyle,
+                cursorColor: Styles.midnightBlue,
+                cursorWidth: 5,
+                obscureText: widget.obscureText,
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  border: InputBorder.none,
                 ),
               ),
             ),
           ),
-        ),
+
+          // -------------------------- NOTE: Suffix Icon
+          Semantics(
+            excludeSemantics: focus.hasFocus ? false : true,
+            child: Container(
+              child: Semantics(
+                label: "Clear text field",
+                hint: "Double tap to clear text field",
+                button: true,
+                obscured: true,
+                child: GestureDetector(
+                  onTap: () {
+                    if (focus.hasFocus) {
+                      Future.delayed(Duration(milliseconds: 50)).then((_) {
+                        _txtController.clear();
+                      });
+                    }
+                  },
+                  child: Container(
+                    child: DghaIcon(
+                      icon: FontAwesomeIcons.times,
+                      iconColor: focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-    ],
-        ),
-      );
+    );
   }
 }
