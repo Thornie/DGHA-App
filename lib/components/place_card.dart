@@ -82,8 +82,8 @@ class PlaceCard extends StatelessWidget {
         SizedBox(
           width: Styles.spacing * 0.25,
         ),
-        ReviewCount(
-            numOfRating: this.placeData.numOfAllReviews,
+        YellowTagHighlight(
+            text: this.placeData.numOfAllReviews.toString(),
             textStyle: Styles.boldPStyle)
       ],
     );

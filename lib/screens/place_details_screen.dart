@@ -5,6 +5,7 @@ import 'package:dgha/components/dgha_star_rating.dart';
 import 'package:dgha/components/dgha_text_btn.dart';
 import 'package:dgha/components/rating_with_title.dart';
 import 'package:dgha/components/review_container.dart';
+import 'package:dgha/components/review_count_container.dart';
 import 'package:dgha/components/view_more_btn.dart';
 import 'package:dgha/misc/data.dart';
 import 'package:dgha/misc/dgha_api.dart';
@@ -120,37 +121,36 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
   }
 
-  String getTypes() {
-    String types = "";
+  List<String> getTypes() {
+    List<String> types = new List<String>();
 
     for (int i = 0; i < widget.placeData.types.length; i++) {
       if (Data.allPlaceTypes.contains(widget.placeData.types[i])) {
-        //For each word in the string
+        // Replace _ with a space
         String type = widget.placeData.types[i].replaceAll(RegExp('_'), ' ');
         List<String> splitStr = type.split(" ");
-        String word = "";
 
         for (int j = 0; j < splitStr.length; j++) {
           //Captitalize first letter
-          word += '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
+          String word = '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
+          types.add(word);
         }
 
-        types += "${word.trim()}, ";
+        // types += "${word.trim()}, ";
       }
     }
 
-    //Remove end comma and whitespace
-    if (types != "") {
-      types = types.trim();
-      types = types.substring(0, types.length - 1);
-    }
+    // //Remove end comma and whitespace
+    // if (types != "") {
+    //   types = types.trim();
+    //   types = types.substring(0, types.length - 1);
+    // }
 
     return types;
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     if (Data.pages.last == PageNav.placeDetailsScr) {
       Data.pages.removeLast();
@@ -159,7 +159,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String types = getTypes();
+    // String types = getTypes();
 
     return Scaffold(
       body: SafeArea(
@@ -185,8 +185,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   // ---------------- NOTE: Types
                   Builder(
                     builder: (context) {
-                      if (types != "") {
-                        return Container(child: Text(types, style: Styles.pStyle));
+                      if (this.getTypes().length > 0) {
+                        return Container(
+                          child: Wrap(
+                              spacing: Styles.spacing * 0.5,
+                              children: this.getTypes()
+                                  .map((type) => YellowTagHighlight(
+                                        text: type,
+                                        textStyle: Styles.boldPStyle,
+                                      ))
+                                  .toList()),
+                        );
                       } else {
                         return Container(height: 0);
                       }

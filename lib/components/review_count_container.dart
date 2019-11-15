@@ -1,11 +1,11 @@
 import 'package:dgha/misc/styles.dart';
 import 'package:flutter/material.dart';
 
-class ReviewCount extends StatelessWidget {
-  final int numOfRating; 
+class YellowTagHighlight extends StatelessWidget {
+  final String text; 
   final TextStyle textStyle; 
 
-  ReviewCount({@required this.numOfRating, @required this.textStyle});
+  YellowTagHighlight({@required this.text, @required this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,13 @@ class ReviewCount extends StatelessWidget {
         // minHeight: 10,
         minWidth: 28
       ),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
       color: Styles.yellow,
       borderRadius: BorderRadius.all(Radius.circular(1000)),
       ),
       child: Text(
-        numOfRating.toString(),
+        text.toString(),
         style: this.textStyle,
         textAlign: TextAlign.center,
       ),
