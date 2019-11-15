@@ -3,7 +3,9 @@ import 'package:dgha/components/input_textfield.dart';
 import 'package:dgha/components/loading_text.dart';
 import 'package:dgha/components/place_card.dart';
 import 'package:dgha/components/view_more_btn.dart';
+import 'package:dgha/misc/data.dart';
 import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/page_nav.dart';
 import 'package:dgha/models/place.dart';
 import 'package:dgha/models/search_response.dart';
 import 'package:dgha/services/place_service.dart';
@@ -23,6 +25,12 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isLoading = false;
   bool isFirstLoad = true;
 
+  @override
+  void initState() {
+    super.initState();
+    Data.pages.add(PageNav.searchScr);
+  }
+
   // ------------------------- NOTE: Get Place
   void _search() async {
     setState(() {
@@ -40,6 +48,15 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     } catch (e) {
       print(e);
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (Data.pages.last == PageNav.searchScr) {
+      Data.pages.removeLast();
     }
   }
 

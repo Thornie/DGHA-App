@@ -149,6 +149,15 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (Data.pages.last == PageNav.placeDetailsScr) {
+      Data.pages.removeLast();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     String types = getTypes();
 
