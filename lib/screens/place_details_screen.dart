@@ -319,29 +319,32 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   }
 
   Widget _buildeReviewSection() {
-    return Builder(
-      builder: (context) {
-        if (this.reviewList.isNotEmpty) {
-          return Column(
-            children: this
-                .reviewList
-                .map((review) => ReviewContainer(
-                      review: review,
-                    ))
-                .toList(),
-          );
-        } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
-          return Container(
-            child: Text(
-              "Loading . . .",
-              style: Styles.h2Style,
-              textAlign: TextAlign.center,
-            ),
-          );
-        } else {
-          return _buildFirstReviewBtn();
-        }
-      },
+    return Semantics(
+      explicitChildNodes: true,
+          child: Builder(
+        builder: (context) {
+          if (this.reviewList.isNotEmpty) {
+            return Column(
+              children: this
+                  .reviewList
+                  .map((review) => ReviewContainer(
+                        review: review,
+                      ))
+                  .toList(),
+            );
+          } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
+            return Container(
+              child: Text(
+                "Loading . . .",
+                style: Styles.h2Style,
+                textAlign: TextAlign.center,
+              ),
+            );
+          } else {
+            return _buildFirstReviewBtn();
+          }
+        },
+      ),
     );
   }
 

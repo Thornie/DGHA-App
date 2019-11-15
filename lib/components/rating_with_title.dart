@@ -25,15 +25,10 @@ class RatingWithTitle extends StatelessWidget {
             style: Styles.h4Style,
           ),
         ),
-        Semantics(
-          label: "Star Rating",
-          hint: "$rating out of 5 stars",
-          excludeSemantics: true,
-          child: DghaStarRating(
-            changeRatingOnTap: false,
-            rating: rating,
-            height: isSmall ? 26 * scale : 30 * scale,
-          ),
+        DghaStarRating(
+          changeRatingOnTap: false,
+          rating: rating,
+          height: isSmall ? 26 * scale : 30 * scale,
         ),
       ],
     );
