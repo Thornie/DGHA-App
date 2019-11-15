@@ -3,7 +3,6 @@ import 'package:dgha/components/bottom_navigation.dart';
 import 'package:dgha/components/dgha_icon.dart';
 import 'package:dgha/components/dgha_star_rating.dart';
 import 'package:dgha/components/dgha_text_btn.dart';
-import 'package:dgha/components/loading_text.dart';
 import 'package:dgha/components/rating_with_title.dart';
 import 'package:dgha/components/review_container.dart';
 import 'package:dgha/components/view_more_btn.dart';
@@ -20,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 
 class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
@@ -327,7 +325,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   Widget _buildeReviewSection() {
     return Semantics(
       explicitChildNodes: true,
-          child: Builder(
+      child: Builder(
         builder: (context) {
           if (this.reviewList.isNotEmpty) {
             return Column(
@@ -339,12 +337,27 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   .toList(),
             );
           } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
-            return Container(
-              child: Text(
-                "Loading . . .",
-                style: Styles.h2Style,
-                textAlign: TextAlign.center,
-              ),
+            return Column(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 2,
+                  color: Styles.midnightBlue,
+                ),
+                SizedBox(
+                  height: Styles.spacing / 2,
+                ),
+                Container(
+                  child: Text(
+                    "Loading . . .",
+                    style: Styles.h2Style,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  height: Styles.spacing / 2,
+                ),
+              ],
             );
           } else {
             return _buildFirstReviewBtn();
