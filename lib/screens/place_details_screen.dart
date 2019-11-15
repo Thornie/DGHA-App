@@ -260,9 +260,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 ),
               ),
             ),
-            LoadingText(
-              condition: this.isLoading && this.isFirstLoad,
-            )
           ],
         ),
       ),
