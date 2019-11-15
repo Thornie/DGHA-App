@@ -92,7 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
               // ------------------------- NOTE: MORE button
               ViewMoreBtn(
-                condition: this.searchPlace.nextPageToken != '',
+                showCondition: this.searchPlace.nextPageToken != '',
                 loadingCondition: this.isLoading,
                 onTap: this._search,
               ),

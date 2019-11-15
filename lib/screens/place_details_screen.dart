@@ -60,13 +60,17 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
     List<ReviewData> _reviewList = await ReviewService.getReviewSetById(widget.placeData.placeId, this.setNum);
 
+    setState(() {
+      this.reviewList.addAll(_reviewList);
+      this.setNum = this.setNum + 1; // can't use increment (i++)
+    });
+
     try {
       // check if it is 6 because that means there will be more reviews to come
-      if (_reviewList.length == 6) {
+      if (this.reviewList.length != widget.placeData.numOfWrittenReviews) {
         setState(() {
           this.databaseHasMoreReviews = true;
         });
-        _reviewList.removeLast();
       } else {
         setState(() {
           this.databaseHasMoreReviews = false;
@@ -75,8 +79,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
       setState(() {
         this.isLoading = false;
-        this.reviewList.addAll(_reviewList);
-        this.setNum = this.setNum + 1; // can't use increment (i++)
         this.isFirstLoad = false;
       });
     } catch (e) {
@@ -168,6 +170,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
               // ----------------------------- NOTE: Body
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   SizedBox(height: Styles.heightFromAppBar),
 
@@ -207,8 +210,9 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   // ---------------- NOTE: Reviews
                   _buildeReviewSection(),
 
+                  // ---------------- NOTE: VIEW MORE
                   ViewMoreBtn(
-                    condition: this.databaseHasMoreReviews,
+                    showCondition: this.databaseHasMoreReviews,
                     loadingCondition: this.isLoading,
                     onTap: this.getReviews,
                     bottomPadding: Styles.spacing,
