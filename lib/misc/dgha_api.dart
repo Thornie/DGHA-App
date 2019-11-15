@@ -66,7 +66,8 @@ class DghaApi {
         currentClient =
             oauth2.Client(credentials, identifier: identifier, secret: secret);
 
-        await refreshCredentials();
+        //TODO: uncomment when credentials refreshing is fixed
+        //await refreshCredentials();
 
         return currentClient;
       } else {
@@ -257,7 +258,6 @@ class DghaApi {
     }
   }
 
-  //TODO: review lees part
   static Future<ReviewPlace> getReviewsFromPlaceId(String placeId) async {
     http.Response response = await http.get(
       "$rootUrl/Reviews/placeId/$placeId",
