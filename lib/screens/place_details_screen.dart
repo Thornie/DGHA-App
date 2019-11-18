@@ -46,7 +46,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     super.initState();
 
     // only run getReviews() if the place has ratings
-    if (widget.placeData.numOfAllReviews > 0) {
+    if (widget.placeData.numOfWrittenReviews > 0) {
       getReviews();
     }
 
