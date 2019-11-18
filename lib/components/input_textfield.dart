@@ -17,9 +17,12 @@ class UserInputTextField extends StatefulWidget {
   final Function prefixOnTap;
   final Function(String) onSubmit;
   final bool changeFocusColour;
+  final String textFieldLabel;
+  final bool activePrefix;
 
   UserInputTextField(
       {this.prefixIcon,
+      this.activePrefix = true,
       this.hintText,
       this.obscureText = false,
       this.highlightRed = false,
@@ -28,6 +31,7 @@ class UserInputTextField extends StatefulWidget {
       this.autoFocus = false,
       this.prefixOnTap,
       this.onSubmit,
+      this.textFieldLabel = "",
       this.changeFocusColour = true});
 
   @override
@@ -36,7 +40,7 @@ class UserInputTextField extends StatefulWidget {
 
 class _UserInputTextFieldState extends State<UserInputTextField> {
   final TextEditingController _txtController = new TextEditingController();
-  FocusNode _focus = new FocusNode();
+  FocusNode focus = new FocusNode();
 
   Color focusColor = Styles.yellow;
   Color unfocusedColor = Colors.white;
@@ -44,11 +48,11 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   @override
   void initState() {
     super.initState();
-    _focus.addListener(_onFocusChange);
+    focus.addListener(_onFocusChange);
   }
 
   void _onFocusChange() {
-    debugPrint("Focus: " + _focus.hasFocus.toString());
+    debugPrint("Focus: " + focus.hasFocus.toString());
   }
 
   double _getTextFieldWidth() {
@@ -65,7 +69,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
       if (widget.highlightRed) {
         textfieldColour = Styles.red;
       } else {
-        textfieldColour = _focus.hasFocus ? Styles.yellow : Colors.white;
+        textfieldColour = focus.hasFocus ? Styles.yellow : Colors.white;
       }
     }
     return textfieldColour;
@@ -74,7 +78,7 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
   Color _setPrefixColour() {
     Color prefixColour = Styles.midnightBlue;
     if (widget.changeFocusColour) {
-      prefixColour = _focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey;
+      prefixColour = focus.hasFocus ? Styles.midnightBlue : Styles.mediumGrey;
     }
     return prefixColour;
   }
@@ -95,55 +99,88 @@ class _UserInputTextFieldState extends State<UserInputTextField> {
       ),
       child: Row(
         children: <Widget>[
-          Container(
-            child: widget.prefixIcon != null
-                ? GestureDetector(
-                    onTap: () {
-                      widget.prefixOnTap();
-                    },
-                    child: DghaIcon(
-                      icon: widget.prefixIcon,
-                      iconColor: _setPrefixColour(),
+          // -------------------------- NOTE: Prefix Icon
+          Builder(
+            builder: (context) {
+              if (widget.prefixIcon != null) {
+                var dghaIcon = DghaIcon(
+                  icon: widget.prefixIcon,
+                  iconColor: _setPrefixColour(),
+                  backgroundColor: Colors.transparent,
+                );
+                if (widget.activePrefix) {
+                  return Semantics(
+                    label: "Back",
+                    button: true,
+                    hint: "Double tap to go back to Explore Page",
+                    child: GestureDetector(
+                      onTap: () {
+                        widget.prefixOnTap();
+                      },
+                      child: dghaIcon,
                     ),
-                  )
-                : SizedBox(width: 30),
+                  );
+                } else {
+                  return dghaIcon;
+                }
+              }
+              return SizedBox(width: 30);
+            },
           ),
-          Container(
-            width: _getTextFieldWidth(),
-            child: TextField(
-              keyboardType: widget.keyboardType,
-              controller: _txtController,
-              focusNode: _focus,
-              autofocus: widget.autoFocus,
-              onSubmitted: (value) {
-                widget.onSubmit(value);
-              },
-              onChanged: (value) {
-                widget.onChange(value);
-              },
-              style: Styles.pStyle,
-              cursorColor: Styles.midnightBlue,
-              cursorWidth: 5,
-              obscureText: widget.obscureText,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                border: InputBorder.none,
+          // -------------------------- NOTE: Textfield
+          Semantics(
+            label: "${widget.textFieldLabel}",
+            textField: true,
+            hint: "Double tap to enter text",
+            excludeSemantics: true,
+            child: Container(
+              width: _getTextFieldWidth(),
+              child: TextField(
+                keyboardType: widget.keyboardType,
+                controller: _txtController,
+                focusNode: focus,
+                onSubmitted: (value) {
+                  widget.onSubmit(value);
+                },
+                onChanged: (value) {
+                  widget.onChange(value);
+                },
+                style: Styles.pStyle,
+                cursorColor: Styles.midnightBlue,
+                cursorWidth: 5,
+                obscureText: widget.obscureText,
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  border: InputBorder.none,
+                ),
               ),
             ),
           ),
-          Container(
-            child: GestureDetector(
-              onTap: () {
-                if (_focus.hasFocus) {
-                  Future.delayed(Duration(milliseconds: 50)).then((_) {
-                    _txtController.clear();
-                  });
-                }
-              },
-              child: Container(
-                child: DghaIcon(
-                  icon: FontAwesomeIcons.times,
-                  iconColor: _focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+
+          // -------------------------- NOTE: Suffix Icon
+          Semantics(
+            excludeSemantics: focus.hasFocus ? false : true,
+            child: Container(
+              child: Semantics(
+                label: "Clear text field",
+                hint: "Double tap to clear text field",
+                button: true,
+                obscured: true,
+                child: GestureDetector(
+                  onTap: () {
+                    if (focus.hasFocus) {
+                      Future.delayed(Duration(milliseconds: 50)).then((_) {
+                        _txtController.clear();
+                      });
+                    }
+                  },
+                  child: Container(
+                    child: DghaIcon(
+                      icon: FontAwesomeIcons.times,
+                      iconColor: focus.hasFocus ? Styles.midnightBlue : Colors.transparent,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ),
                 ),
               ),
             ),

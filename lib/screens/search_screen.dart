@@ -3,7 +3,9 @@ import 'package:dgha/components/input_textfield.dart';
 import 'package:dgha/components/loading_text.dart';
 import 'package:dgha/components/place_card.dart';
 import 'package:dgha/components/view_more_btn.dart';
+import 'package:dgha/misc/data.dart';
 import 'package:dgha/misc/styles.dart';
+import 'package:dgha/models/page_nav.dart';
 import 'package:dgha/models/place.dart';
 import 'package:dgha/models/search_response.dart';
 import 'package:dgha/services/place_service.dart';
@@ -22,6 +24,12 @@ class _SearchScreenState extends State<SearchScreen> {
   String input;
   bool isLoading = false;
   bool isFirstLoad = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Data.pages.add(PageNav.searchScr);
+  }
 
   // ------------------------- NOTE: Get Place
   void _search() async {
@@ -44,6 +52,15 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (Data.pages.last == PageNav.searchScr) {
+      Data.pages.removeLast();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -54,11 +71,20 @@ class _SearchScreenState extends State<SearchScreen> {
             children: <Widget>[
               SizedBox(height: 100),
 
+              // ------------------------- NOTE: Big Loading Text
+              LoadingText(condition: this.isLoading && (this.isFirstLoad || this.searchPlace.places.isEmpty)),
+
               // ------------------------- NOTE: Place Cards
               Container(
                 padding: EdgeInsets.symmetric(horizontal: Styles.spacing),
                 child: Column(
-                  children: this.searchPlace.places.map((place) => PlaceCard(placeData: place,)).toList(),
+                  children: this
+                      .searchPlace
+                      .places
+                      .map((place) => PlaceCard(
+                            placeData: place,
+                          ))
+                      .toList(),
                 ),
               ),
 
@@ -66,7 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
               // ------------------------- NOTE: MORE button
               ViewMoreBtn(
-                condition: this.searchPlace.nextPageToken != '',
+                showCondition: this.searchPlace.nextPageToken != '',
                 loadingCondition: this.isLoading,
                 onTap: this._search,
               ),
@@ -80,9 +106,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
           // ------------------------- NOTE: Search Bar
           buildSearchBar(),
-
-          // ------------------------- NOTE: Big Loading Text
-          LoadingText(condition: this.isLoading && (this.isFirstLoad || this.searchPlace.places.isEmpty))
         ]),
       ),
 
@@ -102,14 +125,13 @@ class _SearchScreenState extends State<SearchScreen> {
           Navigator.pop(context);
         },
         onSubmit: (value) {
-
           // empty out values for the new place
           setState(() {
             this.input = value;
             this.searchPlace.places.clear();
             this.searchPlace.nextPageToken = '';
           });
-          
+
           this._search();
         },
         changeFocusColour: false,

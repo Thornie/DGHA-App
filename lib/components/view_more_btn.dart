@@ -3,18 +3,18 @@ import 'package:dgha/misc/styles.dart';
 import 'package:flutter/material.dart';
 
 class ViewMoreBtn extends StatelessWidget {
-  final bool condition;
+  final bool showCondition;
   final bool loadingCondition; 
   final Function() onTap; 
   final double bottomPadding; 
 
-  ViewMoreBtn({@required this.condition, @required this.loadingCondition, @required this.onTap, this.bottomPadding = 0});
+  ViewMoreBtn({@required this.showCondition, @required this.loadingCondition, @required this.onTap, this.bottomPadding = 0});
 
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if(condition) {
+        if(showCondition) {
           return Container(
             padding: EdgeInsets.only(bottom: this.bottomPadding),
             child: DghaTextButton(

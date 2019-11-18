@@ -150,38 +150,32 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           // NOTE: Email
-                          Semantics(
-                            label: "Email",
-                            hint: "Double tap to enter your email address",
-                            excludeSemantics: true,
-                            child: Container(
-                              child: UserInputTextField(
-                                autoFocus: true,
-                                keyboardType: TextInputType.emailAddress,
-                                prefixIcon: FontAwesomeIcons.solidEnvelope,
-                                hintText: "Email",
-                                onChange: (value) {
-                                  email = value;
-                                },
-                              ),
+                          Container(
+                            child: UserInputTextField(
+                              activePrefix: false,
+                              textFieldLabel: "Email",
+                              keyboardType: TextInputType.emailAddress,
+                              prefixIcon: FontAwesomeIcons.solidEnvelope,
+                              hintText: "Email",
+                              onChange: (value) {
+                                email = value;
+                              },
                             ),
                           ),
 
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Password Text Field
-                          Semantics(
-                            label: "Password",
-                            hint: "Double tap to enter your password",
-                            child: Container(
-                              child: UserInputTextField(
-                                prefixIcon: FontAwesomeIcons.lock,
-                                hintText: "Password",
-                                obscureText: true,
-                                onChange: (value) {
-                                  password = value;
-                                },
-                              ),
+                          Container(
+                            child: UserInputTextField(
+                              activePrefix: false,
+                              textFieldLabel: "Password",
+                              prefixIcon: FontAwesomeIcons.lock,
+                              hintText: "Password",
+                              obscureText: true,
+                              onChange: (value) {
+                                password = value;
+                              },
                             ),
                           ),
 
@@ -190,7 +184,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           // NOTE: Login
                           Semantics(
                             label: "Sign In",
+                            button: true,
                             hint: "Double tap to sign into your account",
+                            excludeSemantics: true,
                             child: DghaTextButton(
                               minWidth: this.buttonMinWidth,
                               text: "Sign In",
@@ -214,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Semantics(
                     label: "Skip",
                     hint: "Double tap to skip sign in",
+                    excludeSemantics: true,
                     child: DghaTextButton(
                       minWidth: this.buttonMinWidth,
                       text: "Skip",

@@ -4,4 +4,5 @@ enum PageNav {
   placeDetailsScr,
   ratingScr,
   infoScr,
+  searchScr,
 }

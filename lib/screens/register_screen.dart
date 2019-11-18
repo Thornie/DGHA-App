@@ -141,61 +141,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
 
                           // NOTE: Email
-                          Semantics(
-                            textField: true,
-                            label: "Email text field",
-                            child: Container(
-                              child: UserInputTextField(
-                                keyboardType: TextInputType.emailAddress,
-                                prefixIcon: FontAwesomeIcons.solidEnvelope,
-                                hintText: "Email",
-                                onChange: (value) {
-                                  this.email = value;
-                                },
-                              ),
+                          Container(
+                            child: UserInputTextField(
+                              textFieldLabel: "Email",
+                              activePrefix: false,
+                              keyboardType: TextInputType.emailAddress,
+                              prefixIcon: FontAwesomeIcons.solidEnvelope,
+                              hintText: "Email",
+                              onChange: (value) {
+                                this.email = value;
+                              },
                             ),
                           ),
 
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Password V1
-                          Semantics(
-                            textField: true,
-                            label: "Password text field",
-                            child: Container(
-                              child: UserInputTextField(
-                                prefixIcon: FontAwesomeIcons.lock,
-                                hintText: "Password",
-                                obscureText: true,
-                                onChange: (value) {
-                                  this.passwordV1 = value;
-                                },
-                              ),
+                          Container(
+                            child: UserInputTextField(
+                              textFieldLabel: "Password",
+                              activePrefix: false,
+                              prefixIcon: FontAwesomeIcons.lock,
+                              hintText: "Password",
+                              obscureText: true,
+                              onChange: (value) {
+                                this.passwordV1 = value;
+                              },
                             ),
                           ),
 
                           SizedBox(height: this.marginHeight * 0.5),
 
                           // NOTE: Password V2
-                          Semantics(
-                            textField: true,
-                            label: "Confirm password text field",
-                            child: Container(
-                              child: UserInputTextField(
-                                prefixIcon: FontAwesomeIcons.lock,
-                                hintText: "Confirm Password",
-                                obscureText: true,
-                                highlightRed: !passwordMatch,
-                                onChange: (value) {
-                                  this.passwordV2 = value;
-                                  setState(() {
-                                    if (passwordV1 != passwordV2)
-                                      passwordMatch = false;
-                                    else
-                                      passwordMatch = true;
-                                  });
-                                },
-                              ),
+                          Container(
+                            child: UserInputTextField(
+                              textFieldLabel: "Confirm Password",
+                              activePrefix: false,
+                              prefixIcon: FontAwesomeIcons.lock,
+                              hintText: "Confirm Password",
+                              obscureText: true,
+                              highlightRed: !passwordMatch,
+                              onChange: (value) {
+                                this.passwordV2 = value;
+                                setState(() {
+                                  if (passwordV1 != passwordV2)
+                                    passwordMatch = false;
+                                  else
+                                    passwordMatch = true;
+                                });
+                              },
                             ),
                           ),
 
@@ -225,6 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             button: true,
                             label: "Sign Up button",
                             hint: "Double tap to sign up",
+                            excludeSemantics: true,
                             child: DghaTextButton(
                               minWidth: this.buttonMinWidth,
                               text: "Sign Up",
@@ -253,6 +248,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       button: true,
                       label: "Skip button",
                       hint: "Double tap to skip sign up",
+                      excludeSemantics: true,
                       child: DghaTextButton(
                         minWidth: this.buttonMinWidth,
                         text: "Skip",

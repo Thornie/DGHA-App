@@ -9,48 +9,60 @@ class ReviewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     DateTime dateAdded = review.formatDateAdded();
 
     return Container(
       child: Column(
         children: <Widget>[
+          // ------------------ NOTE: divider
           Container(
             width: double.infinity,
             height: 2,
             color: Styles.midnightBlue,
           ),
           SizedBox(
-            height: Styles.spacing/2,
+            height: Styles.spacing / 2,
           ),
-          Align(
-            alignment: Alignment.centerLeft,
+
+          // ------------------ NOTE: Date
+          Semantics(
+            label: "Date reviewed: ",
+            child: Align(
+              alignment: Alignment.centerLeft,
               child: Text(
-                "${dateAdded.day}/${dateAdded.month}/${dateAdded.year}", 
+                "${dateAdded.day}/${dateAdded.month}/${dateAdded.year}",
                 style: Styles.pStyle,
+              ),
             ),
           ),
           SizedBox(
-            height: Styles.spacing/4,
+            height: Styles.spacing / 4,
           ),
-          Container(
-            child: Column(
-              children: <Widget>[
-                // ------ NOTE: Rate: ⭐⭐⭐⭐⭐
-                RatingWithTitle(
-                  title: "Rated: ",
-                  rating: this.review.overallRating.toDouble(),
-                  isSmall: true,
-                  spaceBetween: false,
-                ),
-                Container(
-                  width: double.infinity,
-                  child: SelectableText(
-                    this.review.comment,
-                    style: Styles.pStyle,
-                  ),
-                ),
-              ],
+
+          // ------------------ NOTE: Stars
+          Semantics(
+            label: "Rated: ${this.review.overallRating.toString()} out of 5 stars",
+            excludeSemantics: true,
+            explicitChildNodes: false,
+            child: Container(
+              child: RatingWithTitle(
+                title: "Rated: ",
+                rating: this.review.overallRating.toDouble(),
+                isSmall: true,
+                spaceBetween: false,
+              ),
+            ),
+          ),
+
+          // ------------------ NOTE: Comment
+          Semantics(
+            label: "Comment: ",
+            child: Container(
+              width: double.infinity,
+              child: SelectableText(
+                this.review.comment,
+                style: Styles.pStyle,
+              ),
             ),
           ),
           SizedBox(

@@ -12,9 +12,16 @@ class PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    String name = placeData.name;
+    String rating = placeData.avgOverallRating.toStringAsPrecision(2);
+    String reviews = placeData.numOfAllReviews.toString();
+    String type = placeData.types[0];
+    String address = placeData.address; 
+
     return GestureDetector(
       child: Semantics(
-        label: "${placeData.name}",
+        label: "$name, $rating stars, $reviews reviews, place type: $type, address: $address",
         hint: "Double tap to view more details",
         excludeSemantics: true,
         child: Container(
@@ -75,8 +82,8 @@ class PlaceCard extends StatelessWidget {
         SizedBox(
           width: Styles.spacing * 0.25,
         ),
-        ReviewCount(
-            numOfRating: this.placeData.numOfAllReviews,
+        YellowTagHighlight(
+            text: this.placeData.numOfAllReviews.toString(),
             textStyle: Styles.boldPStyle)
       ],
     );

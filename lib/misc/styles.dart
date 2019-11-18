@@ -19,11 +19,11 @@ class Styles {
   static const double spacing = 20;
   static const double heightFromAppBar = 80;
   // ---------- TEXT
-  static final double textPadding = 10;
+  static const double textPadding = 10;
   // ---------- ICON
-  static double iconSize = 24;
-  static final double iconPadding = 10;
-  static final double iconPaddingPadding = 10;
+  static const double iconSize = 24;
+  static const double iconPadding = 10;
+  static const double iconPaddingPadding = 10;
 
   // ----------------- NOTE: GENERAL TEXT
   static const TextStyle pStyle = TextStyle(

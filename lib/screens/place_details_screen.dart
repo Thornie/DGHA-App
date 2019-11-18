@@ -3,9 +3,9 @@ import 'package:dgha/components/bottom_navigation.dart';
 import 'package:dgha/components/dgha_icon.dart';
 import 'package:dgha/components/dgha_star_rating.dart';
 import 'package:dgha/components/dgha_text_btn.dart';
-import 'package:dgha/components/loading_text.dart';
 import 'package:dgha/components/rating_with_title.dart';
 import 'package:dgha/components/review_container.dart';
+import 'package:dgha/components/review_count_container.dart';
 import 'package:dgha/components/view_more_btn.dart';
 import 'package:dgha/misc/data.dart';
 import 'package:dgha/misc/dgha_api.dart';
@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dgha/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 
 class PlaceDetailsScreen extends StatefulWidget {
   static const String id = "Review Screen";
@@ -47,9 +46,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     super.initState();
 
     // only run getReviews() if the place has ratings
-    if (widget.placeData.numOfAllReviews > 0) {
+    if (widget.placeData.numOfWrittenReviews > 0) {
       getReviews();
     }
+
     Data.pages.add(PageNav.placeDetailsScr);
   }
 
@@ -59,16 +59,19 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       this.isLoading = true;
     });
 
-    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(
-        widget.placeData.placeId, this.setNum);
+    List<ReviewData> _reviewList = await ReviewService.getReviewSetById(widget.placeData.placeId, this.setNum);
+
+    setState(() {
+      this.reviewList.addAll(_reviewList);
+      this.setNum = this.setNum + 1; // can't use increment (i++)
+    });
 
     try {
       // check if it is 6 because that means there will be more reviews to come
-      if (_reviewList.length == 6) {
+      if (this.reviewList.length != widget.placeData.numOfWrittenReviews) {
         setState(() {
           this.databaseHasMoreReviews = true;
         });
-        _reviewList.removeLast();
       } else {
         setState(() {
           this.databaseHasMoreReviews = false;
@@ -77,8 +80,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
       setState(() {
         this.isLoading = false;
-        this.reviewList.addAll(_reviewList);
-        this.setNum = this.setNum + 1; // can't use increment (i++)
         this.isFirstLoad = false;
       });
     } catch (e) {
@@ -90,8 +91,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     if (DghaApi.currentClient != null) {
       print(DghaApi.currentClient.credentials.expiration);
       print(DghaApi.currentClient.credentials.isExpired);
-      final result = await Navigator.pushNamed(context, UserRatingScreen.id,
-          arguments: widget.placeData);
+      final result = await Navigator.pushNamed(context, UserRatingScreen.id, arguments: widget.placeData);
       if (result) {
         getReviews();
       }
@@ -105,17 +105,14 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
   void reportBtnHandler() {
     if (DghaApi.currentClient != null) {
-      Navigator.pushNamed(context, ReportScreen.id,
-          arguments: widget.placeData);
+      Navigator.pushNamed(context, ReportScreen.id, arguments: widget.placeData);
     } else {
-      Navigator.of(context)
-          .pushNamed(LoginScreen.id_report, arguments: widget.placeData);
+      Navigator.of(context).pushNamed(LoginScreen.id_report, arguments: widget.placeData);
     }
   }
 
   void _launchMap(String placeId) async {
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
+    final url = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=$placeId';
 
     if (await canLaunch(url)) {
       await launch(url);
@@ -124,37 +121,47 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     }
   }
 
-  String getTypes() {
-    String types = "";
+  List<String> getTypes() {
+    List<String> types = new List<String>();
 
     for (int i = 0; i < widget.placeData.types.length; i++) {
       if (Data.allPlaceTypes.contains(widget.placeData.types[i])) {
-        //For each word in the string
+        // Replace _ with a space
         String type = widget.placeData.types[i].replaceAll(RegExp('_'), ' ');
         List<String> splitStr = type.split(" ");
-        String word = "";
 
+        String word = "";
         for (int j = 0; j < splitStr.length; j++) {
           //Captitalize first letter
           word += '${splitStr[j][0].toUpperCase()}${splitStr[j].substring(1)} ';
         }
 
-        types += "${word.trim()}, ";
+        types.add(word);
+
+        // types += "${word.trim()}, ";
       }
     }
 
-    //Remove end comma and whitespace
-    if (types != "") {
-      types = types.trim();
-      types = types.substring(0, types.length - 1);
-    }
+    // //Remove end comma and whitespace
+    // if (types != "") {
+    //   types = types.trim();
+    //   types = types.substring(0, types.length - 1);
+    // }
 
     return types;
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    if (Data.pages.last == PageNav.placeDetailsScr) {
+      Data.pages.removeLast();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String types = getTypes();
+    // String types = getTypes();
 
     return Scaffold(
       body: SafeArea(
@@ -165,77 +172,65 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
 
               // ----------------------------- NOTE: Body
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   SizedBox(height: Styles.heightFromAppBar),
 
                   // ---------------- NOTE: Place Name
-                  Container(
-                    child: Text(widget.placeData.name, style: Styles.h2Style),
-                  ),
+                  Container(child: Text(widget.placeData.name, style: Styles.h2Style)),
 
                   // ---------------- NOTE: Address
-                  Container(
-                    child: Text(widget.placeData.address, style: Styles.pStyle),
-                  ),
+                  Container(child: Text(widget.placeData.address, style: Styles.pStyle)),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
                   // ---------------- NOTE: Types
-                  types != ""
-                      ? Container(
-                          child: Text(types, style: Styles.pStyle),
-                        )
-                      : Container(height: 0),
+                  Builder(
+                    builder: (context) {
+                      if (this.getTypes().length > 0) {
+                        return Container(
+                          child: Wrap(
+                            runSpacing: Styles.spacing * 0.5,
+                              spacing: Styles.spacing * 0.5,
+                              children: this
+                                  .getTypes()
+                                  .map((type) => YellowTagHighlight(
+                                        text: type,
+                                        textStyle: Styles.boldPStyle,
+                                      ))
+                                  .toList()),
+                        );
+                      } else {
+                        return Container(height: 0);
+                      }
+                    },
+                  ),
 
                   SizedBox(height: Styles.spacing * 0.5),
 
-                  // ---------------- NOTE: Stars
-                  buildStars(),
+                  // -------------------------------- NOTE: Stars
+                  buildStar(rating: widget.placeData.avgOverallRating, ratingLabel: 'Overall Rating', isBigStar: true),
+                  buildStar(rating: widget.placeData.avgCustomerRating, ratingLabel: 'Service Rating', isBigStar: false),
+                  buildStar(rating: widget.placeData.avgAmentitiesRating, ratingLabel: 'Amenities Rating', isBigStar: false),
+                  buildStar(rating: widget.placeData.avgLocationRating, ratingLabel: 'Location Rating', isBigStar: false),
 
                   // ---------------- NOTE: Review Heading Row
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          "Reviews",
-                          style: Styles.h2Style,
-                        ),
-
-                        // ---------- NOTE: Review Btn
-                        GestureDetector(
-                          onTap: () {
-                            reviewBtnHandler();
-                          },
-                          child: Semantics(
-                            button: true,
-                            label: "Write Review",
-                            hint:
-                                "Double tap to leave a review for ${widget.placeData.name}",
-                            excludeSemantics: true,
-                            child: DghaIcon(
-                              icon: FontAwesomeIcons.pen,
-                              iconColor: Styles.yellow,
-                              backgroundColor: Styles.midnightBlue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  Semantics(
+                    explicitChildNodes: true,
+                    child: buildReviewHeader(),
                   ),
 
                   // ---------------- NOTE: Reviews
                   _buildeReviewSection(),
 
+                  // ---------------- NOTE: VIEW MORE
                   ViewMoreBtn(
-                    condition: this.databaseHasMoreReviews,
+                    showCondition: this.databaseHasMoreReviews,
                     loadingCondition: this.isLoading,
                     onTap: this.getReviews,
                     bottomPadding: Styles.spacing,
                   ),
-                  PlaceDetailBtnText(
-                      text: "Report Venue", onTap: this.reportBtnHandler),
+                  PlaceDetailBtnText(text: "Report Venue", onTap: this.reportBtnHandler),
                   SizedBox(height: Styles.spacing),
                 ],
               ),
@@ -248,8 +243,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               semanticLabel: "${widget.placeData.name} Reviews",
               childOne: Semantics(
                 button: true,
-                label: "Menu",
-                hint: "Double tap to go back and view other locations",
+                label: "Back",
+                hint: "Double tap to go back",
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
@@ -264,20 +259,22 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               ),
 
               // NOTE: Map Btn
-              childTwo: GestureDetector(
-                onTap: () {
-                  _launchMap(widget.placeData.placeId);
-                },
-                child: DghaIcon(
-                  icon: FontAwesomeIcons.mapMarkerAlt,
-                  iconColor: Styles.yellow,
-                  backgroundColor: Styles.midnightBlue,
+              childTwo: Semantics(
+                label: "Map",
+                button: true,
+                hint: "Double tap to open google maps",
+                child: GestureDetector(
+                  onTap: () {
+                    _launchMap(widget.placeData.placeId);
+                  },
+                  child: DghaIcon(
+                    icon: FontAwesomeIcons.mapMarkerAlt,
+                    iconColor: Styles.yellow,
+                    backgroundColor: Styles.midnightBlue,
+                  ),
                 ),
               ),
             ),
-            LoadingText(
-              condition: this.isLoading && this.isFirstLoad,
-            )
           ],
         ),
       ),
@@ -285,64 +282,123 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     );
   }
 
-  Widget buildStars() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: DghaStarRating(
-              changeRatingOnTap: false,
-              rating: widget.placeData.avgOverallRating,
-              height: 42,
+  Row buildReviewHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Container(child: Text("Reviews", style: Styles.h2Style)),
+
+        // ---------- NOTE: Review Btn
+        GestureDetector(
+          onTap: () {
+            reviewBtnHandler();
+          },
+          child: Semantics(
+            label: "Write Review",
+            button: true,
+            hint: "Double tap to leave a review for ${widget.placeData.name}",
+            excludeSemantics: true,
+            child: DghaIcon(
+              icon: FontAwesomeIcons.pen,
+              iconColor: Styles.yellow,
+              backgroundColor: Styles.midnightBlue,
             ),
           ),
-          //---------- Customer Service Rating
-          RatingWithTitle(
-            title: "Customer Service",
-            rating: widget.placeData.avgCustomerRating,
-            isSmall: true,
-          ),
-          //---------- Amenities Rating
-          RatingWithTitle(
-            title: "Amenities",
-            rating: widget.placeData.avgAmentitiesRating,
-            isSmall: true,
-          ),
-          //---------- Location Rating
-          RatingWithTitle(
-            title: "Location",
-            rating: widget.placeData.avgLocationRating,
-            isSmall: true,
-          ),
+        ),
+      ],
+    );
+  }
+
+  Semantics buildStar({double rating, String ratingLabel, bool isBigStar}) {
+    String ratingStr = rating.toStringAsPrecision(2);
+    return Semantics(
+      label: "$ratingLabel: $ratingStr stars",
+      child: Center(
+        child: isBigStar ? buildBigStar(rating) : buildSmallStar(rating, ratingLabel),
+      ),
+    );
+  }
+
+  Widget buildBigStar(double rating) {
+    return Semantics(
+      label: "${widget.placeData.numOfAllReviews} rated",
+      excludeSemantics: true,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+      DghaStarRating(
+        changeRatingOnTap: false,
+        rating: rating,
+        height: 42,
+      ),
+      SizedBox(
+        width: Styles.spacing * 0.25,
+      ),
+      YellowTagHighlight(
+        text: widget.placeData.numOfAllReviews.toString(),
+        textStyle: Styles.boldPStyle,
+        size: 30,
+        verticalPadding: 2,
+      )
         ],
       ),
     );
   }
 
+  Widget buildSmallStar(double rating, String ratingLabel) {
+    return Semantics(
+      excludeSemantics: true,
+      child: RatingWithTitle(
+        title: ratingLabel,
+        rating: rating,
+        isSmall: true,
+      ),
+    );
+  }
+
   Widget _buildeReviewSection() {
-    return Builder(
-      builder: (context) {
-        if (this.reviewList.isNotEmpty) {
-          return Column(
-            children: this
-                .reviewList
-                .map((review) => ReviewContainer(
-                      review: review,
-                    ))
-                .toList(),
-          );
-        } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
-          return Container(
-            child: Text(
-              "Loading . . .",
-              style: Styles.h2Style,
-              textAlign: TextAlign.center,
-            ),
-          );
-        } else {
-          return _buildFirstReviewBtn();
-        }
-      },
+    return Semantics(
+      explicitChildNodes: true,
+      child: Builder(
+        builder: (context) {
+          if (this.reviewList.isNotEmpty) {
+            return Column(
+              children: this
+                  .reviewList
+                  .map((review) => ReviewContainer(
+                        review: review,
+                      ))
+                  .toList(),
+            );
+          } else if (widget.placeData.numOfAllReviews > 0 && this.isFirstLoad) {
+            return Column(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: 2,
+                  color: Styles.midnightBlue,
+                ),
+                SizedBox(
+                  height: Styles.spacing / 2,
+                ),
+                Container(
+                  child: Text(
+                    "Loading . . .",
+                    style: Styles.h2Style,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  height: Styles.spacing / 2,
+                ),
+              ],
+            );
+          } else {
+            return _buildFirstReviewBtn();
+          }
+        },
+      ),
     );
   }
 
@@ -360,8 +416,7 @@ class PlaceDetailBtnText extends StatelessWidget {
   final Function onTap;
   final double bottomPadding;
 
-  PlaceDetailBtnText(
-      {@required this.text, @required this.onTap, this.bottomPadding = 0});
+  PlaceDetailBtnText({@required this.text, @required this.onTap, this.bottomPadding = 0});
 
   @override
   Widget build(BuildContext context) {
