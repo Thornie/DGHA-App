@@ -65,6 +65,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       hintText: "Give an overall rating out of 5 on your experience at this location.",
       //If the page already has a rating, grab that from the object
       rating: overallRatingScreen != null ? overallRatingScreen.rating : 0,
+      nextPageName: "Customer Service rating",
       onPressed: () {
         if (overallRatingScreen.rating != 0) {
           setState(() {
@@ -83,6 +84,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       hintText: "Give a score out of 5 on the customer service provided to you at this location.",
       //If the page already has a rating, grab that from the object
       rating: customerServiceRatingScreen != null ? customerServiceRatingScreen.rating : 0,
+      nextPageName: "Amenities rating",
       onPressed: () {
         if (customerServiceRatingScreen.rating != 0) {
           setState(() {
@@ -101,7 +103,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       hintText: "Give a score out of 5 on the amenities here at this location.",
       //If the page already has a rating, grab that from the object
       rating: amenitiesRatingScreen != null ? amenitiesRatingScreen.rating : 0,
-
+      nextPageName: "Location rating",
       onPressed: () {
         if (amenitiesRatingScreen.rating != 0) {
           setState(() {
@@ -120,6 +122,7 @@ class _UserRatingScreenState extends State<UserRatingScreen> {
       hintText: "Give a score out of 5 on the accessibility and ease of access to this location.",
       //If the page already has a rating, grab that from the object
       rating: locationRatingScreen != null ? locationRatingScreen.rating : 0,
+      nextPageName: "Comment",
       onPressed: () {
         if (locationRatingScreen.rating != 0) {
           setState(() {
